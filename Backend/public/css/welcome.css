@@ -1,0 +1,526 @@
+@charset "UTF-8";
+
+/* line 1, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* line 7, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+body {
+    font-family: 'open sans';
+    font-size: 16px;
+}
+
+
+/* Header */
+
+
+/* line 15, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+header {
+    width: 100%;
+    height: 650px;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background-image: url("/images/Skewed.png");
+    background-position-y: 56px;
+}
+
+
+/* line 24, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+header .textos {
+    margin-top: 250px;
+}
+
+
+/* line 27, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+header .titulo {
+    font-size: 85px;
+}
+
+
+/* line 30, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+header .subtitulo {
+    font-size: 42px;
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+
+/* line 35, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+header .boton {
+    display: inline-block;
+    padding: 6px;
+    width: 128px;
+    border: 2px solid rgb(0, 70, 3);
+    color: rgb(0, 51, 20);
+    font-size: 19px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 16px;
+}
+
+
+/* line 48, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.sesgoabajo {
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 35vh 100vw;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+
+/* line 58, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.sesgoarriba {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-width: 35vh 100vw 0 0;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+
+/* line 68, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.contenedor {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+    padding: 52px 0;
+}
+
+
+/* Main */
+
+
+/* line 79, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.sobre-nosotros {
+    text-align: center;
+    font-size: 56px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+/* line 86, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.slogan {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+
+/* line 93, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.parrafo {
+    margin-bottom: 13px;
+    font-weight: 300;
+    text-align: justify;
+    line-height: 24px;
+    color: #181010;
+}
+
+
+/* line 101, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.acerca-de .boton {
+    display: inline-block;
+    padding: 6px;
+    width: 128px;
+    font-weight: 300;
+    border: 1px solid rgba(24, 16, 16, 0.7);
+    color: #181010;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 16px;
+    margin-top: 24px;
+}
+
+
+/* line 115, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.galeria {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+
+/* line 124, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.imagenes {
+    width: 20%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* line 129, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.imagenes img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* line 136, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.encima {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 73, 94, 0.815);
+}
+
+
+/* line 143, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.encima h2 {
+    position: relative;
+    top: 45%;
+    text-align: center;
+    color: #fff;
+}
+
+
+/* line 149, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.encima div {
+    position: relative;
+    display: block;
+    top: 46%;
+    width: 40px;
+    height: 5px;
+    background: #fff;
+    margin: auto;
+}
+
+
+/* line 160, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.cards {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+/* line 168, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.card {
+    margin: 20px 0;
+    width: 30%;
+    height: 250px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 0px 4px 0 rgba(52, 73, 94, 0.849);
+}
+
+
+/* line 177, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.cards img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin: auto;
+}
+
+
+/* line 185, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.fondo {
+    height: 900px;
+    position: relative;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    padding-top: 130px;
+    background-image: url("/images/fondo.png");
+}
+
+
+/* line 196, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.sesgoabajo-unico {
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 35vh 100vw;
+    border-style: solid;
+    border-color: transparent transparent #2c3e50 transparent;
+}
+
+
+/* line 206, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.titulo-patrocinadores,
+.subtitulo-patrocinadores {
+    color: #fff;
+    text-align: center;
+}
+
+
+/* line 212, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.titulo-patrocinadores {
+    font-size: 56px;
+    margin-top: 48px;
+}
+
+
+/* line 217, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.subtitulo-patrocinadores {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 64px;
+}
+
+
+/* line 223, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.clientes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+/* line 231, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.cliente {
+    width: 30%;
+}
+
+
+/* line 233, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.cliente img {
+    width: 100%;
+}
+
+
+/* Footer */
+
+
+/* line 241, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+footer {
+    background: #2c3e50;
+    height: auto;
+}
+
+
+/* line 246, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.titulo-footer {
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 56px;
+}
+
+
+/* line 253, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+.subtitulo-footer {
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 56px;
+    font-size: 16px;
+    margin-bottom: 64px;
+}
+
+
+/* line 262, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+
+/* line 271, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+input[type="text"],
+input[type="email"] {
+    display: inline-block;
+    width: 48%;
+    padding: 13px;
+    border: none;
+    color: #fff;
+    font-family: 'open sans';
+    background: rgba(37, 37, 33, 0.7);
+    margin-bottom: 16px;
+    border-top: 5px solid rgba(37, 37, 33, 0.7);
+}
+
+
+/* line 283, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-top: 5px solid rgba(255, 255, 255, 0.7);
+}
+
+
+/* line 289, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 200px;
+    min-height: 200px;
+    background: rgba(37, 37, 33, 0.7);
+    padding: 13px;
+    border: none;
+    color: #fff;
+    font-family: 'open sans';
+    margin-bottom: 16px;
+}
+
+
+/* line 290, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+textarea:focus {
+    border-top: 5px solid rgba(255, 255, 255, 0.7);
+}
+
+
+/* line 310, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+
+input[type="submit"] {
+    display: inline-block;
+    padding: 13px;
+    border: none;
+    color: #fff;
+    background: rgba(37, 37, 33, 0.7);
+    width: 96px;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 900px) {
+    /* line 323, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .card {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    /* line 330, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    header .textos {
+        margin-top: 130px;
+    }
+    /* line 333, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    header .titulo {
+        font-size: 75px;
+    }
+    /* line 337, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .none {
+        display: none;
+    }
+    /* line 340, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .imagenes {
+        flex-grow: 1;
+    }
+    /* line 343, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .card {
+        width: 90%;
+    }
+    /* line 346, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .fondo {
+        height: auto;
+    }
+    /* line 349, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .especial {
+        display: none;
+    }
+    /* line 352, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .cliente {
+        width: 90%;
+        height: 200px;
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    /* line 361, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    header .textos {
+        margin-top: 100px;
+    }
+    /* line 364, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    header .titulo {
+        font-size: 65px;
+    }
+    /* line 367, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    header .subtitulo {
+        font-size: 25px;
+        margin-bottom: 32px;
+    }
+    /* line 372, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .sobre-nosotros {
+        font-size: 46px;
+    }
+    /* line 375, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .slogan {
+        font-size: 20px;
+    }
+    /* line 378, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .titulo-patrocinadores {
+        font-size: 46px;
+    }
+    /* line 381, /home/david/Escritorio Progamación/Campus/resources/assets/sass/welcome.scss */
+    .subtitulo-patrocinadores {
+        font-size: 20px;
+    }
+}
+
+
+/*# sourceMappingURL=../../../public/css/welcome.map */
