@@ -64,7 +64,7 @@ Para probar el sistema debes de tener instalado php, Mysql, Composer, Node.js, L
 
 ## Contribuir
 
-Por favor lea [CONTRIBUTING.md](https://github.com/esc-granadilla/campus/graphs/contributors) para detalles acerca de la conducta, y procesos para submitting pull requests en el proyecto.
+Por favor lea [CONTRIBUTING.md](CONTRIBUTING.md) para detalles acerca de la conducta, y procesos para submitting pull requests en el proyecto.
 
 
 ## Versión
