@@ -83,5 +83,5 @@ Ver toda la lista de [Contribuidores](https://github.com/esc-granadilla/campus/g
 
 ## Licencia
 
-Este proyecto está bajo la licencia de Fidelitas License - ver el [LICENSE.md](LICENSE.md) archivo para más detalles.
+Este proyecto está bajo la licencia de Fidelitas License  - ver el [LICENSE.md](LICENSE.md) archivo para más detalles.
 
