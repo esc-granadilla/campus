@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/login.vue'
 import Home from './views/Home.vue'
+import MainScreen from './views/MainScreen.vue'
 import RegisterEstudents from './views/RegisterEstudents.vue'
 
 Vue.use(Router)
@@ -13,5 +14,6 @@ export default new Router({
         { path: '/', name: 'home', component: Home },
         { path: '/login', name: 'login', component: Login },
         { path: '/registerestudents', name: 'registerestudents', component: RegisterEstudents },
+        { path: '/main', name: 'main', component: MainScreen, meta: { requiresAuth: true } }
     ],
 })

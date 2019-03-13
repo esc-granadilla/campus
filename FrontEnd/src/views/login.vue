@@ -1,106 +1,59 @@
 <template>
-    <div class="padre">
-        <div class="hijo-1">
-            <div class="login-text">
-                <h3>Iniciar Sesión
-                    <p class="text-buety">Escuela de Granadilla Norte</p>
-                </h3>
-            </div>
-            
-            <div class="login-input">
-                <div class="input-own">
-                    <v-text-field v-model="form.username" label="Nombre de usuario"></v-text-field>
-                </div>
-            </div>
-            <div class="login-input">
-                <div class="input-own">
-                    <v-text-field v-model="form.password" label="Contraseña"></v-text-field>
-                </div>
-            </div>
-            <div class="buttons">
-                <div class="content-button">
-                    <v-btn color="teal" block outline dark round>
-                        Ingresar
-                    </v-btn>
-                </div>
-            </div>
-            <div class="buttons">
-                <div class="content-button">
-                    <v-btn color="blue" block flat dark round>
-                        Recuperar contraseña
-                    </v-btn>
-                </div>
-            </div>
-        </div>
+        <div class="box1"> 
+        <v-layout justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card fluid class="elevation-12">
+              <v-toolbar dark>
+                <v-toolbar-title>Ingreso al sistema</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field  prepend-icon="email" name="Email" label="Correo Electrónico" type="text"></v-text-field>
+                  <v-text-field  id="contraseña" prepend-icon="lock" name="contraseña" label="Contraseña" type="password"></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="teal" @click="sendLoginRequest" block dark>Ingresar</v-btn>
+                <v-spacer></v-spacer>
+                <p style="font-size:10pt;">
+                    <a href="#">Recuperar contraseña</a>
+                </p>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
     </div>
 </template>
 
 <script>
+const axios = require('axios');
 export default {
     data(){
         return {
             form:{
-                username: '',
+                email: '',
                 password: ''
             }
+        }
+    },
+    methods: {
+        sendLoginRequest() {
+            axios.post('http://granadilla_school.com/api/login',this.form).then(res=>{
+                console.log(res.data);
+            })
         }
     }
 }
 </script>
 
 <style scoped>
-    .padre {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        margin: 0%;
-        padding: 0%;
-        height: 100%;
+    .box1{
+        margin-top: 250px;
     }
-
-    .hijo-1 {
-        height: 500px;
-        width: 600px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-
+    .father{
+        background-color: red;
     }
-
-    .hijo-1:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-
-    .login-text {
-        color: black;
-        display: flex;
-        padding-top: 8%;
-        justify-content: center;
-    }
-
-    .login-text h3 {
-        font-weight: normal;
-        letter-spacing: 1px;
-        font-size: 20pt;
-    }
-    
-    .login-input {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-    .input-own {
-        width: 50%;
-        margin: 10px;
-    }
-    .buttons {
-        display: flex;
-        justify-content: center;
-    }
-    .content-button {
-        width: 50%;
-    }
-    .text-buety {
-        display: block;
-        font-size: 12pt;
-    }
-    
 </style>
+
+
