@@ -9,14 +9,14 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field  prepend-icon="person" name="Email" label="Email" type="text"></v-text-field>
+                  <v-text-field  prepend-icon="email" name="Email" label="Correo Electrónico" type="text"></v-text-field>
                   <v-text-field  id="contraseña" prepend-icon="lock" name="contraseña" label="Contraseña" type="password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="teal"  block dark>Ingresar</v-btn>
+                <v-btn color="teal" @click="sendLoginRequest" block dark>Ingresar</v-btn>
                 <v-spacer></v-spacer>
-                <p>
+                <p style="font-size:10pt;">
                     <a href="#">Recuperar contraseña</a>
                 </p>
               </v-card-actions>
@@ -27,13 +27,21 @@
 </template>
 
 <script>
+const axios = require('axios');
 export default {
     data(){
         return {
             form:{
-                username: '',
+                email: '',
                 password: ''
             }
+        }
+    },
+    methods: {
+        sendLoginRequest() {
+            axios.post('http://granadilla_school.com/api/login',this.form).then(res=>{
+                console.log(res.data);
+            })
         }
     }
 }
