@@ -12,7 +12,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            $token =  $user->createToken('MyApp')->accessToken;
+            $token =  $user->createToken(Auth::user()->fullname)->accessToken;
             return response()->json([
                 'token' => $token,
                 'user' => $user
