@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .padre {
         align-items: center;
         display: flex;
