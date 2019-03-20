@@ -4,7 +4,7 @@ El proyecto se trata de la creación de un campus virtual en el cual tanto profe
 
 El proyecto es desarrollado para la Escuela Granadilla Norte.
 
-El repositorio se divide en dos partes, una que es el Frontend y otra todo el Backend.
+El repositorio está escrito bajo php con el framework Laravel.
 
 
 ## Primeros Pasos
@@ -30,7 +30,7 @@ php artisan serve
 
 ### Prerequisitos
 
-Para probar el sistema debes de tener instalado php, Mysql, Composer, Node.js, Laravel, Vue.js
+Para probar el sistema debes de tener instalado Php >= 7.0, Mysql, Composer, Node.js, Laravel, Vue.js
 
 
 
