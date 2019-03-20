@@ -57,7 +57,6 @@ Para probar el sistema debes de tener instalado php, Mysql, Composer, Node.js, L
 ## Construido con
 
 * [Laravel](https://laravel.com/docs/5.8) - The web framework used in Backend
-* [Vue](https://vuejs.org/v2/guide/) - The web framework used in Frontend
 * [Node](https://nodejs.org/es/docs/) - Server Environment
 * [Composer](https://getcomposer.org/doc/) - Dependency Management
 
