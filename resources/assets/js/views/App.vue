@@ -71,10 +71,6 @@ export default {
 };
 </script>
 
-<style lang="css">
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons");
-</style>
-
 <style scoped lang="css">
 a {
    margin-left: 0.5em;

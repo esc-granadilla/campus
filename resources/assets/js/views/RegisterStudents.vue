@@ -3,12 +3,20 @@
       <v-layout justify-center mt-5>
          <v-flex xs12 md6 offset-md3>
             <v-card>
-               <v-progress-linear color="success" height="5" :value="nextindex * 33.3"></v-progress-linear>
+               <v-progress-linear
+                  color="success"
+                  height="5"
+                  class="mb-0 mt-3"
+                  :value="nextindex * 33.3"
+               ></v-progress-linear>
                <v-img class="black--text" height="200px" :src="image">
                   <v-container fill-height fluid>
                      <v-layout fill-height>
                         <v-flex xs12 style="text-align: center;">
-                           <span class="headline font-italic" text-xs-center>{{title}}</span>
+                           <h2
+                              class="headline font-italic espejo font-weight-black"
+                              text-xs-center
+                           >{{title}}</h2>
                         </v-flex>
                      </v-layout>
                   </v-container>
@@ -190,7 +198,7 @@ export default {
             { value: 2, text: "Moderada" },
             { value: 3, text: "Significativa" }
          ],
-         image: require("../../img/studens1.jpg"),
+         image: require("../../img/studens11.jpg"),
          encargadotext: "Ingresar Encargado",
          encargado: {
             cedula: "",
@@ -267,10 +275,6 @@ export default {
 </script>
 
 <style scoped>
-.nooo {
-   height: 40px;
-   background-color: black;
-}
 .no {
    display: block;
 }
@@ -279,5 +283,14 @@ export default {
 }
 .headline {
    font-size: 20px !important;
+}
+.espejo {
+   -webkit-box-reflect: below -15px -webkit-gradient(
+         linear,
+         left top,
+         left bottom,
+         from(transparent),
+         to(rgba(255, 255, 255, 0.7))
+      );
 }
 </style>

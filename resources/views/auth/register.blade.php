@@ -1,6 +1,14 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.app') @section('styles')
+<style>
+    #app {
+        background-image: url('images/fondoregistroestudiantes.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        background-attachment: fixed;
+    }
+</style>
+@endsection @section('content')
 <!--
 <div class="container">
     <div class="row">
@@ -76,7 +84,7 @@
     </div>
 </div> -->
 <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-   {{ csrf_field() }}
-   <registerstudents></registerstudents>
+    {{ csrf_field() }}
+    <registerstudents></registerstudents>
 </form>
 @endsection

@@ -8,7 +8,10 @@
                   <v-container fill-height fluid>
                      <v-layout fill-height>
                         <v-flex xs12 style="text-align: center;">
-                           <span class="headline font-italic" text-xs-center>{{title}}</span>
+                           <h2
+                              class="headline font-italic espejo font-weight-black"
+                              text-xs-center
+                           >{{title}}</h2>
                         </v-flex>
                      </v-layout>
                   </v-container>
@@ -167,10 +170,6 @@ export default {
 </script>
 
 <style scoped>
-.nooo {
-   height: 40px;
-   background-color: black;
-}
 .no {
    display: block;
 }
@@ -179,5 +178,14 @@ export default {
 }
 .headline {
    font-size: 20px !important;
+}
+.espejo {
+   -webkit-box-reflect: below -15px -webkit-gradient(
+         linear,
+         left top,
+         left bottom,
+         from(transparent),
+         to(rgba(255, 255, 255, 0.7))
+      );
 }
 </style>
