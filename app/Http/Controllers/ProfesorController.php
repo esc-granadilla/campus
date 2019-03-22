@@ -21,6 +21,11 @@ class ProfesorController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
+   }
 
    use RegistersUsers;
    /**
@@ -28,9 +33,12 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function index()
+   public function index(Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $profesores = Profesor::all();
+         return response()->json($profesores, 200);
+      }
    }
 
    /**

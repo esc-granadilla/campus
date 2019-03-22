@@ -15,6 +15,8 @@ import RegisterStudents from './views/RegisterStudents.vue'
 import Login from './views/Login.vue'
 import RegisterProfesor from './views/RegisterProfesor.vue'
 import RememberComponent from './components/Login/RememberComponent.vue'
+import Administrador from './views/Administrador.vue'
+import Credencial from './views/Credencial.vue'
 
 window.Vue = require('vue');
 Vue.use(Vuetify, {
@@ -33,6 +35,8 @@ Vue.component('Homeview', Home);
 Vue.component('registerstudents', RegisterStudents);
 Vue.component('registerprofesor', RegisterProfesor);
 Vue.component('remembercomponent', RememberComponent);
+Vue.component('administrador', Administrador);
+Vue.component('credencial', Credencial);
 Vue.component('login', Login);
 
 const app = new Vue({

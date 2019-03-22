@@ -55,6 +55,7 @@ export default {
       items() {
          if (this.login === "true") {
             return [
+               { title: "Administración", ruta: "/admin" },
                { title: "Home", ruta: "/home" },
                { title: this.name, ruta: "#" },
                { title: "Cerrar Sessión", ruta: "/logout" }

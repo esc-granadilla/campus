@@ -29,7 +29,7 @@
         @endif
         <v-app>
          <v-content>
-            <div style="margin-top: 64px">
+            <div style="margin-top: 64px; height: 100%;">
                @yield('content')
             </div>
          </v-content>
