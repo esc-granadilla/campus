@@ -2531,11 +2531,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       profesores: [],
-      roles: []
+      roles: [],
+      search: "",
+      headers: [{
+        text: "Nombre",
+        align: "left",
+        sortable: false,
+        value: "nombre"
+      }, {
+        text: "Cedula",
+        value: "cedula"
+      }, {
+        text: "Puesto",
+        value: "puesto"
+      }, {
+        text: "Telefono",
+        value: "telefono"
+      }, {
+        text: "Administrador",
+        value: "administrador"
+      }, {
+        text: "Profesor",
+        value: "profesor"
+      }]
     };
   },
   mounted: function mounted() {
@@ -2547,6 +2599,48 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/roles").then(function (res) {
       return _this.roles = res.data;
     });
+  },
+  computed: {
+    roless: function roless() {
+      var bar = [];
+
+      for (var i = 0, l = this.roles.length; i < l; i++) {
+        bar[i] = this.roles[i];
+      }
+
+      bar.sort(function (a, b) {
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+
+        return 0;
+      }).pop();
+      return bar;
+    },
+    dessertss: function dessertss() {
+      var des = [];
+      var j = 0;
+
+      for (var i = 0, l = this.profesores.length; i < l; i++) {
+        if (this.profesores[i].estado === 1) {
+          des[j] = {
+            nombre: this.profesores[i].nombre,
+            cedula: this.profesores[i].cedula,
+            puesto: this.profesores[i].puesto,
+            telefono: this.profesores[i].telefono1,
+            administrador: false,
+            profesor: false
+          };
+          j++;
+        }
+      }
+
+      return des;
+    }
   },
   methods: {}
 });
@@ -23049,16 +23143,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "v-card",
+    [
+      _c(
+        "v-card-title",
+        [
+          _vm._v("\n      Profesores\n      "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              "append-icon": "search",
+              label: "Buscar",
+              "single-line": "",
+              "hide-details": ""
+            },
+            model: {
+              value: _vm.search,
+              callback: function($$v) {
+                _vm.search = $$v
+              },
+              expression: "search"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-data-table",
+        {
+          attrs: {
+            headers: _vm.headers,
+            items: _vm.dessertss,
+            search: _vm.search
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "items",
+              fn: function(props) {
+                return [
+                  _c("td", [_vm._v(_vm._s(props.item.nombre))]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.cedula))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.puesto))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.telefono))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-xs-right" },
+                    [
+                      _c("v-checkbox", {
+                        model: {
+                          value: props.item.administrador,
+                          callback: function($$v) {
+                            _vm.$set(props.item, "administrador", $$v)
+                          },
+                          expression: "props.item.administrador"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-xs-right" },
+                    [
+                      _c("v-checkbox", {
+                        model: {
+                          value: props.item.profesor,
+                          callback: function($$v) {
+                            _vm.$set(props.item, "profesor", $$v)
+                          },
+                          expression: "props.item.profesor"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              }
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("v-alert", {
+            attrs: { value: true, color: "error", icon: "warning" },
+            scopedSlots: _vm._u([
+              {
+                key: "no-results",
+                fn: function() {
+                  return [
+                    _vm._v(
+                      'Your search for "' +
+                        _vm._s(_vm.search) +
+                        '" found no results.'
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Hola desde credenciales")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64623,7 +64828,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/david/Workspace/Laravel/Nueva carpeta (1)/campus/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /home/david/Workspace/Laravel/campus/resources/assets/js/app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
