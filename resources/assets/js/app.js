@@ -20,6 +20,8 @@ import Credencial from './views/Credencial.vue'
 import ProfesorMostrarComponent from './components/Profesores/MostrarComponent.vue'
 import ProfesorEditarComponent from './components/Profesores/EditarComponent.vue'
 import ProfesorBorrarComponent from './components/Profesores/BorrarComponent.vue'
+import HorarioComponent from './components/Horario/HorarioComponent.vue'
+import CursoComponent from './components/Curso/CursoComponent.vue'
 
 window.Vue = require('vue');
 Vue.use(Vuetify, {
@@ -41,6 +43,8 @@ Vue.component('remembercomponent', RememberComponent);
 Vue.component('pmostrarcomponent', ProfesorMostrarComponent);
 Vue.component('peditarcomponent', ProfesorEditarComponent);
 Vue.component('pborrarcomponent', ProfesorBorrarComponent);
+Vue.component('horariocomponent', HorarioComponent);
+Vue.component('cursocomponent', CursoComponent);
 Vue.component('administrador', Administrador);
 Vue.component('credencial', Credencial);
 Vue.component('login', Login);

@@ -16,7 +16,7 @@
                      </v-list-tile-avatar>
 
                      <v-list-tile-content>
-                        <v-list-tile-title>John Leider</v-list-tile-title>
+                        <v-list-tile-title>{{this.name}}</v-list-tile-title>
                      </v-list-tile-content>
 
                      <v-list-tile-action>
@@ -85,6 +85,8 @@
          <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
          <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
          <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
+         <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
+         <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
       </div>
    </v-layout>
 </template>
@@ -99,6 +101,16 @@ export default {
                title: "Credenciales",
                icon: "account_balance_wallet",
                ruta: "credencial"
+            },
+            {
+               title: "Cursos",
+               icon: "account_balance_wallet",
+               ruta: "curso"
+            },
+            {
+               title: "Horarios",
+               icon: "account_balance_wallet",
+               ruta: "horario"
             }
          ],
          empleados: [
@@ -119,10 +131,12 @@ export default {
    },
    methods: {
       route(ruta) {
-         this.mostar = ruta;
+         if (ruta !== "profesors/create") {
+            this.mostar = ruta;
+         } else location.href = ruta;
       }
    },
-   computed: {}
+   props: ["name"]
 };
 </script>
 
