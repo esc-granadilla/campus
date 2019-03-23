@@ -11,17 +11,25 @@
             hide-details
          ></v-text-field>
       </v-card-title>
-      <v-data-table :headers="headers" :items="dessertss" :search="search">
+      <v-data-table :headers="headers" :items="profesores" :search="search">
          <template v-slot:items="props">
             <td>{{ props.item.nombre }}</td>
             <td class="text-center">{{ props.item.cedula }}</td>
             <td class="text-center">{{ props.item.puesto }}</td>
             <td class="text-center">{{ props.item.telefono }}</td>
             <td class="text-center">
-               <v-checkbox v-model="props.item.administrador"></v-checkbox>
+               <v-checkbox
+                  :id="'a'+props.item.id"
+                  v-model="props.item.administrador"
+                  @click="checkadmin(props.item)"
+               ></v-checkbox>
             </td>
             <td class="text-center">
-               <v-checkbox v-model="props.item.profesor"></v-checkbox>
+               <v-checkbox
+                  :id="'p'+props.item.id"
+                  v-model="props.item.profesor"
+                  @click="checkprofe(props.item)"
+               ></v-checkbox>
             </td>
          </template>
          <v-alert
@@ -39,8 +47,9 @@ export default {
    data() {
       return {
          profesores: [],
-         roles: [],
          search: "",
+         procheck: true,
+         admcheck: true,
          headers: [
             {
                text: "Nombre",
@@ -58,50 +67,53 @@ export default {
    },
    mounted() {
       axios.get("/roltouser").then(res => (this.profesores = res.data));
-      axios.get("/roles").then(res => (this.roles = res.data));
    },
-   computed: {
-      roless: function() {
-         var bar = [];
-         for (var i = 0, l = this.roles.length; i < l; i++) {
-            bar[i] = this.roles[i];
+   methods: {
+      checkadmin(index) {
+         if (this.admcheck) {
+            let elt = document.getElementById("a" + index.id);
+            if (elt.checked) {
+               axios.post("/credencial", {
+                  user_id: index.user_id,
+                  rol: "Administrador",
+                  attach: false
+               });
+               index.administrador = false;
+            } else {
+               axios.post("/credencial", {
+                  user_id: index.user_id,
+                  rol: "Administrador",
+                  attach: true
+               });
+               index.administrador = true;
+            }
          }
-         bar.sort(function(a, b) {
-            if (a.nombre > b.nombre) {
-               return 1;
-            }
-            if (a.nombre < b.nombre) {
-               return -1;
-            }
-            return 0;
-         }).pop();
-         return bar;
+         this.admcheck = !this.admcheck;
       },
-      dessertss: function() {
-         var des = [];
-         var j = 0;
-         for (var i = 0, l = this.profesores.length; i < l; i++) {
-            if (this.profesores[i].estado === 1) {
-               des[j] = {
-                  id: this.profesores[i].id,
-                  nombre: this.profesores[i].nombre,
-                  cedula: this.profesores[i].cedula,
-                  puesto: this.profesores[i].puesto,
-                  telefono: this.profesores[i].telefono,
-                  administrador: this.profesores[i].administrador,
-                  profesor: this.profesores[i].profesor
-               };
-               j++;
+      checkprofe(index) {
+         if (this.procheck) {
+            let elt = document.getElementById("p" + index.id);
+            if (elt.checked) {
+               axios.post("/credencial", {
+                  user_id: index.user_id,
+                  rol: "Profesor",
+                  attach: false
+               });
+               index.profesor = false;
+            } else {
+               axios.post("/credencial", {
+                  user_id: index.user_id,
+                  rol: "Profesor",
+                  attach: true
+               });
+               index.profesor = true;
             }
          }
-         return des;
+         this.procheck = !this.procheck;
       }
-   },
-   methods: {}
+   }
 };
 </script>
 
 <style scoped>
 </style>
-
-

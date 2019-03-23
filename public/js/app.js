@@ -2561,12 +2561,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       profesores: [],
-      roles: [],
       search: "",
+      procheck: true,
+      admcheck: true,
       headers: [{
         text: "Nombre",
         align: "left",
@@ -2596,54 +2605,55 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/roltouser").then(function (res) {
       return _this.profesores = res.data;
     });
-    axios.get("/roles").then(function (res) {
-      return _this.roles = res.data;
-    });
   },
-  computed: {
-    roless: function roless() {
-      var bar = [];
+  methods: {
+    checkadmin: function checkadmin(index) {
+      if (this.admcheck) {
+        var elt = document.getElementById("a" + index.id);
 
-      for (var i = 0, l = this.roles.length; i < l; i++) {
-        bar[i] = this.roles[i];
+        if (elt.checked) {
+          axios.post("/credencial", {
+            user_id: index.user_id,
+            rol: "Administrador",
+            attach: false
+          });
+          index.administrador = false;
+        } else {
+          axios.post("/credencial", {
+            user_id: index.user_id,
+            rol: "Administrador",
+            attach: true
+          });
+          index.administrador = true;
+        }
       }
 
-      bar.sort(function (a, b) {
-        if (a.nombre > b.nombre) {
-          return 1;
-        }
-
-        if (a.nombre < b.nombre) {
-          return -1;
-        }
-
-        return 0;
-      }).pop();
-      return bar;
+      this.admcheck = !this.admcheck;
     },
-    dessertss: function dessertss() {
-      var des = [];
-      var j = 0;
+    checkprofe: function checkprofe(index) {
+      if (this.procheck) {
+        var elt = document.getElementById("p" + index.id);
 
-      for (var i = 0, l = this.profesores.length; i < l; i++) {
-        if (this.profesores[i].estado === 1) {
-          des[j] = {
-            id: this.profesores[i].id,
-            nombre: this.profesores[i].nombre,
-            cedula: this.profesores[i].cedula,
-            puesto: this.profesores[i].puesto,
-            telefono: this.profesores[i].telefono,
-            administrador: this.profesores[i].administrador,
-            profesor: this.profesores[i].profesor
-          };
-          j++;
+        if (elt.checked) {
+          axios.post("/credencial", {
+            user_id: index.user_id,
+            rol: "Profesor",
+            attach: false
+          });
+          index.profesor = false;
+        } else {
+          axios.post("/credencial", {
+            user_id: index.user_id,
+            rol: "Profesor",
+            attach: true
+          });
+          index.profesor = true;
         }
       }
 
-      return des;
+      this.procheck = !this.procheck;
     }
-  },
-  methods: {}
+  }
 });
 
 /***/ }),
@@ -23177,7 +23187,7 @@ var render = function() {
         {
           attrs: {
             headers: _vm.headers,
-            items: _vm.dessertss,
+            items: _vm.profesores,
             search: _vm.search
           },
           scopedSlots: _vm._u([
@@ -23204,6 +23214,12 @@ var render = function() {
                     { staticClass: "text-center" },
                     [
                       _c("v-checkbox", {
+                        attrs: { id: "a" + props.item.id },
+                        on: {
+                          click: function($event) {
+                            return _vm.checkadmin(props.item)
+                          }
+                        },
                         model: {
                           value: props.item.administrador,
                           callback: function($$v) {
@@ -23221,6 +23237,12 @@ var render = function() {
                     { staticClass: "text-center" },
                     [
                       _c("v-checkbox", {
+                        attrs: { id: "p" + props.item.id },
+                        on: {
+                          click: function($event) {
+                            return _vm.checkprofe(props.item)
+                          }
+                        },
                         model: {
                           value: props.item.profesor,
                           callback: function($$v) {
