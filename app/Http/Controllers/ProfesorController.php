@@ -24,7 +24,8 @@ class ProfesorController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
+      //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
+      $this->middleware('administrador');
    }
 
    use RegistersUsers;
