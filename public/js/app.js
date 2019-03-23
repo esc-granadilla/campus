@@ -2019,6 +2019,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "cursocomponent",
   data: function data() {
@@ -22883,79 +22892,90 @@ var render = function() {
     { attrs: { wrap: "", row: "" } },
     [
       _c(
-        "v-layout",
-        { attrs: { wrap: "", "mx-5": "", xs6: "" } },
+        "v-flex",
+        { attrs: { xs8: "", md6: "", "pt-2": "", "px-3": "" } },
         [
           _c(
-            "v-flex",
-            { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+            "v-card",
+            { staticClass: "elevation-12", attrs: { fluid: "" } },
             [
-              _c("v-text-field", {
-                attrs: {
-                  xs12: "",
-                  rules: [_vm.rules.required, _vm.rules.mini],
-                  counter: "",
-                  label: "Codigo",
-                  name: "codigo",
-                  required: ""
-                },
-                model: {
-                  value: _vm.curso.codigo,
-                  callback: function($$v) {
-                    _vm.$set(_vm.curso, "codigo", $$v)
-                  },
-                  expression: "curso.codigo"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
-            [
-              _c("v-text-field", {
-                attrs: {
-                  xs12: "",
-                  rules: [_vm.rules.required, _vm.rules.mini],
-                  counter: "",
-                  label: "Nombre",
-                  name: "nombre",
-                  required: ""
-                },
-                model: {
-                  value: _vm.curso.nombre,
-                  callback: function($$v) {
-                    _vm.$set(_vm.curso, "nombre", $$v)
-                  },
-                  expression: "curso.nombre"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
-            [
-              _c("v-text-field", {
-                attrs: {
-                  xs12: "",
-                  rules: [_vm.rules.required, _vm.rules.mini],
-                  counter: "",
-                  label: "Descripción",
-                  name: "descripcion"
-                },
-                model: {
-                  value: _vm.curso.descripcion,
-                  callback: function($$v) {
-                    _vm.$set(_vm.curso, "descripcion", $$v)
-                  },
-                  expression: "curso.descripcion"
-                }
-              })
+              _c(
+                "v-toolbar",
+                { staticClass: "py-1", attrs: { dark: "" } },
+                [
+                  _c("v-toolbar-title", [_vm._v("Curso")]),
+                  _vm._v(" "),
+                  _c("v-spacer")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { md10: "", xs12: "", "offset-md1": "" } },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: "pb-0" },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          xs6: "",
+                          rules: [_vm.rules.required, _vm.rules.mini],
+                          counter: "",
+                          label: "Codigo",
+                          name: "codigo",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.curso.codigo,
+                          callback: function($$v) {
+                            _vm.$set(_vm.curso, "codigo", $$v)
+                          },
+                          expression: "curso.codigo"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          xs6: "",
+                          rules: [_vm.rules.required, _vm.rules.mini],
+                          counter: "",
+                          label: "Nombre",
+                          name: "nombre",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.curso.nombre,
+                          callback: function($$v) {
+                            _vm.$set(_vm.curso, "nombre", $$v)
+                          },
+                          expression: "curso.nombre"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          xs6: "",
+                          rules: [_vm.rules.mini],
+                          counter: "",
+                          label: "Descripción",
+                          name: "descripcion"
+                        },
+                        model: {
+                          value: _vm.curso.descripcion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.curso, "descripcion", $$v)
+                          },
+                          expression: "curso.descripcion"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           )
@@ -22964,21 +22984,22 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-layout",
-        { attrs: { wrap: "", "mx-5": "", xs6: "" } },
+        "v-flex",
+        { attrs: { xs4: "", md6: "", "d-flex": "", "px-3": "", "mt-5": "" } },
         [
           _c(
-            "v-flex",
-            { attrs: { xs12: "", "d-flex": "", "px-3": "", "mt-5": "" } },
+            "v-layout",
+            { attrs: { "align-center": "", "justify-center": "", column: "" } },
             [
               _c(
                 "v-flex",
-                { attrs: { xs12: "", "d-flex": "", "px-3": "", "mt-5": "" } },
+                { attrs: { xs12: "" } },
                 [
                   _c(
                     "v-btn",
                     {
                       attrs: {
+                        xs12: "",
                         round: "",
                         dark: "",
                         flat: "",
@@ -22995,12 +23016,13 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { attrs: { xs12: "", "d-flex": "", "px-3": "", "mt-5": "" } },
+                { attrs: { xs12: "" } },
                 [
                   _c(
                     "v-btn",
                     {
                       attrs: {
+                        xs12: "",
                         round: "",
                         dark: "",
                         flat: "",
@@ -23016,18 +23038,26 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-btn",
-                {
-                  attrs: {
-                    round: "",
-                    dark: "",
-                    flat: "",
-                    color: "red",
-                    block: ""
-                  },
-                  on: { click: _vm.eliminar }
-                },
-                [_vm._v("Eliminar")]
+                "v-flex",
+                { attrs: { xs12: "" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        xs12: "",
+                        round: "",
+                        dark: "",
+                        flat: "",
+                        color: "red",
+                        block: ""
+                      },
+                      on: { click: _vm.eliminar }
+                    },
+                    [_vm._v("Eliminar")]
+                  )
+                ],
+                1
               )
             ],
             1
@@ -23037,100 +23067,111 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-card",
+        "v-flex",
+        { attrs: { xs12: "", "pt-2": "", "px-3": "" } },
         [
           _c(
-            "v-card-title",
+            "v-card",
             [
-              _vm._v("\n         Cursos\n         "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  "append-icon": "search",
-                  label: "Buscar por Nombre",
-                  "single-line": "",
-                  "hide-details": ""
-                },
-                model: {
-                  value: _vm.search,
-                  callback: function($$v) {
-                    _vm.search = $$v
-                  },
-                  expression: "search"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-data-table",
-            {
-              attrs: {
-                headers: _vm.headers,
-                items: _vm.cursos,
-                search: _vm.search
-              },
-              scopedSlots: _vm._u([
-                {
-                  key: "items",
-                  fn: function(props) {
-                    return [
-                      _c("td", [_vm._v(_vm._s(props.item.nombre))]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(props.item.codigo))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(props.item.descripcion))
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "text-center" },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { flat: "", small: "", color: "primary" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.buscar(props.item.id)
-                                }
-                              }
-                            },
-                            [_vm._v("Seleccionar")]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  }
-                }
-              ])
-            },
-            [
-              _vm._v(" "),
-              _c("v-alert", {
-                attrs: { value: true, color: "error", icon: "warning" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "no-results",
-                    fn: function() {
-                      return [
-                        _vm._v(
-                          'Tu busqueda por "' +
-                            _vm._s(_vm.search) +
-                            '" no encontro resultados.'
-                        )
-                      ]
+              _c(
+                "v-card-title",
+                [
+                  _vm._v("\n            Cursos\n            "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "append-icon": "search",
+                      label: "Buscar por Nombre",
+                      "single-line": "",
+                      "hide-details": ""
                     },
-                    proxy: true
-                  }
-                ])
-              })
+                    model: {
+                      value: _vm.search,
+                      callback: function($$v) {
+                        _vm.search = $$v
+                      },
+                      expression: "search"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-data-table",
+                {
+                  attrs: {
+                    headers: _vm.headers,
+                    items: _vm.cursos,
+                    search: _vm.search
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "items",
+                      fn: function(props) {
+                        return [
+                          _c("td", [_vm._v(_vm._s(props.item.nombre))]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(props.item.codigo))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(props.item.descripcion))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    flat: "",
+                                    small: "",
+                                    color: "primary"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.buscar(props.item.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Seleccionar")]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _c("v-alert", {
+                    attrs: { value: true, color: "error", icon: "warning" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "no-results",
+                        fn: function() {
+                          return [
+                            _vm._v(
+                              'Tu busqueda por "' +
+                                _vm._s(_vm.search) +
+                                '" no encontro resultados.'
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
             ],
             1
           )
