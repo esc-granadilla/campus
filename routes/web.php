@@ -21,6 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profesors', 'ProfesorController');
 
+Route::resource('horarios', 'HorarioController');
+
+Route::resource('cursos', 'CursoController');
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/credencial', 'AdministracionController@credencial')->name('credencial');

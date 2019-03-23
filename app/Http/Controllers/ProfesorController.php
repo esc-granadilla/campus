@@ -13,7 +13,7 @@ class ProfesorController extends Controller
 {
    /*
     |--------------------------------------------------------------------------
-    | Register Controller
+    | Profesor Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
@@ -165,7 +165,7 @@ class ProfesorController extends Controller
          $profesor->telefono1 = $request->input('telefono1');
          $profesor->telefono2 = $request->input('telefono2');
          $profesor->save();
-         return response()->json(['message' => 'Datos del Profesor actualizados correctamente'], 200);
+         return response()->json(['message' => 'Datos del Profesor fueron actualizados correctamente'], 200);
       }
    }
 
