@@ -37,7 +37,7 @@ class AdministracionController extends Controller
       if ($request->ajax()) {
          $rolestouser = [];
          $i = 0;
-         $profesores = Profesor::all();
+         $profesores = Profesor::where('estado', 1)->get();
          foreach ($profesores as $value) {
             $user = User::where('id', $value->user_id)->first();
             $profesor = $administrador = false;

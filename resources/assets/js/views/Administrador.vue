@@ -82,6 +82,7 @@
             <h1>hola este es el cuerpo</h1>
          </div>
          <credencial v-if="mostar === 'credencial'"></credencial>
+         <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
       </div>
    </v-layout>
 </template>
@@ -100,7 +101,7 @@ export default {
          ],
          empleados: [
             ["Crear", "add", "profesors/create"],
-            ["Mostrar", "insert_drive_file", ""],
+            ["Mostrar", "insert_drive_file", "profesors/mostrar"],
             ["Actualizar", "update", ""],
             ["Eliminar", "delete", ""]
          ],

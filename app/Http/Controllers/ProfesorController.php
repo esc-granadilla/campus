@@ -36,7 +36,7 @@ class ProfesorController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $profesores = Profesor::all();
+         $profesores = Profesor::where('estado', 1)->get();
          return response()->json($profesores, 200);
       }
    }

@@ -6,7 +6,7 @@
          <v-text-field
             v-model="search"
             append-icon="search"
-            label="Buscar"
+            label="Buscar por Nombre"
             single-line
             hide-details
          ></v-text-field>
@@ -37,7 +37,7 @@
             :value="true"
             color="error"
             icon="warning"
-         >Your search for "{{ search }}" found no results.</v-alert>
+         >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
       </v-data-table>
    </v-card>
 </template>
