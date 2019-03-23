@@ -13,12 +13,12 @@
       </v-toolbar>
       <v-layout wrap mx-5 xs6>
          <v-flex xs6 pt-2 px-3>
-            <v-text-field v-model="profesor.nombre" counter label="Nombre" name="nombre" required></v-text-field>
+            <v-text-field v-model="estudiante.nombre" counter label="Nombre" name="nombre" required></v-text-field>
          </v-flex>
          <v-flex xs6 pt-2 px-3>
             <v-text-field
                xs12
-               v-model="profesor.primer_apellido"
+               v-model="estudiante.primer_apellido"
                label="Primer Apellido"
                name="primer_apellido"
                readonly
@@ -26,7 +26,7 @@
          </v-flex>
          <v-flex xs6 pt-2 px-3>
             <v-text-field
-               v-model="profesor.segundo_apellido"
+               v-model="estudiante.segundo_apellido"
                label="Segundo Apellido"
                name="segundo_apellido"
                readonly
@@ -34,7 +34,7 @@
          </v-flex>
          <v-flex xs6 pt-2 px-3>
             <v-text-field
-               v-model="profesor.fecha_nacimiento"
+               v-model="estudiante.fecha_nacimiento"
                label="Fecha Nacimiento"
                name="fecha_nacimiento"
                xs12
@@ -44,33 +44,14 @@
       </v-layout>
       <v-layout wrap mx-5 xs6>
          <v-flex xs6 d-flex px-3>
-            <v-text-field v-model="profesor.puesto" label="Puesto" name="puesto" readonly xs12></v-text-field>
-         </v-flex>
-         <v-flex xs6 pt-2 px-3>
-            <v-text-field
-               v-model="profesor.fecha_ingreso"
-               label="Fecha Ingreso"
-               name="fecha_ingreso"
-               xs12
-               readonly
-            ></v-text-field>
+            <v-text-field v-model="estudiante.grado" label="Grado" name="grado" readonly xs12></v-text-field>
          </v-flex>
          <v-flex xs6 d-flex px-3>
             <v-text-field
-               v-model="profesor.telefono1"
+               v-model="estudiante.adecuacion"
                xs12
-               label="1º Telefono"
-               name="telefono1"
-               readonly
-            ></v-text-field>
-         </v-flex>
-         <v-flex xs6 d-flex px-3>
-            <v-text-field
-               v-model="profesor.telefono2"
-               :counter="8"
-               xs12
-               label="2º Telefono"
-               name="telefono2"
+               label="Adecuacion"
+               name="adecuacion"
                readonly
             ></v-text-field>
          </v-flex>
@@ -87,17 +68,15 @@ export default {
    data() {
       return {
          search: "",
-         profesor: {
+         estudiante: {
             id: null,
             cedula: "",
             nombre: "",
             primer_apellido: "",
             segundo_apellido: "",
             fecha_nacimiento: null,
-            puesto: "",
-            fecha_ingreso: null,
-            telefono1: "",
-            telefono2: ""
+            grado: "",
+            adecuacion: ""
          },
          mensaje: []
       };
@@ -106,14 +85,14 @@ export default {
       buscar(event) {
          if (window.event.keyCode == 13) {
             axios
-               .get("profesors/" + this.search)
-               .then(res => (this.profesor = res.data));
+               .get("estudiantes/" + this.search)
+               .then(res => (this.estudiante = res.data));
          }
       },
       eliminar() {
-         if (this.profesor.id != null) {
+         if (this.estudiante.id != null) {
             axios
-               .delete("profesors/" + this.search)
+               .delete("estudiantes/" + this.estudiante.id)
                .then(res => (this.mensaje = res.data));
          }
       }

@@ -33,7 +33,8 @@ class EstudianteController extends Controller
    {
       if ($request->ajax()) {
          $estudiantes = Estudiante::where('estado', 1)->get();
-         return response()->json($estudiantes, 200);
+         return
+            response()->json($estudiantes, 200);
       }
    }
 
@@ -62,22 +63,53 @@ class EstudianteController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function show($id)
+   public function show($id, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $estudiante = Estudiante::where('cedula', $id)->first();
+         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? null : $estudiante;
+         if ($estudiante == null) {
+            $estudiante = new Estudiante();
+            $estudiante->id = null;
+            $estudiante->cedula = '';
+            $estudiante->nombre = '';
+            $estudiante->primer_apellido = '';
+            $estudiante->segundo_apellido = '';
+            $estudiante->fecha_nacimiento = null;
+            $estudiante->grado = '';
+            $estudiante->adecuacion = '';
+         }
+         return response()->json($estudiante, 200);
+      }
    }
 
    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function edit($id)
+   public function edit(Estudiante $estudiante, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? null : $estudiante;
+         if ($estudiante == null) {
+            $estudiante = new Estudiante();
+            $estudiante->id = null;
+            $estudiante->cedula = '';
+            $estudiante->nombre = '';
+            $estudiante->primer_apellido = '';
+            $estudiante->segundo_apellido = '';
+            $estudiante->fecha_nacimiento = null;
+            $estudiante->grado = '';
+            $estudiante->adecuacion = '';
+         }
+         return response()->json($estudiante, 200);
+      }
    }
 
    /**
@@ -87,19 +119,33 @@ class EstudianteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function update(Request $request, $id)
+   public function update(Request $request, Estudiante $estudiante)
    {
-      //
+      if ($request->ajax()) {
+         $estudiante->nombre = $request->input('nombre');
+         $estudiante->primer_apellido = $request->input('primer_apellido');
+         $estudiante->segundo_apellido = $request->input('segundo_apellido');
+         $estudiante->fecha_nacimiento = $request->input('fecha_nacimiento');
+         $estudiante->grado = $request->input('grado');
+         $estudiante->adecuacion = $request->input('adecuacion');
+         $estudiante->save();
+         return response()->json(['message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
+      }
    }
 
    /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function destroy($id)
+   public function destroy(Request $request, Estudiante $estudiante)
    {
-      //
+      if ($request->ajax()) {
+         $estudiante->estado = 0;
+         $estudiante->save();
+         return response()->json(['message' => 'El Estudiante fue eliminado correctamente'], 200);
+      }
    }
 }
