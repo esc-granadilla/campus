@@ -90,22 +90,58 @@ class ProfesorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function show($id)
+   public function show($id, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $profesor = Profesor::where('cedula', $id)->first();
+         $profesor = ($profesor != null && $profesor->estado == 0) ? null : $profesor;
+         if ($profesor == null) {
+            $profesor = new Profesor();
+            $profesor->id = null;
+            $profesor->cedula = '';
+            $profesor->nombre = '';
+            $profesor->primer_apellido = '';
+            $profesor->segundo_apellido = '';
+            $profesor->fecha_nacimiento = null;
+            $profesor->puesto = '';
+            $profesor->fecha_ingreso = null;
+            $profesor->telefono1 = '';
+            $profesor->telefono2 = '';
+         }
+         return response()->json($profesor, 200);
+      }
    }
 
    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function edit($id)
+   public function edit($id, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $profesor = Profesor::where('cedula', $id)->first();
+         $profesor = ($profesor != null && $profesor->estado == 0) ? null : $profesor;
+         if ($profesor == null) {
+            $profesor = new Profesor();
+            $profesor->id = null;
+            $profesor->cedula = '';
+            $profesor->nombre = '';
+            $profesor->primer_apellido = '';
+            $profesor->segundo_apellido = '';
+            $profesor->fecha_nacimiento = null;
+            $profesor->puesto = '';
+            $profesor->fecha_ingreso = null;
+            $profesor->telefono1 = '';
+            $profesor->telefono2 = '';
+         }
+         return response()->json($profesor, 200);
+      }
    }
 
    /**
@@ -117,17 +153,35 @@ class ProfesorController extends Controller
      */
    public function update(Request $request, $id)
    {
-      //
+      if ($request->ajax()) {
+         $profesor = Profesor::where('cedula', $id)->first();
+         $profesor->nombre = $request->input('nombre');
+         $profesor->primer_apellido = $request->input('primer_apellido');
+         $profesor->segundo_apellido = $request->input('segundo_apellido');
+         $profesor->fecha_nacimiento = $request->input('fecha_nacimiento');
+         $profesor->puesto = $request->input('puesto');
+         $profesor->fecha_ingreso = $request->input('fecha_ingreso');
+         $profesor->telefono1 = $request->input('telefono1');
+         $profesor->telefono2 = $request->input('telefono2');
+         $profesor->save();
+         return response()->json(['message' => 'Datos del Profesor actualizados correctamente'], 200);
+      }
    }
 
    /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function destroy($id)
+   public function destroy(Request $request, $id)
    {
-      //
+      if ($request->ajax()) {
+         $profesor = Profesor::where('cedula', $id)->first();
+         $profesor->estado = 0;
+         $profesor->save();
+         return response()->json(['message' => 'El Profesor fue eliminado correctamente'], 200);
+      }
    }
 }

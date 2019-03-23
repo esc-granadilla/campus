@@ -83,6 +83,8 @@
          </div>
          <credencial v-if="mostar === 'credencial'"></credencial>
          <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
+         <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
+         <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
       </div>
    </v-layout>
 </template>
@@ -102,8 +104,8 @@ export default {
          empleados: [
             ["Crear", "add", "profesors/create"],
             ["Mostrar", "insert_drive_file", "profesors/mostrar"],
-            ["Actualizar", "update", ""],
-            ["Eliminar", "delete", ""]
+            ["Actualizar", "update", "profesors/editar"],
+            ["Eliminar", "delete", "profesors/eliminar"]
          ],
          estudiantes: [
             ["Mostrar", "insert_drive_file", ""],
