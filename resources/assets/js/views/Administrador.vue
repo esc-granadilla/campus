@@ -85,6 +85,9 @@
          <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
          <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
          <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
+         <emostrarcomponent v-if="mostar === 'estudiantes/mostrar'"></emostrarcomponent>
+         <eeditarcomponent v-if="mostar === 'estudiantes/editar'"></eeditarcomponent>
+         <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
          <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
          <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
       </div>
@@ -120,9 +123,9 @@ export default {
             ["Eliminar", "delete", "profesors/eliminar"]
          ],
          estudiantes: [
-            ["Mostrar", "insert_drive_file", ""],
-            ["Actualizar", "update", ""],
-            ["Eliminar", "delete", ""]
+            ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],
+            ["Actualizar", "update", "estudiantes/editar"],
+            ["Eliminar", "delete", "estudiantes/eliminar"]
          ],
          mostar: "cuerpo",
          mini: true,
