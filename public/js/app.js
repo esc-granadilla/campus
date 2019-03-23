@@ -2593,7 +2593,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/profesors").then(function (res) {
+    axios.get("/roltouser").then(function (res) {
       return _this.profesores = res.data;
     });
     axios.get("/roles").then(function (res) {
@@ -2628,12 +2628,13 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0, l = this.profesores.length; i < l; i++) {
         if (this.profesores[i].estado === 1) {
           des[j] = {
+            id: this.profesores[i].id,
             nombre: this.profesores[i].nombre,
             cedula: this.profesores[i].cedula,
             puesto: this.profesores[i].puesto,
-            telefono: this.profesores[i].telefono1,
-            administrador: false,
-            profesor: false
+            telefono: this.profesores[i].telefono,
+            administrador: this.profesores[i].administrador,
+            profesor: this.profesores[i].profesor
           };
           j++;
         }
@@ -23186,21 +23187,21 @@ var render = function() {
                 return [
                   _c("td", [_vm._v(_vm._s(props.item.nombre))]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
+                  _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(props.item.cedula))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
+                  _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(props.item.puesto))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-right" }, [
+                  _c("td", { staticClass: "text-center" }, [
                     _vm._v(_vm._s(props.item.telefono))
                   ]),
                   _vm._v(" "),
                   _c(
                     "td",
-                    { staticClass: "text-xs-right" },
+                    { staticClass: "text-center" },
                     [
                       _c("v-checkbox", {
                         model: {
@@ -23217,7 +23218,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "td",
-                    { staticClass: "text-xs-right" },
+                    { staticClass: "text-center" },
                     [
                       _c("v-checkbox", {
                         model: {

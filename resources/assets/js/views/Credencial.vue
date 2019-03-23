@@ -14,13 +14,13 @@
       <v-data-table :headers="headers" :items="dessertss" :search="search">
          <template v-slot:items="props">
             <td>{{ props.item.nombre }}</td>
-            <td class="text-xs-right">{{ props.item.cedula }}</td>
-            <td class="text-xs-right">{{ props.item.puesto }}</td>
-            <td class="text-xs-right">{{ props.item.telefono }}</td>
-            <td class="text-xs-right">
+            <td class="text-center">{{ props.item.cedula }}</td>
+            <td class="text-center">{{ props.item.puesto }}</td>
+            <td class="text-center">{{ props.item.telefono }}</td>
+            <td class="text-center">
                <v-checkbox v-model="props.item.administrador"></v-checkbox>
             </td>
-            <td class="text-xs-right">
+            <td class="text-center">
                <v-checkbox v-model="props.item.profesor"></v-checkbox>
             </td>
          </template>
@@ -57,7 +57,7 @@ export default {
       };
    },
    mounted() {
-      axios.get("/profesors").then(res => (this.profesores = res.data));
+      axios.get("/roltouser").then(res => (this.profesores = res.data));
       axios.get("/roles").then(res => (this.roles = res.data));
    },
    computed: {
@@ -83,12 +83,13 @@ export default {
          for (var i = 0, l = this.profesores.length; i < l; i++) {
             if (this.profesores[i].estado === 1) {
                des[j] = {
+                  id: this.profesores[i].id,
                   nombre: this.profesores[i].nombre,
                   cedula: this.profesores[i].cedula,
                   puesto: this.profesores[i].puesto,
-                  telefono: this.profesores[i].telefono1,
-                  administrador: false,
-                  profesor: false
+                  telefono: this.profesores[i].telefono,
+                  administrador: this.profesores[i].administrador,
+                  profesor: this.profesores[i].profesor
                };
                j++;
             }
