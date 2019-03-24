@@ -28,6 +28,9 @@ import EstudianteEditarComponent from './components/Estudiantes/EditarComponent.
 import EstudianteBorrarComponent from './components/Estudiantes/BorrarComponent.vue'
 import HorarioComponent from './components/Horario/HorarioComponent.vue'
 import CursoComponent from './components/Curso/CursoComponent.vue'
+import Vuebar from 'vuebar';
+
+Vue.use(Vuebar);
 
 window.Vue = require('vue');
 Vue.use(Vuetify, {
