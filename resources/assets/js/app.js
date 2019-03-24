@@ -20,6 +20,9 @@ import Credencial from './views/Credencial.vue'
 import ProfesorMostrarComponent from './components/Profesores/MostrarComponent.vue'
 import ProfesorEditarComponent from './components/Profesores/EditarComponent.vue'
 import ProfesorBorrarComponent from './components/Profesores/BorrarComponent.vue'
+import EstudianteMostrarComponent from './components/Estudiantes/MostrarComponent.vue'
+import EstudianteEditarComponent from './components/Estudiantes/EditarComponent.vue'
+import EstudianteBorrarComponent from './components/Estudiantes/BorrarComponent.vue'
 import HorarioComponent from './components/Horario/HorarioComponent.vue'
 import CursoComponent from './components/Curso/CursoComponent.vue'
 
@@ -43,6 +46,9 @@ Vue.component('remembercomponent', RememberComponent);
 Vue.component('pmostrarcomponent', ProfesorMostrarComponent);
 Vue.component('peditarcomponent', ProfesorEditarComponent);
 Vue.component('pborrarcomponent', ProfesorBorrarComponent);
+Vue.component('emostrarcomponent', EstudianteMostrarComponent);
+Vue.component('eeditarcomponent', EstudianteEditarComponent);
+Vue.component('eborrarcomponent', EstudianteBorrarComponent);
 Vue.component('horariocomponent', HorarioComponent);
 Vue.component('cursocomponent', CursoComponent);
 Vue.component('administrador', Administrador);

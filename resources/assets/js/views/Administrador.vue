@@ -12,7 +12,7 @@
                <v-list class="pa-0">
                   <v-list-tile avatar>
                      <v-list-tile-avatar>
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg">
+                        <v-icon x-large>vertical_split</v-icon>
                      </v-list-tile-avatar>
 
                      <v-list-tile-content>
@@ -85,6 +85,9 @@
          <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
          <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
          <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
+         <emostrarcomponent v-if="mostar === 'estudiantes/mostrar'"></emostrarcomponent>
+         <eeditarcomponent v-if="mostar === 'estudiantes/editar'"></eeditarcomponent>
+         <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
          <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
          <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
       </div>
@@ -98,18 +101,23 @@ export default {
          drawer: true,
          items: [
             {
+               title: "Noticias",
+               icon: "notifications",
+               ruta: "noticias"
+            },
+            {
                title: "Credenciales",
                icon: "account_balance_wallet",
                ruta: "credencial"
             },
             {
                title: "Cursos",
-               icon: "account_balance_wallet",
+               icon: "donut_small",
                ruta: "curso"
             },
             {
                title: "Horarios",
-               icon: "account_balance_wallet",
+               icon: "alarm",
                ruta: "horario"
             }
          ],
@@ -120,9 +128,9 @@ export default {
             ["Eliminar", "delete", "profesors/eliminar"]
          ],
          estudiantes: [
-            ["Mostrar", "insert_drive_file", ""],
-            ["Actualizar", "update", ""],
-            ["Eliminar", "delete", ""]
+            ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],
+            ["Actualizar", "update", "estudiantes/editar"],
+            ["Eliminar", "delete", "estudiantes/eliminar"]
          ],
          mostar: "cuerpo",
          mini: true,

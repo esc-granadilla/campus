@@ -139,7 +139,7 @@ class CursoController extends Controller
       if ($request->ajax()) {
          $curso->estado = 0;
          $curso->save();
-         return response()->json(['message' => 'El Curso fueron eliminado exitosamente'], 200);
+         return response()->json(['message' => 'El Curso fue eliminado exitosamente'], 200);
       }
    }
 }
