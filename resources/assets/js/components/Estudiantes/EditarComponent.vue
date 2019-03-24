@@ -160,22 +160,9 @@ export default {
       buscar(event) {
          var self = this;
          if (window.event.keyCode == 13) {
-            axios.get("estudiantes/" + this.search).then(function(res) {
-               self.estudiante = res.data;
-               if (self.estudiante.grado !== "") {
-                  var grado = self.grados.find(function(element) {
-                     return element.value == self.estudiante.grado;
-                  });
-                  self.grado = grado;
-                  var adecuacion = self.adecuaciones.find(function(element) {
-                     return element.text == self.estudiante.adecuacion;
-                  });
-                  self.adecuacion = adecuacion;
-               } else {
-                  self.grado = { value: 1, text: "Primero" };
-                  self.adecuacion = { value: 1, text: "Ninguna" };
-               }
-            });
+            axios
+               .get("estudiantes/" + this.search)
+               .then(res => (this.estudiante = res.data));
          }
       },
       editar() {
@@ -194,6 +181,21 @@ export default {
       adecuaciontxt: function() {
          this.estudiante.adecuacion = this.adecuacion.text;
          return this.adecuacion.text;
+      }
+   },
+   watch: {
+      estudiante: function(val) {
+         if (val.grado === "") {
+            this.grado = { value: 1, text: "Primero" };
+            this.adecuacion = { value: 1, text: "Ninguna" };
+         } else {
+            this.grado = this.grados.find(function(element) {
+               return element.value == val.grado;
+            });
+            this.adecuacion = this.adecuaciones.find(function(element) {
+               return element.text == val.adecuacion;
+            });
+         }
       }
    }
 };

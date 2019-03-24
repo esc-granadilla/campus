@@ -20,9 +20,8 @@ class EstudianteController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
-      $this->middleware('administrador');
-      //$this->middleware('profesor');
+      $this->middleware('administrador', ['only' => ['create', 'store', 'update', 'destroy']]);
+      $this->middleware('profesor', ['only' => ['index', 'show', 'edit']]);
    }
    /**
      * Display a listing of the resource.

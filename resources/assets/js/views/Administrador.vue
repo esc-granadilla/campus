@@ -12,7 +12,7 @@
                <v-list class="pa-0">
                   <v-list-tile avatar>
                      <v-list-tile-avatar>
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg">
+                        <v-icon x-large>vertical_split</v-icon>
                      </v-list-tile-avatar>
 
                      <v-list-tile-content>
@@ -101,18 +101,23 @@ export default {
          drawer: true,
          items: [
             {
+               title: "Noticias",
+               icon: "notifications",
+               ruta: "noticias"
+            },
+            {
                title: "Credenciales",
                icon: "account_balance_wallet",
                ruta: "credencial"
             },
             {
                title: "Cursos",
-               icon: "account_balance_wallet",
+               icon: "donut_small",
                ruta: "curso"
             },
             {
                title: "Horarios",
-               icon: "account_balance_wallet",
+               icon: "alarm",
                ruta: "horario"
             }
          ],

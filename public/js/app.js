@@ -2256,6 +2256,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2365,7 +2367,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   name: "editarcomponent",
   data: function data() {
     return {
@@ -2449,40 +2451,22 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.menu.save(date);
     },
     buscar: function buscar(event) {
+      var _this2 = this;
+
       var self = this;
 
       if (window.event.keyCode == 13) {
         axios.get("estudiantes/" + this.search).then(function (res) {
-          self.estudiante = res.data;
-
-          if (self.estudiante.grado !== "") {
-            var grado = self.grados.find(function (element) {
-              return element.value == self.estudiante.grado;
-            });
-            self.grado = grado;
-            var adecuacion = self.adecuaciones.find(function (element) {
-              return element.text == self.estudiante.adecuacion;
-            });
-            self.adecuacion = adecuacion;
-          } else {
-            self.grado = {
-              value: 1,
-              text: "Primero"
-            };
-            self.adecuacion = {
-              value: 1,
-              text: "Ninguna"
-            };
-          }
+          return _this2.estudiante = res.data;
         });
       }
     },
     editar: function editar() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.estudiante.id != null) {
         axios.put("estudiantes/" + this.estudiante.id, this.estudiante).then(function (res) {
-          return _this2.mensaje = res.data;
+          return _this3.mensaje = res.data;
         });
       }
     }
@@ -2497,7 +2481,27 @@ __webpack_require__.r(__webpack_exports__);
       return this.adecuacion.text;
     }
   }
-});
+}, "watch", {
+  estudiante: function estudiante(val) {
+    if (val.grado === "") {
+      this.grado = {
+        value: 1,
+        text: "Primero"
+      };
+      this.adecuacion = {
+        value: 1,
+        text: "Ninguna"
+      };
+    } else {
+      this.grado = this.grados.find(function (element) {
+        return element.value == val.grado;
+      });
+      this.adecuacion = this.adecuaciones.find(function (element) {
+        return element.text == val.adecuacion;
+      });
+    }
+  }
+}));
 
 /***/ }),
 
@@ -3540,16 +3544,20 @@ __webpack_require__.r(__webpack_exports__);
     return {
       drawer: true,
       items: [{
+        title: "Noticias",
+        icon: "notifications",
+        ruta: "noticias"
+      }, {
         title: "Credenciales",
         icon: "account_balance_wallet",
         ruta: "credencial"
       }, {
         title: "Cursos",
-        icon: "account_balance_wallet",
+        icon: "donut_small",
         ruta: "curso"
       }, {
         title: "Horarios",
-        icon: "account_balance_wallet",
+        icon: "alarm",
         ruta: "horario"
       }],
       empleados: [["Crear", "add", "profesors/create"], ["Mostrar", "insert_drive_file", "profesors/mostrar"], ["Actualizar", "update", "profesors/editar"], ["Eliminar", "delete", "profesors/eliminar"]],
@@ -4151,6 +4159,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4171,7 +4192,7 @@ __webpack_require__.r(__webpack_exports__);
       date: null,
       telefono1: "",
       telefono2: "",
-      image: __webpack_require__(/*! ../../img/studens1.jpg */ "./resources/assets/img/studens1.jpg"),
+      image: __webpack_require__(/*! ../../img/profebanner.jpg */ "./resources/assets/img/profebanner.jpg"),
       rules: {
         required: function required(value) {
           return !!value || "Requerido.";
@@ -4208,6 +4229,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     save: function save(date) {
       this.$refs.menu.save(date);
+    }
+  },
+  watch: {
+    menu: function menu(val) {
+      var _this = this;
+
+      val && setTimeout(function () {
+        return _this.$refs.picker.activePicker = "YEAR";
+      });
     }
   },
   computed: {}
@@ -25908,14 +25938,15 @@ var render = function() {
                       "v-list-tile",
                       { attrs: { avatar: "" } },
                       [
-                        _c("v-list-tile-avatar", [
-                          _c("img", {
-                            attrs: {
-                              src:
-                                "https://randomuser.me/api/portraits/men/85.jpg"
-                            }
-                          })
-                        ]),
+                        _c(
+                          "v-list-tile-avatar",
+                          [
+                            _c("v-icon", { attrs: { "x-large": "" } }, [
+                              _vm._v("vertical_split")
+                            ])
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "v-list-tile-content",
@@ -26869,16 +26900,25 @@ var render = function() {
     [
       _c(
         "v-layout",
-        { attrs: { "justify-center": "", "mt-5": "" } },
+        { attrs: { "justify-center": "", "mt-2": "" } },
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", md6: "", "offset-md3": "" } },
+            {
+              attrs: {
+                xs12: "",
+                md6: "",
+                "offset-md3": "",
+                lg4: "",
+                "offset-lg4": ""
+              }
+            },
             [
               _c(
                 "v-card",
                 [
                   _c("v-progress-linear", {
+                    staticClass: "mb-0 mt-3",
                     attrs: {
                       color: "success",
                       height: "5",
@@ -26890,7 +26930,13 @@ var render = function() {
                     "v-img",
                     {
                       staticClass: "black--text",
-                      attrs: { height: "200px", src: _vm.image }
+                      class: _vm.subheading,
+                      attrs: {
+                        "aspect-ratio": "4",
+                        height: "200px",
+                        contain: "",
+                        src: _vm.image
+                      }
                     },
                     [
                       _c(
@@ -26977,7 +27023,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs12: "", "d-flex": "" } },
+                                { attrs: { xs12: "" } },
                                 [
                                   _c(
                                     "v-menu",
@@ -27006,7 +27052,8 @@ var render = function() {
                                                       label: "Fecha Ingreso",
                                                       name: "fecha_ingreso",
                                                       "prepend-icon": "event",
-                                                      readonly: ""
+                                                      readonly: "",
+                                                      xs12: ""
                                                     },
                                                     model: {
                                                       value: _vm.date,
@@ -27211,11 +27258,19 @@ var render = function() {
     [
       _c(
         "v-layout",
-        { attrs: { "justify-center": "", "mt-5": "" } },
+        { attrs: { "justify-center": "", "mt-3": "" } },
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", md6: "", "offset-md3": "" } },
+            {
+              attrs: {
+                xs12: "",
+                md6: "",
+                "offset-md3": "",
+                lg4: "",
+                "offset-lg4": ""
+              }
+            },
             [
               _c(
                 "v-card",
@@ -66885,14 +66940,14 @@ module.exports = "/images/logo.png?92c90eee5b22dddcbbd647c8d43b8cc6";
 
 /***/ }),
 
-/***/ "./resources/assets/img/studens1.jpg":
-/*!*******************************************!*\
-  !*** ./resources/assets/img/studens1.jpg ***!
-  \*******************************************/
+/***/ "./resources/assets/img/profebanner.jpg":
+/*!**********************************************!*\
+  !*** ./resources/assets/img/profebanner.jpg ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/studens1.jpg?c154eb109105254a7f01ce4356102de4";
+module.exports = "/images/profebanner.jpg?7425a89a850f6ec71b99a316425cfbf3";
 
 /***/ }),
 
