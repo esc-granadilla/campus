@@ -60,17 +60,8 @@ class HorarioController extends Controller
    {
       if ($request->ajax()) {
          $horario = new Horario();
-         $desde = explode(':', $request->input('desde'), 2);
-         $hasta = explode(':', $request->input('hasta'), 2);
-         $time1 = new Carbon();
-         $time1->hour   = (int)$desde[0];
-         $time1->minute = (int)$desde[1];
-         $time2 = new Carbon();
-         $time2->hour   = (int)$hasta[0];
-         $time2->minute = (int)$hasta[1];
-         $time1->second = $time2->second = 0;
-         $horario->hasta = $time2;
-         $horario->desde = $time1;
+         $horario->hasta = $request->input('hasta');
+         $horario->desde = $request->input('desde');
          $horario->save();
          return response()->json(['message' => 'Se registro el Horario correctamente'], 200);
       }
@@ -129,17 +120,8 @@ class HorarioController extends Controller
    public function update(Request $request, Horario $horario)
    {
       if ($request->ajax()) {
-         $desde = explode(':', $request->input('desde'), 2);
-         $hasta = explode(':', $request->input('hasta'), 2);
-         $time1 = new Carbon();
-         $time1->hour   = (int)$desde[0];
-         $time1->minute = (int)$desde[1];
-         $time2 = new Carbon();
-         $time2->hour   = (int)$hasta[0];
-         $time2->minute = (int)$hasta[1];
-         $time1->second = $time2->second = 0;
-         $horario->hasta = $time2;
-         $horario->desde = $time1;
+         $horario->hasta = $request->input('hasta');
+         $horario->desde = $request->input('desde');
          $horario->save();
          return response()->json(['message' => 'Datos del Horario fueron actualizados correctamente'], 200);
       }
