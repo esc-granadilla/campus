@@ -8,7 +8,7 @@
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-flex md10 xs12 offset-md1>
-                  <v-card-text class="pb-0">
+                  <v-card-text>
                      <v-layout wrap row>
                         <v-flex xs12 md7>
                            <v-dialog

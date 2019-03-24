@@ -4,14 +4,20 @@
          <v-layout justify-center wrap>
             <v-flex md10 class="mar">
                <v-toolbar color="green" dark tabs>
-                  <v-text-field
-                     class="mx-3"
-                     flat
-                     label="Buscar Codigo"
-                     prepend-inner-icon="search"
-                     solo-inverted
-                  ></v-text-field>
-
+                  <v-flex v-if="ocualtarTab">
+                     <v-text-field
+                        class="mx-3"
+                        flat
+                        label="Buscar Nombre"
+                        prepend-inner-icon="search"
+                        solo-inverted
+                        v-model="search"
+                        @keydown="buscar()"
+                     ></v-text-field>
+                  </v-flex>
+                  <v-layout v-if="!ocualtarTab" xs12 justify-center align-center wrap>
+                     <v-btn block flat xs12 round selected>Asignar Horario(s) al curso</v-btn>
+                  </v-layout>
                   <template v-slot:extension>
                      <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
                         <v-tab v-for="a in accions" :key="a.id">{{ a.text }}</v-tab>
@@ -55,11 +61,10 @@
                         <v-data-table
                            v-model="selected"
                            :headers="headers"
-                           :items="desserts"
+                           :items="horarios"
                            :pagination.sync="pagination"
                            select-all
                            item-key="id"
-                           class="elevation-1"
                         >
                            <template v-slot:headers="props">
                               <tr>
@@ -91,8 +96,8 @@
                                  <td>
                                     <v-checkbox :input-value="props.selected" hide-details></v-checkbox>
                                  </td>
-                                 <td class="text-xs-right expand">{{ props.item.desde }}</td>
-                                 <td class="text-xs-right">{{ props.item.hasta }}</td>
+                                 <td class="text-xs-center">{{ props.item.desde }}</td>
+                                 <td class="text-xs-center">{{ props.item.hasta }}</td>
                               </tr>
                            </template>
                         </v-data-table>
@@ -109,10 +114,8 @@
 export default {
    data() {
       return {
-         tabs: null,
-         notifications: false,
-         sound: true,
-         widgets: false,
+         tabs: 0,
+         search: "",
          pagination: {
             sortBy: "desde"
          },
@@ -125,25 +128,9 @@ export default {
             },
             { text: "Hasta", value: "hasta" }
          ],
-         desserts: [
-            {
-               id: 5,
-               desde: "Frozen Yogurt",
-               hasta: 159
-            },
-            {
-               id: 6,
-               desde: "Frozen Yogurt",
-               hasta: 159
-            },
-            {
-               id: 7,
-               desde: "Frozen Yogurt",
-               hasta: 159
-            }
-         ],
          cursos: [],
          cursostock: [],
+         horarios: [],
          curso: null,
          accions: [
             {
@@ -170,17 +157,49 @@ export default {
             this.pagination.descending = false;
          }
       },
+      buscar(event) {
+         var self = this;
+         if (window.event.keyCode == 13) {
+            var cur = self.cursostock.find(function(curso) {
+               return curso.nombre.toUpperCase() === self.search.toUpperCase();
+            });
+            if (cur != null)
+               cur = {
+                  id: cur.id,
+                  nombre: cur.nombre,
+                  codigo: cur.codigo,
+                  descripcion: cur.descripcion,
+                  selected: false
+               };
+            self.selectedCurso(cur);
+         }
+      },
       selectedCurso(curso) {
-         if (!curso.selected) {
+         if (curso != null && !curso.selected) {
+            if (this.curso != null) this.curso.selected = false;
             curso.selected = true;
             this.curso = curso;
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
          } else {
-            curso.selected = false;
+            if (this.curso != null) this.curso.selected = false;
+            if (curso != null) curso.selected = false;
             this.curso = null;
             this.cursos = this.cursostock;
+         }
+      }
+   },
+   computed: {
+      ocualtarTab: function() {
+         return this.tabs == 0;
+      }
+   },
+   watch: {
+      tabs(val) {
+         if (this.curso == null) {
+            this.tabs = null;
+            this.tabs = 0;
          }
       }
    },
@@ -195,6 +214,7 @@ export default {
          }
          self.cursos = self.cursostock = cursos;
       });
+      axios.get("/horarios").then(res => (this.horarios = res.data));
    }
 };
 </script>
@@ -206,7 +226,7 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   position: absolute;
+   /*position: absolute;*/
 }
 .tm {
    height: 400px;

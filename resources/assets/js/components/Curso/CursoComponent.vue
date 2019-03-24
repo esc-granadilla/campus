@@ -1,104 +1,121 @@
 <template>
-   <v-flex md6 xs12 offset-md3>
-      <v-layout wrap row>
-         <v-flex xs12 pt-2 px-3>
-            <v-card fluid class="elevation-12">
-               <v-toolbar dark class="py-1">
-                  <v-toolbar-title>Curso</v-toolbar-title>
-                  <v-spacer></v-spacer>
-               </v-toolbar>
-               <v-flex md10 xs12 offset-md1>
-                  <v-card-text class="pb-0">
-                     <v-layout wrap row>
-                        <v-flex xs12 md7>
-                           <v-text-field
-                              xs6
-                              v-model="curso.codigo"
-                              :rules="[rules.required, rules.mini]"
-                              counter
-                              label="Codigo"
-                              name="codigo"
-                              required
-                           ></v-text-field>
+   <div>
+      <div class="alert">
+         <v-alert v-model="alert" dismissible type="success">{{ mensaje.message }}</v-alert>
+      </div>
+      <v-flex md6 xs12 offset-md3>
+         <v-layout wrap row>
+            <v-flex xs12 pt-2 px-3>
+               <v-card fluid class="elevation-12">
+                  <v-toolbar dark class="py-1">
+                     <v-toolbar-title>Curso</v-toolbar-title>
+                     <v-spacer></v-spacer>
+                  </v-toolbar>
+                  <v-flex md10 xs12 offset-md1>
+                     <v-card-text>
+                        <v-layout wrap row>
+                           <v-flex xs12 md7>
+                              <v-text-field
+                                 xs6
+                                 v-model="curso.codigo"
+                                 :rules="[rules.required, rules.mini]"
+                                 counter
+                                 label="Codigo"
+                                 name="codigo"
+                                 required
+                              ></v-text-field>
 
-                           <v-text-field
-                              xs6
-                              v-model="curso.nombre"
-                              :rules="[rules.required, rules.mini]"
-                              counter
-                              label="Nombre"
-                              name="nombre"
-                              required
-                           ></v-text-field>
-                           <v-text-field
-                              xs6
-                              v-model="curso.descripcion"
-                              :rules="[rules.mini]"
-                              counter
-                              label="Descripción"
-                              name="descripcion"
-                           ></v-text-field>
-                        </v-flex>
-                        <v-spacer></v-spacer>
-                        <v-flex xs12 md3>
-                           <v-layout align-end justify-end fill-height wrap>
-                              <v-flex xs3 md12>
-                                 <v-btn round dark flat color="green" block @click="crear">Crear</v-btn>
-                              </v-flex>
-                              <v-flex xs3 md12>
-                                 <v-btn
-                                    round
-                                    dark
-                                    flat
-                                    color="blue"
-                                    block
-                                    @click="editar"
-                                 >Actualizar</v-btn>
-                              </v-flex>
-                              <v-flex xs3 md12>
-                                 <v-btn round dark flat color="red" block @click="eliminar">Eliminar</v-btn>
-                              </v-flex>
-                           </v-layout>
-                        </v-flex>
-                     </v-layout>
-                  </v-card-text>
-               </v-flex>
-            </v-card>
-         </v-flex>
+                              <v-text-field
+                                 xs6
+                                 v-model="curso.nombre"
+                                 :rules="[rules.required, rules.mini]"
+                                 counter
+                                 label="Nombre"
+                                 name="nombre"
+                                 required
+                              ></v-text-field>
+                              <v-text-field
+                                 xs6
+                                 v-model="curso.descripcion"
+                                 :rules="[rules.mini]"
+                                 counter
+                                 label="Descripción"
+                                 name="descripcion"
+                              ></v-text-field>
+                           </v-flex>
+                           <v-spacer></v-spacer>
+                           <v-flex xs12 md3>
+                              <v-layout align-end justify-end fill-height wrap>
+                                 <v-flex xs3 md12>
+                                    <v-btn round dark flat color="green" block @click="crear">Crear</v-btn>
+                                 </v-flex>
+                                 <v-flex xs3 md12>
+                                    <v-btn
+                                       round
+                                       dark
+                                       flat
+                                       color="blue"
+                                       block
+                                       @click="editar"
+                                    >Actualizar</v-btn>
+                                 </v-flex>
+                                 <v-flex xs3 md12>
+                                    <v-btn
+                                       round
+                                       dark
+                                       flat
+                                       color="red"
+                                       block
+                                       @click="eliminar"
+                                    >Eliminar</v-btn>
+                                 </v-flex>
+                              </v-layout>
+                           </v-flex>
+                        </v-layout>
+                     </v-card-text>
+                  </v-flex>
+               </v-card>
+            </v-flex>
 
-         <v-flex xs12 pt-2 px-3>
-            <v-card>
-               <v-card-title>
-                  Cursos
-                  <v-spacer></v-spacer>
-                  <v-text-field
-                     v-model="search"
-                     append-icon="search"
-                     label="Buscar por Nombre"
-                     single-line
-                     hide-details
-                  ></v-text-field>
-               </v-card-title>
-               <v-data-table :headers="headers" :items="cursos" :search="search">
-                  <template v-slot:items="props">
-                     <td>{{ props.item.nombre }}</td>
-                     <td class="text-center">{{ props.item.codigo }}</td>
-                     <td class="text-center">{{ props.item.descripcion }}</td>
-                     <td class="text-center">
-                        <v-btn flat small color="primary" @click="buscar(props.item.id)">Seleccionar</v-btn>
-                     </td>
-                  </template>
-                  <v-alert
-                     v-slot:no-results
-                     :value="true"
-                     color="error"
-                     icon="warning"
-                  >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
-               </v-data-table>
-            </v-card>
-         </v-flex>
-      </v-layout>
-   </v-flex>
+            <v-flex xs12 pt-2 px-3>
+               <v-card>
+                  <v-card-title>
+                     Cursos
+                     <v-spacer></v-spacer>
+                     <v-text-field
+                        v-model="search"
+                        append-icon="search"
+                        label="Buscar por Nombre"
+                        single-line
+                        hide-details
+                     ></v-text-field>
+                  </v-card-title>
+                  <v-data-table :headers="headers" :items="cursos" :search="search">
+                     <template v-slot:items="props">
+                        <td>{{ props.item.nombre }}</td>
+                        <td class="text-center">{{ props.item.codigo }}</td>
+                        <td class="text-center">{{ props.item.descripcion }}</td>
+                        <td class="text-center">
+                           <v-btn
+                              flat
+                              small
+                              color="primary"
+                              @click="buscar(props.item.id)"
+                           >Seleccionar</v-btn>
+                        </td>
+                     </template>
+                     <v-alert
+                        v-slot:no-results
+                        :value="true"
+                        color="error"
+                        icon="warning"
+                     >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
+                  </v-data-table>
+               </v-card>
+            </v-flex>
+         </v-layout>
+      </v-flex>
+   </div>
 </template>
 
 <script>
@@ -114,6 +131,7 @@ export default {
             descripcion: "",
             estado: ""
          },
+         alert: false,
          cursos: [],
          mensaje: [],
          headers: [
@@ -172,6 +190,11 @@ export default {
          }
       }
    },
+   watch: {
+      mensaje(val) {
+         this.alert = true;
+      }
+   },
    mounted() {
       axios.get("/cursos").then(res => (this.cursos = res.data));
    }
@@ -179,4 +202,9 @@ export default {
 </script>
 
 <style scoped>
+.alert {
+   position: absolute;
+   z-index: 2;
+   right: 0;
+}
 </style>
