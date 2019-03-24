@@ -140,55 +140,25 @@ export default {
    },
    methods: {
       buscar(id) {
-         var self = this;
-         axios.get("horarios/" + id + "/edit").then(function(res) {
-            var array = res.data;
-            var desde = array.desde.split(" ")[1];
-            var hasta = array.hasta.split(" ")[1];
-            self.horario = { id: array.id, desde: desde, hasta: hasta };
-         });
+         axios
+            .get("horarios/" + id + "/edit")
+            .then(res => (this.horario = res.data));
       },
       crear() {
          var self = this;
          if (this.horario.desde != null) {
-            axios.post("horarios/", this.horario).then(function(res) {
+            axios.post("horarios/", self.horario).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/horarios").then(function(res) {
-                  var lista = [];
-                  var array = res.data;
-                  for (let index = 0; index < array.length; index++) {
-                     var desde = array[index].desde.split(" ")[1];
-                     var hasta = array[index].hasta.split(" ")[1];
-                     lista[index] = {
-                        id: array[index].id,
-                        desde: desde,
-                        hasta: hasta
-                     };
-                  }
-                  self.horarios = lista;
-               });
+               axios.get("/horarios").then(res => (self.horarios = res.data));
             });
          }
       },
       eliminar() {
          var self = this;
          if (this.horario.id != null) {
-            axios.delete("horarios/" + this.horario.id).then(function(res) {
+            axios.delete("horarios/" + self.horario.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/horarios").then(function(res) {
-                  var lista = [];
-                  var array = res.data;
-                  for (let index = 0; index < array.length; index++) {
-                     var desde = array[index].desde.split(" ")[1];
-                     var hasta = array[index].hasta.split(" ")[1];
-                     lista[index] = {
-                        id: array[index].id,
-                        desde: desde,
-                        hasta: hasta
-                     };
-                  }
-                  self.horarios = lista;
-               });
+               axios.get("/horarios").then(res => (self.horarios = res.data));
             });
          }
       },
@@ -196,39 +166,18 @@ export default {
          var self = this;
          if (this.horario.id != null) {
             axios
-               .put("horarios/" + this.horario.id, this.horario)
+               .put("horarios/" + self.horario.id, self.horario)
                .then(function(res) {
                   self.mensaje = res.data;
-                  axios.get("/horarios").then(function(res) {
-                     var lista = [];
-                     var array = res.data;
-                     for (let index = 0; index < array.length; index++) {
-                        var desde = array[index].desde.split(" ")[1];
-                        var hasta = array[index].hasta.split(" ")[1];
-                        lista[index] = {
-                           id: array[index].id,
-                           desde: desde,
-                           hasta: hasta
-                        };
-                     }
-                     self.horarios = lista;
-                  });
+                  axios
+                     .get("/horarios")
+                     .then(res => (self.horarios = res.data));
                });
          }
       }
    },
    mounted() {
-      var self = this;
-      axios.get("/horarios").then(function(res) {
-         var lista = [];
-         var array = res.data;
-         for (let index = 0; index < array.length; index++) {
-            var desde = array[index].desde.split(" ")[1];
-            var hasta = array[index].hasta.split(" ")[1];
-            lista[index] = { id: array[index].id, desde: desde, hasta: hasta };
-         }
-         self.horarios = lista;
-      });
+      axios.get("/horarios").then(res => (this.horarios = res.data));
    }
 };
 </script>

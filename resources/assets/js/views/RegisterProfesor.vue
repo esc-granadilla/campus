@@ -9,14 +9,7 @@
                   class="mb-0 mt-3"
                   :value="nextindex * 33.3"
                ></v-progress-linear>
-               <v-img
-                  class="black--text"
-                  :class="subheading"
-                  aspect-ratio="4"
-                  height="200px"
-                  contain
-                  :src="image"
-               >
+               <v-img class="black--text" aspect-ratio="4" height="200px" contain :src="image">
                   <v-container fill-height fluid>
                      <v-layout fill-height>
                         <v-flex xs12 style="text-align: center;">

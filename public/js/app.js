@@ -2806,39 +2806,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     buscar: function buscar(id) {
-      var self = this;
+      var _this = this;
+
       axios.get("horarios/" + id + "/edit").then(function (res) {
-        var array = res.data;
-        var desde = array.desde.split(" ")[1];
-        var hasta = array.hasta.split(" ")[1];
-        self.horario = {
-          id: array.id,
-          desde: desde,
-          hasta: hasta
-        };
+        return _this.horario = res.data;
       });
     },
     crear: function crear() {
       var self = this;
 
       if (this.horario.desde != null) {
-        axios.post("horarios/", this.horario).then(function (res) {
+        axios.post("horarios/", self.horario).then(function (res) {
           self.mensaje = res.data;
           axios.get("/horarios").then(function (res) {
-            var lista = [];
-            var array = res.data;
-
-            for (var index = 0; index < array.length; index++) {
-              var desde = array[index].desde.split(" ")[1];
-              var hasta = array[index].hasta.split(" ")[1];
-              lista[index] = {
-                id: array[index].id,
-                desde: desde,
-                hasta: hasta
-              };
-            }
-
-            self.horarios = lista;
+            return self.horarios = res.data;
           });
         });
       }
@@ -2847,23 +2828,10 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (this.horario.id != null) {
-        axios.delete("horarios/" + this.horario.id).then(function (res) {
+        axios.delete("horarios/" + self.horario.id).then(function (res) {
           self.mensaje = res.data;
           axios.get("/horarios").then(function (res) {
-            var lista = [];
-            var array = res.data;
-
-            for (var index = 0; index < array.length; index++) {
-              var desde = array[index].desde.split(" ")[1];
-              var hasta = array[index].hasta.split(" ")[1];
-              lista[index] = {
-                id: array[index].id,
-                desde: desde,
-                hasta: hasta
-              };
-            }
-
-            self.horarios = lista;
+            return self.horarios = res.data;
           });
         });
       }
@@ -2872,45 +2840,20 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (this.horario.id != null) {
-        axios.put("horarios/" + this.horario.id, this.horario).then(function (res) {
+        axios.put("horarios/" + self.horario.id, self.horario).then(function (res) {
           self.mensaje = res.data;
           axios.get("/horarios").then(function (res) {
-            var lista = [];
-            var array = res.data;
-
-            for (var index = 0; index < array.length; index++) {
-              var desde = array[index].desde.split(" ")[1];
-              var hasta = array[index].hasta.split(" ")[1];
-              lista[index] = {
-                id: array[index].id,
-                desde: desde,
-                hasta: hasta
-              };
-            }
-
-            self.horarios = lista;
+            return self.horarios = res.data;
           });
         });
       }
     }
   },
   mounted: function mounted() {
-    var self = this;
+    var _this2 = this;
+
     axios.get("/horarios").then(function (res) {
-      var lista = [];
-      var array = res.data;
-
-      for (var index = 0; index < array.length; index++) {
-        var desde = array[index].desde.split(" ")[1];
-        var hasta = array[index].hasta.split(" ")[1];
-        lista[index] = {
-          id: array[index].id,
-          desde: desde,
-          hasta: hasta
-        };
-      }
-
-      self.horarios = lista;
+      return _this2.horarios = res.data;
     });
   }
 });
@@ -4306,13 +4249,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Register_UserComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Register/UserComponent.vue */ "./resources/assets/js/components/Register/UserComponent.vue");
 /* harmony import */ var _components_Register_PersonComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Register/PersonComponent.vue */ "./resources/assets/js/components/Register/PersonComponent.vue");
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -27695,7 +27631,6 @@ var render = function() {
                     "v-img",
                     {
                       staticClass: "black--text",
-                      class: _vm.subheading,
                       attrs: {
                         "aspect-ratio": "4",
                         height: "200px",
