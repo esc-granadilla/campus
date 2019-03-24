@@ -74,6 +74,25 @@
                      </v-list-tile>
                   </v-list-group>
                </v-list-group>
+               <v-list-group prepend-icon="offline_pin">
+                  <template v-slot:activator>
+                     <v-list-tile>
+                        <v-list-tile-title>Asignaciones</v-list-tile-title>
+                     </v-list-tile>
+                  </template>
+                  <v-layout pl-5>
+                     <v-list-tile
+                        v-for="(crud, i) in asignaciones"
+                        :key="i"
+                        @click="route(crud[2])"
+                     >
+                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
+                        <v-list-tile-action>
+                           <v-icon v-text="crud[1]"></v-icon>
+                        </v-list-tile-action>
+                     </v-list-tile>
+                  </v-layout>
+               </v-list-group>
             </v-list>
          </v-navigation-drawer>
       </div>
@@ -90,6 +109,9 @@
          <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
          <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
          <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
+         <acursohorario v-if="mostar === 'curso/horario'"></acursohorario>
+         <acursoprofesor v-if="mostar === 'curso/profesor'"></acursoprofesor>
+         <acursoalumno v-if="mostar === 'curso/alumno'"></acursoalumno>
       </div>
    </v-layout>
 </template>
@@ -131,6 +153,11 @@ export default {
             ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],
             ["Actualizar", "update", "estudiantes/editar"],
             ["Eliminar", "delete", "estudiantes/eliminar"]
+         ],
+         asignaciones: [
+            ["Cursos Horarios", "swap_horizontal_circle", "curso/horario"],
+            ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
+            ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
          ],
          mostar: "cuerpo",
          mini: true,

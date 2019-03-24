@@ -16,7 +16,10 @@ import Login from './views/Login.vue'
 import RegisterProfesor from './views/RegisterProfesor.vue'
 import RememberComponent from './components/Login/RememberComponent.vue'
 import Administrador from './views/Administrador.vue'
-import Credencial from './views/Credencial.vue'
+import Credencial from './components/Asignaciones/Credencial.vue'
+import AsignacionCursoHorario from './components/Asignaciones/AsignacionCursoHorario.vue'
+import AsignacionCursoProfesor from './components/Asignaciones/AsignacionCursoProfesor.vue'
+import AsignacionCursoAlumno from './components/Asignaciones/AsignacionCursoAlumno.vue'
 import ProfesorMostrarComponent from './components/Profesores/MostrarComponent.vue'
 import ProfesorEditarComponent from './components/Profesores/EditarComponent.vue'
 import ProfesorBorrarComponent from './components/Profesores/BorrarComponent.vue'
@@ -53,6 +56,9 @@ Vue.component('horariocomponent', HorarioComponent);
 Vue.component('cursocomponent', CursoComponent);
 Vue.component('administrador', Administrador);
 Vue.component('credencial', Credencial);
+Vue.component('acursohorario', AsignacionCursoHorario);
+Vue.component('acursoprofesor', AsignacionCursoProfesor);
+Vue.component('acursoalumno', AsignacionCursoAlumno);
 Vue.component('login', Login);
 
 const app = new Vue({
