@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="alert">
-         <v-alert v-model="alert" dismissible type="success">{{ mensaje.message }}</v-alert>
+         <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
       </div>
       <v-flex md6 xs12 offset-md3>
          <v-layout wrap row>
@@ -132,6 +132,7 @@ export default {
             estado: ""
          },
          alert: false,
+         alerttype: "success",
          cursos: [],
          mensaje: [],
          headers: [
