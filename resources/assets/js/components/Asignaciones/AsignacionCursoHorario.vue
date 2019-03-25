@@ -16,7 +16,7 @@
                      ></v-text-field>
                   </v-flex>
                   <v-layout v-if="!ocualtarTab" xs12 justify-center align-center wrap>
-                     <v-btn block flat xs12 round selected>Asignar Horario(s) al curso</v-btn>
+                     <v-btn block flat xs12 round @click="enviar">Asignar Horario(s) al curso</v-btn>
                   </v-layout>
                   <template v-slot:extension>
                      <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
@@ -120,6 +120,8 @@ export default {
             sortBy: "desde"
          },
          selected: [],
+         mensaje: [],
+         cursoshorarios: [],
          headers: [
             {
                text: "Desde:",
@@ -179,6 +181,9 @@ export default {
             if (this.curso != null) this.curso.selected = false;
             curso.selected = true;
             this.curso = curso;
+            axios
+               .get("cursohorario/" + curso.id)
+               .then(res => (this.cursoshorarios = res.data));
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
@@ -188,6 +193,13 @@ export default {
             this.curso = null;
             this.cursos = this.cursostock;
          }
+      },
+      enviar() {
+         axios
+            .post("asigcursohorario/" + this.curso.id, {
+               horarios: this.selected
+            })
+            .then(res => (this.mensaje = res.data));
       }
    },
    computed: {
@@ -197,9 +209,13 @@ export default {
    },
    watch: {
       tabs(val) {
-         if (this.curso == null) {
-            this.tabs = null;
-            this.tabs = 0;
+         if (val == 1) {
+            this.selected = [];
+            this.cursoshorarios.forEach(ch => {
+               this.horarios.forEach(h => {
+                  if (h.id == ch.id) this.selected.push(h);
+               });
+            });
          }
       }
    },

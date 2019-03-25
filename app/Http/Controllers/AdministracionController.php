@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Campus\Role;
 use Campus\Profesor;
 use Campus\User;
+use Campus\Curso;
+use Campus\Horario;
 
 class AdministracionController extends Controller
 {
@@ -75,5 +77,29 @@ class AdministracionController extends Controller
          }
       }
       return response()->json(['message' => 'error'], 400);
+   }
+
+   public function asigcursohorario(Curso $curso, Request $request)
+   {
+      if ($request->ajax()) {
+         $horarios = Horario::all();
+         foreach ($horarios as $horario) {
+            $curso->horarios()->detach($horario);
+         }
+         $horarios = $request->input('horarios');
+         foreach ($horarios as $horario) {
+            $h = Horario::where('id', $horario["id"])->first();
+            $curso->horarios()->attach($h);
+         }
+         return response()->json(['message' => "Horarios ingresados correctamente"], 200);
+      }
+   }
+
+   public function cursohorario(Curso $curso, Request $request)
+   {
+      if ($request->ajax()) {
+         $horarios = $curso->horarios->toArray();
+         return response()->json($horarios, 200);
+      }
    }
 }

@@ -2061,6 +2061,8 @@ __webpack_require__.r(__webpack_exports__);
         sortBy: "desde"
       },
       selected: [],
+      mensaje: [],
+      cursoshorarios: [],
       headers: [{
         text: "Desde:",
         align: "left",
@@ -2112,10 +2114,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     selectedCurso: function selectedCurso(curso) {
+      var _this = this;
+
       if (curso != null && !curso.selected) {
         if (this.curso != null) this.curso.selected = false;
         curso.selected = true;
         this.curso = curso;
+        axios.get("cursohorario/" + curso.id).then(function (res) {
+          return _this.cursoshorarios = res.data;
+        });
         var nuevos = [];
         nuevos.push(curso);
         this.cursos = nuevos;
@@ -2125,6 +2132,15 @@ __webpack_require__.r(__webpack_exports__);
         this.curso = null;
         this.cursos = this.cursostock;
       }
+    },
+    enviar: function enviar() {
+      var _this2 = this;
+
+      axios.post("asigcursohorario/" + this.curso.id, {
+        horarios: this.selected
+      }).then(function (res) {
+        return _this2.mensaje = res.data;
+      });
     }
   },
   computed: {
@@ -2134,14 +2150,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     tabs: function tabs(val) {
-      if (this.curso == null) {
-        this.tabs = null;
-        this.tabs = 0;
+      var _this3 = this;
+
+      if (val == 1) {
+        this.selected = [];
+        this.cursoshorarios.forEach(function (ch) {
+          _this3.horarios.forEach(function (h) {
+            if (h.id == ch.id) _this3.selected.push(h);
+          });
+        });
       }
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this4 = this;
 
     var self = this;
     axios.get("/cursos").then(function (res) {
@@ -2156,7 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
       self.cursos = self.cursostock = cursos;
     });
     axios.get("/horarios").then(function (res) {
-      return _this.horarios = res.data;
+      return _this4.horarios = res.data;
     });
   }
 });
@@ -24182,9 +24204,9 @@ var render = function() {
                                     block: "",
                                     flat: "",
                                     xs12: "",
-                                    round: "",
-                                    selected: ""
-                                  }
+                                    round: ""
+                                  },
+                                  on: { click: _vm.enviar }
                                 },
                                 [_vm._v("Asignar Horario(s) al curso")]
                               )
