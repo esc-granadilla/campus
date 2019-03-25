@@ -210,7 +210,7 @@ export default {
       editar() {
          if (this.profesor.id != null) {
             axios
-               .put("profesors/" + this.search, this.profesor)
+               .put("profesors/" + this.profesor.id, this.profesor)
                .then(res => (this.mensaje = res.data));
          }
       }

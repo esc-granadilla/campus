@@ -126,7 +126,7 @@ export default {
       eliminar() {
          if (this.profesor.id != null) {
             axios
-               .delete("profesors/" + this.search)
+               .delete("profesors/" + this.profesor.id)
                .then(res => (this.mensaje = res.data));
          }
       }

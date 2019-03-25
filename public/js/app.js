@@ -2291,15 +2291,15 @@ __webpack_require__.r(__webpack_exports__);
         var elt = document.getElementById("a" + index.id);
 
         if (elt.checked) {
-          axios.post("/credencial", {
-            user_id: index.user_id,
+          axios.post("credencial/" + index.user_id, {
+            //user_id: index.user_id,
             rol: "Administrador",
             attach: false
           });
           index.administrador = false;
         } else {
-          axios.post("/credencial", {
-            user_id: index.user_id,
+          axios.post("credencial/" + index.user_id, {
+            //user_id: index.user_id,
             rol: "Administrador",
             attach: true
           });
@@ -2314,15 +2314,15 @@ __webpack_require__.r(__webpack_exports__);
         var elt = document.getElementById("p" + index.id);
 
         if (elt.checked) {
-          axios.post("/credencial", {
-            user_id: index.user_id,
+          axios.post("credencial/" + index.user_id, {
+            //user_id: index.user_id,
             rol: "Profesor",
             attach: false
           });
           index.profesor = false;
         } else {
-          axios.post("/credencial", {
-            user_id: index.user_id,
+          axios.post("credencial/" + index.user_id, {
+            //user_id: index.user_id,
             rol: "Profesor",
             attach: true
           });
@@ -3584,7 +3584,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (this.profesor.id != null) {
-        axios.delete("profesors/" + this.search).then(function (res) {
+        axios.delete("profesors/" + this.profesor.id).then(function (res) {
           return _this2.mensaje = res.data;
         });
       }
@@ -3840,7 +3840,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       if (this.profesor.id != null) {
-        axios.put("profesors/" + this.search, this.profesor).then(function (res) {
+        axios.put("profesors/" + this.profesor.id, this.profesor).then(function (res) {
           return _this4.mensaje = res.data;
         });
       }

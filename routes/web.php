@@ -29,7 +29,7 @@ Route::resource('cursos', 'CursoController');
 
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
-Route::post('/credencial', 'AdministracionController@credencial')->name('credencial');
+Route::post('/credencial/{user}', 'AdministracionController@credencial')->name('credencial');
 
 Route::post('/asigcursohorario/{curso}', 'AdministracionController@asigcursohorario')->name('asigcursohorario');
 
