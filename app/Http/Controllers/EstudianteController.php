@@ -32,8 +32,7 @@ class EstudianteController extends Controller
    {
       if ($request->ajax()) {
          $estudiantes = Estudiante::where('estado', 1)->get();
-         return
-            response()->json($estudiantes, 200);
+         return response()->json($estudiantes, 200);
       }
    }
 

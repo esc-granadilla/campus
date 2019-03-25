@@ -78,12 +78,6 @@ class HorarioController extends Controller
    {
       if ($request->ajax()) {
          $horario = ($horario != null && $horario->estado == 0) ? null : $horario;
-         if ($horario == null) {
-            $horario = new Horario();
-            $horario->id = null;
-            $horario->desde = null;
-            $horario->hasta = null;
-         }
          return response()->json($horario, 200);
       }
    }
@@ -99,12 +93,6 @@ class HorarioController extends Controller
    {
       if ($request->ajax()) {
          $horario = ($horario != null && $horario->estado == 0) ? null : $horario;
-         if ($horario == null) {
-            $horario = new Horario();
-            $horario->id = null;
-            $horario->desde = null;
-            $horario->hasta = null;
-         }
          return response()->json($horario, 200);
       }
    }

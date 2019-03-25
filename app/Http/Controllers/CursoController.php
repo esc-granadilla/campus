@@ -76,13 +76,6 @@ class CursoController extends Controller
    {
       if ($request->ajax()) {
          $curso = ($curso != null && $curso->estado == 0) ? null : $curso;
-         if ($curso == null) {
-            $curso = new Curso();
-            $curso->id = null;
-            $curso->codigo = '';
-            $curso->nombre = '';
-            $curso->descripcion = '';
-         }
          return response()->json($curso, 200);
       }
    }
@@ -98,13 +91,6 @@ class CursoController extends Controller
    {
       if ($request->ajax()) {
          $curso = ($curso != null && $curso->estado == 0) ? null : $curso;
-         if ($curso == null) {
-            $curso = new Curso();
-            $curso->id = null;
-            $curso->codigo = '';
-            $curso->nombre = '';
-            $curso->descripcion = '';
-         }
          return response()->json($curso, 200);
       }
    }

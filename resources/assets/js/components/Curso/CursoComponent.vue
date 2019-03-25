@@ -157,9 +157,9 @@ export default {
    },
    methods: {
       buscar(id) {
-         axios
-            .get("cursos/" + id + "/edit")
-            .then(res => (this.curso = res.data));
+         this.curso = this.cursos.find(function(c) {
+            return c.id == id;
+         });
       },
       crear() {
          var self = this;

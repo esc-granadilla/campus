@@ -177,9 +177,9 @@ export default {
    },
    methods: {
       buscar(id) {
-         axios
-            .get("horarios/" + id + "/edit")
-            .then(res => (this.horario = res.data));
+         this.horario = this.horarios.find(function(h) {
+            return h.id == id;
+         });
       },
       crear() {
          var self = this;

@@ -2518,10 +2518,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     buscar: function buscar(id) {
-      var _this = this;
-
-      axios.get("cursos/" + id + "/edit").then(function (res) {
-        return _this.curso = res.data;
+      this.curso = this.cursos.find(function (c) {
+        return c.id == id;
       });
     },
     crear: function crear() {
@@ -2567,10 +2565,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     axios.get("/cursos").then(function (res) {
-      return _this2.cursos = res.data;
+      return _this.cursos = res.data;
     });
   }
 });
@@ -3316,10 +3314,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     buscar: function buscar(id) {
-      var _this = this;
-
-      axios.get("horarios/" + id + "/edit").then(function (res) {
-        return _this.horario = res.data;
+      this.horario = this.horarios.find(function (h) {
+        return h.id == id;
       });
     },
     crear: function crear() {
@@ -3365,10 +3361,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this = this;
 
     axios.get("/horarios").then(function (res) {
-      return _this2.horarios = res.data;
+      return _this.horarios = res.data;
     });
   }
 });
