@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Campus\Role;
 use Campus\Profesor;
 use Campus\User;
+use Campus\Curso;
+use Campus\Horario;
 
 class AdministracionController extends Controller
 {
@@ -36,36 +38,27 @@ class AdministracionController extends Controller
    {
       if ($request->ajax()) {
          $rolestouser = [];
-         $i = 0;
          $profesores = Profesor::where('estado', 1)->get();
-         foreach ($profesores as $value) {
-            $user = User::where('id', $value->user_id)->first();
-            $profesor = $administrador = false;
-            if ($user->hasRole('Profesor')) {
-               $profesor = true;
-            }
-            if ($user->hasRole('Administrador')) {
-               $administrador = true;
-            }
+         for ($i = 0; $i < sizeof($profesores); $i++) {
+            $profesor = $profesores[$i]->user->hasRole('Profesor');
+            $administrador = $profesores[$i]->user->hasRole('Administrador');
             $rolestouser[$i] = [
-               'id' => $value->id, 'nombre' => $value->nombre . ' ' . $value->primer_apellido,
-               'cedula' => $value->cedula, 'puesto' => $value->puesto, 'telefono' => $value->telefono1,
-               'profesor' => $profesor, 'administrador' => $administrador, 'estado' => $value->estado, 'user_id' => $value->user_id
+               'id' => $profesores[$i]->id, 'nombre' => $profesores[$i]->nombre . ' ' .
+                  $profesores[$i]->primer_apellido, 'cedula' => $profesores[$i]->cedula,
+               'puesto' => $profesores[$i]->puesto, 'telefono' => $profesores[$i]->telefono1,
+               'profesor' => $profesor, 'administrador' => $administrador, 'estado' => $profesores[$i]->estado,
+               'user_id' => $profesores[$i]->user_id
             ];
-            $i++;
          }
          return response()->json($rolestouser, 200);
       }
    }
 
-   public function credencial(Request $request)
+   public function credencial(User $user, Request $request)
    {
       if ($request->ajax()) {
-         $rol_nombre = $request->input('rol');
-         $user_id = $request->input('user_id');
          $accion = (boolean)$request->input('attach');
-         $user = User::where('id', $user_id)->first();
-         $role = Role::where('nombre', $rol_nombre)->first();
+         $role = Role::where('nombre', $request->input('rol'))->first();
          if ($accion) {
             $user->roles()->attach($role);
             return response()->json(['message' => 'Se agrego el rol con exito'], 200);
@@ -75,5 +68,26 @@ class AdministracionController extends Controller
          }
       }
       return response()->json(['message' => 'error'], 400);
+   }
+
+   public function asigcursohorario(Curso $curso, Request $request)
+   {
+      if ($request->ajax()) {
+         $curso->horarios()->detach();
+         $horarios = $request->input('horarios');
+         foreach ($horarios as $horario) {
+            $h = Horario::where('id', $horario["id"])->first();
+            $curso->horarios()->attach($h);
+         }
+         return response()->json(['message' => "Horarios ingresados correctamente"], 200);
+      }
+   }
+
+   public function cursohorario(Curso $curso, Request $request)
+   {
+      if ($request->ajax()) {
+         $horarios = $curso->horarios->toArray();
+         return response()->json($horarios, 200);
+      }
    }
 }

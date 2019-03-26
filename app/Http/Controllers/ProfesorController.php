@@ -152,10 +152,9 @@ class ProfesorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function update(Request $request, $id)
+   public function update(Request $request, Profesor $profesor)
    {
       if ($request->ajax()) {
-         $profesor = Profesor::where('cedula', $id)->first();
          $profesor->nombre = $request->input('nombre');
          $profesor->primer_apellido = $request->input('primer_apellido');
          $profesor->segundo_apellido = $request->input('segundo_apellido');
@@ -176,10 +175,9 @@ class ProfesorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function destroy(Request $request, $id)
+   public function destroy(Request $request, Profesor $profesor)
    {
       if ($request->ajax()) {
-         $profesor = Profesor::where('cedula', $id)->first();
          $profesor->estado = 0;
          $profesor->save();
          return response()->json(['message' => 'El Profesor fue eliminado correctamente'], 200);
