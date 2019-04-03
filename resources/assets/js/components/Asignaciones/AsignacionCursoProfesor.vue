@@ -16,22 +16,22 @@
                            prepend-inner-icon="search"
                            solo-inverted
                            v-model="search"
-                           @keydown="buscar()"
+                           @keydown="buscarProfesor()"
                         ></v-text-field>
                      </v-flex>
                      <v-flex v-if="ocualtarTab2">
                         <v-text-field
                            class="mx-3"
                            flat
-                           label="Buscar Codigo"
+                           label="Buscar Nombre"
                            prepend-inner-icon="search"
                            solo-inverted
                            v-model="search"
-                           @keydown="buscar()"
+                           @keydown="buscarCurso()"
                         ></v-text-field>
                      </v-flex>
                      <v-layout v-if="ocualtarTab3" xs12 justify-center align-center wrap>
-                        <v-btn block flat xs12 round @click="enviar">Asignar Horario(s) al curso</v-btn>
+                        <v-btn block flat xs12 round @click="enviar">Asignar Profesor al curso</v-btn>
                      </v-layout>
                      <template v-slot:extension>
                         <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
@@ -73,8 +73,27 @@
                      </v-tab-item>
                      <v-tab-item :key="2">
                         <div>
-                           <!--         <v-layout row>
+                           <v-layout row>
                               <v-flex xs12>
+                                 <v-subheader class="mt-4">
+                                    <v-select
+                                       :items="grados"
+                                       item-text="text"
+                                       item-value="value"
+                                       return-object
+                                       v-model="grado"
+                                       label="Seleccione el Grado"
+                                       d-block
+                                    ></v-select>
+                                 </v-subheader>
+
+                                 <v-text-field
+                                    v-model="gradotxt"
+                                    name="grado"
+                                    type="number"
+                                    v-show="false"
+                                    required
+                                 ></v-text-field>
                                  <div v-bar class="tm">
                                     <v-list subheader two-line>
                                        <v-subheader>Cursos</v-subheader>
@@ -98,11 +117,22 @@
                                     </v-list>
                                  </div>
                               </v-flex>
-                           </v-layout>-->
+                           </v-layout>
                         </div>
                      </v-tab-item>
                      <v-tab-item :key="3">
                         <div>
+                           <v-subheader class="mt-4">
+                              <v-select
+                                 :items="dias"
+                                 item-text="text"
+                                 item-value="value"
+                                 return-object
+                                 v-model="dia"
+                                 label="Seleccione le Dia"
+                                 d-block
+                              ></v-select>
+                           </v-subheader>
                            <v-data-table
                               v-model="selected"
                               :headers="headers"
@@ -170,6 +200,25 @@ export default {
          cursoshorarios: [],
          alert: false,
          alerttype: "success",
+         grado: { value: 1, text: "Primero" },
+         grados: [
+            { value: 1, text: "Primero" },
+            { value: 2, text: "Segundo" },
+            { value: 3, text: "Tercero" },
+            { value: 4, text: "Cuarto" },
+            { value: 5, text: "Quinto" }
+         ],
+         dia: { value: 1, text: "Lunes" },
+         dias: [
+            { value: 1, text: "Lunes" },
+            { value: 2, text: "Martes" },
+            { value: 3, text: "Miercoles" },
+            { value: 4, text: "Jueves" },
+            { value: 5, text: "Viernes" }
+         ],
+         cursos: [],
+         cursostock: [],
+         curso: null,
          headers: [
             {
                text: "Desde:",
@@ -189,11 +238,11 @@ export default {
             },
             {
                id: 2,
-               text: "curso"
+               text: "Curso"
             },
             {
                id: 3,
-               text: "Dia y Grado"
+               text: "Horario"
             }
          ]
       };
@@ -201,7 +250,7 @@ export default {
    methods: {
       toggleAll() {
          if (this.selected.length) this.selected = [];
-         else this.selected = this.desserts.slice();
+         else this.selected = this.horarios.slice();
       },
       changeSort(column) {
          if (this.pagination.sortBy === column) {
@@ -211,7 +260,24 @@ export default {
             this.pagination.descending = false;
          }
       },
-      buscar(event) {
+      buscarCurso(event) {
+         var self = this;
+         if (window.event.keyCode == 13) {
+            var cur = self.cursostock.find(function(curso) {
+               return curso.nombre.toUpperCase() === self.search.toUpperCase();
+            });
+            if (cur != null)
+               cur = {
+                  id: cur.id,
+                  nombre: cur.nombre,
+                  codigo: cur.codigo,
+                  descripcion: cur.descripcion,
+                  selected: false
+               };
+            self.selectedCurso(cur);
+         }
+      },
+      buscarProfesor(event) {
          var self = this;
          if (window.event.keyCode == 13) {
             var pro = self.profesorstock.find(function(profesor) {
@@ -229,6 +295,24 @@ export default {
                   selected: false
                };
             self.selectedProfesor(pro);
+         }
+      },
+      selectedCurso(curso) {
+         if (curso != null && !curso.selected) {
+            if (this.curso != null) this.curso.selected = false;
+            curso.selected = true;
+            this.curso = curso;
+            axios
+               .get("cursohorario/" + curso.id)
+               .then(res => (this.cursoshorarios = res.data));
+            var nuevos = [];
+            nuevos.push(curso);
+            this.cursos = nuevos;
+         } else {
+            if (this.curso != null) this.curso.selected = false;
+            if (curso != null) curso.selected = false;
+            this.curso = null;
+            this.cursos = this.cursostock;
          }
       },
       selectedProfesor(profesor) {
@@ -258,6 +342,12 @@ export default {
       }
    },
    computed: {
+      gradotxt: function() {
+         return this.grado.value;
+      },
+      diatxt: function() {
+         return this.dia.value;
+      },
       ocualtarTab: function() {
          return this.tabs == 0;
       },
@@ -270,12 +360,13 @@ export default {
    },
    watch: {
       tabs(val) {
-         if (val == 1) {
+         if (val == 2) {
             this.selected = [];
+            this.horarios = this.cursoshorarios;
             this.cursoshorarios.forEach(ch => {
-               this.horarios.forEach(h => {
+               /*this.horarios.forEach(h => {
                   if (h.id == ch.id) this.selected.push(h);
-               });
+               });*/
             });
          }
       },
@@ -293,6 +384,15 @@ export default {
             profesores[index] = crs[index];
          }
          self.profesores = self.profesorstock = profesores;
+      });
+      axios.get("/cursos").then(function(res) {
+         var crs = res.data;
+         var cursos = [];
+         for (let index = 0; index < crs.length; index++) {
+            crs[index].selected = false;
+            cursos[index] = crs[index];
+         }
+         self.cursos = self.cursostock = cursos;
       });
       axios.get("/horarios").then(res => (this.horarios = res.data));
    }

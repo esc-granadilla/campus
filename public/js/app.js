@@ -2093,7 +2093,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggleAll: function toggleAll() {
-      if (this.selected.length) this.selected = [];else this.selected = this.desserts.slice();
+      if (this.selected.length) this.selected = [];else this.selected = this.horarios.slice();
     },
     changeSort: function changeSort(column) {
       if (this.pagination.sortBy === column) {
@@ -2362,6 +2362,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2375,6 +2405,49 @@ __webpack_require__.r(__webpack_exports__);
       cursoshorarios: [],
       alert: false,
       alerttype: "success",
+      grado: {
+        value: 1,
+        text: "Primero"
+      },
+      grados: [{
+        value: 1,
+        text: "Primero"
+      }, {
+        value: 2,
+        text: "Segundo"
+      }, {
+        value: 3,
+        text: "Tercero"
+      }, {
+        value: 4,
+        text: "Cuarto"
+      }, {
+        value: 5,
+        text: "Quinto"
+      }],
+      dia: {
+        value: 1,
+        text: "Lunes"
+      },
+      dias: [{
+        value: 1,
+        text: "Lunes"
+      }, {
+        value: 2,
+        text: "Martes"
+      }, {
+        value: 3,
+        text: "Miercoles"
+      }, {
+        value: 4,
+        text: "Jueves"
+      }, {
+        value: 5,
+        text: "Viernes"
+      }],
+      cursos: [],
+      cursostock: [],
+      curso: null,
       headers: [{
         text: "Desde:",
         align: "left",
@@ -2392,16 +2465,16 @@ __webpack_require__.r(__webpack_exports__);
         text: "Profesor"
       }, {
         id: 2,
-        text: "curso"
+        text: "Curso"
       }, {
         id: 3,
-        text: "Dia y Grado"
+        text: "Horario"
       }]
     };
   },
   methods: {
     toggleAll: function toggleAll() {
-      if (this.selected.length) this.selected = [];else this.selected = this.desserts.slice();
+      if (this.selected.length) this.selected = [];else this.selected = this.horarios.slice();
     },
     changeSort: function changeSort(column) {
       if (this.pagination.sortBy === column) {
@@ -2411,7 +2484,24 @@ __webpack_require__.r(__webpack_exports__);
         this.pagination.descending = false;
       }
     },
-    buscar: function buscar(event) {
+    buscarCurso: function buscarCurso(event) {
+      var self = this;
+
+      if (window.event.keyCode == 13) {
+        var cur = self.cursostock.find(function (curso) {
+          return curso.nombre.toUpperCase() === self.search.toUpperCase();
+        });
+        if (cur != null) cur = {
+          id: cur.id,
+          nombre: cur.nombre,
+          codigo: cur.codigo,
+          descripcion: cur.descripcion,
+          selected: false
+        };
+        self.selectedCurso(cur);
+      }
+    },
+    buscarProfesor: function buscarProfesor(event) {
       var self = this;
 
       if (window.event.keyCode == 13) {
@@ -2429,6 +2519,26 @@ __webpack_require__.r(__webpack_exports__);
           selected: false
         };
         self.selectedProfesor(pro);
+      }
+    },
+    selectedCurso: function selectedCurso(curso) {
+      var _this = this;
+
+      if (curso != null && !curso.selected) {
+        if (this.curso != null) this.curso.selected = false;
+        curso.selected = true;
+        this.curso = curso;
+        axios.get("cursohorario/" + curso.id).then(function (res) {
+          return _this.cursoshorarios = res.data;
+        });
+        var nuevos = [];
+        nuevos.push(curso);
+        this.cursos = nuevos;
+      } else {
+        if (this.curso != null) this.curso.selected = false;
+        if (curso != null) curso.selected = false;
+        this.curso = null;
+        this.cursos = this.cursostock;
       }
     },
     selectedProfesor: function selectedProfesor(profesor) {
@@ -2450,16 +2560,22 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     enviar: function enviar() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post("asigcursohorario/" + this.curso.id, {
         horarios: this.selected
       }).then(function (res) {
-        return _this.mensaje = res.data;
+        return _this2.mensaje = res.data;
       });
     }
   },
   computed: {
+    gradotxt: function gradotxt() {
+      return this.grado.value;
+    },
+    diatxt: function diatxt() {
+      return this.dia.value;
+    },
     ocualtarTab: function ocualtarTab() {
       return this.tabs == 0;
     },
@@ -2472,14 +2588,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     tabs: function tabs(val) {
-      var _this2 = this;
-
-      if (val == 1) {
+      if (val == 2) {
         this.selected = [];
+        this.horarios = this.cursoshorarios;
         this.cursoshorarios.forEach(function (ch) {
-          _this2.horarios.forEach(function (h) {
-            if (h.id == ch.id) _this2.selected.push(h);
-          });
+          /*this.horarios.forEach(h => {
+             if (h.id == ch.id) this.selected.push(h);
+          });*/
         });
       }
     },
@@ -2501,6 +2616,17 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       self.profesores = self.profesorstock = profesores;
+    });
+    axios.get("/cursos").then(function (res) {
+      var crs = res.data;
+      var cursos = [];
+
+      for (var index = 0; index < crs.length; index++) {
+        crs[index].selected = false;
+        cursos[index] = crs[index];
+      }
+
+      self.cursos = self.cursostock = cursos;
     });
     axios.get("/horarios").then(function (res) {
       return _this3.horarios = res.data;
@@ -25180,7 +25306,7 @@ var render = function() {
                                     },
                                     on: {
                                       keydown: function($event) {
-                                        return _vm.buscar()
+                                        return _vm.buscarProfesor()
                                       }
                                     },
                                     model: {
@@ -25204,13 +25330,13 @@ var render = function() {
                                     staticClass: "mx-3",
                                     attrs: {
                                       flat: "",
-                                      label: "Buscar Codigo",
+                                      label: "Buscar Nombre",
                                       "prepend-inner-icon": "search",
                                       "solo-inverted": ""
                                     },
                                     on: {
                                       keydown: function($event) {
-                                        return _vm.buscar()
+                                        return _vm.buscarCurso()
                                       }
                                     },
                                     model: {
@@ -25249,7 +25375,7 @@ var render = function() {
                                       },
                                       on: { click: _vm.enviar }
                                     },
-                                    [_vm._v("Asignar Horario(s) al curso")]
+                                    [_vm._v("Asignar Profesor al curso")]
                                   )
                                 ],
                                 1
@@ -25420,12 +25546,219 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("v-tab-item", { key: 2 }, [_c("div")]),
+                          _c("v-tab-item", { key: 2 }, [
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "" } },
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs12: "" } },
+                                      [
+                                        _c(
+                                          "v-subheader",
+                                          { staticClass: "mt-4" },
+                                          [
+                                            _c("v-select", {
+                                              attrs: {
+                                                items: _vm.grados,
+                                                "item-text": "text",
+                                                "item-value": "value",
+                                                "return-object": "",
+                                                label: "Seleccione el Grado",
+                                                "d-block": ""
+                                              },
+                                              model: {
+                                                value: _vm.grado,
+                                                callback: function($$v) {
+                                                  _vm.grado = $$v
+                                                },
+                                                expression: "grado"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("v-text-field", {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: false,
+                                              expression: "false"
+                                            }
+                                          ],
+                                          attrs: {
+                                            name: "grado",
+                                            type: "number",
+                                            required: ""
+                                          },
+                                          model: {
+                                            value: _vm.gradotxt,
+                                            callback: function($$v) {
+                                              _vm.gradotxt = $$v
+                                            },
+                                            expression: "gradotxt"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            directives: [
+                                              { name: "bar", rawName: "v-bar" }
+                                            ],
+                                            staticClass: "tm"
+                                          },
+                                          [
+                                            _c(
+                                              "v-list",
+                                              {
+                                                attrs: {
+                                                  subheader: "",
+                                                  "two-line": ""
+                                                }
+                                              },
+                                              [
+                                                _c("v-subheader", [
+                                                  _vm._v("Cursos")
+                                                ]),
+                                                _vm._v(" "),
+                                                _vm._l(_vm.cursos, function(c) {
+                                                  return _c(
+                                                    "v-list-tile",
+                                                    {
+                                                      key: c.id,
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.preventDefault()
+                                                          return _vm.selectedCurso(
+                                                            c
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "v-list-tile-action",
+                                                        [
+                                                          _c("v-checkbox", {
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                $event.preventDefault()
+                                                                return _vm.selectedCurso(
+                                                                  c
+                                                                )
+                                                              }
+                                                            },
+                                                            model: {
+                                                              value: c.selected,
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  c,
+                                                                  "selected",
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "c.selected"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-list-tile-content",
+                                                        [
+                                                          _c(
+                                                            "v-list-tile-title",
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  c.codigo
+                                                                ) +
+                                                                  _vm._s(" ") +
+                                                                  _vm._s(
+                                                                    c.nombre
+                                                                  )
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-list-tile-sub-title",
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  c.descripcion
+                                                                )
+                                                              )
+                                                            ]
+                                                          )
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                })
+                                              ],
+                                              2
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("v-tab-item", { key: 3 }, [
                             _c(
                               "div",
                               [
+                                _c(
+                                  "v-subheader",
+                                  { staticClass: "mt-4" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.dias,
+                                        "item-text": "text",
+                                        "item-value": "value",
+                                        "return-object": "",
+                                        label: "Seleccione le Dia",
+                                        "d-block": ""
+                                      },
+                                      model: {
+                                        value: _vm.dia,
+                                        callback: function($$v) {
+                                          _vm.dia = $$v
+                                        },
+                                        expression: "dia"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
                                 _c("v-data-table", {
                                   attrs: {
                                     headers: _vm.headers,
