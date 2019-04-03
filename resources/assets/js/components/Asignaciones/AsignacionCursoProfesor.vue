@@ -86,14 +86,6 @@
                                        d-block
                                     ></v-select>
                                  </v-subheader>
-
-                                 <v-text-field
-                                    v-model="gradotxt"
-                                    name="grado"
-                                    type="number"
-                                    v-show="false"
-                                    required
-                                 ></v-text-field>
                                  <div v-bar class="tm">
                                     <v-list subheader two-line>
                                        <v-subheader>Cursos</v-subheader>
@@ -304,7 +296,7 @@ export default {
             this.curso = curso;
             axios
                .get("cursohorario/" + curso.id)
-               .then(res => (this.cursoshorarios = res.data));
+               .then(res => (this.horarios = res.data));
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
@@ -359,17 +351,18 @@ export default {
       }
    },
    watch: {
-      tabs(val) {
+      /*tabs(val) {
          if (val == 2) {
             this.selected = [];
             this.horarios = this.cursoshorarios;
             this.cursoshorarios.forEach(ch => {
-               /*this.horarios.forEach(h => {
+               this.horarios.forEach(h => {
                   if (h.id == ch.id) this.selected.push(h);
-               });*/
+               });
+         
             });
          }
-      },
+      },*/
       mensaje(val) {
          this.alert = true;
       }
@@ -394,7 +387,7 @@ export default {
          }
          self.cursos = self.cursostock = cursos;
       });
-      axios.get("/horarios").then(res => (this.horarios = res.data));
+      //axios.get("/horarios").then(res => (this.horarios = res.data));
    }
 };
 </script>

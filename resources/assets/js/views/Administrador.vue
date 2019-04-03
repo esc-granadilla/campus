@@ -48,7 +48,7 @@
                   <v-list-group no-action sub-group>
                      <template v-slot:activator>
                         <v-list-tile>
-                           <v-list-tile-title>Empleados</v-list-tile-title>
+                           <v-list-tile-title>Profesores</v-list-tile-title>
                         </v-list-tile>
                      </template>
 

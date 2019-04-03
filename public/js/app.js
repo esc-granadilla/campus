@@ -2384,14 +2384,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2529,7 +2521,7 @@ __webpack_require__.r(__webpack_exports__);
         curso.selected = true;
         this.curso = curso;
         axios.get("cursohorario/" + curso.id).then(function (res) {
-          return _this.cursoshorarios = res.data;
+          return _this.horarios = res.data;
         });
         var nuevos = [];
         nuevos.push(curso);
@@ -2587,24 +2579,23 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    tabs: function tabs(val) {
-      if (val == 2) {
-        this.selected = [];
-        this.horarios = this.cursoshorarios;
-        this.cursoshorarios.forEach(function (ch) {
-          /*this.horarios.forEach(h => {
-             if (h.id == ch.id) this.selected.push(h);
-          });*/
-        });
-      }
-    },
+    /*tabs(val) {
+       if (val == 2) {
+          this.selected = [];
+          this.horarios = this.cursoshorarios;
+          this.cursoshorarios.forEach(ch => {
+             this.horarios.forEach(h => {
+                if (h.id == ch.id) this.selected.push(h);
+             });
+       
+          });
+       }
+    },*/
     mensaje: function mensaje(val) {
       this.alert = true;
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
-
     var self = this;
     axios.get("/profesors").then(function (res) {
       var crs = res.data;
@@ -2627,10 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       self.cursos = self.cursostock = cursos;
-    });
-    axios.get("/horarios").then(function (res) {
-      return _this3.horarios = res.data;
-    });
+    }); //axios.get("/horarios").then(res => (this.horarios = res.data));
   }
 });
 
@@ -25583,29 +25571,6 @@ var render = function() {
                                           1
                                         ),
                                         _vm._v(" "),
-                                        _c("v-text-field", {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: false,
-                                              expression: "false"
-                                            }
-                                          ],
-                                          attrs: {
-                                            name: "grado",
-                                            type: "number",
-                                            required: ""
-                                          },
-                                          model: {
-                                            value: _vm.gradotxt,
-                                            callback: function($$v) {
-                                              _vm.gradotxt = $$v
-                                            },
-                                            expression: "gradotxt"
-                                          }
-                                        }),
-                                        _vm._v(" "),
                                         _c(
                                           "div",
                                           {
@@ -29496,7 +29461,7 @@ var render = function() {
                                   "v-list-tile",
                                   [
                                     _c("v-list-tile-title", [
-                                      _vm._v("Empleados")
+                                      _vm._v("Profesores")
                                     ])
                                   ],
                                   1
