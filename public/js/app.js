@@ -4621,7 +4621,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -29384,9 +29383,7 @@ var render = function() {
         _vm.mostar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("br")
+    )
   ])
 }
 var staticRenderFns = []

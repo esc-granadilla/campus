@@ -113,7 +113,6 @@
          <acursoprofesor v-if="mostar === 'curso/profesor'"></acursoprofesor>
          <acursoalumno v-if="mostar === 'curso/alumno'"></acursoalumno>
       </div>
-      <br>
    </v-layout>
 </template>
 
