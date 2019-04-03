@@ -1,10 +1,15 @@
 <template>
    <div id="registerprofesor">
-      <v-layout justify-center mt-5>
-         <v-flex xs12 md6 offset-md3>
+      <v-layout justify-center mt-2>
+         <v-flex xs12 md6 offset-md3 lg4 offset-lg4>
             <v-card>
-               <v-progress-linear color="success" height="5" :value="nextindex * 33.3"></v-progress-linear>
-               <v-img class="black--text" height="200px" :src="image">
+               <v-progress-linear
+                  color="success"
+                  height="5"
+                  class="mb-0 mt-3"
+                  :value="nextindex * 33.3"
+               ></v-progress-linear>
+               <v-img class="black--text" aspect-ratio="4" height="200px" contain :src="image">
                   <v-container fill-height fluid>
                      <v-layout fill-height>
                         <v-flex xs12 style="text-align: center;">
@@ -32,7 +37,7 @@
                               required
                            ></v-text-field>
                         </v-flex>
-                        <v-flex xs12 d-flex>
+                        <v-flex xs12>
                            <v-menu
                               ref="menu"
                               v-model="menu"
@@ -51,6 +56,7 @@
                                     name="fecha_ingreso"
                                     prepend-icon="event"
                                     readonly
+                                    xs12
                                     v-on="on"
                                  ></v-text-field>
                               </template>
@@ -136,7 +142,7 @@ export default {
          date: null,
          telefono1: "",
          telefono2: "",
-         image: require("../../img/studens1.jpg"),
+         image: require("../../img/profebanner.jpg"),
          rules: {
             required: value => !!value || "Requerido.",
             min: v => v.length >= 9 || "Min 9 Caracteres",
@@ -163,6 +169,11 @@ export default {
       },
       save(date) {
          this.$refs.menu.save(date);
+      }
+   },
+   watch: {
+      menu(val) {
+         val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
       }
    },
    computed: {}
