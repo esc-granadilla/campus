@@ -45,3 +45,8 @@ Route::get(
    '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
    'AdministracionController@showcursohorarioprofesor'
 )->name('showcursohorarioprofesor');
+
+Route::post(
+   '/asigcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@asigcursohorarioprofesor'
+)->name('asigcursohorarioprofesor');

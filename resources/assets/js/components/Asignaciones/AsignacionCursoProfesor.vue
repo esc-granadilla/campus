@@ -356,18 +356,28 @@ export default {
                )
                .then(function(res) {
                   var crs = res.data;
-                  for (let index = 0; index < crs.length; index++) {
-                     if (crs[index].selected == true)
-                        self.selected[index] = crs[index];
-                  }
                   self.horarios = crs;
+                  self.selected = [];
+                  crs.forEach(c => {
+                     if (c.selected) self.selected.push(c);
+                  });
                });
       },
       enviar() {
          axios
-            .post("asigcursohorario/" + this.curso.id, {
-               horarios: this.selected
-            })
+            .post(
+               "asigcursohorarioprofesor/" +
+                  this.profesor.id +
+                  "/" +
+                  this.curso.id +
+                  "/" +
+                  this.grado.value +
+                  "/" +
+                  this.dia.value,
+               {
+                  horarios: this.selected
+               }
+            )
             .then(res => (this.mensaje = res.data));
       }
    },

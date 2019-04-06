@@ -101,14 +101,13 @@ class AdministracionController extends Controller
          $horarios = $curso->horarios()->get();
          $horariospermitidos = [];
          foreach ($horarios as $horario) {
-            if ($asignaciones != null || count($asignaciones) > 0) {
-               $agregar = true;
+            $agregar = true;
+            if ($asignaciones != null && count($asignaciones) > 0) {
                foreach ($asignaciones as $asignacion) {
-                  if ($asignacion->id_horario == $horario->id) {
+                  if ($asignacion->horario_id == $horario->id && $asignacion->dia_id == $dia->id) {
                      if (
-                        $asignacion->id_grado == $grado->id ||
-                        $asignacion->id_dia == $dia->id ||
-                        $asignacion->id_curso == $curso->id
+                        $asignacion->grado_id == $grado->id &&
+                        $asignacion->curso_id == $curso->id
                      ) {
                         array_push(
                            $horariospermitidos,
@@ -124,15 +123,42 @@ class AdministracionController extends Controller
                      break;
                   }
                }
-               if ($agregar) {
-                  array_push(
-                     $horariospermitidos,
-                     ['id' => $horario->id, 'desde' => $horario->desde, 'hasta' => $horario->hasta, 'selected' => false]
-                  );
-               }
+            }
+            if ($agregar) {
+               array_push(
+                  $horariospermitidos,
+                  ['id' => $horario->id, 'desde' => $horario->desde, 'hasta' => $horario->hasta, 'selected' => false]
+               );
             }
          }
          return response()->json($horariospermitidos, 200);
+      }
+   }
+
+   public function asigcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   {
+      if ($request->ajax()) {
+         if ($request->ajax()) {
+            $horarios = $request->input('horarios');
+            AsignacionCursoProfesor::where(
+               [
+                  'profesor_id' => $profesor->id,
+                  'curso_id' => $curso->id,
+                  'grado_id' => $grado->id,
+                  'dia_id' => $dia->id
+               ]
+            )->delete();
+            foreach ($horarios as $horario) {
+               $asignacion = new AsignacionCursoProfesor();
+               $asignacion->profesor_id = $profesor->id;
+               $asignacion->curso_id = $curso->id;
+               $asignacion->grado_id = $grado->id;
+               $asignacion->dia_id = $dia->id;
+               $asignacion->horario_id = $horario['id'];
+               $asignacion->save();
+            }
+            return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+         }
       }
    }
 }

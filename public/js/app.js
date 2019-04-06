@@ -2582,18 +2582,17 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       if (this.curso != null) axios.get("showcursohorarioprofesor/" + this.profesor.id + "/" + this.curso.id + "/" + this.grado.value + "/" + this.dia.value).then(function (res) {
         var crs = res.data;
-
-        for (var index = 0; index < crs.length; index++) {
-          if (crs[index].selected == true) self.selected[index] = crs[index];
-        }
-
         self.horarios = crs;
+        self.selected = [];
+        crs.forEach(function (c) {
+          if (c.selected) self.selected.push(c);
+        });
       });
     },
     enviar: function enviar() {
       var _this = this;
 
-      axios.post("asigcursohorario/" + this.curso.id, {
+      axios.post("asigcursohorarioprofesor/" + this.profesor.id + "/" + this.curso.id + "/" + this.grado.value + "/" + this.dia.value, {
         horarios: this.selected
       }).then(function (res) {
         return _this.mensaje = res.data;
