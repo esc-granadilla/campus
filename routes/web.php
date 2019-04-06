@@ -40,3 +40,8 @@ Route::get('/roles', 'AdministracionController@roles')->name('roles');
 Route::get('/roltouser', 'AdministracionController@roltouser')->name('roltouser');
 
 Route::get('/credencial', 'AdministracionController@credencial')->name('credencial');
+
+Route::get(
+   '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@showcursohorarioprofesor'
+)->name('showcursohorarioprofesor');
