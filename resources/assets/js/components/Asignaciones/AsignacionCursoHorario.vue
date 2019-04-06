@@ -156,7 +156,7 @@ export default {
    methods: {
       toggleAll() {
          if (this.selected.length) this.selected = [];
-         else this.selected = this.desserts.slice();
+         else this.selected = this.horarios.slice();
       },
       changeSort(column) {
          if (this.pagination.sortBy === column) {
