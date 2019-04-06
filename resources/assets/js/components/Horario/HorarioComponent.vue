@@ -1,110 +1,10 @@
 <template>
    <div>
       <div class="alert">
-         <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
+         <v-alert v-model="alert" dismissible :type="mensaje.type">{{ mensaje.message }}</v-alert>
       </div>
       <v-flex md8 xs12 offset-md2>
          <v-layout wrap row>
-            <!--<v-flex xs12 pt-2 px-3>
-               <v-card fluid class="elevation-12">
-                  <v-toolbar dark class="py-1">
-                     <v-toolbar-title>Horario</v-toolbar-title>
-                     <v-spacer></v-spacer>
-                  </v-toolbar>
-                  <v-flex md10 xs12 offset-md1>
-                     <v-card-text>
-                        <v-layout wrap row>
-                           <v-flex xs12 md7>
-                              <v-dialog
-                                 ref="dialog"
-                                 v-model="modal1"
-                                 :return-value.sync="horario.desde"
-                                 persistent
-                                 lazy
-                                 full-width
-                                 width="290px"
-                              >
-                                 <template v-slot:activator="{ on }">
-                                    <v-text-field
-                                       v-model="horario.desde"
-                                       label="Desde:"
-                                       prepend-icon="access_time"
-                                       readonly
-                                       v-on="on"
-                                    ></v-text-field>
-                                 </template>
-                                 <v-time-picker v-if="modal1" v-model="horario.desde" full-width>
-                                    <v-spacer></v-spacer>
-                                    <v-btn flat color="primary" @click="modal1 = false">Cancel</v-btn>
-                                    <v-btn
-                                       flat
-                                       color="primary"
-                                       @click="$refs.dialog.save(horario.desde)"
-                                    >OK</v-btn>
-                                 </v-time-picker>
-                              </v-dialog>
-                              <v-dialog
-                                 ref="dialog1"
-                                 v-model="modal2"
-                                 :return-value.sync="horario.hasta"
-                                 persistent
-                                 lazy
-                                 full-width
-                                 width="290px"
-                              >
-                                 <template v-slot:activator="{ on }">
-                                    <v-text-field
-                                       v-model="horario.hasta"
-                                       label="Hasta"
-                                       prepend-icon="access_time"
-                                       readonly
-                                       v-on="on"
-                                    ></v-text-field>
-                                 </template>
-                                 <v-time-picker v-if="modal2" v-model="horario.hasta" full-width>
-                                    <v-spacer></v-spacer>
-                                    <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
-                                    <v-btn
-                                       flat
-                                       color="primary"
-                                       @click="$refs.dialog1.save(horario.hasta)"
-                                    >OK</v-btn>
-                                 </v-time-picker>
-                              </v-dialog>
-                           </v-flex>
-                           <v-spacer></v-spacer>
-                           <v-flex xs12 md3>
-                              <v-layout align-end justify-end fill-height wrap>
-                                 <v-flex xs3 md12>
-                                    <v-btn round dark flat color="green" block @click="crear">Crear</v-btn>
-                                 </v-flex>
-                                 <v-flex xs3 md12>
-                                    <v-btn
-                                       round
-                                       dark
-                                       flat
-                                       color="blue"
-                                       block
-                                       @click="editar"
-                                    >Actualizar</v-btn>
-                                 </v-flex>
-                                 <v-flex xs3 md12>
-                                    <v-btn
-                                       round
-                                       dark
-                                       flat
-                                       color="red"
-                                       block
-                                       @click="eliminar"
-                                    >Eliminar</v-btn>
-                                 </v-flex>
-                              </v-layout>
-                           </v-flex>
-                        </v-layout>
-                     </v-card-text>
-                  </v-flex>
-               </v-card>
-            </v-flex>-->
             <v-flex xs12 pt-2 px-3>
                <v-toolbar dark color="green" class="py-1">
                   <v-spacer></v-spacer>
@@ -202,7 +102,7 @@ export default {
             estado: ""
          },
          horarios: [],
-         mensaje: [],
+         mensaje: { type: "success", message: "" },
          headers: [
             {
                text: "Desde:",
@@ -214,8 +114,7 @@ export default {
             { text: "Editar", align: "center", value: "" },
             { text: "Eliminar", align: "center", value: "" }
          ],
-         alert: false,
-         alerttype: "success"
+         alert: false
       };
    },
    methods: {

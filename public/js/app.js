@@ -2862,78 +2862,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2957,9 +2885,11 @@ __webpack_require__.r(__webpack_exports__);
         estado: ""
       },
       alert: false,
-      alerttype: "success",
       cursos: [],
-      mensaje: [],
+      mensaje: {
+        type: "success",
+        message: ""
+      },
       headers: [{
         text: "Nombre",
         align: "left",
@@ -3147,8 +3077,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3178,6 +3106,14 @@ __webpack_require__.r(__webpack_exports__);
         estado: ""
       }
     };
+  },
+  methods: {
+    validar: function validar() {
+      if (this.$refs.form.validate()) {
+        this.dialogCreate = false;
+        this.$emit("speak", this.curso);
+      }
+    }
   }
 });
 
@@ -3310,8 +3246,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3360,6 +3294,18 @@ __webpack_require__.r(__webpack_exports__);
       this.curso.nombre = val.nombre;
       this.curso.descripcion = val.descripcion;
       this.curso.estado = val.estado;
+    }
+  },
+  methods: {
+    validar: function validar() {
+      if (this.$refs.form.validate()) {
+        this.dialogedit = false;
+        this.$emit("speak", {
+          dialogedit: false,
+          Edit: true,
+          curso: this.curso
+        });
+      }
     }
   }
 });
@@ -4007,6 +3953,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4025,6 +3977,14 @@ __webpack_require__.r(__webpack_exports__);
       modal2: false,
       modal1: false
     };
+  },
+  methods: {
+    validar: function validar() {
+      if (this.$refs.form.validate()) {
+        this.dialogCreate = false;
+        this.$emit("speak", this.horario);
+      }
+    }
   }
 });
 
@@ -4182,6 +4142,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4218,6 +4184,18 @@ __webpack_require__.r(__webpack_exports__);
       this.horario.hasta = val.hasta;
       this.horario.estado = val.estado;
     }
+  },
+  methods: {
+    validar: function validar() {
+      if (this.$refs.form.validate()) {
+        this.dialogedit = false;
+        this.$emit("speak", {
+          dialogedit: false,
+          Edit: true,
+          horario: this.horario
+        });
+      }
+    }
   }
 });
 
@@ -4235,106 +4213,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Horario_DialogCreate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Horario/DialogCreate.vue */ "./resources/assets/js/components/Horario/DialogCreate.vue");
 /* harmony import */ var _Horario_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Horario/DialogDelete.vue */ "./resources/assets/js/components/Horario/DialogDelete.vue");
 /* harmony import */ var _Horario_DialogEdit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Horario/DialogEdit.vue */ "./resources/assets/js/components/Horario/DialogEdit.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4437,7 +4315,10 @@ __webpack_require__.r(__webpack_exports__);
         estado: ""
       },
       horarios: [],
-      mensaje: [],
+      mensaje: {
+        type: "success",
+        message: ""
+      },
       headers: [{
         text: "Desde:",
         align: "left",
@@ -4456,8 +4337,7 @@ __webpack_require__.r(__webpack_exports__);
         align: "center",
         value: ""
       }],
-      alert: false,
-      alerttype: "success"
+      alert: false
     };
   },
   methods: {
@@ -26829,7 +26709,7 @@ var render = function() {
           _c(
             "v-alert",
             {
-              attrs: { dismissible: "", type: _vm.alerttype },
+              attrs: { dismissible: "", type: _vm.mensaje.type },
               model: {
                 value: _vm.alert,
                 callback: function($$v) {
@@ -27186,58 +27066,65 @@ var render = function() {
                         "v-layout",
                         { attrs: { wrap: "" } },
                         [
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
-                              counter: "",
-                              label: "*Codigo",
-                              name: "codigo",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.curso.codigo,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "codigo", $$v)
-                              },
-                              expression: "curso.codigo"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
-                              counter: "",
-                              label: "*Nombre",
-                              name: "nombre",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.curso.nombre,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "nombre", $$v)
-                              },
-                              expression: "curso.nombre"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.mini],
-                              counter: "",
-                              label: "Descripción",
-                              name: "descripcion"
-                            },
-                            model: {
-                              value: _vm.curso.descripcion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "descripcion", $$v)
-                              },
-                              expression: "curso.descripcion"
-                            }
-                          })
+                          _c(
+                            "v-form",
+                            { ref: "form" },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.required, _vm.rules.mini],
+                                  counter: "",
+                                  label: "*Codigo",
+                                  name: "codigo",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.curso.codigo,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "codigo", $$v)
+                                  },
+                                  expression: "curso.codigo"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.required, _vm.rules.mini],
+                                  counter: "",
+                                  label: "*Nombre",
+                                  name: "nombre",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.curso.nombre,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "nombre", $$v)
+                                  },
+                                  expression: "curso.nombre"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.mini],
+                                  counter: "",
+                                  label: "Descripción",
+                                  name: "descripcion"
+                                },
+                                model: {
+                                  value: _vm.curso.descripcion,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "descripcion", $$v)
+                                  },
+                                  expression: "curso.descripcion"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -27272,12 +27159,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue darken-1", flat: "" },
-                      on: {
-                        click: function($event) {
-                          ;(_vm.dialogCreate = false),
-                            _vm.$emit("speak", _vm.curso)
-                        }
-                      }
+                      on: { click: _vm.validar }
                     },
                     [_vm._v("Salvar")]
                   )
@@ -27470,58 +27352,65 @@ var render = function() {
                         "v-layout",
                         { attrs: { wrap: "" } },
                         [
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
-                              counter: "",
-                              label: "*Codigo",
-                              name: "codigo",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.curso.codigo,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "codigo", $$v)
-                              },
-                              expression: "curso.codigo"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
-                              counter: "",
-                              label: "*Nombre",
-                              name: "nombre",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.curso.nombre,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "nombre", $$v)
-                              },
-                              expression: "curso.nombre"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: {
-                              xs12: "",
-                              rules: [_vm.rules.mini],
-                              counter: "",
-                              label: "Descripción",
-                              name: "descripcion"
-                            },
-                            model: {
-                              value: _vm.curso.descripcion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.curso, "descripcion", $$v)
-                              },
-                              expression: "curso.descripcion"
-                            }
-                          })
+                          _c(
+                            "v-form",
+                            { ref: "form" },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.required, _vm.rules.mini],
+                                  counter: "",
+                                  label: "*Codigo",
+                                  name: "codigo",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.curso.codigo,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "codigo", $$v)
+                                  },
+                                  expression: "curso.codigo"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.required, _vm.rules.mini],
+                                  counter: "",
+                                  label: "*Nombre",
+                                  name: "nombre",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.curso.nombre,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "nombre", $$v)
+                                  },
+                                  expression: "curso.nombre"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  xs12: "",
+                                  rules: [_vm.rules.mini],
+                                  counter: "",
+                                  label: "Descripción",
+                                  name: "descripcion"
+                                },
+                                model: {
+                                  value: _vm.curso.descripcion,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.curso, "descripcion", $$v)
+                                  },
+                                  expression: "curso.descripcion"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -27562,16 +27451,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue darken-1", flat: "" },
-                      on: {
-                        click: function($event) {
-                          ;(_vm.dialogedit = false),
-                            _vm.$emit("speak", {
-                              dialogedit: false,
-                              Edit: true,
-                              curso: _vm.curso
-                            })
-                        }
-                      }
+                      on: { click: _vm.validar }
                     },
                     [_vm._v("Salvar")]
                   )
@@ -28548,231 +28428,274 @@ var render = function() {
                         { attrs: { wrap: "" } },
                         [
                           _c(
-                            "v-dialog",
-                            {
-                              ref: "dialog",
-                              attrs: {
-                                "return-value": _vm.horario.desde,
-                                persistent: "",
-                                lazy: "",
-                                "full-width": "",
-                                width: "290px"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  return _vm.$set(_vm.horario, "desde", $event)
-                                },
-                                "update:return-value": function($event) {
-                                  return _vm.$set(_vm.horario, "desde", $event)
-                                }
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    return [
-                                      _c(
-                                        "v-text-field",
-                                        _vm._g(
-                                          {
-                                            attrs: {
-                                              label: "*Desde:",
-                                              "prepend-icon": "access_time",
-                                              readonly: "",
-                                              rules: [_vm.rules.required]
-                                            },
-                                            model: {
-                                              value: _vm.horario.desde,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.horario,
-                                                  "desde",
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "horario.desde"
-                                            }
-                                          },
-                                          on
-                                        )
-                                      )
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.modal1,
-                                callback: function($$v) {
-                                  _vm.modal1 = $$v
-                                },
-                                expression: "modal1"
-                              }
-                            },
+                            "v-form",
+                            { ref: "form" },
                             [
-                              _vm._v(" "),
-                              _vm.modal1
-                                ? _c(
-                                    "v-time-picker",
-                                    {
-                                      attrs: { "full-width": "" },
-                                      model: {
-                                        value: _vm.horario.desde,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.horario, "desde", $$v)
-                                        },
-                                        expression: "horario.desde"
-                                      }
-                                    },
-                                    [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.modal1 = false
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.$refs.dialog.save(
-                                                _vm.horario.desde
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-dialog",
-                            {
-                              ref: "dialog1",
-                              attrs: {
-                                "return-value": _vm.horario.hasta,
-                                persistent: "",
-                                lazy: "",
-                                "full-width": "",
-                                width: "290px"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  return _vm.$set(_vm.horario, "hasta", $event)
-                                },
-                                "update:return-value": function($event) {
-                                  return _vm.$set(_vm.horario, "hasta", $event)
-                                }
-                              },
-                              scopedSlots: _vm._u([
+                              _c(
+                                "v-dialog",
                                 {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    return [
-                                      _c(
-                                        "v-text-field",
-                                        _vm._g(
-                                          {
-                                            attrs: {
-                                              label: "*Hasta",
-                                              "prepend-icon": "access_time",
-                                              readonly: "",
-                                              rules: [_vm.rules.required]
-                                            },
-                                            model: {
-                                              value: _vm.horario.hasta,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.horario,
-                                                  "hasta",
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "horario.hasta"
-                                            }
-                                          },
-                                          on
-                                        )
+                                  ref: "dialog",
+                                  attrs: {
+                                    "return-value": _vm.horario.desde,
+                                    persistent: "",
+                                    lazy: "",
+                                    "full-width": "",
+                                    width: "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "desde",
+                                        $event
                                       )
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.modal2,
-                                callback: function($$v) {
-                                  _vm.modal2 = $$v
-                                },
-                                expression: "modal2"
-                              }
-                            },
-                            [
-                              _vm._v(" "),
-                              _vm.modal2
-                                ? _c(
-                                    "v-time-picker",
-                                    {
-                                      attrs: { "full-width": "" },
-                                      model: {
-                                        value: _vm.horario.hasta,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.horario, "hasta", $$v)
-                                        },
-                                        expression: "horario.hasta"
-                                      }
                                     },
-                                    [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.modal2 = false
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.$refs.dialog1.save(
-                                                _vm.horario.hasta
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
+                                    "update:return-value": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "desde",
+                                        $event
                                       )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function(ref) {
+                                        var on = ref.on
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              {
+                                                attrs: {
+                                                  label: "*Desde:",
+                                                  "prepend-icon": "access_time",
+                                                  readonly: "",
+                                                  rules: [_vm.rules.required]
+                                                },
+                                                model: {
+                                                  value: _vm.horario.desde,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.horario,
+                                                      "desde",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "horario.desde"
+                                                }
+                                              },
+                                              on
+                                            )
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.modal1,
+                                    callback: function($$v) {
+                                      _vm.modal1 = $$v
+                                    },
+                                    expression: "modal1"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _vm.modal1
+                                    ? _c(
+                                        "v-time-picker",
+                                        {
+                                          attrs: { "full-width": "" },
+                                          model: {
+                                            value: _vm.horario.desde,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.horario,
+                                                "desde",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "horario.desde"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.modal1 = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.dialog.save(
+                                                    _vm.horario.desde
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-dialog",
+                                {
+                                  ref: "dialog1",
+                                  attrs: {
+                                    "return-value": _vm.horario.hasta,
+                                    persistent: "",
+                                    lazy: "",
+                                    "full-width": "",
+                                    width: "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "hasta",
+                                        $event
+                                      )
+                                    },
+                                    "update:return-value": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "hasta",
+                                        $event
+                                      )
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function(ref) {
+                                        var on = ref.on
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              {
+                                                attrs: {
+                                                  label: "*Hasta",
+                                                  "prepend-icon": "access_time",
+                                                  readonly: "",
+                                                  rules: [_vm.rules.required]
+                                                },
+                                                model: {
+                                                  value: _vm.horario.hasta,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.horario,
+                                                      "hasta",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "horario.hasta"
+                                                }
+                                              },
+                                              on
+                                            )
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.modal2,
+                                    callback: function($$v) {
+                                      _vm.modal2 = $$v
+                                    },
+                                    expression: "modal2"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _vm.modal2
+                                    ? _c(
+                                        "v-time-picker",
+                                        {
+                                          attrs: { "full-width": "" },
+                                          model: {
+                                            value: _vm.horario.hasta,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.horario,
+                                                "hasta",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "horario.hasta"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.modal2 = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.dialog1.save(
+                                                    _vm.horario.hasta
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
@@ -28810,12 +28733,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue darken-1", flat: "" },
-                      on: {
-                        click: function($event) {
-                          ;(_vm.dialogCreate = false),
-                            _vm.$emit("speak", _vm.horario)
-                        }
-                      }
+                      on: { click: _vm.validar }
                     },
                     [_vm._v("Salvar")]
                   )
@@ -29009,231 +28927,274 @@ var render = function() {
                         { attrs: { wrap: "" } },
                         [
                           _c(
-                            "v-dialog",
-                            {
-                              ref: "dialog",
-                              attrs: {
-                                "return-value": _vm.horario.desde,
-                                persistent: "",
-                                lazy: "",
-                                "full-width": "",
-                                width: "290px"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  return _vm.$set(_vm.horario, "desde", $event)
-                                },
-                                "update:return-value": function($event) {
-                                  return _vm.$set(_vm.horario, "desde", $event)
-                                }
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    return [
-                                      _c(
-                                        "v-text-field",
-                                        _vm._g(
-                                          {
-                                            attrs: {
-                                              label: "*Desde:",
-                                              "prepend-icon": "access_time",
-                                              readonly: "",
-                                              rules: [_vm.rules.required]
-                                            },
-                                            model: {
-                                              value: _vm.horario.desde,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.horario,
-                                                  "desde",
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "horario.desde"
-                                            }
-                                          },
-                                          on
-                                        )
-                                      )
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.modal1,
-                                callback: function($$v) {
-                                  _vm.modal1 = $$v
-                                },
-                                expression: "modal1"
-                              }
-                            },
+                            "v-form",
+                            { ref: "form" },
                             [
-                              _vm._v(" "),
-                              _vm.modal1
-                                ? _c(
-                                    "v-time-picker",
-                                    {
-                                      attrs: { "full-width": "" },
-                                      model: {
-                                        value: _vm.horario.desde,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.horario, "desde", $$v)
-                                        },
-                                        expression: "horario.desde"
-                                      }
-                                    },
-                                    [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.modal1 = false
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.$refs.dialog.save(
-                                                _vm.horario.desde
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-dialog",
-                            {
-                              ref: "dialog1",
-                              attrs: {
-                                "return-value": _vm.horario.hasta,
-                                persistent: "",
-                                lazy: "",
-                                "full-width": "",
-                                width: "290px"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  return _vm.$set(_vm.horario, "hasta", $event)
-                                },
-                                "update:return-value": function($event) {
-                                  return _vm.$set(_vm.horario, "hasta", $event)
-                                }
-                              },
-                              scopedSlots: _vm._u([
+                              _c(
+                                "v-dialog",
                                 {
-                                  key: "activator",
-                                  fn: function(ref) {
-                                    var on = ref.on
-                                    return [
-                                      _c(
-                                        "v-text-field",
-                                        _vm._g(
-                                          {
-                                            attrs: {
-                                              label: "*Hasta",
-                                              "prepend-icon": "access_time",
-                                              readonly: "",
-                                              rules: [_vm.rules.required]
-                                            },
-                                            model: {
-                                              value: _vm.horario.hasta,
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.horario,
-                                                  "hasta",
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "horario.hasta"
-                                            }
-                                          },
-                                          on
-                                        )
+                                  ref: "dialog",
+                                  attrs: {
+                                    "return-value": _vm.horario.desde,
+                                    persistent: "",
+                                    lazy: "",
+                                    "full-width": "",
+                                    width: "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "desde",
+                                        $event
                                       )
-                                    ]
-                                  }
-                                }
-                              ]),
-                              model: {
-                                value: _vm.modal2,
-                                callback: function($$v) {
-                                  _vm.modal2 = $$v
-                                },
-                                expression: "modal2"
-                              }
-                            },
-                            [
-                              _vm._v(" "),
-                              _vm.modal2
-                                ? _c(
-                                    "v-time-picker",
-                                    {
-                                      attrs: { "full-width": "" },
-                                      model: {
-                                        value: _vm.horario.hasta,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.horario, "hasta", $$v)
-                                        },
-                                        expression: "horario.hasta"
-                                      }
                                     },
-                                    [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.modal2 = false
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.$refs.dialog1.save(
-                                                _vm.horario.hasta
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
+                                    "update:return-value": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "desde",
+                                        $event
                                       )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function(ref) {
+                                        var on = ref.on
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              {
+                                                attrs: {
+                                                  label: "*Desde:",
+                                                  "prepend-icon": "access_time",
+                                                  readonly: "",
+                                                  rules: [_vm.rules.required]
+                                                },
+                                                model: {
+                                                  value: _vm.horario.desde,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.horario,
+                                                      "desde",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "horario.desde"
+                                                }
+                                              },
+                                              on
+                                            )
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.modal1,
+                                    callback: function($$v) {
+                                      _vm.modal1 = $$v
+                                    },
+                                    expression: "modal1"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _vm.modal1
+                                    ? _c(
+                                        "v-time-picker",
+                                        {
+                                          attrs: { "full-width": "" },
+                                          model: {
+                                            value: _vm.horario.desde,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.horario,
+                                                "desde",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "horario.desde"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.modal1 = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.dialog.save(
+                                                    _vm.horario.desde
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-dialog",
+                                {
+                                  ref: "dialog1",
+                                  attrs: {
+                                    "return-value": _vm.horario.hasta,
+                                    persistent: "",
+                                    lazy: "",
+                                    "full-width": "",
+                                    width: "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "hasta",
+                                        $event
+                                      )
+                                    },
+                                    "update:return-value": function($event) {
+                                      return _vm.$set(
+                                        _vm.horario,
+                                        "hasta",
+                                        $event
+                                      )
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function(ref) {
+                                        var on = ref.on
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              {
+                                                attrs: {
+                                                  label: "*Hasta",
+                                                  "prepend-icon": "access_time",
+                                                  readonly: "",
+                                                  rules: [_vm.rules.required]
+                                                },
+                                                model: {
+                                                  value: _vm.horario.hasta,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.horario,
+                                                      "hasta",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "horario.hasta"
+                                                }
+                                              },
+                                              on
+                                            )
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.modal2,
+                                    callback: function($$v) {
+                                      _vm.modal2 = $$v
+                                    },
+                                    expression: "modal2"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _vm.modal2
+                                    ? _c(
+                                        "v-time-picker",
+                                        {
+                                          attrs: { "full-width": "" },
+                                          model: {
+                                            value: _vm.horario.hasta,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.horario,
+                                                "hasta",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "horario.hasta"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.modal2 = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.dialog1.save(
+                                                    _vm.horario.hasta
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
@@ -29277,16 +29238,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue darken-1", flat: "" },
-                      on: {
-                        click: function($event) {
-                          ;(_vm.dialogedit = false),
-                            _vm.$emit("speak", {
-                              dialogedit: false,
-                              Edit: true,
-                              horario: _vm.horario
-                            })
-                        }
-                      }
+                      on: { click: _vm.validar }
                     },
                     [_vm._v("Salvar")]
                   )
@@ -29335,7 +29287,7 @@ var render = function() {
           _c(
             "v-alert",
             {
-              attrs: { dismissible: "", type: _vm.alerttype },
+              attrs: { dismissible: "", type: _vm.mensaje.type },
               model: {
                 value: _vm.alert,
                 callback: function($$v) {

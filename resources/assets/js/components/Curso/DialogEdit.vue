@@ -9,33 +9,35 @@
             <v-card-text>
                <v-container grid-list-md>
                   <v-layout wrap>
-                     <v-text-field
-                        xs12
-                        v-model="curso.codigo"
-                        :rules="[rules.required, rules.mini]"
-                        counter
-                        label="*Codigo"
-                        name="codigo"
-                        required
-                     ></v-text-field>
+                     <v-form ref="form">
+                        <v-text-field
+                           xs12
+                           v-model="curso.codigo"
+                           :rules="[rules.required, rules.mini]"
+                           counter
+                           label="*Codigo"
+                           name="codigo"
+                           required
+                        ></v-text-field>
 
-                     <v-text-field
-                        xs12
-                        v-model="curso.nombre"
-                        :rules="[rules.required, rules.mini]"
-                        counter
-                        label="*Nombre"
-                        name="nombre"
-                        required
-                     ></v-text-field>
-                     <v-text-field
-                        xs12
-                        v-model="curso.descripcion"
-                        :rules="[rules.mini]"
-                        counter
-                        label="Descripción"
-                        name="descripcion"
-                     ></v-text-field>
+                        <v-text-field
+                           xs12
+                           v-model="curso.nombre"
+                           :rules="[rules.required, rules.mini]"
+                           counter
+                           label="*Nombre"
+                           name="nombre"
+                           required
+                        ></v-text-field>
+                        <v-text-field
+                           xs12
+                           v-model="curso.descripcion"
+                           :rules="[rules.mini]"
+                           counter
+                           label="Descripción"
+                           name="descripcion"
+                        ></v-text-field>
+                     </v-form>
                   </v-layout>
                </v-container>
                <small>*Campos requeridos</small>
@@ -47,11 +49,7 @@
                   flat
                   @click="dialogedit = false, curso = cursostock,$emit('speak', {dialogedit:false,Edit:false,curso:curso})"
                >Cerrar</v-btn>
-               <v-btn
-                  color="blue darken-1"
-                  flat
-                  @click="dialogedit = false, $emit('speak', {dialogedit:false,Edit:true,curso:curso})"
-               >Salvar</v-btn>
+               <v-btn color="blue darken-1" flat @click="validar">Salvar</v-btn>
             </v-card-actions>
          </v-card>
       </v-dialog>
@@ -97,6 +95,18 @@ export default {
          this.curso.nombre = val.nombre;
          this.curso.descripcion = val.descripcion;
          this.curso.estado = val.estado;
+      }
+   },
+   methods: {
+      validar() {
+         if (this.$refs.form.validate()) {
+            this.dialogedit = false;
+            this.$emit("speak", {
+               dialogedit: false,
+               Edit: true,
+               curso: this.curso
+            });
+         }
       }
    }
 };

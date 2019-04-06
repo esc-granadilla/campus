@@ -24,11 +24,11 @@ class CursoController extends Controller
       $this->middleware('administrador');
    }
    /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function index(Request $request)
    {
       if ($request->ajax()) {
@@ -38,40 +38,50 @@ class CursoController extends Controller
    }
 
    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
    public function create()
    {
       //
    }
 
    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $curso = new Curso();
-         $curso->codigo = $request->input('codigo');
-         $curso->nombre = $request->input('nombre');
-         $curso->descripcion = $request->input('descripcion');
-         $curso->save();
-         return response()->json(['message' => 'Se registro el Curso correctamente'], 200);
+         $cur = Curso::where('codigo', strtoupper($request->input('codigo')))->first();
+         if ($cur != null) {
+            if ($cur->estado == 0) {
+               $cur->estado = 1;
+               $cur->save();
+            } else {
+               return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+            }
+         } else {
+            $curso = new Curso();
+            $curso->codigo = strtoupper($request->input('codigo'));
+            $curso->nombre = $request->input('nombre');
+            $curso->descripcion = $request->input('descripcion');
+            $curso->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se registro el Curso correctamente.'], 200);
       }
    }
 
    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function show(Curso $curso, Request $request)
    {
       if ($request->ajax()) {
@@ -81,12 +91,12 @@ class CursoController extends Controller
    }
 
    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function edit(Curso $curso, Request $request)
    {
       if ($request->ajax()) {
@@ -96,36 +106,41 @@ class CursoController extends Controller
    }
 
    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
    public function update(Request $request, Curso $curso)
    {
       if ($request->ajax()) {
-         $curso->codigo = $request->input('codigo');
-         $curso->nombre = $request->input('nombre');
-         $curso->descripcion = $request->input('descripcion');
-         $curso->save();
-         return response()->json(['message' => 'Datos del Curso fueron actualizados correctamente'], 200);
+         $cur = Curso::where('codigo', strtoupper($request->input('codigo')))->first();
+         if ($cur != null) {
+            return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+         } else {
+            $curso->codigo = strtoupper($request->input('codigo'));
+            $curso->nombre = $request->input('nombre');
+            $curso->descripcion = $request->input('descripcion');
+            $curso->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Datos del Curso fueron actualizados correctamente'], 200);
       }
    }
 
    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function destroy(Curso $curso, Request $request)
    {
       if ($request->ajax()) {
          $curso->estado = 0;
          $curso->save();
-         return response()->json(['message' => 'El Curso fue eliminado exitosamente'], 200);
+         return response()->json(['type' => 'success', 'message' => 'El Curso fue eliminado exitosamente'], 200);
       }
    }
 }

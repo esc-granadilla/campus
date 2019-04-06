@@ -1,82 +1,10 @@
 <template>
    <div>
       <div class="alert">
-         <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
+         <v-alert v-model="alert" dismissible :type="mensaje.type">{{ mensaje.message }}</v-alert>
       </div>
       <v-flex md8 xs12 offset-md2>
          <v-layout wrap row>
-            <!--<v-flex xs12 pt-2 px-3>
-               <v-card fluid class="elevation-12">
-                  <v-toolbar dark class="py-1">
-                     <v-toolbar-title>Curso</v-toolbar-title>
-                     <v-spacer></v-spacer>
-                  </v-toolbar>
-                  <v-flex md10 xs12 offset-md1>
-                     <v-card-text>
-                        <v-layout wrap row>
-                           <v-flex xs12 md7>
-                              <v-text-field
-                                 xs6
-                                 v-model="curso.codigo"
-                                 :rules="[rules.required, rules.mini]"
-                                 counter
-                                 label="Codigo"
-                                 name="codigo"
-                                 required
-                              ></v-text-field>
-
-                              <v-text-field
-                                 xs6
-                                 v-model="curso.nombre"
-                                 :rules="[rules.required, rules.mini]"
-                                 counter
-                                 label="Nombre"
-                                 name="nombre"
-                                 required
-                              ></v-text-field>
-                              <v-text-field
-                                 xs6
-                                 v-model="curso.descripcion"
-                                 :rules="[rules.mini]"
-                                 counter
-                                 label="Descripción"
-                                 name="descripcion"
-                              ></v-text-field>
-                           </v-flex>
-                           <v-spacer></v-spacer>
-                           <v-flex xs12 md3>
-                              <v-layout align-end justify-end fill-height wrap>
-                                 <v-flex xs3 md12>
-                                    <v-btn round dark flat color="green" block @click="crear">Crear</v-btn>
-                                 </v-flex>
-                                 <v-flex xs3 md12>
-                                    <v-btn
-                                       round
-                                       dark
-                                       flat
-                                       color="blue"
-                                       block
-                                       @click="editar"
-                                    >Actualizar</v-btn>
-                                 </v-flex>
-                                 <v-flex xs3 md12>
-                                    <v-btn
-                                       round
-                                       dark
-                                       flat
-                                       color="red"
-                                       block
-                                       @click="eliminar"
-                                    >Eliminar</v-btn>
-                                 </v-flex>
-                              </v-layout>
-                           </v-flex>
-                        </v-layout>
-                     </v-card-text>
-                  </v-flex>
-               </v-card>
-            </v-flex>-->
-
             <v-flex xs12 pt-2 px-3>
                <v-toolbar dark color="green" class="py-1">
                   <v-spacer></v-spacer>
@@ -179,9 +107,8 @@ export default {
             estado: ""
          },
          alert: false,
-         alerttype: "success",
          cursos: [],
-         mensaje: [],
+         mensaje: { type: "success", message: "" },
          headers: [
             {
                text: "Nombre",
