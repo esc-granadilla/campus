@@ -3,112 +3,116 @@
       <div class="alert">
          <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
       </div>
-      <v-layout wrap row>
-         <v-toolbar color="blue darken-2" dark xs12 class="mar">
-            <v-text-field
-               class="mx-3"
-               flat
-               label="Buscar por Cedula"
-               prepend-inner-icon="search"
-               solo-inverted
-               v-model="search"
-               @keydown="buscar()"
-            ></v-text-field>
-         </v-toolbar>
-         <v-layout wrap mx-5 xs6>
-            <v-flex xs6 pt-2 px-3>
-               <v-text-field
-                  v-model="estudiante.nombre"
-                  :rules="[rules.required, rules.mini]"
-                  counter
-                  label="Nombre"
-                  name="nombre"
-                  required
-               ></v-text-field>
-            </v-flex>
-            <v-flex xs6 pt-2 px-3>
-               <v-text-field
-                  xs12
-                  v-model="estudiante.primer_apellido"
-                  :rules="[rules.required, rules.mini]"
-                  counter
-                  label="Primer Apellido"
-                  name="primer_apellido"
-                  required
-               ></v-text-field>
-            </v-flex>
-            <v-flex xs6 pt-2 px-3>
-               <v-text-field
-                  v-model="estudiante.segundo_apellido"
-                  :rules="[rules.required, rules.mini]"
-                  counter
-                  label="Segundo Apellido"
-                  name="segundo_apellido"
-                  required
-               ></v-text-field>
-            </v-flex>
-            <v-flex xs6 pt-2 px-3>
-               <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  lazy
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  min-width="290px"
-               >
-                  <template v-slot:activator="{ on }">
+      <v-flex md8 xs12 offset-md2>
+         <v-flex xs12 pt-2 px-3>
+            <v-layout wrap row class="elevation-12">
+               <v-toolbar color="green" dark xs12 class="mar">
+                  <v-text-field
+                     class="mx-3"
+                     flat
+                     label="Buscar por Cedula"
+                     prepend-inner-icon="search"
+                     solo-inverted
+                     v-model="search"
+                     @keydown="buscar()"
+                  ></v-text-field>
+               </v-toolbar>
+               <v-layout wrap mx-5 xs6>
+                  <v-flex xs6 pt-2 px-3>
                      <v-text-field
-                        v-model="estudiante.fecha_nacimiento"
-                        label="Fecha Nacimiento"
-                        name="fecha_nacimiento"
-                        prepend-icon="event"
-                        readonly
-                        v-on="on"
+                        v-model="estudiante.nombre"
+                        :rules="[rules.required, rules.mini]"
+                        counter
+                        label="Nombre"
+                        name="nombre"
+                        required
                      ></v-text-field>
-                  </template>
-                  <v-date-picker
-                     ref="picker"
-                     v-model="estudiante.fecha_nacimiento"
-                     :max="new Date().toISOString().substr(0, 10)"
-                     min="1950-01-01"
-                     @change="save"
-                  ></v-date-picker>
-               </v-menu>
-            </v-flex>
-         </v-layout>
-         <v-layout wrap mx-5 xs6>
-            <v-flex xs6 pt-2 px-3>
-               <v-select
-                  :items="grados"
-                  item-text="text"
-                  item-value="value"
-                  return-object
-                  v-model="grado"
-                  label="Grado"
-                  d-block
-               ></v-select>
-            </v-flex>
-            <v-text-field v-model="gradotxt" name="grado" v-show="false" required></v-text-field>
-            <v-flex xs6 pt-2 px-3>
-               <v-select
-                  :items="adecuaciones"
-                  item-text="text"
-                  item-value="value"
-                  return-object
-                  v-model="adecuacion"
-                  label="Adecuaciòn"
-                  d-block
-               ></v-select>
-            </v-flex>
-            <v-text-field v-model="adecuaciontxt" name="adecuacion" v-show="false" required></v-text-field>
-            <v-flex xs12 d-flex px-3 mt-5>
-               <v-btn round dark flat color="green" block @click="editar">Actualizar Datos</v-btn>
-            </v-flex>
-         </v-layout>
-      </v-layout>
+                  </v-flex>
+                  <v-flex xs6 pt-2 px-3>
+                     <v-text-field
+                        xs12
+                        v-model="estudiante.primer_apellido"
+                        :rules="[rules.required, rules.mini]"
+                        counter
+                        label="Primer Apellido"
+                        name="primer_apellido"
+                        required
+                     ></v-text-field>
+                  </v-flex>
+                  <v-flex xs6 pt-2 px-3>
+                     <v-text-field
+                        v-model="estudiante.segundo_apellido"
+                        :rules="[rules.required, rules.mini]"
+                        counter
+                        label="Segundo Apellido"
+                        name="segundo_apellido"
+                        required
+                     ></v-text-field>
+                  </v-flex>
+                  <v-flex xs6 pt-2 px-3>
+                     <v-menu
+                        ref="menu"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        lazy
+                        transition="scale-transition"
+                        offset-y
+                        full-width
+                        min-width="290px"
+                     >
+                        <template v-slot:activator="{ on }">
+                           <v-text-field
+                              v-model="estudiante.fecha_nacimiento"
+                              label="Fecha Nacimiento"
+                              name="fecha_nacimiento"
+                              prepend-icon="event"
+                              readonly
+                              v-on="on"
+                           ></v-text-field>
+                        </template>
+                        <v-date-picker
+                           ref="picker"
+                           v-model="estudiante.fecha_nacimiento"
+                           :max="new Date().toISOString().substr(0, 10)"
+                           min="1950-01-01"
+                           @change="save"
+                        ></v-date-picker>
+                     </v-menu>
+                  </v-flex>
+               </v-layout>
+               <v-layout wrap mx-5 xs6>
+                  <v-flex xs6 pt-2 px-3>
+                     <v-select
+                        :items="grados"
+                        item-text="text"
+                        item-value="value"
+                        return-object
+                        v-model="grado"
+                        label="Grado"
+                        d-block
+                     ></v-select>
+                  </v-flex>
+                  <v-text-field v-model="gradotxt" name="grado" v-show="false" required></v-text-field>
+                  <v-flex xs6 pt-2 px-3>
+                     <v-select
+                        :items="adecuaciones"
+                        item-text="text"
+                        item-value="value"
+                        return-object
+                        v-model="adecuacion"
+                        label="Adecuaciòn"
+                        d-block
+                     ></v-select>
+                  </v-flex>
+                  <v-text-field v-model="adecuaciontxt" name="adecuacion" v-show="false" required></v-text-field>
+                  <v-flex xs12 d-flex px-3 mt-5>
+                     <v-btn round dark flat color="green" block @click="editar">Actualizar Datos</v-btn>
+                  </v-flex>
+               </v-layout>
+            </v-layout>
+         </v-flex>
+      </v-flex>
    </div>
 </template>
 
