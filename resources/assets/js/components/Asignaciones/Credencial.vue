@@ -1,45 +1,54 @@
 <template>
-   <v-card>
-      <v-card-title>
-         Profesores
-         <v-spacer></v-spacer>
-         <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Buscar por Nombre"
-            single-line
-            hide-details
-         ></v-text-field>
-      </v-card-title>
-      <v-data-table :headers="headers" :items="profesores" :search="search">
-         <template v-slot:items="props">
-            <td>{{ props.item.nombre }}</td>
-            <td class="text-center">{{ props.item.cedula }}</td>
-            <td class="text-center">{{ props.item.puesto }}</td>
-            <td class="text-center">{{ props.item.telefono }}</td>
-            <td class="text-center">
-               <v-checkbox
-                  :id="'a'+props.item.id"
-                  v-model="props.item.administrador"
-                  @click="checkadmin(props.item)"
-               ></v-checkbox>
-            </td>
-            <td class="text-center">
-               <v-checkbox
-                  :id="'p'+props.item.id"
-                  v-model="props.item.profesor"
-                  @click="checkprofe(props.item)"
-               ></v-checkbox>
-            </td>
-         </template>
-         <v-alert
-            v-slot:no-results
-            :value="true"
-            color="error"
-            icon="warning"
-         >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
-      </v-data-table>
-   </v-card>
+   <v-flex md10 xs12 offset-md1>
+      <v-flex xs12 pt-2 px-3>
+         <v-toolbar dark color="green" class="py-1">
+            <v-spacer></v-spacer>
+            <v-toolbar-title>Roles de Maestros</v-toolbar-title>
+            <v-spacer></v-spacer>
+         </v-toolbar>
+         <v-card>
+            <v-card-title>
+               Profesores
+               <v-spacer></v-spacer>
+               <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Buscar por Nombre"
+                  single-line
+                  hide-details
+               ></v-text-field>
+            </v-card-title>
+            <v-data-table :headers="headers" :items="profesores" :search="search">
+               <template v-slot:items="props">
+                  <td>{{ props.item.nombre }}</td>
+                  <td class="text-center">{{ props.item.cedula }}</td>
+                  <td class="text-center">{{ props.item.puesto }}</td>
+                  <td class="text-center">{{ props.item.telefono }}</td>
+                  <td class="text-center">
+                     <v-checkbox
+                        :id="'a'+props.item.id"
+                        v-model="props.item.administrador"
+                        @click="checkadmin(props.item)"
+                     ></v-checkbox>
+                  </td>
+                  <td class="text-center">
+                     <v-checkbox
+                        :id="'p'+props.item.id"
+                        v-model="props.item.profesor"
+                        @click="checkprofe(props.item)"
+                     ></v-checkbox>
+                  </td>
+               </template>
+               <v-alert
+                  v-slot:no-results
+                  :value="true"
+                  color="error"
+                  icon="warning"
+               >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
+            </v-data-table>
+         </v-card>
+      </v-flex>
+   </v-flex>
 </template>
 
 <script>

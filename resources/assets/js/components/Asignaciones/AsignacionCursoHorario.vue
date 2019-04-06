@@ -23,8 +23,18 @@
                         <v-btn block flat xs12 round @click="enviar">Asignar Horario(s) al curso</v-btn>
                      </v-layout>
                      <template v-slot:extension>
-                        <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
-                           <v-tab v-for="a in accions" :key="a.id">{{ a.text }}</v-tab>
+                        <v-tabs
+                           v-model="tabs"
+                           centered
+                           color="transparent"
+                           slider-color="white"
+                           change
+                        >
+                           <v-tab
+                              v-for="a in accions"
+                              :key="a.id"
+                              :disabled="a.id==2 ? noSelected : false"
+                           >{{ a.text }}</v-tab>
                         </v-tabs>
                      </template>
                   </v-toolbar>
@@ -124,6 +134,7 @@ export default {
          pagination: {
             sortBy: "desde"
          },
+         noSelected: true,
          selected: [],
          mensaje: [],
          cursoshorarios: [],
@@ -194,11 +205,13 @@ export default {
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.noSelected = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
             if (curso != null) curso.selected = false;
             this.curso = null;
             this.cursos = this.cursostock;
+            this.noSelected = true;
          }
       },
       enviar() {

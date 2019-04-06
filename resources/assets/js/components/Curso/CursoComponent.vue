@@ -8,7 +8,7 @@
             <v-flex xs12 pt-2 px-3>
                <v-toolbar dark color="green" class="py-1">
                   <v-spacer></v-spacer>
-                  <v-toolbar-title>Curso</v-toolbar-title>
+                  <v-toolbar-title>Listado de Cursos</v-toolbar-title>
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-card>

@@ -35,7 +35,11 @@
                      </v-layout>
                      <template v-slot:extension>
                         <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
-                           <v-tab v-for="a in accions" :key="a.id">{{ a.text }}</v-tab>
+                           <v-tab
+                              v-for="a in accions"
+                              :key="a.id"
+                              :disabled="a.invisible"
+                           >{{ a.text }}</v-tab>
                         </v-tabs>
                      </template>
                   </v-toolbar>
@@ -84,6 +88,7 @@
                                        v-model="grado"
                                        label="Seleccione el Grado"
                                        d-block
+                                       @change="obtenerHorarios"
                                     ></v-select>
                                  </v-subheader>
                                  <div v-bar class="tm">
@@ -123,6 +128,7 @@
                                  v-model="dia"
                                  label="Seleccione le Dia"
                                  d-block
+                                 @change="obtenerHorarios"
                               ></v-select>
                            </v-subheader>
                            <v-data-table
@@ -226,15 +232,18 @@ export default {
          accions: [
             {
                id: 1,
-               text: "Profesor"
+               text: "Profesor",
+               invisible: false
             },
             {
                id: 2,
-               text: "Curso"
+               text: "Curso",
+               invisible: true
             },
             {
                id: 3,
-               text: "Horario"
+               text: "Horario",
+               invisible: true
             }
          ]
       };
@@ -294,17 +303,20 @@ export default {
             if (this.curso != null) this.curso.selected = false;
             curso.selected = true;
             this.curso = curso;
-            axios
+            this.obtenerHorarios();
+            /*axios
                .get("cursohorario/" + curso.id)
-               .then(res => (this.horarios = res.data));
+               .then(res => (this.horarios = res.data));*/
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.accions[2].invisible = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
             if (curso != null) curso.selected = false;
             this.curso = null;
             this.cursos = this.cursostock;
+            this.accions[2].invisible = true;
          }
       },
       selectedProfesor(profesor) {
@@ -318,12 +330,38 @@ export default {
             var nuevos = [];
             nuevos.push(profesor);
             this.profesores = nuevos;
+            this.accions[1].invisible = false;
          } else {
             if (this.profesor != null) this.profesor.selected = false;
             if (profesor != null) profesor.selected = false;
             this.profesor = null;
             this.profesores = this.profesorstock;
+            this.accions[1].invisible = true;
+            this.selectedCurso(null);
          }
+      },
+      obtenerHorarios() {
+         var self = this;
+         if (this.curso != null)
+            axios
+               .get(
+                  "showcursohorarioprofesor/" +
+                     this.profesor.id +
+                     "/" +
+                     this.curso.id +
+                     "/" +
+                     this.grado.value +
+                     "/" +
+                     this.dia.value
+               )
+               .then(function(res) {
+                  var crs = res.data;
+                  for (let index = 0; index < crs.length; index++) {
+                     if (crs[index].selected == true)
+                        self.selected[index] = crs[index];
+                  }
+                  self.horarios = crs;
+               });
       },
       enviar() {
          axios

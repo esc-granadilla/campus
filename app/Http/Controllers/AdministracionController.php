@@ -8,6 +8,9 @@ use Campus\Profesor;
 use Campus\User;
 use Campus\Curso;
 use Campus\Horario;
+use Campus\Dia;
+use Campus\Grado;
+use Campus\AsignacionCursoProfesor;
 
 class AdministracionController extends Controller
 {
@@ -17,10 +20,10 @@ class AdministracionController extends Controller
       $this->middleware('administrador');
    }
    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
    public function index()
    {
       return view('homeadministrador');
@@ -88,6 +91,48 @@ class AdministracionController extends Controller
       if ($request->ajax()) {
          $horarios = $curso->horarios->toArray();
          return response()->json($horarios, 200);
+      }
+   }
+
+   public function showcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   {
+      if ($request->ajax()) {
+         $asignaciones = AsignacionCursoProfesor::where('profesor_id', $profesor->id)->get();
+         $horarios = $curso->horarios()->get();
+         $horariospermitidos = [];
+         foreach ($horarios as $horario) {
+            if ($asignaciones != null || count($asignaciones) > 0) {
+               $agregar = true;
+               foreach ($asignaciones as $asignacion) {
+                  if ($asignacion->id_horario == $horario->id) {
+                     if (
+                        $asignacion->id_grado == $grado->id ||
+                        $asignacion->id_dia == $dia->id ||
+                        $asignacion->id_curso == $curso->id
+                     ) {
+                        array_push(
+                           $horariospermitidos,
+                           [
+                              'id' => $horario->id,
+                              'desde' => $horario->desde,
+                              'hasta' => $horario->hasta,
+                              'selected' => true
+                           ]
+                        );
+                     }
+                     $agregar = false;
+                     break;
+                  }
+               }
+               if ($agregar) {
+                  array_push(
+                     $horariospermitidos,
+                     ['id' => $horario->id, 'desde' => $horario->desde, 'hasta' => $horario->hasta, 'selected' => false]
+                  );
+               }
+            }
+         }
+         return response()->json($horariospermitidos, 200);
       }
    }
 }
