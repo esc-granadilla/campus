@@ -3,9 +3,9 @@
       <div class="alert">
          <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
       </div>
-      <v-flex md6 xs12 offset-md3>
+      <v-flex md8 xs12 offset-md2>
          <v-layout wrap row>
-            <v-flex xs12 pt-2 px-3>
+            <!--<v-flex xs12 pt-2 px-3>
                <v-card fluid class="elevation-12">
                   <v-toolbar dark class="py-1">
                      <v-toolbar-title>Curso</v-toolbar-title>
@@ -75,12 +75,24 @@
                      </v-card-text>
                   </v-flex>
                </v-card>
-            </v-flex>
+            </v-flex>-->
 
             <v-flex xs12 pt-2 px-3>
+               <v-toolbar dark color="green" class="py-1">
+                  <v-spacer></v-spacer>
+                  <v-toolbar-title>Curso</v-toolbar-title>
+                  <v-spacer></v-spacer>
+               </v-toolbar>
                <v-card>
+                  <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
+                  <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
+                  <dialogedit
+                     :dialogEdits="dialogEdit"
+                     :editCurso="curso"
+                     v-on:speak="editarMethod($event)"
+                  ></dialogedit>
                   <v-card-title>
-                     Cursos
+                     <v-spacer></v-spacer>Cursos
                      <v-spacer></v-spacer>
                      <v-text-field
                         v-model="search"
@@ -92,16 +104,40 @@
                   </v-card-title>
                   <v-data-table :headers="headers" :items="cursos" :search="search">
                      <template v-slot:items="props">
-                        <td>{{ props.item.nombre }}</td>
-                        <td class="text-center">{{ props.item.codigo }}</td>
-                        <td class="text-center">{{ props.item.descripcion }}</td>
-                        <td class="text-center">
+                        <td
+                           class="text-xs-left"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >{{ props.item.nombre }}</td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >{{ props.item.codigo }}</td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >{{ props.item.descripcion }}</td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >
                            <v-btn
                               flat
                               small
                               color="primary"
-                              @click="buscar(props.item.id)"
-                           >Seleccionar</v-btn>
+                              @click="buscar(props.item.id),dialogEdit = true"
+                           >Editar</v-btn>
+                        </td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >
+                           <v-btn
+                              flat
+                              small
+                              color="error"
+                              dark
+                              @click.stop="buscar(props.item.id),dialogDelete = true"
+                           >Eliminar</v-btn>
                         </td>
                      </template>
                      <v-alert
@@ -119,11 +155,22 @@
 </template>
 
 <script>
+import dialogcreate from "../Curso/DialogCreate.vue";
+import dialogdelete from "../Curso/DialogDelete.vue";
+import dialogedit from "../Curso/DialogEdit.vue";
+
 export default {
    name: "cursocomponent",
+   components: {
+      dialogcreate,
+      dialogdelete,
+      dialogedit
+   },
    data() {
       return {
          search: "",
+         dialogDelete: false,
+         dialogEdit: false,
          curso: {
             id: null,
             codigo: "",
@@ -142,9 +189,10 @@ export default {
                sortable: false,
                value: "nombre"
             },
-            { text: "Codigo", value: "codigo" },
-            { text: "Descripción", value: "descripcion" },
-            { text: "Seleccione", value: "" }
+            { text: "Codigo", align: "center", value: "codigo" },
+            { text: "Descripción", align: "center", value: "descripcion" },
+            { text: "Editar", align: "center", value: "" },
+            { text: "Eliminar", align: "center", value: "" }
          ],
          rules: {
             required: value => !!value || "Requerido.",
@@ -161,8 +209,9 @@ export default {
             return c.id == id;
          });
       },
-      crear() {
+      crearMethod: function(msg) {
          var self = this;
+         this.curso = msg;
          if (this.curso.nombre != "") {
             axios.post("cursos/", this.curso).then(function(res) {
                self.mensaje = res.data;
@@ -189,6 +238,25 @@ export default {
                   axios.get("/cursos").then(res => (self.cursos = res.data));
                });
          }
+      },
+      borrarMethod: function(msg) {
+         this.dialogDelete = msg.dialogdelete;
+         if (msg.Delete) this.eliminar();
+      },
+      editarMethod: function(msg) {
+         this.dialogEdit = msg.dialogedit;
+         if (msg.Edit) {
+            this.curso = msg.curso;
+            this.editar();
+         } else {
+            this.curso = {
+               id: null,
+               codigo: "",
+               nombre: "",
+               descripcion: "",
+               estado: ""
+            };
+         }
       }
    },
    watch: {
@@ -207,5 +275,8 @@ export default {
    position: absolute;
    z-index: 2;
    right: 0;
+}
+.v-table thead tr:first-child {
+   background-color: black;
 }
 </style>

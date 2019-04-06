@@ -2775,6 +2775,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Curso_DialogCreate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Curso/DialogCreate.vue */ "./resources/assets/js/components/Curso/DialogCreate.vue");
+/* harmony import */ var _Curso_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Curso/DialogDelete.vue */ "./resources/assets/js/components/Curso/DialogDelete.vue");
+/* harmony import */ var _Curso_DialogEdit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Curso/DialogEdit.vue */ "./resources/assets/js/components/Curso/DialogEdit.vue");
 //
 //
 //
@@ -2835,6 +2838,420 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "cursocomponent",
+  components: {
+    dialogcreate: _Curso_DialogCreate_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    dialogdelete: _Curso_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    dialogedit: _Curso_DialogEdit_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      search: "",
+      dialogDelete: false,
+      dialogEdit: false,
+      curso: {
+        id: null,
+        codigo: "",
+        nombre: "",
+        descripcion: "",
+        estado: ""
+      },
+      alert: false,
+      alerttype: "success",
+      cursos: [],
+      mensaje: [],
+      headers: [{
+        text: "Nombre",
+        align: "left",
+        sortable: false,
+        value: "nombre"
+      }, {
+        text: "Codigo",
+        align: "center",
+        value: "codigo"
+      }, {
+        text: "Descripción",
+        align: "center",
+        value: "descripcion"
+      }, {
+        text: "Editar",
+        align: "center",
+        value: ""
+      }, {
+        text: "Eliminar",
+        align: "center",
+        value: ""
+      }],
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        },
+        min: function min(v) {
+          return v.length >= 9 || "Min 9 Caracteres";
+        },
+        min8: function min8(v) {
+          return v.length >= 8 || "Min 8 Caracteres";
+        },
+        max: function max(v) {
+          return v.length >= 50 || "Maximo 50 Caracteres";
+        },
+        mini: function mini(v) {
+          return v.length >= 3 || "Min 3 Caracteres";
+        }
+      }
+    };
+  },
+  methods: {
+    buscar: function buscar(id) {
+      this.curso = this.cursos.find(function (c) {
+        return c.id == id;
+      });
+    },
+    crearMethod: function crearMethod(msg) {
+      var self = this;
+      this.curso = msg;
+
+      if (this.curso.nombre != "") {
+        axios.post("cursos/", this.curso).then(function (res) {
+          self.mensaje = res.data;
+          axios.get("/cursos").then(function (res) {
+            return self.cursos = res.data;
+          });
+        });
+      }
+    },
+    eliminar: function eliminar() {
+      var self = this;
+
+      if (this.curso.id != null) {
+        axios.delete("cursos/" + this.curso.id).then(function (res) {
+          self.mensaje = res.data;
+          axios.get("/cursos").then(function (res) {
+            return self.cursos = res.data;
+          });
+        });
+      }
+    },
+    editar: function editar() {
+      var self = this;
+
+      if (this.curso.id != null) {
+        axios.put("cursos/" + this.curso.id, this.curso).then(function (res) {
+          self.mensaje = res.data;
+          axios.get("/cursos").then(function (res) {
+            return self.cursos = res.data;
+          });
+        });
+      }
+    },
+    borrarMethod: function borrarMethod(msg) {
+      this.dialogDelete = msg.dialogdelete;
+      if (msg.Delete) this.eliminar();
+    },
+    editarMethod: function editarMethod(msg) {
+      this.dialogEdit = msg.dialogedit;
+
+      if (msg.Edit) {
+        this.curso = msg.curso;
+        this.editar();
+      } else {
+        this.curso = {
+          id: null,
+          codigo: "",
+          nombre: "",
+          descripcion: "",
+          estado: ""
+        };
+      }
+    }
+  },
+  watch: {
+    mensaje: function mensaje(val) {
+      this.alert = true;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/cursos").then(function (res) {
+      return _this.cursos = res.data;
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialogCreate: false,
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        },
+        min: function min(v) {
+          return v.length >= 9 || "Min 9 Caracteres";
+        },
+        min8: function min8(v) {
+          return v.length >= 8 || "Min 8 Caracteres";
+        },
+        max: function max(v) {
+          return v.length >= 50 || "Maximo 50 Caracteres";
+        },
+        mini: function mini(v) {
+          return v.length >= 3 || "Min 3 Caracteres";
+        }
+      },
+      curso: {
+        id: null,
+        codigo: "",
+        nombre: "",
+        descripcion: "",
+        estado: ""
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialogdelete: false
+    };
+  },
+  props: ["dialogDeletes"],
+  watch: {
+    dialogDeletes: function dialogDeletes(val) {
+      this.dialogdelete = val;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2896,36 +3313,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "cursocomponent",
   data: function data() {
     return {
-      search: "",
-      curso: {
-        id: null,
-        codigo: "",
-        nombre: "",
-        descripcion: "",
-        estado: ""
-      },
-      alert: false,
-      alerttype: "success",
-      cursos: [],
-      mensaje: [],
-      headers: [{
-        text: "Nombre",
-        align: "left",
-        sortable: false,
-        value: "nombre"
-      }, {
-        text: "Codigo",
-        value: "codigo"
-      }, {
-        text: "Descripción",
-        value: "descripcion"
-      }, {
-        text: "Seleccione",
-        value: ""
-      }],
+      dialogedit: false,
       rules: {
         required: function required(value) {
           return !!value || "Requerido.";
@@ -2942,63 +3332,35 @@ __webpack_require__.r(__webpack_exports__);
         mini: function mini(v) {
           return v.length >= 3 || "Min 3 Caracteres";
         }
+      },
+      curso: {
+        id: null,
+        codigo: "",
+        nombre: "",
+        descripcion: "",
+        estado: ""
+      },
+      cursostock: {
+        id: null,
+        codigo: "",
+        nombre: "",
+        descripcion: "",
+        estado: ""
       }
     };
   },
-  methods: {
-    buscar: function buscar(id) {
-      this.curso = this.cursos.find(function (c) {
-        return c.id == id;
-      });
-    },
-    crear: function crear() {
-      var self = this;
-
-      if (this.curso.nombre != "") {
-        axios.post("cursos/", this.curso).then(function (res) {
-          self.mensaje = res.data;
-          axios.get("/cursos").then(function (res) {
-            return self.cursos = res.data;
-          });
-        });
-      }
-    },
-    eliminar: function eliminar() {
-      var self = this;
-
-      if (this.curso.id != null) {
-        axios.delete("cursos/" + this.curso.id).then(function (res) {
-          self.mensaje = res.data;
-          axios.get("/cursos").then(function (res) {
-            return self.cursos = res.data;
-          });
-        });
-      }
-    },
-    editar: function editar() {
-      var self = this;
-
-      if (this.curso.id != null) {
-        axios.put("cursos/" + this.curso.id, this.curso).then(function (res) {
-          self.mensaje = res.data;
-          axios.get("/cursos").then(function (res) {
-            return self.cursos = res.data;
-          });
-        });
-      }
-    }
-  },
+  props: ["dialogEdits", "editCurso"],
   watch: {
-    mensaje: function mensaje(val) {
-      this.alert = true;
+    dialogEdits: function dialogEdits(val) {
+      this.dialogedit = val;
+    },
+    editCurso: function editCurso(val) {
+      this.curso.id = val.id;
+      this.curso.codigo = val.codigo;
+      this.curso.nombre = val.nombre;
+      this.curso.descripcion = val.descripcion;
+      this.curso.estado = val.estado;
     }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/cursos").then(function (res) {
-      return _this.cursos = res.data;
-    });
   }
 });
 
@@ -3554,10 +3916,184 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialogCreate: false,
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        }
+      },
+      horario: {
+        id: null,
+        desde: null,
+        hasta: null,
+        estado: ""
+      },
+      modal2: false,
+      modal1: false
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialogdelete: false
+    };
+  },
+  props: ["dialogDeletes"],
+  watch: {
+    dialogDeletes: function dialogDeletes(val) {
+      this.dialogdelete = val;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3646,75 +4182,254 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialogedit: false,
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        }
+      },
+      horario: {
+        id: null,
+        desde: null,
+        hasta: null,
+        estado: ""
+      },
+      modal2: false,
+      modal1: false,
+      horariostock: {
+        id: null,
+        desde: null,
+        hasta: null,
+        estado: ""
+      }
+    };
+  },
+  props: ["dialogEdits", "editHorario"],
+  watch: {
+    dialogEdits: function dialogEdits(val) {
+      this.dialogedit = val;
+    },
+    editHorario: function editHorario(val) {
+      this.horario.id = val.id;
+      this.horario.desde = val.desde;
+      this.horario.hasta = val.hasta;
+      this.horario.estado = val.estado;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Horario_DialogCreate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Horario/DialogCreate.vue */ "./resources/assets/js/components/Horario/DialogCreate.vue");
+/* harmony import */ var _Horario_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Horario/DialogDelete.vue */ "./resources/assets/js/components/Horario/DialogDelete.vue");
+/* harmony import */ var _Horario_DialogEdit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Horario/DialogEdit.vue */ "./resources/assets/js/components/Horario/DialogEdit.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    dialogcreate: _Horario_DialogCreate_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    dialogdelete: _Horario_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    dialogedit: _Horario_DialogEdit_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   name: "cursocomponent",
   data: function data() {
     return {
       search: "",
+      dialogDelete: false,
+      dialogEdit: false,
       horario: {
         id: null,
         desde: null,
@@ -3730,15 +4445,19 @@ __webpack_require__.r(__webpack_exports__);
         value: "desde"
       }, {
         text: "Hasta:",
+        align: "center",
         value: "hasta"
       }, {
-        text: "Seleccione",
+        text: "Editar",
+        align: "center",
+        value: ""
+      }, {
+        text: "Eliminar",
+        align: "center",
         value: ""
       }],
       alert: false,
-      alerttype: "success",
-      modal2: false,
-      modal1: false
+      alerttype: "success"
     };
   },
   methods: {
@@ -3747,8 +4466,9 @@ __webpack_require__.r(__webpack_exports__);
         return h.id == id;
       });
     },
-    crear: function crear() {
+    crearMethod: function crearMethod(msg) {
       var self = this;
+      this.horario = msg;
 
       if (this.horario.desde != null) {
         axios.post("horarios/", self.horario).then(function (res) {
@@ -3781,6 +4501,25 @@ __webpack_require__.r(__webpack_exports__);
             return self.horarios = res.data;
           });
         });
+      }
+    },
+    borrarMethod: function borrarMethod(msg) {
+      this.dialogDelete = msg.dialogdelete;
+      if (msg.Delete) this.eliminar();
+    },
+    editarMethod: function editarMethod(msg) {
+      this.dialogEdit = msg.dialogedit;
+
+      if (msg.Edit) {
+        this.horario = msg.horario;
+        this.editar();
+      } else {
+        this.horario = {
+          id: null,
+          desde: null,
+          hasta: null,
+          estado: ""
+        };
       }
     }
   },
@@ -5680,7 +6419,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.alert[data-v-703f366b] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.alert[data-v-703f366b] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n.v-table thead tr[data-v-703f366b]:first-child {\n   background-color: black;\n}\n", ""]);
 
 // exports
 
@@ -26107,7 +26846,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-flex",
-        { attrs: { md6: "", xs12: "", "offset-md3": "" } },
+        { attrs: { md8: "", xs12: "", "offset-md2": "" } },
         [
           _c(
             "v-layout",
@@ -26118,218 +26857,58 @@ var render = function() {
                 { attrs: { xs12: "", "pt-2": "", "px-3": "" } },
                 [
                   _c(
-                    "v-card",
-                    { staticClass: "elevation-12", attrs: { fluid: "" } },
+                    "v-toolbar",
+                    {
+                      staticClass: "py-1",
+                      attrs: { dark: "", color: "green" }
+                    },
                     [
-                      _c(
-                        "v-toolbar",
-                        { staticClass: "py-1", attrs: { dark: "" } },
-                        [
-                          _c("v-toolbar-title", [_vm._v("Curso")]),
-                          _vm._v(" "),
-                          _c("v-spacer")
-                        ],
-                        1
-                      ),
+                      _c("v-spacer"),
                       _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { md10: "", xs12: "", "offset-md1": "" } },
-                        [
-                          _c(
-                            "v-card-text",
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { wrap: "", row: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", md7: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          xs6: "",
-                                          rules: [
-                                            _vm.rules.required,
-                                            _vm.rules.mini
-                                          ],
-                                          counter: "",
-                                          label: "Codigo",
-                                          name: "codigo",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.curso.codigo,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.curso, "codigo", $$v)
-                                          },
-                                          expression: "curso.codigo"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          xs6: "",
-                                          rules: [
-                                            _vm.rules.required,
-                                            _vm.rules.mini
-                                          ],
-                                          counter: "",
-                                          label: "Nombre",
-                                          name: "nombre",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.curso.nombre,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.curso, "nombre", $$v)
-                                          },
-                                          expression: "curso.nombre"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          xs6: "",
-                                          rules: [_vm.rules.mini],
-                                          counter: "",
-                                          label: "Descripción",
-                                          name: "descripcion"
-                                        },
-                                        model: {
-                                          value: _vm.curso.descripcion,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.curso,
-                                              "descripcion",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "curso.descripcion"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", md3: "" } },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            "align-end": "",
-                                            "justify-end": "",
-                                            "fill-height": "",
-                                            wrap: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "green",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.crear }
-                                                },
-                                                [_vm._v("Crear")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "blue",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.editar }
-                                                },
-                                                [_vm._v("Actualizar")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "red",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.eliminar }
-                                                },
-                                                [_vm._v("Eliminar")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
+                      _c("v-toolbar-title", [_vm._v("Curso")]),
+                      _vm._v(" "),
+                      _c("v-spacer")
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", "pt-2": "", "px-3": "" } },
-                [
+                  ),
+                  _vm._v(" "),
                   _c(
                     "v-card",
                     [
+                      _c("dialogcreate", {
+                        on: {
+                          speak: function($event) {
+                            return _vm.crearMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("dialogdelete", {
+                        attrs: { dialogDeletes: _vm.dialogDelete },
+                        on: {
+                          speak: function($event) {
+                            return _vm.borrarMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("dialogedit", {
+                        attrs: {
+                          dialogEdits: _vm.dialogEdit,
+                          editCurso: _vm.curso
+                        },
+                        on: {
+                          speak: function($event) {
+                            return _vm.editarMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
                       _c(
                         "v-card-title",
                         [
-                          _vm._v(
-                            "\n                  Cursos\n                  "
-                          ),
+                          _c("v-spacer"),
+                          _vm._v("Cursos\n                  "),
                           _c("v-spacer"),
                           _vm._v(" "),
                           _c("v-text-field", {
@@ -26364,19 +26943,59 @@ var render = function() {
                               key: "items",
                               fn: function(props) {
                                 return [
-                                  _c("td", [_vm._v(_vm._s(props.item.nombre))]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _vm._v(_vm._s(props.item.codigo))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _vm._v(_vm._s(props.item.descripcion))
-                                  ]),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-left",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(props.item.nombre))]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "td",
-                                    { staticClass: "text-center" },
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(props.item.codigo))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(props.item.descripcion))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
                                     [
                                       _c(
                                         "v-btn",
@@ -26388,11 +27007,47 @@ var render = function() {
                                           },
                                           on: {
                                             click: function($event) {
-                                              return _vm.buscar(props.item.id)
+                                              _vm.buscar(props.item.id),
+                                                (_vm.dialogEdit = true)
                                             }
                                           }
                                         },
-                                        [_vm._v("Seleccionar")]
+                                        [_vm._v("Editar")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            flat: "",
+                                            small: "",
+                                            color: "error",
+                                            dark: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.stopPropagation()
+                                              _vm.buscar(props.item.id),
+                                                (_vm.dialogDelete = true)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
                                       )
                                     ],
                                     1
@@ -26431,6 +27086,494 @@ var render = function() {
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "300px" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g(
+                      {
+                        staticClass: "green lighten-4",
+                        attrs: {
+                          fab: "",
+                          small: "",
+                          absolute: "",
+                          top: "",
+                          left: "",
+                          block: ""
+                        }
+                      },
+                      on
+                    ),
+                    [_vm._v("+")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialogCreate,
+            callback: function($$v) {
+              _vm.dialogCreate = $$v
+            },
+            expression: "dialogCreate"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [_vm._v("Curso Nuevo")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.required, _vm.rules.mini],
+                              counter: "",
+                              label: "*Codigo",
+                              name: "codigo",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.curso.codigo,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "codigo", $$v)
+                              },
+                              expression: "curso.codigo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.required, _vm.rules.mini],
+                              counter: "",
+                              label: "*Nombre",
+                              name: "nombre",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.curso.nombre,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "nombre", $$v)
+                              },
+                              expression: "curso.nombre"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.mini],
+                              counter: "",
+                              label: "Descripción",
+                              name: "descripcion"
+                            },
+                            model: {
+                              value: _vm.curso.descripcion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "descripcion", $$v)
+                              },
+                              expression: "curso.descripcion"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("*Campos requeridos")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogCreate = false
+                        }
+                      }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogCreate = false),
+                            _vm.$emit("speak", _vm.curso)
+                        }
+                      }
+                    },
+                    [_vm._v("Salvar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "290" },
+          model: {
+            value: _vm.dialogdelete,
+            callback: function($$v) {
+              _vm.dialogdelete = $$v
+            },
+            expression: "dialogdelete"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Eliminar curso?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { attrs: { error: "" } },
+                [
+                  _c(
+                    "v-alert",
+                    {
+                      attrs: {
+                        value: true,
+                        color: "error",
+                        icon: "priority_high",
+                        outline: ""
+                      }
+                    },
+                    [_vm._v("Seguro que quieres eliminar este curso.")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "grey darken-3", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: false
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("NO")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red darken-2", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: true
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("SI")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "300px" },
+          model: {
+            value: _vm.dialogedit,
+            callback: function($$v) {
+              _vm.dialogedit = $$v
+            },
+            expression: "dialogedit"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v("Editar Curso")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.required, _vm.rules.mini],
+                              counter: "",
+                              label: "*Codigo",
+                              name: "codigo",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.curso.codigo,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "codigo", $$v)
+                              },
+                              expression: "curso.codigo"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.required, _vm.rules.mini],
+                              counter: "",
+                              label: "*Nombre",
+                              name: "nombre",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.curso.nombre,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "nombre", $$v)
+                              },
+                              expression: "curso.nombre"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              xs12: "",
+                              rules: [_vm.rules.mini],
+                              counter: "",
+                              label: "Descripción",
+                              name: "descripcion"
+                            },
+                            model: {
+                              value: _vm.curso.descripcion,
+                              callback: function($$v) {
+                                _vm.$set(_vm.curso, "descripcion", $$v)
+                              },
+                              expression: "curso.descripcion"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("*Campos requeridos")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogedit = false),
+                            (_vm.curso = _vm.cursostock),
+                            _vm.$emit("speak", {
+                              dialogedit: false,
+                              Edit: false,
+                              curso: _vm.curso
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogedit = false),
+                            _vm.$emit("speak", {
+                              dialogedit: false,
+                              Edit: true,
+                              curso: _vm.curso
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("Salvar")]
                   )
                 ],
                 1
@@ -27325,6 +28468,848 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "300px" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g(
+                      {
+                        staticClass: "green lighten-4",
+                        attrs: {
+                          fab: "",
+                          small: "",
+                          absolute: "",
+                          top: "",
+                          left: "",
+                          block: ""
+                        }
+                      },
+                      on
+                    ),
+                    [_vm._v("+")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialogCreate,
+            callback: function($$v) {
+              _vm.dialogCreate = $$v
+            },
+            expression: "dialogCreate"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [_vm._v("Curso Nuevo")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c(
+                            "v-dialog",
+                            {
+                              ref: "dialog",
+                              attrs: {
+                                "return-value": _vm.horario.desde,
+                                persistent: "",
+                                lazy: "",
+                                "full-width": "",
+                                width: "290px"
+                              },
+                              on: {
+                                "update:returnValue": function($event) {
+                                  return _vm.$set(_vm.horario, "desde", $event)
+                                },
+                                "update:return-value": function($event) {
+                                  return _vm.$set(_vm.horario, "desde", $event)
+                                }
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-text-field",
+                                        _vm._g(
+                                          {
+                                            attrs: {
+                                              label: "*Desde:",
+                                              "prepend-icon": "access_time",
+                                              readonly: "",
+                                              rules: [_vm.rules.required]
+                                            },
+                                            model: {
+                                              value: _vm.horario.desde,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.horario,
+                                                  "desde",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "horario.desde"
+                                            }
+                                          },
+                                          on
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.modal1,
+                                callback: function($$v) {
+                                  _vm.modal1 = $$v
+                                },
+                                expression: "modal1"
+                              }
+                            },
+                            [
+                              _vm._v(" "),
+                              _vm.modal1
+                                ? _c(
+                                    "v-time-picker",
+                                    {
+                                      attrs: { "full-width": "" },
+                                      model: {
+                                        value: _vm.horario.desde,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.horario, "desde", $$v)
+                                        },
+                                        expression: "horario.desde"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.modal1 = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.dialog.save(
+                                                _vm.horario.desde
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-dialog",
+                            {
+                              ref: "dialog1",
+                              attrs: {
+                                "return-value": _vm.horario.hasta,
+                                persistent: "",
+                                lazy: "",
+                                "full-width": "",
+                                width: "290px"
+                              },
+                              on: {
+                                "update:returnValue": function($event) {
+                                  return _vm.$set(_vm.horario, "hasta", $event)
+                                },
+                                "update:return-value": function($event) {
+                                  return _vm.$set(_vm.horario, "hasta", $event)
+                                }
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-text-field",
+                                        _vm._g(
+                                          {
+                                            attrs: {
+                                              label: "*Hasta",
+                                              "prepend-icon": "access_time",
+                                              readonly: "",
+                                              rules: [_vm.rules.required]
+                                            },
+                                            model: {
+                                              value: _vm.horario.hasta,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.horario,
+                                                  "hasta",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "horario.hasta"
+                                            }
+                                          },
+                                          on
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.modal2,
+                                callback: function($$v) {
+                                  _vm.modal2 = $$v
+                                },
+                                expression: "modal2"
+                              }
+                            },
+                            [
+                              _vm._v(" "),
+                              _vm.modal2
+                                ? _c(
+                                    "v-time-picker",
+                                    {
+                                      attrs: { "full-width": "" },
+                                      model: {
+                                        value: _vm.horario.hasta,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.horario, "hasta", $$v)
+                                        },
+                                        expression: "horario.hasta"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.modal2 = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.dialog1.save(
+                                                _vm.horario.hasta
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("*Campos requeridos")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogCreate = false
+                        }
+                      }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogCreate = false),
+                            _vm.$emit("speak", _vm.horario)
+                        }
+                      }
+                    },
+                    [_vm._v("Salvar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "290" },
+          model: {
+            value: _vm.dialogdelete,
+            callback: function($$v) {
+              _vm.dialogdelete = $$v
+            },
+            expression: "dialogdelete"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Eliminar horario?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { attrs: { error: "" } },
+                [
+                  _c(
+                    "v-alert",
+                    {
+                      attrs: {
+                        value: true,
+                        color: "error",
+                        icon: "priority_high",
+                        outline: ""
+                      }
+                    },
+                    [_vm._v("Seguro que quieres eliminar este Horario.")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "grey darken-3", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: false
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("NO")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red darken-2", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: true
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("SI")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "300px" },
+          model: {
+            value: _vm.dialogedit,
+            callback: function($$v) {
+              _vm.dialogedit = $$v
+            },
+            expression: "dialogedit"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v("Editar Horario")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c(
+                            "v-dialog",
+                            {
+                              ref: "dialog",
+                              attrs: {
+                                "return-value": _vm.horario.desde,
+                                persistent: "",
+                                lazy: "",
+                                "full-width": "",
+                                width: "290px"
+                              },
+                              on: {
+                                "update:returnValue": function($event) {
+                                  return _vm.$set(_vm.horario, "desde", $event)
+                                },
+                                "update:return-value": function($event) {
+                                  return _vm.$set(_vm.horario, "desde", $event)
+                                }
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-text-field",
+                                        _vm._g(
+                                          {
+                                            attrs: {
+                                              label: "*Desde:",
+                                              "prepend-icon": "access_time",
+                                              readonly: "",
+                                              rules: [_vm.rules.required]
+                                            },
+                                            model: {
+                                              value: _vm.horario.desde,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.horario,
+                                                  "desde",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "horario.desde"
+                                            }
+                                          },
+                                          on
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.modal1,
+                                callback: function($$v) {
+                                  _vm.modal1 = $$v
+                                },
+                                expression: "modal1"
+                              }
+                            },
+                            [
+                              _vm._v(" "),
+                              _vm.modal1
+                                ? _c(
+                                    "v-time-picker",
+                                    {
+                                      attrs: { "full-width": "" },
+                                      model: {
+                                        value: _vm.horario.desde,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.horario, "desde", $$v)
+                                        },
+                                        expression: "horario.desde"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.modal1 = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.dialog.save(
+                                                _vm.horario.desde
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-dialog",
+                            {
+                              ref: "dialog1",
+                              attrs: {
+                                "return-value": _vm.horario.hasta,
+                                persistent: "",
+                                lazy: "",
+                                "full-width": "",
+                                width: "290px"
+                              },
+                              on: {
+                                "update:returnValue": function($event) {
+                                  return _vm.$set(_vm.horario, "hasta", $event)
+                                },
+                                "update:return-value": function($event) {
+                                  return _vm.$set(_vm.horario, "hasta", $event)
+                                }
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-text-field",
+                                        _vm._g(
+                                          {
+                                            attrs: {
+                                              label: "*Hasta",
+                                              "prepend-icon": "access_time",
+                                              readonly: "",
+                                              rules: [_vm.rules.required]
+                                            },
+                                            model: {
+                                              value: _vm.horario.hasta,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.horario,
+                                                  "hasta",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "horario.hasta"
+                                            }
+                                          },
+                                          on
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.modal2,
+                                callback: function($$v) {
+                                  _vm.modal2 = $$v
+                                },
+                                expression: "modal2"
+                              }
+                            },
+                            [
+                              _vm._v(" "),
+                              _vm.modal2
+                                ? _c(
+                                    "v-time-picker",
+                                    {
+                                      attrs: { "full-width": "" },
+                                      model: {
+                                        value: _vm.horario.hasta,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.horario, "hasta", $$v)
+                                        },
+                                        expression: "horario.hasta"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.modal2 = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.dialog1.save(
+                                                _vm.horario.hasta
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("*Campos requeridos")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogedit = false),
+                            (_vm.horario = _vm.horariostock),
+                            _vm.$emit("speak", {
+                              dialogedit: false,
+                              Edit: false,
+                              horario: _vm.horario
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogedit = false),
+                            _vm.$emit("speak", {
+                              dialogedit: false,
+                              Edit: true,
+                              horario: _vm.horario
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("Salvar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=template&id=87b5cdc2&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Horario/HorarioComponent.vue?vue&type=template&id=87b5cdc2&scoped=true& ***!
@@ -27367,7 +29352,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-flex",
-        { attrs: { md6: "", xs12: "", "offset-md3": "" } },
+        { attrs: { md8: "", xs12: "", "offset-md2": "" } },
         [
           _c(
             "v-layout",
@@ -27378,445 +29363,58 @@ var render = function() {
                 { attrs: { xs12: "", "pt-2": "", "px-3": "" } },
                 [
                   _c(
-                    "v-card",
-                    { staticClass: "elevation-12", attrs: { fluid: "" } },
+                    "v-toolbar",
+                    {
+                      staticClass: "py-1",
+                      attrs: { dark: "", color: "green" }
+                    },
                     [
-                      _c(
-                        "v-toolbar",
-                        { staticClass: "py-1", attrs: { dark: "" } },
-                        [
-                          _c("v-toolbar-title", [_vm._v("Horario")]),
-                          _vm._v(" "),
-                          _c("v-spacer")
-                        ],
-                        1
-                      ),
+                      _c("v-spacer"),
                       _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { md10: "", xs12: "", "offset-md1": "" } },
-                        [
-                          _c(
-                            "v-card-text",
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { wrap: "", row: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", md7: "" } },
-                                    [
-                                      _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "dialog",
-                                          attrs: {
-                                            "return-value": _vm.horario.desde,
-                                            persistent: "",
-                                            lazy: "",
-                                            "full-width": "",
-                                            width: "290px"
-                                          },
-                                          on: {
-                                            "update:returnValue": function(
-                                              $event
-                                            ) {
-                                              return _vm.$set(
-                                                _vm.horario,
-                                                "desde",
-                                                $event
-                                              )
-                                            },
-                                            "update:return-value": function(
-                                              $event
-                                            ) {
-                                              return _vm.$set(
-                                                _vm.horario,
-                                                "desde",
-                                                $event
-                                              )
-                                            }
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function(ref) {
-                                                var on = ref.on
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      {
-                                                        attrs: {
-                                                          label: "Desde:",
-                                                          "prepend-icon":
-                                                            "access_time",
-                                                          readonly: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.horario.desde,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.horario,
-                                                              "desde",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "horario.desde"
-                                                        }
-                                                      },
-                                                      on
-                                                    )
-                                                  )
-                                                ]
-                                              }
-                                            }
-                                          ]),
-                                          model: {
-                                            value: _vm.modal1,
-                                            callback: function($$v) {
-                                              _vm.modal1 = $$v
-                                            },
-                                            expression: "modal1"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(" "),
-                                          _vm.modal1
-                                            ? _c(
-                                                "v-time-picker",
-                                                {
-                                                  attrs: { "full-width": "" },
-                                                  model: {
-                                                    value: _vm.horario.desde,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.horario,
-                                                        "desde",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression: "horario.desde"
-                                                  }
-                                                },
-                                                [
-                                                  _c("v-spacer"),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      attrs: {
-                                                        flat: "",
-                                                        color: "primary"
-                                                      },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          _vm.modal1 = false
-                                                        }
-                                                      }
-                                                    },
-                                                    [_vm._v("Cancel")]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      attrs: {
-                                                        flat: "",
-                                                        color: "primary"
-                                                      },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.$refs.dialog.save(
-                                                            _vm.horario.desde
-                                                          )
-                                                        }
-                                                      }
-                                                    },
-                                                    [_vm._v("OK")]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            : _vm._e()
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-dialog",
-                                        {
-                                          ref: "dialog1",
-                                          attrs: {
-                                            "return-value": _vm.horario.hasta,
-                                            persistent: "",
-                                            lazy: "",
-                                            "full-width": "",
-                                            width: "290px"
-                                          },
-                                          on: {
-                                            "update:returnValue": function(
-                                              $event
-                                            ) {
-                                              return _vm.$set(
-                                                _vm.horario,
-                                                "hasta",
-                                                $event
-                                              )
-                                            },
-                                            "update:return-value": function(
-                                              $event
-                                            ) {
-                                              return _vm.$set(
-                                                _vm.horario,
-                                                "hasta",
-                                                $event
-                                              )
-                                            }
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "activator",
-                                              fn: function(ref) {
-                                                var on = ref.on
-                                                return [
-                                                  _c(
-                                                    "v-text-field",
-                                                    _vm._g(
-                                                      {
-                                                        attrs: {
-                                                          label: "Hasta",
-                                                          "prepend-icon":
-                                                            "access_time",
-                                                          readonly: ""
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.horario.hasta,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.horario,
-                                                              "hasta",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "horario.hasta"
-                                                        }
-                                                      },
-                                                      on
-                                                    )
-                                                  )
-                                                ]
-                                              }
-                                            }
-                                          ]),
-                                          model: {
-                                            value: _vm.modal2,
-                                            callback: function($$v) {
-                                              _vm.modal2 = $$v
-                                            },
-                                            expression: "modal2"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(" "),
-                                          _vm.modal2
-                                            ? _c(
-                                                "v-time-picker",
-                                                {
-                                                  attrs: { "full-width": "" },
-                                                  model: {
-                                                    value: _vm.horario.hasta,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.horario,
-                                                        "hasta",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression: "horario.hasta"
-                                                  }
-                                                },
-                                                [
-                                                  _c("v-spacer"),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      attrs: {
-                                                        flat: "",
-                                                        color: "primary"
-                                                      },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          _vm.modal2 = false
-                                                        }
-                                                      }
-                                                    },
-                                                    [_vm._v("Cancel")]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      attrs: {
-                                                        flat: "",
-                                                        color: "primary"
-                                                      },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.$refs.dialog1.save(
-                                                            _vm.horario.hasta
-                                                          )
-                                                        }
-                                                      }
-                                                    },
-                                                    [_vm._v("OK")]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            : _vm._e()
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", md3: "" } },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        {
-                                          attrs: {
-                                            "align-end": "",
-                                            "justify-end": "",
-                                            "fill-height": "",
-                                            wrap: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "green",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.crear }
-                                                },
-                                                [_vm._v("Crear")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "blue",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.editar }
-                                                },
-                                                [_vm._v("Actualizar")]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs3: "", md12: "" } },
-                                            [
-                                              _c(
-                                                "v-btn",
-                                                {
-                                                  attrs: {
-                                                    round: "",
-                                                    dark: "",
-                                                    flat: "",
-                                                    color: "red",
-                                                    block: ""
-                                                  },
-                                                  on: { click: _vm.eliminar }
-                                                },
-                                                [_vm._v("Eliminar")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
+                      _c("v-toolbar-title", [_vm._v("Horario")]),
+                      _vm._v(" "),
+                      _c("v-spacer")
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", "pt-2": "", "px-3": "" } },
-                [
+                  ),
+                  _vm._v(" "),
                   _c(
                     "v-card",
                     [
+                      _c("dialogcreate", {
+                        on: {
+                          speak: function($event) {
+                            return _vm.crearMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("dialogdelete", {
+                        attrs: { dialogDeletes: _vm.dialogDelete },
+                        on: {
+                          speak: function($event) {
+                            return _vm.borrarMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("dialogedit", {
+                        attrs: {
+                          dialogEdits: _vm.dialogEdit,
+                          editHorario: _vm.horario
+                        },
+                        on: {
+                          speak: function($event) {
+                            return _vm.editarMethod($event)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
                       _c(
                         "v-card-title",
                         [
-                          _vm._v(
-                            "\n                  Horarios\n                  "
-                          ),
+                          _c("v-spacer"),
+                          _vm._v("Horarios\n                  "),
                           _c("v-spacer"),
                           _vm._v(" "),
                           _c("v-text-field", {
@@ -27851,15 +29449,45 @@ var render = function() {
                               key: "items",
                               fn: function(props) {
                                 return [
-                                  _c("td", [_vm._v(_vm._s(props.item.desde))]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _vm._v(_vm._s(props.item.hasta))
-                                  ]),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-left",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(props.item.desde))]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "td",
-                                    { staticClass: "text-center" },
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(props.item.hasta))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
                                     [
                                       _c(
                                         "v-btn",
@@ -27871,11 +29499,47 @@ var render = function() {
                                           },
                                           on: {
                                             click: function($event) {
-                                              return _vm.buscar(props.item.id)
+                                              _vm.buscar(props.item.id),
+                                                (_vm.dialogEdit = true)
                                             }
                                           }
                                         },
-                                        [_vm._v("Seleccionar")]
+                                        [_vm._v("Editar")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass: "text-xs-center",
+                                      style: {
+                                        backgroundColor:
+                                          props.index % 2 == 0
+                                            ? "#c8e6c9"
+                                            : "white"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            flat: "",
+                                            small: "",
+                                            color: "error",
+                                            dark: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.stopPropagation()
+                                              _vm.buscar(props.item.id),
+                                                (_vm.dialogDelete = true)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
                                       )
                                     ],
                                     1
@@ -71698,6 +73362,213 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Curso/DialogCreate.vue":
+/*!***************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogCreate.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true& */ "./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true&");
+/* harmony import */ var _DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogCreate.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6bc2720e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Curso/DialogCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogCreate.vue?vue&type=template&id=6bc2720e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_6bc2720e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogDelete.vue":
+/*!***************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogDelete.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=template&id=f9593186& */ "./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186&");
+/* harmony import */ var _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Curso/DialogDelete.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=template&id=f9593186& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogDelete.vue?vue&type=template&id=f9593186&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_f9593186___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogEdit.vue":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogEdit.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true& */ "./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true&");
+/* harmony import */ var _DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogEdit.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "9b6842c8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Curso/DialogEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Curso/DialogEdit.vue?vue&type=template&id=9b6842c8&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9b6842c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Estudiantes/BorrarComponent.vue":
 /*!************************************************************************!*\
   !*** ./resources/assets/js/components/Estudiantes/BorrarComponent.vue ***!
@@ -72110,6 +73981,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_a1e93352_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_a1e93352_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogCreate.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogCreate.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true& */ "./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true&");
+/* harmony import */ var _DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogCreate.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "71fd63c8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Horario/DialogCreate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogCreate.vue?vue&type=template&id=71fd63c8&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogCreate_vue_vue_type_template_id_71fd63c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogDelete.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogDelete.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=template&id=ece34e12& */ "./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12&");
+/* harmony import */ var _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Horario/DialogDelete.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12&":
+/*!************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=template&id=ece34e12& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogDelete.vue?vue&type=template&id=ece34e12&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_ece34e12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogEdit.vue":
+/*!***************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogEdit.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true& */ "./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true&");
+/* harmony import */ var _DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogEdit.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "9fa81254",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Horario/DialogEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Horario/DialogEdit.vue?vue&type=template&id=9fa81254&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogEdit_vue_vue_type_template_id_9fa81254_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

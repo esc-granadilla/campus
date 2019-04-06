@@ -3,9 +3,9 @@
       <div class="alert">
          <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
       </div>
-      <v-flex md6 xs12 offset-md3>
+      <v-flex md8 xs12 offset-md2>
          <v-layout wrap row>
-            <v-flex xs12 pt-2 px-3>
+            <!--<v-flex xs12 pt-2 px-3>
                <v-card fluid class="elevation-12">
                   <v-toolbar dark class="py-1">
                      <v-toolbar-title>Horario</v-toolbar-title>
@@ -104,11 +104,23 @@
                      </v-card-text>
                   </v-flex>
                </v-card>
-            </v-flex>
+            </v-flex>-->
             <v-flex xs12 pt-2 px-3>
+               <v-toolbar dark color="green" class="py-1">
+                  <v-spacer></v-spacer>
+                  <v-toolbar-title>Horario</v-toolbar-title>
+                  <v-spacer></v-spacer>
+               </v-toolbar>
                <v-card>
+                  <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
+                  <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
+                  <dialogedit
+                     :dialogEdits="dialogEdit"
+                     :editHorario="horario"
+                     v-on:speak="editarMethod($event)"
+                  ></dialogedit>
                   <v-card-title>
-                     Horarios
+                     <v-spacer></v-spacer>Horarios
                      <v-spacer></v-spacer>
                      <v-text-field
                         v-model="search"
@@ -120,15 +132,36 @@
                   </v-card-title>
                   <v-data-table :headers="headers" :items="horarios" :search="search">
                      <template v-slot:items="props">
-                        <td>{{ props.item.desde }}</td>
-                        <td class="text-center">{{ props.item.hasta }}</td>
-                        <td class="text-center">
+                        <td
+                           class="text-xs-left"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >{{ props.item.desde }}</td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >{{ props.item.hasta }}</td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >
                            <v-btn
                               flat
                               small
                               color="primary"
-                              @click="buscar(props.item.id)"
-                           >Seleccionar</v-btn>
+                              @click="buscar(props.item.id),dialogEdit = true"
+                           >Editar</v-btn>
+                        </td>
+                        <td
+                           class="text-xs-center"
+                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                        >
+                           <v-btn
+                              flat
+                              small
+                              color="error"
+                              dark
+                              @click.stop="buscar(props.item.id),dialogDelete = true"
+                           >Eliminar</v-btn>
                         </td>
                      </template>
                      <v-alert
@@ -146,11 +179,22 @@
 </template>
 
 <script>
+import dialogcreate from "../Horario/DialogCreate.vue";
+import dialogdelete from "../Horario/DialogDelete.vue";
+import dialogedit from "../Horario/DialogEdit.vue";
+
 export default {
+   components: {
+      dialogcreate,
+      dialogdelete,
+      dialogedit
+   },
    name: "cursocomponent",
    data() {
       return {
          search: "",
+         dialogDelete: false,
+         dialogEdit: false,
          horario: {
             id: null,
             desde: null,
@@ -166,13 +210,12 @@ export default {
                sortable: false,
                value: "desde"
             },
-            { text: "Hasta:", value: "hasta" },
-            { text: "Seleccione", value: "" }
+            { text: "Hasta:", align: "center", value: "hasta" },
+            { text: "Editar", align: "center", value: "" },
+            { text: "Eliminar", align: "center", value: "" }
          ],
          alert: false,
-         alerttype: "success",
-         modal2: false,
-         modal1: false
+         alerttype: "success"
       };
    },
    methods: {
@@ -181,8 +224,9 @@ export default {
             return h.id == id;
          });
       },
-      crear() {
+      crearMethod: function(msg) {
          var self = this;
+         this.horario = msg;
          if (this.horario.desde != null) {
             axios.post("horarios/", self.horario).then(function(res) {
                self.mensaje = res.data;
@@ -210,6 +254,24 @@ export default {
                      .get("/horarios")
                      .then(res => (self.horarios = res.data));
                });
+         }
+      },
+      borrarMethod: function(msg) {
+         this.dialogDelete = msg.dialogdelete;
+         if (msg.Delete) this.eliminar();
+      },
+      editarMethod: function(msg) {
+         this.dialogEdit = msg.dialogedit;
+         if (msg.Edit) {
+            this.horario = msg.horario;
+            this.editar();
+         } else {
+            this.horario = {
+               id: null,
+               desde: null,
+               hasta: null,
+               estado: ""
+            };
          }
       }
    },
