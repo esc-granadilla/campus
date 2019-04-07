@@ -55,3 +55,13 @@ Route::get(
    '/showcursosprofesors/{grado}',
    'AdministracionController@showcursosprofesors'
 )->name('showcursosprofesors');
+
+Route::get(
+   '/showprofesorscurso/{curso}/{grado}',
+   'AdministracionController@showprofesorscurso'
+)->name('showprofesorscurso');
+
+Route::get(
+   '/showhorarioscurso/{profesor}/{curso}/{grado}',
+   'AdministracionController@showhorarioscurso'
+)->name('showhorarioscurso');

@@ -205,7 +205,7 @@ class AdministracionController extends Controller
             $valido = false;
             $horarios = [];
             foreach ($cursosid as $cursosi) {
-               $horario = Horario::find($cursosi->id_horario);
+               $horario = Horario::find($cursosi->horario_id);
                if ($horario->estado == 1) {
                   $valido = true;
                   array_push($horarios, $horario);

@@ -2364,7 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
 
       self.cursos = self.cursostock = cursos;
     });
-    axios.get("/showcursosprofesors/1").then(function (res) {
+    axios.get("/showhorarioscurso/3/1/1").then(function (res) {
       return _this2.resultados = res.data;
     });
   }

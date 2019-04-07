@@ -419,7 +419,7 @@ export default {
          self.cursos = self.cursostock = cursos;
       });
       axios
-         .get("/showcursosprofesors/1")
+         .get("/showhorarioscurso/3/1/1")
          .then(res => (this.resultados = res.data));
    }
 };
