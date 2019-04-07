@@ -1,56 +1,46 @@
 <template>
    <div class="box1">
-      <ul class="bubble-boxes mt-5">
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-      </ul>
       <v-layout justify-center>
          <v-flex xs12 sm8 md4>
-            <v-card fluid class="elevation-12">
+            <v-card fluid class="elevation-1">
                <v-toolbar dark class="py-3">
                   <v-toolbar-title>Ingreso al sistema</v-toolbar-title>
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-card-text class="pb-0">
-                  <!--<v-form>-->
-                  <v-text-field
-                     prepend-icon="email"
-                     name="email"
-                     label="Correo Electrónico"
-                     type="text"
-                     v-model="email"
-                     :rules="emailRules"
-                  ></v-text-field>
-                  <v-text-field
-                     v-model="password"
-                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                     :rules="[rules.required, rules.min]"
-                     :type="show1 ? 'text' : 'password'"
-                     name="password"
-                     label="Contraseña"
-                     hint="At least 8 characters"
-                     prepend-icon="lock"
-                     counter
-                     @click:append="show1 = !show1"
-                  ></v-text-field>
-                  <v-switch class="center" v-model="switch1" label="Recordarme" name="remember"></v-switch>
-                  <!--</v-form>-->
+                  <v-layout row wrap align-center justify-center>
+                     <v-flex xs12 md6 lg12>
+                        <v-text-field
+                           prepend-icon="email"
+                           name="email"
+                           label="Correo Electrónico"
+                           type="text"
+                           v-model="email"
+                           :rules="emailRules">
+                        </v-text-field>
+                     </v-flex>
+                     <v-flex xs12 md6 lg12>
+                        <v-text-field
+                           v-model="password"
+                           :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                           :rules="[rules.required, rules.min]"
+                           :type="show1 ? 'text' : 'password'"
+                           name="password"
+                           label="Contraseña"
+                           hint="At least 8 characters"
+                           prepend-icon="lock"
+                           counter
+                           @click:append="show1 = !show1">
+                        </v-text-field>
+                     </v-flex>
+                  </v-layout>
                </v-card-text>
                <v-card-actions>
-                  <!--<v-btn color="teal" @click="sendLoginRequest" block dark>Ingresar</v-btn>-->
-                  <v-btn round dark color="green" block type="submit">Ingresar</v-btn>
-                  <v-spacer></v-spacer>
-                  <p style="font-size:12pt;">
-                     <a href="/password/reset">Recuperar contraseña</a>
-                  </p>
+                  <v-layout align-center justify-left>
+                     <v-btn dark color="green" round flat  type="submit">Ingresar</v-btn> 
+                     <v-checkbox height="10" color="dark" class="center" v-model="remember" label="Recuerdame" name="remember"></v-checkbox> 
+                     <v-btn dark color="indigo"  round flat href="/password/reset" >Recuperar Contraseña</v-btn>
+                  </v-layout>
                </v-card-actions>
             </v-card>
          </v-flex>
@@ -59,17 +49,16 @@
 </template>
 
 <script>
-//const axios = require("axios");
 export default {
    data() {
       return {
          show1: false,
          email: "",
          password: "",
-         switch1: true,
+         remember: true,
          rules: {
-            required: value => !!value || "Requerido.",
-            min: v => v.length >= 8 || "Min 8 caracteres"
+            required: value => !!value || "La contraseña es requerida",
+            min: v => v.length >= 8 || "Minimo 8 caracteres"
          },
          emailRules: [
             v => !!v || "E-mail es requerido",
@@ -77,7 +66,6 @@ export default {
          ]
       };
    },
-   methods: {}
 };
 </script>
 

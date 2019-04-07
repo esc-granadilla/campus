@@ -86,201 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@fortawesome/fontawesome-free/css/all.css":
-/*!****************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/css/all.css ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../css-loader??ref--5-1!../../../postcss-loader/src??ref--5-2!./all.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@fortawesome/fontawesome-free/css/all.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.eot":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.eot ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?d9d17590c975aad1be0ddab673f9c769";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.svg":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.svg ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?80533988ff5fecd5be26557d08ce8237";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?c39278f7abfc798a241551194f55e29f";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?b90365bccdabd68c6c03902b4b141f09";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2 ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?4b115e1153a9ea339d6a0bb284cc8ed3";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.eot":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.eot ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?414ff5daad323a1c47c5177d4bd29674";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.svg":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.svg ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?e7e957c87c454bccaa3bf9fdaa6874f8";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?f6c6f6c8cb7784254ad00056f6fbd74e";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?5dd3976cb5d61e2e561f2a46b916f377";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2 ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?65779ebcc35604a25c2ba77309c5b8af";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?b5596f4d339f99e3d69bc41be78db962";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.svg":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.svg ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?82905d8d1c06969df11c8c378e9bdd4c";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?b70cea0339374107969eb53e5b1f603f";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?61969d433bf265b9717a6c357a1e04e4";
-
-/***/ }),
-
-/***/ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2 ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?462806316fea535a6a57651bc2b000b0";
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -5438,16 +5243,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["name"],
   data: function data() {
     return {
       drawer: true,
@@ -5468,6 +5265,7 @@ __webpack_require__.r(__webpack_exports__);
         icon: "alarm",
         ruta: "horario"
       }],
+      noticias: [["Crear", "add", "noticias/create"], ["Actualizar", "update", "noticias/editar"], ["Eliminar", "delete", "noticias/eliminar"]],
       empleados: [["Crear", "add", "profesors/create"], ["Mostrar", "insert_drive_file", "profesors/mostrar"], ["Actualizar", "update", "profesors/editar"], ["Eliminar", "delete", "profesors/eliminar"]],
       estudiantes: [["Mostrar", "insert_drive_file", "estudiantes/mostrar"], ["Actualizar", "update", "estudiantes/editar"], ["Eliminar", "delete", "estudiantes/eliminar"]],
       asignaciones: [["Cursos Horarios", "swap_horizontal_circle", "curso/horario"], ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"], ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]],
@@ -5482,8 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
         this.mostar = ruta;
       } else location.href = ruta;
     }
-  },
-  props: ["name"]
+  }
 });
 
 /***/ }),
@@ -5571,7 +5368,7 @@ __webpack_require__.r(__webpack_exports__);
         title: "Home",
         ruta: "/"
       }, {
-        title: "Registarce",
+        title: "Registrarse",
         ruta: "/register"
       }, {
         title: "Ingresar",
@@ -5761,30 +5558,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//const axios = require("axios");
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       show1: false,
       email: "",
       password: "",
-      switch1: true,
+      remember: true,
       rules: {
         required: function required(value) {
-          return !!value || "Requerido.";
+          return !!value || "La contraseña es requerida";
         },
         min: function min(v) {
-          return v.length >= 8 || "Min 8 caracteres";
+          return v.length >= 8 || "Minimo 8 caracteres";
         }
       },
       emailRules: [function (v) {
@@ -5793,8 +5579,7 @@ __webpack_require__.r(__webpack_exports__);
         return /.+@.+/.test(v) || "E-mail debe ser valido";
       }]
     };
-  },
-  methods: {}
+  }
 });
 
 /***/ }),
@@ -6322,26 +6107,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/@fortawesome/fontawesome-free/css/all.css":
-/*!************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/@fortawesome/fontawesome-free/css/all.css ***!
-  \************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__(/*! ../../../css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
-exports = module.exports = __webpack_require__(/*! ../../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".fa,\n.fas,\n.far,\n.fal,\n.fab {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  display: inline-block;\n  font-style: normal;\n  font-variant: normal;\n  text-rendering: auto;\n  line-height: 1; }\n\n.fa-lg {\n  font-size: 1.33333em;\n  line-height: 0.75em;\n  vertical-align: -.0667em; }\n\n.fa-xs {\n  font-size: .75em; }\n\n.fa-sm {\n  font-size: .875em; }\n\n.fa-1x {\n  font-size: 1em; }\n\n.fa-2x {\n  font-size: 2em; }\n\n.fa-3x {\n  font-size: 3em; }\n\n.fa-4x {\n  font-size: 4em; }\n\n.fa-5x {\n  font-size: 5em; }\n\n.fa-6x {\n  font-size: 6em; }\n\n.fa-7x {\n  font-size: 7em; }\n\n.fa-8x {\n  font-size: 8em; }\n\n.fa-9x {\n  font-size: 9em; }\n\n.fa-10x {\n  font-size: 10em; }\n\n.fa-fw {\n  text-align: center;\n  width: 1.25em; }\n\n.fa-ul {\n  list-style-type: none;\n  margin-left: 2.5em;\n  padding-left: 0; }\n  .fa-ul > li {\n    position: relative; }\n\n.fa-li {\n  left: -2em;\n  position: absolute;\n  text-align: center;\n  width: 2em;\n  line-height: inherit; }\n\n.fa-border {\n  border: solid 0.08em #eee;\n  border-radius: .1em;\n  padding: .2em .25em .15em; }\n\n.fa-pull-left {\n  float: left; }\n\n.fa-pull-right {\n  float: right; }\n\n.fa.fa-pull-left,\n.fas.fa-pull-left,\n.far.fa-pull-left,\n.fal.fa-pull-left,\n.fab.fa-pull-left {\n  margin-right: .3em; }\n\n.fa.fa-pull-right,\n.fas.fa-pull-right,\n.far.fa-pull-right,\n.fal.fa-pull-right,\n.fab.fa-pull-right {\n  margin-left: .3em; }\n\n.fa-spin {\n  -webkit-animation: fa-spin 2s infinite linear;\n          animation: fa-spin 2s infinite linear; }\n\n.fa-pulse {\n  -webkit-animation: fa-spin 1s infinite steps(8);\n          animation: fa-spin 1s infinite steps(8); }\n\n@-webkit-keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@keyframes fa-spin {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n.fa-rotate-90 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)\";\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg); }\n\n.fa-rotate-180 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)\";\n  -webkit-transform: rotate(180deg);\n          transform: rotate(180deg); }\n\n.fa-rotate-270 {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)\";\n  -webkit-transform: rotate(270deg);\n          transform: rotate(270deg); }\n\n.fa-flip-horizontal {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)\";\n  -webkit-transform: scale(-1, 1);\n          transform: scale(-1, 1); }\n\n.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(1, -1);\n          transform: scale(1, -1); }\n\n.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {\n  -ms-filter: \"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)\";\n  -webkit-transform: scale(-1, -1);\n          transform: scale(-1, -1); }\n\n:root .fa-rotate-90,\n:root .fa-rotate-180,\n:root .fa-rotate-270,\n:root .fa-flip-horizontal,\n:root .fa-flip-vertical,\n:root .fa-flip-both {\n  -webkit-filter: none;\n          filter: none; }\n\n.fa-stack {\n  display: inline-block;\n  height: 2em;\n  line-height: 2em;\n  position: relative;\n  vertical-align: middle;\n  width: 2.5em; }\n\n.fa-stack-1x,\n.fa-stack-2x {\n  left: 0;\n  position: absolute;\n  text-align: center;\n  width: 100%; }\n\n.fa-stack-1x {\n  line-height: inherit; }\n\n.fa-stack-2x {\n  font-size: 2em; }\n\n.fa-inverse {\n  color: #fff; }\n\n/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\nreaders do not read off random characters that represent icons */\n.fa-500px:before {\n  content: \"\\F26E\"; }\n\n.fa-accessible-icon:before {\n  content: \"\\F368\"; }\n\n.fa-accusoft:before {\n  content: \"\\F369\"; }\n\n.fa-acquisitions-incorporated:before {\n  content: \"\\F6AF\"; }\n\n.fa-ad:before {\n  content: \"\\F641\"; }\n\n.fa-address-book:before {\n  content: \"\\F2B9\"; }\n\n.fa-address-card:before {\n  content: \"\\F2BB\"; }\n\n.fa-adjust:before {\n  content: \"\\F042\"; }\n\n.fa-adn:before {\n  content: \"\\F170\"; }\n\n.fa-adobe:before {\n  content: \"\\F778\"; }\n\n.fa-adversal:before {\n  content: \"\\F36A\"; }\n\n.fa-affiliatetheme:before {\n  content: \"\\F36B\"; }\n\n.fa-air-freshener:before {\n  content: \"\\F5D0\"; }\n\n.fa-algolia:before {\n  content: \"\\F36C\"; }\n\n.fa-align-center:before {\n  content: \"\\F037\"; }\n\n.fa-align-justify:before {\n  content: \"\\F039\"; }\n\n.fa-align-left:before {\n  content: \"\\F036\"; }\n\n.fa-align-right:before {\n  content: \"\\F038\"; }\n\n.fa-alipay:before {\n  content: \"\\F642\"; }\n\n.fa-allergies:before {\n  content: \"\\F461\"; }\n\n.fa-amazon:before {\n  content: \"\\F270\"; }\n\n.fa-amazon-pay:before {\n  content: \"\\F42C\"; }\n\n.fa-ambulance:before {\n  content: \"\\F0F9\"; }\n\n.fa-american-sign-language-interpreting:before {\n  content: \"\\F2A3\"; }\n\n.fa-amilia:before {\n  content: \"\\F36D\"; }\n\n.fa-anchor:before {\n  content: \"\\F13D\"; }\n\n.fa-android:before {\n  content: \"\\F17B\"; }\n\n.fa-angellist:before {\n  content: \"\\F209\"; }\n\n.fa-angle-double-down:before {\n  content: \"\\F103\"; }\n\n.fa-angle-double-left:before {\n  content: \"\\F100\"; }\n\n.fa-angle-double-right:before {\n  content: \"\\F101\"; }\n\n.fa-angle-double-up:before {\n  content: \"\\F102\"; }\n\n.fa-angle-down:before {\n  content: \"\\F107\"; }\n\n.fa-angle-left:before {\n  content: \"\\F104\"; }\n\n.fa-angle-right:before {\n  content: \"\\F105\"; }\n\n.fa-angle-up:before {\n  content: \"\\F106\"; }\n\n.fa-angry:before {\n  content: \"\\F556\"; }\n\n.fa-angrycreative:before {\n  content: \"\\F36E\"; }\n\n.fa-angular:before {\n  content: \"\\F420\"; }\n\n.fa-ankh:before {\n  content: \"\\F644\"; }\n\n.fa-app-store:before {\n  content: \"\\F36F\"; }\n\n.fa-app-store-ios:before {\n  content: \"\\F370\"; }\n\n.fa-apper:before {\n  content: \"\\F371\"; }\n\n.fa-apple:before {\n  content: \"\\F179\"; }\n\n.fa-apple-alt:before {\n  content: \"\\F5D1\"; }\n\n.fa-apple-pay:before {\n  content: \"\\F415\"; }\n\n.fa-archive:before {\n  content: \"\\F187\"; }\n\n.fa-archway:before {\n  content: \"\\F557\"; }\n\n.fa-arrow-alt-circle-down:before {\n  content: \"\\F358\"; }\n\n.fa-arrow-alt-circle-left:before {\n  content: \"\\F359\"; }\n\n.fa-arrow-alt-circle-right:before {\n  content: \"\\F35A\"; }\n\n.fa-arrow-alt-circle-up:before {\n  content: \"\\F35B\"; }\n\n.fa-arrow-circle-down:before {\n  content: \"\\F0AB\"; }\n\n.fa-arrow-circle-left:before {\n  content: \"\\F0A8\"; }\n\n.fa-arrow-circle-right:before {\n  content: \"\\F0A9\"; }\n\n.fa-arrow-circle-up:before {\n  content: \"\\F0AA\"; }\n\n.fa-arrow-down:before {\n  content: \"\\F063\"; }\n\n.fa-arrow-left:before {\n  content: \"\\F060\"; }\n\n.fa-arrow-right:before {\n  content: \"\\F061\"; }\n\n.fa-arrow-up:before {\n  content: \"\\F062\"; }\n\n.fa-arrows-alt:before {\n  content: \"\\F0B2\"; }\n\n.fa-arrows-alt-h:before {\n  content: \"\\F337\"; }\n\n.fa-arrows-alt-v:before {\n  content: \"\\F338\"; }\n\n.fa-artstation:before {\n  content: \"\\F77A\"; }\n\n.fa-assistive-listening-systems:before {\n  content: \"\\F2A2\"; }\n\n.fa-asterisk:before {\n  content: \"\\F069\"; }\n\n.fa-asymmetrik:before {\n  content: \"\\F372\"; }\n\n.fa-at:before {\n  content: \"\\F1FA\"; }\n\n.fa-atlas:before {\n  content: \"\\F558\"; }\n\n.fa-atlassian:before {\n  content: \"\\F77B\"; }\n\n.fa-atom:before {\n  content: \"\\F5D2\"; }\n\n.fa-audible:before {\n  content: \"\\F373\"; }\n\n.fa-audio-description:before {\n  content: \"\\F29E\"; }\n\n.fa-autoprefixer:before {\n  content: \"\\F41C\"; }\n\n.fa-avianex:before {\n  content: \"\\F374\"; }\n\n.fa-aviato:before {\n  content: \"\\F421\"; }\n\n.fa-award:before {\n  content: \"\\F559\"; }\n\n.fa-aws:before {\n  content: \"\\F375\"; }\n\n.fa-baby:before {\n  content: \"\\F77C\"; }\n\n.fa-baby-carriage:before {\n  content: \"\\F77D\"; }\n\n.fa-backspace:before {\n  content: \"\\F55A\"; }\n\n.fa-backward:before {\n  content: \"\\F04A\"; }\n\n.fa-bacon:before {\n  content: \"\\F7E5\"; }\n\n.fa-balance-scale:before {\n  content: \"\\F24E\"; }\n\n.fa-ban:before {\n  content: \"\\F05E\"; }\n\n.fa-band-aid:before {\n  content: \"\\F462\"; }\n\n.fa-bandcamp:before {\n  content: \"\\F2D5\"; }\n\n.fa-barcode:before {\n  content: \"\\F02A\"; }\n\n.fa-bars:before {\n  content: \"\\F0C9\"; }\n\n.fa-baseball-ball:before {\n  content: \"\\F433\"; }\n\n.fa-basketball-ball:before {\n  content: \"\\F434\"; }\n\n.fa-bath:before {\n  content: \"\\F2CD\"; }\n\n.fa-battery-empty:before {\n  content: \"\\F244\"; }\n\n.fa-battery-full:before {\n  content: \"\\F240\"; }\n\n.fa-battery-half:before {\n  content: \"\\F242\"; }\n\n.fa-battery-quarter:before {\n  content: \"\\F243\"; }\n\n.fa-battery-three-quarters:before {\n  content: \"\\F241\"; }\n\n.fa-bed:before {\n  content: \"\\F236\"; }\n\n.fa-beer:before {\n  content: \"\\F0FC\"; }\n\n.fa-behance:before {\n  content: \"\\F1B4\"; }\n\n.fa-behance-square:before {\n  content: \"\\F1B5\"; }\n\n.fa-bell:before {\n  content: \"\\F0F3\"; }\n\n.fa-bell-slash:before {\n  content: \"\\F1F6\"; }\n\n.fa-bezier-curve:before {\n  content: \"\\F55B\"; }\n\n.fa-bible:before {\n  content: \"\\F647\"; }\n\n.fa-bicycle:before {\n  content: \"\\F206\"; }\n\n.fa-bimobject:before {\n  content: \"\\F378\"; }\n\n.fa-binoculars:before {\n  content: \"\\F1E5\"; }\n\n.fa-biohazard:before {\n  content: \"\\F780\"; }\n\n.fa-birthday-cake:before {\n  content: \"\\F1FD\"; }\n\n.fa-bitbucket:before {\n  content: \"\\F171\"; }\n\n.fa-bitcoin:before {\n  content: \"\\F379\"; }\n\n.fa-bity:before {\n  content: \"\\F37A\"; }\n\n.fa-black-tie:before {\n  content: \"\\F27E\"; }\n\n.fa-blackberry:before {\n  content: \"\\F37B\"; }\n\n.fa-blender:before {\n  content: \"\\F517\"; }\n\n.fa-blender-phone:before {\n  content: \"\\F6B6\"; }\n\n.fa-blind:before {\n  content: \"\\F29D\"; }\n\n.fa-blog:before {\n  content: \"\\F781\"; }\n\n.fa-blogger:before {\n  content: \"\\F37C\"; }\n\n.fa-blogger-b:before {\n  content: \"\\F37D\"; }\n\n.fa-bluetooth:before {\n  content: \"\\F293\"; }\n\n.fa-bluetooth-b:before {\n  content: \"\\F294\"; }\n\n.fa-bold:before {\n  content: \"\\F032\"; }\n\n.fa-bolt:before {\n  content: \"\\F0E7\"; }\n\n.fa-bomb:before {\n  content: \"\\F1E2\"; }\n\n.fa-bone:before {\n  content: \"\\F5D7\"; }\n\n.fa-bong:before {\n  content: \"\\F55C\"; }\n\n.fa-book:before {\n  content: \"\\F02D\"; }\n\n.fa-book-dead:before {\n  content: \"\\F6B7\"; }\n\n.fa-book-medical:before {\n  content: \"\\F7E6\"; }\n\n.fa-book-open:before {\n  content: \"\\F518\"; }\n\n.fa-book-reader:before {\n  content: \"\\F5DA\"; }\n\n.fa-bookmark:before {\n  content: \"\\F02E\"; }\n\n.fa-bowling-ball:before {\n  content: \"\\F436\"; }\n\n.fa-box:before {\n  content: \"\\F466\"; }\n\n.fa-box-open:before {\n  content: \"\\F49E\"; }\n\n.fa-boxes:before {\n  content: \"\\F468\"; }\n\n.fa-braille:before {\n  content: \"\\F2A1\"; }\n\n.fa-brain:before {\n  content: \"\\F5DC\"; }\n\n.fa-bread-slice:before {\n  content: \"\\F7EC\"; }\n\n.fa-briefcase:before {\n  content: \"\\F0B1\"; }\n\n.fa-briefcase-medical:before {\n  content: \"\\F469\"; }\n\n.fa-broadcast-tower:before {\n  content: \"\\F519\"; }\n\n.fa-broom:before {\n  content: \"\\F51A\"; }\n\n.fa-brush:before {\n  content: \"\\F55D\"; }\n\n.fa-btc:before {\n  content: \"\\F15A\"; }\n\n.fa-bug:before {\n  content: \"\\F188\"; }\n\n.fa-building:before {\n  content: \"\\F1AD\"; }\n\n.fa-bullhorn:before {\n  content: \"\\F0A1\"; }\n\n.fa-bullseye:before {\n  content: \"\\F140\"; }\n\n.fa-burn:before {\n  content: \"\\F46A\"; }\n\n.fa-buromobelexperte:before {\n  content: \"\\F37F\"; }\n\n.fa-bus:before {\n  content: \"\\F207\"; }\n\n.fa-bus-alt:before {\n  content: \"\\F55E\"; }\n\n.fa-business-time:before {\n  content: \"\\F64A\"; }\n\n.fa-buysellads:before {\n  content: \"\\F20D\"; }\n\n.fa-calculator:before {\n  content: \"\\F1EC\"; }\n\n.fa-calendar:before {\n  content: \"\\F133\"; }\n\n.fa-calendar-alt:before {\n  content: \"\\F073\"; }\n\n.fa-calendar-check:before {\n  content: \"\\F274\"; }\n\n.fa-calendar-day:before {\n  content: \"\\F783\"; }\n\n.fa-calendar-minus:before {\n  content: \"\\F272\"; }\n\n.fa-calendar-plus:before {\n  content: \"\\F271\"; }\n\n.fa-calendar-times:before {\n  content: \"\\F273\"; }\n\n.fa-calendar-week:before {\n  content: \"\\F784\"; }\n\n.fa-camera:before {\n  content: \"\\F030\"; }\n\n.fa-camera-retro:before {\n  content: \"\\F083\"; }\n\n.fa-campground:before {\n  content: \"\\F6BB\"; }\n\n.fa-canadian-maple-leaf:before {\n  content: \"\\F785\"; }\n\n.fa-candy-cane:before {\n  content: \"\\F786\"; }\n\n.fa-cannabis:before {\n  content: \"\\F55F\"; }\n\n.fa-capsules:before {\n  content: \"\\F46B\"; }\n\n.fa-car:before {\n  content: \"\\F1B9\"; }\n\n.fa-car-alt:before {\n  content: \"\\F5DE\"; }\n\n.fa-car-battery:before {\n  content: \"\\F5DF\"; }\n\n.fa-car-crash:before {\n  content: \"\\F5E1\"; }\n\n.fa-car-side:before {\n  content: \"\\F5E4\"; }\n\n.fa-caret-down:before {\n  content: \"\\F0D7\"; }\n\n.fa-caret-left:before {\n  content: \"\\F0D9\"; }\n\n.fa-caret-right:before {\n  content: \"\\F0DA\"; }\n\n.fa-caret-square-down:before {\n  content: \"\\F150\"; }\n\n.fa-caret-square-left:before {\n  content: \"\\F191\"; }\n\n.fa-caret-square-right:before {\n  content: \"\\F152\"; }\n\n.fa-caret-square-up:before {\n  content: \"\\F151\"; }\n\n.fa-caret-up:before {\n  content: \"\\F0D8\"; }\n\n.fa-carrot:before {\n  content: \"\\F787\"; }\n\n.fa-cart-arrow-down:before {\n  content: \"\\F218\"; }\n\n.fa-cart-plus:before {\n  content: \"\\F217\"; }\n\n.fa-cash-register:before {\n  content: \"\\F788\"; }\n\n.fa-cat:before {\n  content: \"\\F6BE\"; }\n\n.fa-cc-amazon-pay:before {\n  content: \"\\F42D\"; }\n\n.fa-cc-amex:before {\n  content: \"\\F1F3\"; }\n\n.fa-cc-apple-pay:before {\n  content: \"\\F416\"; }\n\n.fa-cc-diners-club:before {\n  content: \"\\F24C\"; }\n\n.fa-cc-discover:before {\n  content: \"\\F1F2\"; }\n\n.fa-cc-jcb:before {\n  content: \"\\F24B\"; }\n\n.fa-cc-mastercard:before {\n  content: \"\\F1F1\"; }\n\n.fa-cc-paypal:before {\n  content: \"\\F1F4\"; }\n\n.fa-cc-stripe:before {\n  content: \"\\F1F5\"; }\n\n.fa-cc-visa:before {\n  content: \"\\F1F0\"; }\n\n.fa-centercode:before {\n  content: \"\\F380\"; }\n\n.fa-centos:before {\n  content: \"\\F789\"; }\n\n.fa-certificate:before {\n  content: \"\\F0A3\"; }\n\n.fa-chair:before {\n  content: \"\\F6C0\"; }\n\n.fa-chalkboard:before {\n  content: \"\\F51B\"; }\n\n.fa-chalkboard-teacher:before {\n  content: \"\\F51C\"; }\n\n.fa-charging-station:before {\n  content: \"\\F5E7\"; }\n\n.fa-chart-area:before {\n  content: \"\\F1FE\"; }\n\n.fa-chart-bar:before {\n  content: \"\\F080\"; }\n\n.fa-chart-line:before {\n  content: \"\\F201\"; }\n\n.fa-chart-pie:before {\n  content: \"\\F200\"; }\n\n.fa-check:before {\n  content: \"\\F00C\"; }\n\n.fa-check-circle:before {\n  content: \"\\F058\"; }\n\n.fa-check-double:before {\n  content: \"\\F560\"; }\n\n.fa-check-square:before {\n  content: \"\\F14A\"; }\n\n.fa-cheese:before {\n  content: \"\\F7EF\"; }\n\n.fa-chess:before {\n  content: \"\\F439\"; }\n\n.fa-chess-bishop:before {\n  content: \"\\F43A\"; }\n\n.fa-chess-board:before {\n  content: \"\\F43C\"; }\n\n.fa-chess-king:before {\n  content: \"\\F43F\"; }\n\n.fa-chess-knight:before {\n  content: \"\\F441\"; }\n\n.fa-chess-pawn:before {\n  content: \"\\F443\"; }\n\n.fa-chess-queen:before {\n  content: \"\\F445\"; }\n\n.fa-chess-rook:before {\n  content: \"\\F447\"; }\n\n.fa-chevron-circle-down:before {\n  content: \"\\F13A\"; }\n\n.fa-chevron-circle-left:before {\n  content: \"\\F137\"; }\n\n.fa-chevron-circle-right:before {\n  content: \"\\F138\"; }\n\n.fa-chevron-circle-up:before {\n  content: \"\\F139\"; }\n\n.fa-chevron-down:before {\n  content: \"\\F078\"; }\n\n.fa-chevron-left:before {\n  content: \"\\F053\"; }\n\n.fa-chevron-right:before {\n  content: \"\\F054\"; }\n\n.fa-chevron-up:before {\n  content: \"\\F077\"; }\n\n.fa-child:before {\n  content: \"\\F1AE\"; }\n\n.fa-chrome:before {\n  content: \"\\F268\"; }\n\n.fa-church:before {\n  content: \"\\F51D\"; }\n\n.fa-circle:before {\n  content: \"\\F111\"; }\n\n.fa-circle-notch:before {\n  content: \"\\F1CE\"; }\n\n.fa-city:before {\n  content: \"\\F64F\"; }\n\n.fa-clinic-medical:before {\n  content: \"\\F7F2\"; }\n\n.fa-clipboard:before {\n  content: \"\\F328\"; }\n\n.fa-clipboard-check:before {\n  content: \"\\F46C\"; }\n\n.fa-clipboard-list:before {\n  content: \"\\F46D\"; }\n\n.fa-clock:before {\n  content: \"\\F017\"; }\n\n.fa-clone:before {\n  content: \"\\F24D\"; }\n\n.fa-closed-captioning:before {\n  content: \"\\F20A\"; }\n\n.fa-cloud:before {\n  content: \"\\F0C2\"; }\n\n.fa-cloud-download-alt:before {\n  content: \"\\F381\"; }\n\n.fa-cloud-meatball:before {\n  content: \"\\F73B\"; }\n\n.fa-cloud-moon:before {\n  content: \"\\F6C3\"; }\n\n.fa-cloud-moon-rain:before {\n  content: \"\\F73C\"; }\n\n.fa-cloud-rain:before {\n  content: \"\\F73D\"; }\n\n.fa-cloud-showers-heavy:before {\n  content: \"\\F740\"; }\n\n.fa-cloud-sun:before {\n  content: \"\\F6C4\"; }\n\n.fa-cloud-sun-rain:before {\n  content: \"\\F743\"; }\n\n.fa-cloud-upload-alt:before {\n  content: \"\\F382\"; }\n\n.fa-cloudscale:before {\n  content: \"\\F383\"; }\n\n.fa-cloudsmith:before {\n  content: \"\\F384\"; }\n\n.fa-cloudversify:before {\n  content: \"\\F385\"; }\n\n.fa-cocktail:before {\n  content: \"\\F561\"; }\n\n.fa-code:before {\n  content: \"\\F121\"; }\n\n.fa-code-branch:before {\n  content: \"\\F126\"; }\n\n.fa-codepen:before {\n  content: \"\\F1CB\"; }\n\n.fa-codiepie:before {\n  content: \"\\F284\"; }\n\n.fa-coffee:before {\n  content: \"\\F0F4\"; }\n\n.fa-cog:before {\n  content: \"\\F013\"; }\n\n.fa-cogs:before {\n  content: \"\\F085\"; }\n\n.fa-coins:before {\n  content: \"\\F51E\"; }\n\n.fa-columns:before {\n  content: \"\\F0DB\"; }\n\n.fa-comment:before {\n  content: \"\\F075\"; }\n\n.fa-comment-alt:before {\n  content: \"\\F27A\"; }\n\n.fa-comment-dollar:before {\n  content: \"\\F651\"; }\n\n.fa-comment-dots:before {\n  content: \"\\F4AD\"; }\n\n.fa-comment-medical:before {\n  content: \"\\F7F5\"; }\n\n.fa-comment-slash:before {\n  content: \"\\F4B3\"; }\n\n.fa-comments:before {\n  content: \"\\F086\"; }\n\n.fa-comments-dollar:before {\n  content: \"\\F653\"; }\n\n.fa-compact-disc:before {\n  content: \"\\F51F\"; }\n\n.fa-compass:before {\n  content: \"\\F14E\"; }\n\n.fa-compress:before {\n  content: \"\\F066\"; }\n\n.fa-compress-arrows-alt:before {\n  content: \"\\F78C\"; }\n\n.fa-concierge-bell:before {\n  content: \"\\F562\"; }\n\n.fa-confluence:before {\n  content: \"\\F78D\"; }\n\n.fa-connectdevelop:before {\n  content: \"\\F20E\"; }\n\n.fa-contao:before {\n  content: \"\\F26D\"; }\n\n.fa-cookie:before {\n  content: \"\\F563\"; }\n\n.fa-cookie-bite:before {\n  content: \"\\F564\"; }\n\n.fa-copy:before {\n  content: \"\\F0C5\"; }\n\n.fa-copyright:before {\n  content: \"\\F1F9\"; }\n\n.fa-couch:before {\n  content: \"\\F4B8\"; }\n\n.fa-cpanel:before {\n  content: \"\\F388\"; }\n\n.fa-creative-commons:before {\n  content: \"\\F25E\"; }\n\n.fa-creative-commons-by:before {\n  content: \"\\F4E7\"; }\n\n.fa-creative-commons-nc:before {\n  content: \"\\F4E8\"; }\n\n.fa-creative-commons-nc-eu:before {\n  content: \"\\F4E9\"; }\n\n.fa-creative-commons-nc-jp:before {\n  content: \"\\F4EA\"; }\n\n.fa-creative-commons-nd:before {\n  content: \"\\F4EB\"; }\n\n.fa-creative-commons-pd:before {\n  content: \"\\F4EC\"; }\n\n.fa-creative-commons-pd-alt:before {\n  content: \"\\F4ED\"; }\n\n.fa-creative-commons-remix:before {\n  content: \"\\F4EE\"; }\n\n.fa-creative-commons-sa:before {\n  content: \"\\F4EF\"; }\n\n.fa-creative-commons-sampling:before {\n  content: \"\\F4F0\"; }\n\n.fa-creative-commons-sampling-plus:before {\n  content: \"\\F4F1\"; }\n\n.fa-creative-commons-share:before {\n  content: \"\\F4F2\"; }\n\n.fa-creative-commons-zero:before {\n  content: \"\\F4F3\"; }\n\n.fa-credit-card:before {\n  content: \"\\F09D\"; }\n\n.fa-critical-role:before {\n  content: \"\\F6C9\"; }\n\n.fa-crop:before {\n  content: \"\\F125\"; }\n\n.fa-crop-alt:before {\n  content: \"\\F565\"; }\n\n.fa-cross:before {\n  content: \"\\F654\"; }\n\n.fa-crosshairs:before {\n  content: \"\\F05B\"; }\n\n.fa-crow:before {\n  content: \"\\F520\"; }\n\n.fa-crown:before {\n  content: \"\\F521\"; }\n\n.fa-crutch:before {\n  content: \"\\F7F7\"; }\n\n.fa-css3:before {\n  content: \"\\F13C\"; }\n\n.fa-css3-alt:before {\n  content: \"\\F38B\"; }\n\n.fa-cube:before {\n  content: \"\\F1B2\"; }\n\n.fa-cubes:before {\n  content: \"\\F1B3\"; }\n\n.fa-cut:before {\n  content: \"\\F0C4\"; }\n\n.fa-cuttlefish:before {\n  content: \"\\F38C\"; }\n\n.fa-d-and-d:before {\n  content: \"\\F38D\"; }\n\n.fa-d-and-d-beyond:before {\n  content: \"\\F6CA\"; }\n\n.fa-dashcube:before {\n  content: \"\\F210\"; }\n\n.fa-database:before {\n  content: \"\\F1C0\"; }\n\n.fa-deaf:before {\n  content: \"\\F2A4\"; }\n\n.fa-delicious:before {\n  content: \"\\F1A5\"; }\n\n.fa-democrat:before {\n  content: \"\\F747\"; }\n\n.fa-deploydog:before {\n  content: \"\\F38E\"; }\n\n.fa-deskpro:before {\n  content: \"\\F38F\"; }\n\n.fa-desktop:before {\n  content: \"\\F108\"; }\n\n.fa-dev:before {\n  content: \"\\F6CC\"; }\n\n.fa-deviantart:before {\n  content: \"\\F1BD\"; }\n\n.fa-dharmachakra:before {\n  content: \"\\F655\"; }\n\n.fa-dhl:before {\n  content: \"\\F790\"; }\n\n.fa-diagnoses:before {\n  content: \"\\F470\"; }\n\n.fa-diaspora:before {\n  content: \"\\F791\"; }\n\n.fa-dice:before {\n  content: \"\\F522\"; }\n\n.fa-dice-d20:before {\n  content: \"\\F6CF\"; }\n\n.fa-dice-d6:before {\n  content: \"\\F6D1\"; }\n\n.fa-dice-five:before {\n  content: \"\\F523\"; }\n\n.fa-dice-four:before {\n  content: \"\\F524\"; }\n\n.fa-dice-one:before {\n  content: \"\\F525\"; }\n\n.fa-dice-six:before {\n  content: \"\\F526\"; }\n\n.fa-dice-three:before {\n  content: \"\\F527\"; }\n\n.fa-dice-two:before {\n  content: \"\\F528\"; }\n\n.fa-digg:before {\n  content: \"\\F1A6\"; }\n\n.fa-digital-ocean:before {\n  content: \"\\F391\"; }\n\n.fa-digital-tachograph:before {\n  content: \"\\F566\"; }\n\n.fa-directions:before {\n  content: \"\\F5EB\"; }\n\n.fa-discord:before {\n  content: \"\\F392\"; }\n\n.fa-discourse:before {\n  content: \"\\F393\"; }\n\n.fa-divide:before {\n  content: \"\\F529\"; }\n\n.fa-dizzy:before {\n  content: \"\\F567\"; }\n\n.fa-dna:before {\n  content: \"\\F471\"; }\n\n.fa-dochub:before {\n  content: \"\\F394\"; }\n\n.fa-docker:before {\n  content: \"\\F395\"; }\n\n.fa-dog:before {\n  content: \"\\F6D3\"; }\n\n.fa-dollar-sign:before {\n  content: \"\\F155\"; }\n\n.fa-dolly:before {\n  content: \"\\F472\"; }\n\n.fa-dolly-flatbed:before {\n  content: \"\\F474\"; }\n\n.fa-donate:before {\n  content: \"\\F4B9\"; }\n\n.fa-door-closed:before {\n  content: \"\\F52A\"; }\n\n.fa-door-open:before {\n  content: \"\\F52B\"; }\n\n.fa-dot-circle:before {\n  content: \"\\F192\"; }\n\n.fa-dove:before {\n  content: \"\\F4BA\"; }\n\n.fa-download:before {\n  content: \"\\F019\"; }\n\n.fa-draft2digital:before {\n  content: \"\\F396\"; }\n\n.fa-drafting-compass:before {\n  content: \"\\F568\"; }\n\n.fa-dragon:before {\n  content: \"\\F6D5\"; }\n\n.fa-draw-polygon:before {\n  content: \"\\F5EE\"; }\n\n.fa-dribbble:before {\n  content: \"\\F17D\"; }\n\n.fa-dribbble-square:before {\n  content: \"\\F397\"; }\n\n.fa-dropbox:before {\n  content: \"\\F16B\"; }\n\n.fa-drum:before {\n  content: \"\\F569\"; }\n\n.fa-drum-steelpan:before {\n  content: \"\\F56A\"; }\n\n.fa-drumstick-bite:before {\n  content: \"\\F6D7\"; }\n\n.fa-drupal:before {\n  content: \"\\F1A9\"; }\n\n.fa-dumbbell:before {\n  content: \"\\F44B\"; }\n\n.fa-dumpster:before {\n  content: \"\\F793\"; }\n\n.fa-dumpster-fire:before {\n  content: \"\\F794\"; }\n\n.fa-dungeon:before {\n  content: \"\\F6D9\"; }\n\n.fa-dyalog:before {\n  content: \"\\F399\"; }\n\n.fa-earlybirds:before {\n  content: \"\\F39A\"; }\n\n.fa-ebay:before {\n  content: \"\\F4F4\"; }\n\n.fa-edge:before {\n  content: \"\\F282\"; }\n\n.fa-edit:before {\n  content: \"\\F044\"; }\n\n.fa-egg:before {\n  content: \"\\F7FB\"; }\n\n.fa-eject:before {\n  content: \"\\F052\"; }\n\n.fa-elementor:before {\n  content: \"\\F430\"; }\n\n.fa-ellipsis-h:before {\n  content: \"\\F141\"; }\n\n.fa-ellipsis-v:before {\n  content: \"\\F142\"; }\n\n.fa-ello:before {\n  content: \"\\F5F1\"; }\n\n.fa-ember:before {\n  content: \"\\F423\"; }\n\n.fa-empire:before {\n  content: \"\\F1D1\"; }\n\n.fa-envelope:before {\n  content: \"\\F0E0\"; }\n\n.fa-envelope-open:before {\n  content: \"\\F2B6\"; }\n\n.fa-envelope-open-text:before {\n  content: \"\\F658\"; }\n\n.fa-envelope-square:before {\n  content: \"\\F199\"; }\n\n.fa-envira:before {\n  content: \"\\F299\"; }\n\n.fa-equals:before {\n  content: \"\\F52C\"; }\n\n.fa-eraser:before {\n  content: \"\\F12D\"; }\n\n.fa-erlang:before {\n  content: \"\\F39D\"; }\n\n.fa-ethereum:before {\n  content: \"\\F42E\"; }\n\n.fa-ethernet:before {\n  content: \"\\F796\"; }\n\n.fa-etsy:before {\n  content: \"\\F2D7\"; }\n\n.fa-euro-sign:before {\n  content: \"\\F153\"; }\n\n.fa-exchange-alt:before {\n  content: \"\\F362\"; }\n\n.fa-exclamation:before {\n  content: \"\\F12A\"; }\n\n.fa-exclamation-circle:before {\n  content: \"\\F06A\"; }\n\n.fa-exclamation-triangle:before {\n  content: \"\\F071\"; }\n\n.fa-expand:before {\n  content: \"\\F065\"; }\n\n.fa-expand-arrows-alt:before {\n  content: \"\\F31E\"; }\n\n.fa-expeditedssl:before {\n  content: \"\\F23E\"; }\n\n.fa-external-link-alt:before {\n  content: \"\\F35D\"; }\n\n.fa-external-link-square-alt:before {\n  content: \"\\F360\"; }\n\n.fa-eye:before {\n  content: \"\\F06E\"; }\n\n.fa-eye-dropper:before {\n  content: \"\\F1FB\"; }\n\n.fa-eye-slash:before {\n  content: \"\\F070\"; }\n\n.fa-facebook:before {\n  content: \"\\F09A\"; }\n\n.fa-facebook-f:before {\n  content: \"\\F39E\"; }\n\n.fa-facebook-messenger:before {\n  content: \"\\F39F\"; }\n\n.fa-facebook-square:before {\n  content: \"\\F082\"; }\n\n.fa-fantasy-flight-games:before {\n  content: \"\\F6DC\"; }\n\n.fa-fast-backward:before {\n  content: \"\\F049\"; }\n\n.fa-fast-forward:before {\n  content: \"\\F050\"; }\n\n.fa-fax:before {\n  content: \"\\F1AC\"; }\n\n.fa-feather:before {\n  content: \"\\F52D\"; }\n\n.fa-feather-alt:before {\n  content: \"\\F56B\"; }\n\n.fa-fedex:before {\n  content: \"\\F797\"; }\n\n.fa-fedora:before {\n  content: \"\\F798\"; }\n\n.fa-female:before {\n  content: \"\\F182\"; }\n\n.fa-fighter-jet:before {\n  content: \"\\F0FB\"; }\n\n.fa-figma:before {\n  content: \"\\F799\"; }\n\n.fa-file:before {\n  content: \"\\F15B\"; }\n\n.fa-file-alt:before {\n  content: \"\\F15C\"; }\n\n.fa-file-archive:before {\n  content: \"\\F1C6\"; }\n\n.fa-file-audio:before {\n  content: \"\\F1C7\"; }\n\n.fa-file-code:before {\n  content: \"\\F1C9\"; }\n\n.fa-file-contract:before {\n  content: \"\\F56C\"; }\n\n.fa-file-csv:before {\n  content: \"\\F6DD\"; }\n\n.fa-file-download:before {\n  content: \"\\F56D\"; }\n\n.fa-file-excel:before {\n  content: \"\\F1C3\"; }\n\n.fa-file-export:before {\n  content: \"\\F56E\"; }\n\n.fa-file-image:before {\n  content: \"\\F1C5\"; }\n\n.fa-file-import:before {\n  content: \"\\F56F\"; }\n\n.fa-file-invoice:before {\n  content: \"\\F570\"; }\n\n.fa-file-invoice-dollar:before {\n  content: \"\\F571\"; }\n\n.fa-file-medical:before {\n  content: \"\\F477\"; }\n\n.fa-file-medical-alt:before {\n  content: \"\\F478\"; }\n\n.fa-file-pdf:before {\n  content: \"\\F1C1\"; }\n\n.fa-file-powerpoint:before {\n  content: \"\\F1C4\"; }\n\n.fa-file-prescription:before {\n  content: \"\\F572\"; }\n\n.fa-file-signature:before {\n  content: \"\\F573\"; }\n\n.fa-file-upload:before {\n  content: \"\\F574\"; }\n\n.fa-file-video:before {\n  content: \"\\F1C8\"; }\n\n.fa-file-word:before {\n  content: \"\\F1C2\"; }\n\n.fa-fill:before {\n  content: \"\\F575\"; }\n\n.fa-fill-drip:before {\n  content: \"\\F576\"; }\n\n.fa-film:before {\n  content: \"\\F008\"; }\n\n.fa-filter:before {\n  content: \"\\F0B0\"; }\n\n.fa-fingerprint:before {\n  content: \"\\F577\"; }\n\n.fa-fire:before {\n  content: \"\\F06D\"; }\n\n.fa-fire-alt:before {\n  content: \"\\F7E4\"; }\n\n.fa-fire-extinguisher:before {\n  content: \"\\F134\"; }\n\n.fa-firefox:before {\n  content: \"\\F269\"; }\n\n.fa-first-aid:before {\n  content: \"\\F479\"; }\n\n.fa-first-order:before {\n  content: \"\\F2B0\"; }\n\n.fa-first-order-alt:before {\n  content: \"\\F50A\"; }\n\n.fa-firstdraft:before {\n  content: \"\\F3A1\"; }\n\n.fa-fish:before {\n  content: \"\\F578\"; }\n\n.fa-fist-raised:before {\n  content: \"\\F6DE\"; }\n\n.fa-flag:before {\n  content: \"\\F024\"; }\n\n.fa-flag-checkered:before {\n  content: \"\\F11E\"; }\n\n.fa-flag-usa:before {\n  content: \"\\F74D\"; }\n\n.fa-flask:before {\n  content: \"\\F0C3\"; }\n\n.fa-flickr:before {\n  content: \"\\F16E\"; }\n\n.fa-flipboard:before {\n  content: \"\\F44D\"; }\n\n.fa-flushed:before {\n  content: \"\\F579\"; }\n\n.fa-fly:before {\n  content: \"\\F417\"; }\n\n.fa-folder:before {\n  content: \"\\F07B\"; }\n\n.fa-folder-minus:before {\n  content: \"\\F65D\"; }\n\n.fa-folder-open:before {\n  content: \"\\F07C\"; }\n\n.fa-folder-plus:before {\n  content: \"\\F65E\"; }\n\n.fa-font:before {\n  content: \"\\F031\"; }\n\n.fa-font-awesome:before {\n  content: \"\\F2B4\"; }\n\n.fa-font-awesome-alt:before {\n  content: \"\\F35C\"; }\n\n.fa-font-awesome-flag:before {\n  content: \"\\F425\"; }\n\n.fa-font-awesome-logo-full:before {\n  content: \"\\F4E6\"; }\n\n.fa-fonticons:before {\n  content: \"\\F280\"; }\n\n.fa-fonticons-fi:before {\n  content: \"\\F3A2\"; }\n\n.fa-football-ball:before {\n  content: \"\\F44E\"; }\n\n.fa-fort-awesome:before {\n  content: \"\\F286\"; }\n\n.fa-fort-awesome-alt:before {\n  content: \"\\F3A3\"; }\n\n.fa-forumbee:before {\n  content: \"\\F211\"; }\n\n.fa-forward:before {\n  content: \"\\F04E\"; }\n\n.fa-foursquare:before {\n  content: \"\\F180\"; }\n\n.fa-free-code-camp:before {\n  content: \"\\F2C5\"; }\n\n.fa-freebsd:before {\n  content: \"\\F3A4\"; }\n\n.fa-frog:before {\n  content: \"\\F52E\"; }\n\n.fa-frown:before {\n  content: \"\\F119\"; }\n\n.fa-frown-open:before {\n  content: \"\\F57A\"; }\n\n.fa-fulcrum:before {\n  content: \"\\F50B\"; }\n\n.fa-funnel-dollar:before {\n  content: \"\\F662\"; }\n\n.fa-futbol:before {\n  content: \"\\F1E3\"; }\n\n.fa-galactic-republic:before {\n  content: \"\\F50C\"; }\n\n.fa-galactic-senate:before {\n  content: \"\\F50D\"; }\n\n.fa-gamepad:before {\n  content: \"\\F11B\"; }\n\n.fa-gas-pump:before {\n  content: \"\\F52F\"; }\n\n.fa-gavel:before {\n  content: \"\\F0E3\"; }\n\n.fa-gem:before {\n  content: \"\\F3A5\"; }\n\n.fa-genderless:before {\n  content: \"\\F22D\"; }\n\n.fa-get-pocket:before {\n  content: \"\\F265\"; }\n\n.fa-gg:before {\n  content: \"\\F260\"; }\n\n.fa-gg-circle:before {\n  content: \"\\F261\"; }\n\n.fa-ghost:before {\n  content: \"\\F6E2\"; }\n\n.fa-gift:before {\n  content: \"\\F06B\"; }\n\n.fa-gifts:before {\n  content: \"\\F79C\"; }\n\n.fa-git:before {\n  content: \"\\F1D3\"; }\n\n.fa-git-square:before {\n  content: \"\\F1D2\"; }\n\n.fa-github:before {\n  content: \"\\F09B\"; }\n\n.fa-github-alt:before {\n  content: \"\\F113\"; }\n\n.fa-github-square:before {\n  content: \"\\F092\"; }\n\n.fa-gitkraken:before {\n  content: \"\\F3A6\"; }\n\n.fa-gitlab:before {\n  content: \"\\F296\"; }\n\n.fa-gitter:before {\n  content: \"\\F426\"; }\n\n.fa-glass-cheers:before {\n  content: \"\\F79F\"; }\n\n.fa-glass-martini:before {\n  content: \"\\F000\"; }\n\n.fa-glass-martini-alt:before {\n  content: \"\\F57B\"; }\n\n.fa-glass-whiskey:before {\n  content: \"\\F7A0\"; }\n\n.fa-glasses:before {\n  content: \"\\F530\"; }\n\n.fa-glide:before {\n  content: \"\\F2A5\"; }\n\n.fa-glide-g:before {\n  content: \"\\F2A6\"; }\n\n.fa-globe:before {\n  content: \"\\F0AC\"; }\n\n.fa-globe-africa:before {\n  content: \"\\F57C\"; }\n\n.fa-globe-americas:before {\n  content: \"\\F57D\"; }\n\n.fa-globe-asia:before {\n  content: \"\\F57E\"; }\n\n.fa-globe-europe:before {\n  content: \"\\F7A2\"; }\n\n.fa-gofore:before {\n  content: \"\\F3A7\"; }\n\n.fa-golf-ball:before {\n  content: \"\\F450\"; }\n\n.fa-goodreads:before {\n  content: \"\\F3A8\"; }\n\n.fa-goodreads-g:before {\n  content: \"\\F3A9\"; }\n\n.fa-google:before {\n  content: \"\\F1A0\"; }\n\n.fa-google-drive:before {\n  content: \"\\F3AA\"; }\n\n.fa-google-play:before {\n  content: \"\\F3AB\"; }\n\n.fa-google-plus:before {\n  content: \"\\F2B3\"; }\n\n.fa-google-plus-g:before {\n  content: \"\\F0D5\"; }\n\n.fa-google-plus-square:before {\n  content: \"\\F0D4\"; }\n\n.fa-google-wallet:before {\n  content: \"\\F1EE\"; }\n\n.fa-gopuram:before {\n  content: \"\\F664\"; }\n\n.fa-graduation-cap:before {\n  content: \"\\F19D\"; }\n\n.fa-gratipay:before {\n  content: \"\\F184\"; }\n\n.fa-grav:before {\n  content: \"\\F2D6\"; }\n\n.fa-greater-than:before {\n  content: \"\\F531\"; }\n\n.fa-greater-than-equal:before {\n  content: \"\\F532\"; }\n\n.fa-grimace:before {\n  content: \"\\F57F\"; }\n\n.fa-grin:before {\n  content: \"\\F580\"; }\n\n.fa-grin-alt:before {\n  content: \"\\F581\"; }\n\n.fa-grin-beam:before {\n  content: \"\\F582\"; }\n\n.fa-grin-beam-sweat:before {\n  content: \"\\F583\"; }\n\n.fa-grin-hearts:before {\n  content: \"\\F584\"; }\n\n.fa-grin-squint:before {\n  content: \"\\F585\"; }\n\n.fa-grin-squint-tears:before {\n  content: \"\\F586\"; }\n\n.fa-grin-stars:before {\n  content: \"\\F587\"; }\n\n.fa-grin-tears:before {\n  content: \"\\F588\"; }\n\n.fa-grin-tongue:before {\n  content: \"\\F589\"; }\n\n.fa-grin-tongue-squint:before {\n  content: \"\\F58A\"; }\n\n.fa-grin-tongue-wink:before {\n  content: \"\\F58B\"; }\n\n.fa-grin-wink:before {\n  content: \"\\F58C\"; }\n\n.fa-grip-horizontal:before {\n  content: \"\\F58D\"; }\n\n.fa-grip-lines:before {\n  content: \"\\F7A4\"; }\n\n.fa-grip-lines-vertical:before {\n  content: \"\\F7A5\"; }\n\n.fa-grip-vertical:before {\n  content: \"\\F58E\"; }\n\n.fa-gripfire:before {\n  content: \"\\F3AC\"; }\n\n.fa-grunt:before {\n  content: \"\\F3AD\"; }\n\n.fa-guitar:before {\n  content: \"\\F7A6\"; }\n\n.fa-gulp:before {\n  content: \"\\F3AE\"; }\n\n.fa-h-square:before {\n  content: \"\\F0FD\"; }\n\n.fa-hacker-news:before {\n  content: \"\\F1D4\"; }\n\n.fa-hacker-news-square:before {\n  content: \"\\F3AF\"; }\n\n.fa-hackerrank:before {\n  content: \"\\F5F7\"; }\n\n.fa-hamburger:before {\n  content: \"\\F805\"; }\n\n.fa-hammer:before {\n  content: \"\\F6E3\"; }\n\n.fa-hamsa:before {\n  content: \"\\F665\"; }\n\n.fa-hand-holding:before {\n  content: \"\\F4BD\"; }\n\n.fa-hand-holding-heart:before {\n  content: \"\\F4BE\"; }\n\n.fa-hand-holding-usd:before {\n  content: \"\\F4C0\"; }\n\n.fa-hand-lizard:before {\n  content: \"\\F258\"; }\n\n.fa-hand-middle-finger:before {\n  content: \"\\F806\"; }\n\n.fa-hand-paper:before {\n  content: \"\\F256\"; }\n\n.fa-hand-peace:before {\n  content: \"\\F25B\"; }\n\n.fa-hand-point-down:before {\n  content: \"\\F0A7\"; }\n\n.fa-hand-point-left:before {\n  content: \"\\F0A5\"; }\n\n.fa-hand-point-right:before {\n  content: \"\\F0A4\"; }\n\n.fa-hand-point-up:before {\n  content: \"\\F0A6\"; }\n\n.fa-hand-pointer:before {\n  content: \"\\F25A\"; }\n\n.fa-hand-rock:before {\n  content: \"\\F255\"; }\n\n.fa-hand-scissors:before {\n  content: \"\\F257\"; }\n\n.fa-hand-spock:before {\n  content: \"\\F259\"; }\n\n.fa-hands:before {\n  content: \"\\F4C2\"; }\n\n.fa-hands-helping:before {\n  content: \"\\F4C4\"; }\n\n.fa-handshake:before {\n  content: \"\\F2B5\"; }\n\n.fa-hanukiah:before {\n  content: \"\\F6E6\"; }\n\n.fa-hard-hat:before {\n  content: \"\\F807\"; }\n\n.fa-hashtag:before {\n  content: \"\\F292\"; }\n\n.fa-hat-wizard:before {\n  content: \"\\F6E8\"; }\n\n.fa-haykal:before {\n  content: \"\\F666\"; }\n\n.fa-hdd:before {\n  content: \"\\F0A0\"; }\n\n.fa-heading:before {\n  content: \"\\F1DC\"; }\n\n.fa-headphones:before {\n  content: \"\\F025\"; }\n\n.fa-headphones-alt:before {\n  content: \"\\F58F\"; }\n\n.fa-headset:before {\n  content: \"\\F590\"; }\n\n.fa-heart:before {\n  content: \"\\F004\"; }\n\n.fa-heart-broken:before {\n  content: \"\\F7A9\"; }\n\n.fa-heartbeat:before {\n  content: \"\\F21E\"; }\n\n.fa-helicopter:before {\n  content: \"\\F533\"; }\n\n.fa-highlighter:before {\n  content: \"\\F591\"; }\n\n.fa-hiking:before {\n  content: \"\\F6EC\"; }\n\n.fa-hippo:before {\n  content: \"\\F6ED\"; }\n\n.fa-hips:before {\n  content: \"\\F452\"; }\n\n.fa-hire-a-helper:before {\n  content: \"\\F3B0\"; }\n\n.fa-history:before {\n  content: \"\\F1DA\"; }\n\n.fa-hockey-puck:before {\n  content: \"\\F453\"; }\n\n.fa-holly-berry:before {\n  content: \"\\F7AA\"; }\n\n.fa-home:before {\n  content: \"\\F015\"; }\n\n.fa-hooli:before {\n  content: \"\\F427\"; }\n\n.fa-hornbill:before {\n  content: \"\\F592\"; }\n\n.fa-horse:before {\n  content: \"\\F6F0\"; }\n\n.fa-horse-head:before {\n  content: \"\\F7AB\"; }\n\n.fa-hospital:before {\n  content: \"\\F0F8\"; }\n\n.fa-hospital-alt:before {\n  content: \"\\F47D\"; }\n\n.fa-hospital-symbol:before {\n  content: \"\\F47E\"; }\n\n.fa-hot-tub:before {\n  content: \"\\F593\"; }\n\n.fa-hotdog:before {\n  content: \"\\F80F\"; }\n\n.fa-hotel:before {\n  content: \"\\F594\"; }\n\n.fa-hotjar:before {\n  content: \"\\F3B1\"; }\n\n.fa-hourglass:before {\n  content: \"\\F254\"; }\n\n.fa-hourglass-end:before {\n  content: \"\\F253\"; }\n\n.fa-hourglass-half:before {\n  content: \"\\F252\"; }\n\n.fa-hourglass-start:before {\n  content: \"\\F251\"; }\n\n.fa-house-damage:before {\n  content: \"\\F6F1\"; }\n\n.fa-houzz:before {\n  content: \"\\F27C\"; }\n\n.fa-hryvnia:before {\n  content: \"\\F6F2\"; }\n\n.fa-html5:before {\n  content: \"\\F13B\"; }\n\n.fa-hubspot:before {\n  content: \"\\F3B2\"; }\n\n.fa-i-cursor:before {\n  content: \"\\F246\"; }\n\n.fa-ice-cream:before {\n  content: \"\\F810\"; }\n\n.fa-icicles:before {\n  content: \"\\F7AD\"; }\n\n.fa-id-badge:before {\n  content: \"\\F2C1\"; }\n\n.fa-id-card:before {\n  content: \"\\F2C2\"; }\n\n.fa-id-card-alt:before {\n  content: \"\\F47F\"; }\n\n.fa-igloo:before {\n  content: \"\\F7AE\"; }\n\n.fa-image:before {\n  content: \"\\F03E\"; }\n\n.fa-images:before {\n  content: \"\\F302\"; }\n\n.fa-imdb:before {\n  content: \"\\F2D8\"; }\n\n.fa-inbox:before {\n  content: \"\\F01C\"; }\n\n.fa-indent:before {\n  content: \"\\F03C\"; }\n\n.fa-industry:before {\n  content: \"\\F275\"; }\n\n.fa-infinity:before {\n  content: \"\\F534\"; }\n\n.fa-info:before {\n  content: \"\\F129\"; }\n\n.fa-info-circle:before {\n  content: \"\\F05A\"; }\n\n.fa-instagram:before {\n  content: \"\\F16D\"; }\n\n.fa-intercom:before {\n  content: \"\\F7AF\"; }\n\n.fa-internet-explorer:before {\n  content: \"\\F26B\"; }\n\n.fa-invision:before {\n  content: \"\\F7B0\"; }\n\n.fa-ioxhost:before {\n  content: \"\\F208\"; }\n\n.fa-italic:before {\n  content: \"\\F033\"; }\n\n.fa-itunes:before {\n  content: \"\\F3B4\"; }\n\n.fa-itunes-note:before {\n  content: \"\\F3B5\"; }\n\n.fa-java:before {\n  content: \"\\F4E4\"; }\n\n.fa-jedi:before {\n  content: \"\\F669\"; }\n\n.fa-jedi-order:before {\n  content: \"\\F50E\"; }\n\n.fa-jenkins:before {\n  content: \"\\F3B6\"; }\n\n.fa-jira:before {\n  content: \"\\F7B1\"; }\n\n.fa-joget:before {\n  content: \"\\F3B7\"; }\n\n.fa-joint:before {\n  content: \"\\F595\"; }\n\n.fa-joomla:before {\n  content: \"\\F1AA\"; }\n\n.fa-journal-whills:before {\n  content: \"\\F66A\"; }\n\n.fa-js:before {\n  content: \"\\F3B8\"; }\n\n.fa-js-square:before {\n  content: \"\\F3B9\"; }\n\n.fa-jsfiddle:before {\n  content: \"\\F1CC\"; }\n\n.fa-kaaba:before {\n  content: \"\\F66B\"; }\n\n.fa-kaggle:before {\n  content: \"\\F5FA\"; }\n\n.fa-key:before {\n  content: \"\\F084\"; }\n\n.fa-keybase:before {\n  content: \"\\F4F5\"; }\n\n.fa-keyboard:before {\n  content: \"\\F11C\"; }\n\n.fa-keycdn:before {\n  content: \"\\F3BA\"; }\n\n.fa-khanda:before {\n  content: \"\\F66D\"; }\n\n.fa-kickstarter:before {\n  content: \"\\F3BB\"; }\n\n.fa-kickstarter-k:before {\n  content: \"\\F3BC\"; }\n\n.fa-kiss:before {\n  content: \"\\F596\"; }\n\n.fa-kiss-beam:before {\n  content: \"\\F597\"; }\n\n.fa-kiss-wink-heart:before {\n  content: \"\\F598\"; }\n\n.fa-kiwi-bird:before {\n  content: \"\\F535\"; }\n\n.fa-korvue:before {\n  content: \"\\F42F\"; }\n\n.fa-landmark:before {\n  content: \"\\F66F\"; }\n\n.fa-language:before {\n  content: \"\\F1AB\"; }\n\n.fa-laptop:before {\n  content: \"\\F109\"; }\n\n.fa-laptop-code:before {\n  content: \"\\F5FC\"; }\n\n.fa-laptop-medical:before {\n  content: \"\\F812\"; }\n\n.fa-laravel:before {\n  content: \"\\F3BD\"; }\n\n.fa-lastfm:before {\n  content: \"\\F202\"; }\n\n.fa-lastfm-square:before {\n  content: \"\\F203\"; }\n\n.fa-laugh:before {\n  content: \"\\F599\"; }\n\n.fa-laugh-beam:before {\n  content: \"\\F59A\"; }\n\n.fa-laugh-squint:before {\n  content: \"\\F59B\"; }\n\n.fa-laugh-wink:before {\n  content: \"\\F59C\"; }\n\n.fa-layer-group:before {\n  content: \"\\F5FD\"; }\n\n.fa-leaf:before {\n  content: \"\\F06C\"; }\n\n.fa-leanpub:before {\n  content: \"\\F212\"; }\n\n.fa-lemon:before {\n  content: \"\\F094\"; }\n\n.fa-less:before {\n  content: \"\\F41D\"; }\n\n.fa-less-than:before {\n  content: \"\\F536\"; }\n\n.fa-less-than-equal:before {\n  content: \"\\F537\"; }\n\n.fa-level-down-alt:before {\n  content: \"\\F3BE\"; }\n\n.fa-level-up-alt:before {\n  content: \"\\F3BF\"; }\n\n.fa-life-ring:before {\n  content: \"\\F1CD\"; }\n\n.fa-lightbulb:before {\n  content: \"\\F0EB\"; }\n\n.fa-line:before {\n  content: \"\\F3C0\"; }\n\n.fa-link:before {\n  content: \"\\F0C1\"; }\n\n.fa-linkedin:before {\n  content: \"\\F08C\"; }\n\n.fa-linkedin-in:before {\n  content: \"\\F0E1\"; }\n\n.fa-linode:before {\n  content: \"\\F2B8\"; }\n\n.fa-linux:before {\n  content: \"\\F17C\"; }\n\n.fa-lira-sign:before {\n  content: \"\\F195\"; }\n\n.fa-list:before {\n  content: \"\\F03A\"; }\n\n.fa-list-alt:before {\n  content: \"\\F022\"; }\n\n.fa-list-ol:before {\n  content: \"\\F0CB\"; }\n\n.fa-list-ul:before {\n  content: \"\\F0CA\"; }\n\n.fa-location-arrow:before {\n  content: \"\\F124\"; }\n\n.fa-lock:before {\n  content: \"\\F023\"; }\n\n.fa-lock-open:before {\n  content: \"\\F3C1\"; }\n\n.fa-long-arrow-alt-down:before {\n  content: \"\\F309\"; }\n\n.fa-long-arrow-alt-left:before {\n  content: \"\\F30A\"; }\n\n.fa-long-arrow-alt-right:before {\n  content: \"\\F30B\"; }\n\n.fa-long-arrow-alt-up:before {\n  content: \"\\F30C\"; }\n\n.fa-low-vision:before {\n  content: \"\\F2A8\"; }\n\n.fa-luggage-cart:before {\n  content: \"\\F59D\"; }\n\n.fa-lyft:before {\n  content: \"\\F3C3\"; }\n\n.fa-magento:before {\n  content: \"\\F3C4\"; }\n\n.fa-magic:before {\n  content: \"\\F0D0\"; }\n\n.fa-magnet:before {\n  content: \"\\F076\"; }\n\n.fa-mail-bulk:before {\n  content: \"\\F674\"; }\n\n.fa-mailchimp:before {\n  content: \"\\F59E\"; }\n\n.fa-male:before {\n  content: \"\\F183\"; }\n\n.fa-mandalorian:before {\n  content: \"\\F50F\"; }\n\n.fa-map:before {\n  content: \"\\F279\"; }\n\n.fa-map-marked:before {\n  content: \"\\F59F\"; }\n\n.fa-map-marked-alt:before {\n  content: \"\\F5A0\"; }\n\n.fa-map-marker:before {\n  content: \"\\F041\"; }\n\n.fa-map-marker-alt:before {\n  content: \"\\F3C5\"; }\n\n.fa-map-pin:before {\n  content: \"\\F276\"; }\n\n.fa-map-signs:before {\n  content: \"\\F277\"; }\n\n.fa-markdown:before {\n  content: \"\\F60F\"; }\n\n.fa-marker:before {\n  content: \"\\F5A1\"; }\n\n.fa-mars:before {\n  content: \"\\F222\"; }\n\n.fa-mars-double:before {\n  content: \"\\F227\"; }\n\n.fa-mars-stroke:before {\n  content: \"\\F229\"; }\n\n.fa-mars-stroke-h:before {\n  content: \"\\F22B\"; }\n\n.fa-mars-stroke-v:before {\n  content: \"\\F22A\"; }\n\n.fa-mask:before {\n  content: \"\\F6FA\"; }\n\n.fa-mastodon:before {\n  content: \"\\F4F6\"; }\n\n.fa-maxcdn:before {\n  content: \"\\F136\"; }\n\n.fa-medal:before {\n  content: \"\\F5A2\"; }\n\n.fa-medapps:before {\n  content: \"\\F3C6\"; }\n\n.fa-medium:before {\n  content: \"\\F23A\"; }\n\n.fa-medium-m:before {\n  content: \"\\F3C7\"; }\n\n.fa-medkit:before {\n  content: \"\\F0FA\"; }\n\n.fa-medrt:before {\n  content: \"\\F3C8\"; }\n\n.fa-meetup:before {\n  content: \"\\F2E0\"; }\n\n.fa-megaport:before {\n  content: \"\\F5A3\"; }\n\n.fa-meh:before {\n  content: \"\\F11A\"; }\n\n.fa-meh-blank:before {\n  content: \"\\F5A4\"; }\n\n.fa-meh-rolling-eyes:before {\n  content: \"\\F5A5\"; }\n\n.fa-memory:before {\n  content: \"\\F538\"; }\n\n.fa-mendeley:before {\n  content: \"\\F7B3\"; }\n\n.fa-menorah:before {\n  content: \"\\F676\"; }\n\n.fa-mercury:before {\n  content: \"\\F223\"; }\n\n.fa-meteor:before {\n  content: \"\\F753\"; }\n\n.fa-microchip:before {\n  content: \"\\F2DB\"; }\n\n.fa-microphone:before {\n  content: \"\\F130\"; }\n\n.fa-microphone-alt:before {\n  content: \"\\F3C9\"; }\n\n.fa-microphone-alt-slash:before {\n  content: \"\\F539\"; }\n\n.fa-microphone-slash:before {\n  content: \"\\F131\"; }\n\n.fa-microscope:before {\n  content: \"\\F610\"; }\n\n.fa-microsoft:before {\n  content: \"\\F3CA\"; }\n\n.fa-minus:before {\n  content: \"\\F068\"; }\n\n.fa-minus-circle:before {\n  content: \"\\F056\"; }\n\n.fa-minus-square:before {\n  content: \"\\F146\"; }\n\n.fa-mitten:before {\n  content: \"\\F7B5\"; }\n\n.fa-mix:before {\n  content: \"\\F3CB\"; }\n\n.fa-mixcloud:before {\n  content: \"\\F289\"; }\n\n.fa-mizuni:before {\n  content: \"\\F3CC\"; }\n\n.fa-mobile:before {\n  content: \"\\F10B\"; }\n\n.fa-mobile-alt:before {\n  content: \"\\F3CD\"; }\n\n.fa-modx:before {\n  content: \"\\F285\"; }\n\n.fa-monero:before {\n  content: \"\\F3D0\"; }\n\n.fa-money-bill:before {\n  content: \"\\F0D6\"; }\n\n.fa-money-bill-alt:before {\n  content: \"\\F3D1\"; }\n\n.fa-money-bill-wave:before {\n  content: \"\\F53A\"; }\n\n.fa-money-bill-wave-alt:before {\n  content: \"\\F53B\"; }\n\n.fa-money-check:before {\n  content: \"\\F53C\"; }\n\n.fa-money-check-alt:before {\n  content: \"\\F53D\"; }\n\n.fa-monument:before {\n  content: \"\\F5A6\"; }\n\n.fa-moon:before {\n  content: \"\\F186\"; }\n\n.fa-mortar-pestle:before {\n  content: \"\\F5A7\"; }\n\n.fa-mosque:before {\n  content: \"\\F678\"; }\n\n.fa-motorcycle:before {\n  content: \"\\F21C\"; }\n\n.fa-mountain:before {\n  content: \"\\F6FC\"; }\n\n.fa-mouse-pointer:before {\n  content: \"\\F245\"; }\n\n.fa-mug-hot:before {\n  content: \"\\F7B6\"; }\n\n.fa-music:before {\n  content: \"\\F001\"; }\n\n.fa-napster:before {\n  content: \"\\F3D2\"; }\n\n.fa-neos:before {\n  content: \"\\F612\"; }\n\n.fa-network-wired:before {\n  content: \"\\F6FF\"; }\n\n.fa-neuter:before {\n  content: \"\\F22C\"; }\n\n.fa-newspaper:before {\n  content: \"\\F1EA\"; }\n\n.fa-nimblr:before {\n  content: \"\\F5A8\"; }\n\n.fa-nintendo-switch:before {\n  content: \"\\F418\"; }\n\n.fa-node:before {\n  content: \"\\F419\"; }\n\n.fa-node-js:before {\n  content: \"\\F3D3\"; }\n\n.fa-not-equal:before {\n  content: \"\\F53E\"; }\n\n.fa-notes-medical:before {\n  content: \"\\F481\"; }\n\n.fa-npm:before {\n  content: \"\\F3D4\"; }\n\n.fa-ns8:before {\n  content: \"\\F3D5\"; }\n\n.fa-nutritionix:before {\n  content: \"\\F3D6\"; }\n\n.fa-object-group:before {\n  content: \"\\F247\"; }\n\n.fa-object-ungroup:before {\n  content: \"\\F248\"; }\n\n.fa-odnoklassniki:before {\n  content: \"\\F263\"; }\n\n.fa-odnoklassniki-square:before {\n  content: \"\\F264\"; }\n\n.fa-oil-can:before {\n  content: \"\\F613\"; }\n\n.fa-old-republic:before {\n  content: \"\\F510\"; }\n\n.fa-om:before {\n  content: \"\\F679\"; }\n\n.fa-opencart:before {\n  content: \"\\F23D\"; }\n\n.fa-openid:before {\n  content: \"\\F19B\"; }\n\n.fa-opera:before {\n  content: \"\\F26A\"; }\n\n.fa-optin-monster:before {\n  content: \"\\F23C\"; }\n\n.fa-osi:before {\n  content: \"\\F41A\"; }\n\n.fa-otter:before {\n  content: \"\\F700\"; }\n\n.fa-outdent:before {\n  content: \"\\F03B\"; }\n\n.fa-page4:before {\n  content: \"\\F3D7\"; }\n\n.fa-pagelines:before {\n  content: \"\\F18C\"; }\n\n.fa-pager:before {\n  content: \"\\F815\"; }\n\n.fa-paint-brush:before {\n  content: \"\\F1FC\"; }\n\n.fa-paint-roller:before {\n  content: \"\\F5AA\"; }\n\n.fa-palette:before {\n  content: \"\\F53F\"; }\n\n.fa-palfed:before {\n  content: \"\\F3D8\"; }\n\n.fa-pallet:before {\n  content: \"\\F482\"; }\n\n.fa-paper-plane:before {\n  content: \"\\F1D8\"; }\n\n.fa-paperclip:before {\n  content: \"\\F0C6\"; }\n\n.fa-parachute-box:before {\n  content: \"\\F4CD\"; }\n\n.fa-paragraph:before {\n  content: \"\\F1DD\"; }\n\n.fa-parking:before {\n  content: \"\\F540\"; }\n\n.fa-passport:before {\n  content: \"\\F5AB\"; }\n\n.fa-pastafarianism:before {\n  content: \"\\F67B\"; }\n\n.fa-paste:before {\n  content: \"\\F0EA\"; }\n\n.fa-patreon:before {\n  content: \"\\F3D9\"; }\n\n.fa-pause:before {\n  content: \"\\F04C\"; }\n\n.fa-pause-circle:before {\n  content: \"\\F28B\"; }\n\n.fa-paw:before {\n  content: \"\\F1B0\"; }\n\n.fa-paypal:before {\n  content: \"\\F1ED\"; }\n\n.fa-peace:before {\n  content: \"\\F67C\"; }\n\n.fa-pen:before {\n  content: \"\\F304\"; }\n\n.fa-pen-alt:before {\n  content: \"\\F305\"; }\n\n.fa-pen-fancy:before {\n  content: \"\\F5AC\"; }\n\n.fa-pen-nib:before {\n  content: \"\\F5AD\"; }\n\n.fa-pen-square:before {\n  content: \"\\F14B\"; }\n\n.fa-pencil-alt:before {\n  content: \"\\F303\"; }\n\n.fa-pencil-ruler:before {\n  content: \"\\F5AE\"; }\n\n.fa-penny-arcade:before {\n  content: \"\\F704\"; }\n\n.fa-people-carry:before {\n  content: \"\\F4CE\"; }\n\n.fa-pepper-hot:before {\n  content: \"\\F816\"; }\n\n.fa-percent:before {\n  content: \"\\F295\"; }\n\n.fa-percentage:before {\n  content: \"\\F541\"; }\n\n.fa-periscope:before {\n  content: \"\\F3DA\"; }\n\n.fa-person-booth:before {\n  content: \"\\F756\"; }\n\n.fa-phabricator:before {\n  content: \"\\F3DB\"; }\n\n.fa-phoenix-framework:before {\n  content: \"\\F3DC\"; }\n\n.fa-phoenix-squadron:before {\n  content: \"\\F511\"; }\n\n.fa-phone:before {\n  content: \"\\F095\"; }\n\n.fa-phone-slash:before {\n  content: \"\\F3DD\"; }\n\n.fa-phone-square:before {\n  content: \"\\F098\"; }\n\n.fa-phone-volume:before {\n  content: \"\\F2A0\"; }\n\n.fa-php:before {\n  content: \"\\F457\"; }\n\n.fa-pied-piper:before {\n  content: \"\\F2AE\"; }\n\n.fa-pied-piper-alt:before {\n  content: \"\\F1A8\"; }\n\n.fa-pied-piper-hat:before {\n  content: \"\\F4E5\"; }\n\n.fa-pied-piper-pp:before {\n  content: \"\\F1A7\"; }\n\n.fa-piggy-bank:before {\n  content: \"\\F4D3\"; }\n\n.fa-pills:before {\n  content: \"\\F484\"; }\n\n.fa-pinterest:before {\n  content: \"\\F0D2\"; }\n\n.fa-pinterest-p:before {\n  content: \"\\F231\"; }\n\n.fa-pinterest-square:before {\n  content: \"\\F0D3\"; }\n\n.fa-pizza-slice:before {\n  content: \"\\F818\"; }\n\n.fa-place-of-worship:before {\n  content: \"\\F67F\"; }\n\n.fa-plane:before {\n  content: \"\\F072\"; }\n\n.fa-plane-arrival:before {\n  content: \"\\F5AF\"; }\n\n.fa-plane-departure:before {\n  content: \"\\F5B0\"; }\n\n.fa-play:before {\n  content: \"\\F04B\"; }\n\n.fa-play-circle:before {\n  content: \"\\F144\"; }\n\n.fa-playstation:before {\n  content: \"\\F3DF\"; }\n\n.fa-plug:before {\n  content: \"\\F1E6\"; }\n\n.fa-plus:before {\n  content: \"\\F067\"; }\n\n.fa-plus-circle:before {\n  content: \"\\F055\"; }\n\n.fa-plus-square:before {\n  content: \"\\F0FE\"; }\n\n.fa-podcast:before {\n  content: \"\\F2CE\"; }\n\n.fa-poll:before {\n  content: \"\\F681\"; }\n\n.fa-poll-h:before {\n  content: \"\\F682\"; }\n\n.fa-poo:before {\n  content: \"\\F2FE\"; }\n\n.fa-poo-storm:before {\n  content: \"\\F75A\"; }\n\n.fa-poop:before {\n  content: \"\\F619\"; }\n\n.fa-portrait:before {\n  content: \"\\F3E0\"; }\n\n.fa-pound-sign:before {\n  content: \"\\F154\"; }\n\n.fa-power-off:before {\n  content: \"\\F011\"; }\n\n.fa-pray:before {\n  content: \"\\F683\"; }\n\n.fa-praying-hands:before {\n  content: \"\\F684\"; }\n\n.fa-prescription:before {\n  content: \"\\F5B1\"; }\n\n.fa-prescription-bottle:before {\n  content: \"\\F485\"; }\n\n.fa-prescription-bottle-alt:before {\n  content: \"\\F486\"; }\n\n.fa-print:before {\n  content: \"\\F02F\"; }\n\n.fa-procedures:before {\n  content: \"\\F487\"; }\n\n.fa-product-hunt:before {\n  content: \"\\F288\"; }\n\n.fa-project-diagram:before {\n  content: \"\\F542\"; }\n\n.fa-pushed:before {\n  content: \"\\F3E1\"; }\n\n.fa-puzzle-piece:before {\n  content: \"\\F12E\"; }\n\n.fa-python:before {\n  content: \"\\F3E2\"; }\n\n.fa-qq:before {\n  content: \"\\F1D6\"; }\n\n.fa-qrcode:before {\n  content: \"\\F029\"; }\n\n.fa-question:before {\n  content: \"\\F128\"; }\n\n.fa-question-circle:before {\n  content: \"\\F059\"; }\n\n.fa-quidditch:before {\n  content: \"\\F458\"; }\n\n.fa-quinscape:before {\n  content: \"\\F459\"; }\n\n.fa-quora:before {\n  content: \"\\F2C4\"; }\n\n.fa-quote-left:before {\n  content: \"\\F10D\"; }\n\n.fa-quote-right:before {\n  content: \"\\F10E\"; }\n\n.fa-quran:before {\n  content: \"\\F687\"; }\n\n.fa-r-project:before {\n  content: \"\\F4F7\"; }\n\n.fa-radiation:before {\n  content: \"\\F7B9\"; }\n\n.fa-radiation-alt:before {\n  content: \"\\F7BA\"; }\n\n.fa-rainbow:before {\n  content: \"\\F75B\"; }\n\n.fa-random:before {\n  content: \"\\F074\"; }\n\n.fa-raspberry-pi:before {\n  content: \"\\F7BB\"; }\n\n.fa-ravelry:before {\n  content: \"\\F2D9\"; }\n\n.fa-react:before {\n  content: \"\\F41B\"; }\n\n.fa-reacteurope:before {\n  content: \"\\F75D\"; }\n\n.fa-readme:before {\n  content: \"\\F4D5\"; }\n\n.fa-rebel:before {\n  content: \"\\F1D0\"; }\n\n.fa-receipt:before {\n  content: \"\\F543\"; }\n\n.fa-recycle:before {\n  content: \"\\F1B8\"; }\n\n.fa-red-river:before {\n  content: \"\\F3E3\"; }\n\n.fa-reddit:before {\n  content: \"\\F1A1\"; }\n\n.fa-reddit-alien:before {\n  content: \"\\F281\"; }\n\n.fa-reddit-square:before {\n  content: \"\\F1A2\"; }\n\n.fa-redhat:before {\n  content: \"\\F7BC\"; }\n\n.fa-redo:before {\n  content: \"\\F01E\"; }\n\n.fa-redo-alt:before {\n  content: \"\\F2F9\"; }\n\n.fa-registered:before {\n  content: \"\\F25D\"; }\n\n.fa-renren:before {\n  content: \"\\F18B\"; }\n\n.fa-reply:before {\n  content: \"\\F3E5\"; }\n\n.fa-reply-all:before {\n  content: \"\\F122\"; }\n\n.fa-replyd:before {\n  content: \"\\F3E6\"; }\n\n.fa-republican:before {\n  content: \"\\F75E\"; }\n\n.fa-researchgate:before {\n  content: \"\\F4F8\"; }\n\n.fa-resolving:before {\n  content: \"\\F3E7\"; }\n\n.fa-restroom:before {\n  content: \"\\F7BD\"; }\n\n.fa-retweet:before {\n  content: \"\\F079\"; }\n\n.fa-rev:before {\n  content: \"\\F5B2\"; }\n\n.fa-ribbon:before {\n  content: \"\\F4D6\"; }\n\n.fa-ring:before {\n  content: \"\\F70B\"; }\n\n.fa-road:before {\n  content: \"\\F018\"; }\n\n.fa-robot:before {\n  content: \"\\F544\"; }\n\n.fa-rocket:before {\n  content: \"\\F135\"; }\n\n.fa-rocketchat:before {\n  content: \"\\F3E8\"; }\n\n.fa-rockrms:before {\n  content: \"\\F3E9\"; }\n\n.fa-route:before {\n  content: \"\\F4D7\"; }\n\n.fa-rss:before {\n  content: \"\\F09E\"; }\n\n.fa-rss-square:before {\n  content: \"\\F143\"; }\n\n.fa-ruble-sign:before {\n  content: \"\\F158\"; }\n\n.fa-ruler:before {\n  content: \"\\F545\"; }\n\n.fa-ruler-combined:before {\n  content: \"\\F546\"; }\n\n.fa-ruler-horizontal:before {\n  content: \"\\F547\"; }\n\n.fa-ruler-vertical:before {\n  content: \"\\F548\"; }\n\n.fa-running:before {\n  content: \"\\F70C\"; }\n\n.fa-rupee-sign:before {\n  content: \"\\F156\"; }\n\n.fa-sad-cry:before {\n  content: \"\\F5B3\"; }\n\n.fa-sad-tear:before {\n  content: \"\\F5B4\"; }\n\n.fa-safari:before {\n  content: \"\\F267\"; }\n\n.fa-sass:before {\n  content: \"\\F41E\"; }\n\n.fa-satellite:before {\n  content: \"\\F7BF\"; }\n\n.fa-satellite-dish:before {\n  content: \"\\F7C0\"; }\n\n.fa-save:before {\n  content: \"\\F0C7\"; }\n\n.fa-schlix:before {\n  content: \"\\F3EA\"; }\n\n.fa-school:before {\n  content: \"\\F549\"; }\n\n.fa-screwdriver:before {\n  content: \"\\F54A\"; }\n\n.fa-scribd:before {\n  content: \"\\F28A\"; }\n\n.fa-scroll:before {\n  content: \"\\F70E\"; }\n\n.fa-sd-card:before {\n  content: \"\\F7C2\"; }\n\n.fa-search:before {\n  content: \"\\F002\"; }\n\n.fa-search-dollar:before {\n  content: \"\\F688\"; }\n\n.fa-search-location:before {\n  content: \"\\F689\"; }\n\n.fa-search-minus:before {\n  content: \"\\F010\"; }\n\n.fa-search-plus:before {\n  content: \"\\F00E\"; }\n\n.fa-searchengin:before {\n  content: \"\\F3EB\"; }\n\n.fa-seedling:before {\n  content: \"\\F4D8\"; }\n\n.fa-sellcast:before {\n  content: \"\\F2DA\"; }\n\n.fa-sellsy:before {\n  content: \"\\F213\"; }\n\n.fa-server:before {\n  content: \"\\F233\"; }\n\n.fa-servicestack:before {\n  content: \"\\F3EC\"; }\n\n.fa-shapes:before {\n  content: \"\\F61F\"; }\n\n.fa-share:before {\n  content: \"\\F064\"; }\n\n.fa-share-alt:before {\n  content: \"\\F1E0\"; }\n\n.fa-share-alt-square:before {\n  content: \"\\F1E1\"; }\n\n.fa-share-square:before {\n  content: \"\\F14D\"; }\n\n.fa-shekel-sign:before {\n  content: \"\\F20B\"; }\n\n.fa-shield-alt:before {\n  content: \"\\F3ED\"; }\n\n.fa-ship:before {\n  content: \"\\F21A\"; }\n\n.fa-shipping-fast:before {\n  content: \"\\F48B\"; }\n\n.fa-shirtsinbulk:before {\n  content: \"\\F214\"; }\n\n.fa-shoe-prints:before {\n  content: \"\\F54B\"; }\n\n.fa-shopping-bag:before {\n  content: \"\\F290\"; }\n\n.fa-shopping-basket:before {\n  content: \"\\F291\"; }\n\n.fa-shopping-cart:before {\n  content: \"\\F07A\"; }\n\n.fa-shopware:before {\n  content: \"\\F5B5\"; }\n\n.fa-shower:before {\n  content: \"\\F2CC\"; }\n\n.fa-shuttle-van:before {\n  content: \"\\F5B6\"; }\n\n.fa-sign:before {\n  content: \"\\F4D9\"; }\n\n.fa-sign-in-alt:before {\n  content: \"\\F2F6\"; }\n\n.fa-sign-language:before {\n  content: \"\\F2A7\"; }\n\n.fa-sign-out-alt:before {\n  content: \"\\F2F5\"; }\n\n.fa-signal:before {\n  content: \"\\F012\"; }\n\n.fa-signature:before {\n  content: \"\\F5B7\"; }\n\n.fa-sim-card:before {\n  content: \"\\F7C4\"; }\n\n.fa-simplybuilt:before {\n  content: \"\\F215\"; }\n\n.fa-sistrix:before {\n  content: \"\\F3EE\"; }\n\n.fa-sitemap:before {\n  content: \"\\F0E8\"; }\n\n.fa-sith:before {\n  content: \"\\F512\"; }\n\n.fa-skating:before {\n  content: \"\\F7C5\"; }\n\n.fa-sketch:before {\n  content: \"\\F7C6\"; }\n\n.fa-skiing:before {\n  content: \"\\F7C9\"; }\n\n.fa-skiing-nordic:before {\n  content: \"\\F7CA\"; }\n\n.fa-skull:before {\n  content: \"\\F54C\"; }\n\n.fa-skull-crossbones:before {\n  content: \"\\F714\"; }\n\n.fa-skyatlas:before {\n  content: \"\\F216\"; }\n\n.fa-skype:before {\n  content: \"\\F17E\"; }\n\n.fa-slack:before {\n  content: \"\\F198\"; }\n\n.fa-slack-hash:before {\n  content: \"\\F3EF\"; }\n\n.fa-slash:before {\n  content: \"\\F715\"; }\n\n.fa-sleigh:before {\n  content: \"\\F7CC\"; }\n\n.fa-sliders-h:before {\n  content: \"\\F1DE\"; }\n\n.fa-slideshare:before {\n  content: \"\\F1E7\"; }\n\n.fa-smile:before {\n  content: \"\\F118\"; }\n\n.fa-smile-beam:before {\n  content: \"\\F5B8\"; }\n\n.fa-smile-wink:before {\n  content: \"\\F4DA\"; }\n\n.fa-smog:before {\n  content: \"\\F75F\"; }\n\n.fa-smoking:before {\n  content: \"\\F48D\"; }\n\n.fa-smoking-ban:before {\n  content: \"\\F54D\"; }\n\n.fa-sms:before {\n  content: \"\\F7CD\"; }\n\n.fa-snapchat:before {\n  content: \"\\F2AB\"; }\n\n.fa-snapchat-ghost:before {\n  content: \"\\F2AC\"; }\n\n.fa-snapchat-square:before {\n  content: \"\\F2AD\"; }\n\n.fa-snowboarding:before {\n  content: \"\\F7CE\"; }\n\n.fa-snowflake:before {\n  content: \"\\F2DC\"; }\n\n.fa-snowman:before {\n  content: \"\\F7D0\"; }\n\n.fa-snowplow:before {\n  content: \"\\F7D2\"; }\n\n.fa-socks:before {\n  content: \"\\F696\"; }\n\n.fa-solar-panel:before {\n  content: \"\\F5BA\"; }\n\n.fa-sort:before {\n  content: \"\\F0DC\"; }\n\n.fa-sort-alpha-down:before {\n  content: \"\\F15D\"; }\n\n.fa-sort-alpha-up:before {\n  content: \"\\F15E\"; }\n\n.fa-sort-amount-down:before {\n  content: \"\\F160\"; }\n\n.fa-sort-amount-up:before {\n  content: \"\\F161\"; }\n\n.fa-sort-down:before {\n  content: \"\\F0DD\"; }\n\n.fa-sort-numeric-down:before {\n  content: \"\\F162\"; }\n\n.fa-sort-numeric-up:before {\n  content: \"\\F163\"; }\n\n.fa-sort-up:before {\n  content: \"\\F0DE\"; }\n\n.fa-soundcloud:before {\n  content: \"\\F1BE\"; }\n\n.fa-sourcetree:before {\n  content: \"\\F7D3\"; }\n\n.fa-spa:before {\n  content: \"\\F5BB\"; }\n\n.fa-space-shuttle:before {\n  content: \"\\F197\"; }\n\n.fa-speakap:before {\n  content: \"\\F3F3\"; }\n\n.fa-spider:before {\n  content: \"\\F717\"; }\n\n.fa-spinner:before {\n  content: \"\\F110\"; }\n\n.fa-splotch:before {\n  content: \"\\F5BC\"; }\n\n.fa-spotify:before {\n  content: \"\\F1BC\"; }\n\n.fa-spray-can:before {\n  content: \"\\F5BD\"; }\n\n.fa-square:before {\n  content: \"\\F0C8\"; }\n\n.fa-square-full:before {\n  content: \"\\F45C\"; }\n\n.fa-square-root-alt:before {\n  content: \"\\F698\"; }\n\n.fa-squarespace:before {\n  content: \"\\F5BE\"; }\n\n.fa-stack-exchange:before {\n  content: \"\\F18D\"; }\n\n.fa-stack-overflow:before {\n  content: \"\\F16C\"; }\n\n.fa-stamp:before {\n  content: \"\\F5BF\"; }\n\n.fa-star:before {\n  content: \"\\F005\"; }\n\n.fa-star-and-crescent:before {\n  content: \"\\F699\"; }\n\n.fa-star-half:before {\n  content: \"\\F089\"; }\n\n.fa-star-half-alt:before {\n  content: \"\\F5C0\"; }\n\n.fa-star-of-david:before {\n  content: \"\\F69A\"; }\n\n.fa-star-of-life:before {\n  content: \"\\F621\"; }\n\n.fa-staylinked:before {\n  content: \"\\F3F5\"; }\n\n.fa-steam:before {\n  content: \"\\F1B6\"; }\n\n.fa-steam-square:before {\n  content: \"\\F1B7\"; }\n\n.fa-steam-symbol:before {\n  content: \"\\F3F6\"; }\n\n.fa-step-backward:before {\n  content: \"\\F048\"; }\n\n.fa-step-forward:before {\n  content: \"\\F051\"; }\n\n.fa-stethoscope:before {\n  content: \"\\F0F1\"; }\n\n.fa-sticker-mule:before {\n  content: \"\\F3F7\"; }\n\n.fa-sticky-note:before {\n  content: \"\\F249\"; }\n\n.fa-stop:before {\n  content: \"\\F04D\"; }\n\n.fa-stop-circle:before {\n  content: \"\\F28D\"; }\n\n.fa-stopwatch:before {\n  content: \"\\F2F2\"; }\n\n.fa-store:before {\n  content: \"\\F54E\"; }\n\n.fa-store-alt:before {\n  content: \"\\F54F\"; }\n\n.fa-strava:before {\n  content: \"\\F428\"; }\n\n.fa-stream:before {\n  content: \"\\F550\"; }\n\n.fa-street-view:before {\n  content: \"\\F21D\"; }\n\n.fa-strikethrough:before {\n  content: \"\\F0CC\"; }\n\n.fa-stripe:before {\n  content: \"\\F429\"; }\n\n.fa-stripe-s:before {\n  content: \"\\F42A\"; }\n\n.fa-stroopwafel:before {\n  content: \"\\F551\"; }\n\n.fa-studiovinari:before {\n  content: \"\\F3F8\"; }\n\n.fa-stumbleupon:before {\n  content: \"\\F1A4\"; }\n\n.fa-stumbleupon-circle:before {\n  content: \"\\F1A3\"; }\n\n.fa-subscript:before {\n  content: \"\\F12C\"; }\n\n.fa-subway:before {\n  content: \"\\F239\"; }\n\n.fa-suitcase:before {\n  content: \"\\F0F2\"; }\n\n.fa-suitcase-rolling:before {\n  content: \"\\F5C1\"; }\n\n.fa-sun:before {\n  content: \"\\F185\"; }\n\n.fa-superpowers:before {\n  content: \"\\F2DD\"; }\n\n.fa-superscript:before {\n  content: \"\\F12B\"; }\n\n.fa-supple:before {\n  content: \"\\F3F9\"; }\n\n.fa-surprise:before {\n  content: \"\\F5C2\"; }\n\n.fa-suse:before {\n  content: \"\\F7D6\"; }\n\n.fa-swatchbook:before {\n  content: \"\\F5C3\"; }\n\n.fa-swimmer:before {\n  content: \"\\F5C4\"; }\n\n.fa-swimming-pool:before {\n  content: \"\\F5C5\"; }\n\n.fa-synagogue:before {\n  content: \"\\F69B\"; }\n\n.fa-sync:before {\n  content: \"\\F021\"; }\n\n.fa-sync-alt:before {\n  content: \"\\F2F1\"; }\n\n.fa-syringe:before {\n  content: \"\\F48E\"; }\n\n.fa-table:before {\n  content: \"\\F0CE\"; }\n\n.fa-table-tennis:before {\n  content: \"\\F45D\"; }\n\n.fa-tablet:before {\n  content: \"\\F10A\"; }\n\n.fa-tablet-alt:before {\n  content: \"\\F3FA\"; }\n\n.fa-tablets:before {\n  content: \"\\F490\"; }\n\n.fa-tachometer-alt:before {\n  content: \"\\F3FD\"; }\n\n.fa-tag:before {\n  content: \"\\F02B\"; }\n\n.fa-tags:before {\n  content: \"\\F02C\"; }\n\n.fa-tape:before {\n  content: \"\\F4DB\"; }\n\n.fa-tasks:before {\n  content: \"\\F0AE\"; }\n\n.fa-taxi:before {\n  content: \"\\F1BA\"; }\n\n.fa-teamspeak:before {\n  content: \"\\F4F9\"; }\n\n.fa-teeth:before {\n  content: \"\\F62E\"; }\n\n.fa-teeth-open:before {\n  content: \"\\F62F\"; }\n\n.fa-telegram:before {\n  content: \"\\F2C6\"; }\n\n.fa-telegram-plane:before {\n  content: \"\\F3FE\"; }\n\n.fa-temperature-high:before {\n  content: \"\\F769\"; }\n\n.fa-temperature-low:before {\n  content: \"\\F76B\"; }\n\n.fa-tencent-weibo:before {\n  content: \"\\F1D5\"; }\n\n.fa-tenge:before {\n  content: \"\\F7D7\"; }\n\n.fa-terminal:before {\n  content: \"\\F120\"; }\n\n.fa-text-height:before {\n  content: \"\\F034\"; }\n\n.fa-text-width:before {\n  content: \"\\F035\"; }\n\n.fa-th:before {\n  content: \"\\F00A\"; }\n\n.fa-th-large:before {\n  content: \"\\F009\"; }\n\n.fa-th-list:before {\n  content: \"\\F00B\"; }\n\n.fa-the-red-yeti:before {\n  content: \"\\F69D\"; }\n\n.fa-theater-masks:before {\n  content: \"\\F630\"; }\n\n.fa-themeco:before {\n  content: \"\\F5C6\"; }\n\n.fa-themeisle:before {\n  content: \"\\F2B2\"; }\n\n.fa-thermometer:before {\n  content: \"\\F491\"; }\n\n.fa-thermometer-empty:before {\n  content: \"\\F2CB\"; }\n\n.fa-thermometer-full:before {\n  content: \"\\F2C7\"; }\n\n.fa-thermometer-half:before {\n  content: \"\\F2C9\"; }\n\n.fa-thermometer-quarter:before {\n  content: \"\\F2CA\"; }\n\n.fa-thermometer-three-quarters:before {\n  content: \"\\F2C8\"; }\n\n.fa-think-peaks:before {\n  content: \"\\F731\"; }\n\n.fa-thumbs-down:before {\n  content: \"\\F165\"; }\n\n.fa-thumbs-up:before {\n  content: \"\\F164\"; }\n\n.fa-thumbtack:before {\n  content: \"\\F08D\"; }\n\n.fa-ticket-alt:before {\n  content: \"\\F3FF\"; }\n\n.fa-times:before {\n  content: \"\\F00D\"; }\n\n.fa-times-circle:before {\n  content: \"\\F057\"; }\n\n.fa-tint:before {\n  content: \"\\F043\"; }\n\n.fa-tint-slash:before {\n  content: \"\\F5C7\"; }\n\n.fa-tired:before {\n  content: \"\\F5C8\"; }\n\n.fa-toggle-off:before {\n  content: \"\\F204\"; }\n\n.fa-toggle-on:before {\n  content: \"\\F205\"; }\n\n.fa-toilet:before {\n  content: \"\\F7D8\"; }\n\n.fa-toilet-paper:before {\n  content: \"\\F71E\"; }\n\n.fa-toolbox:before {\n  content: \"\\F552\"; }\n\n.fa-tools:before {\n  content: \"\\F7D9\"; }\n\n.fa-tooth:before {\n  content: \"\\F5C9\"; }\n\n.fa-torah:before {\n  content: \"\\F6A0\"; }\n\n.fa-torii-gate:before {\n  content: \"\\F6A1\"; }\n\n.fa-tractor:before {\n  content: \"\\F722\"; }\n\n.fa-trade-federation:before {\n  content: \"\\F513\"; }\n\n.fa-trademark:before {\n  content: \"\\F25C\"; }\n\n.fa-traffic-light:before {\n  content: \"\\F637\"; }\n\n.fa-train:before {\n  content: \"\\F238\"; }\n\n.fa-tram:before {\n  content: \"\\F7DA\"; }\n\n.fa-transgender:before {\n  content: \"\\F224\"; }\n\n.fa-transgender-alt:before {\n  content: \"\\F225\"; }\n\n.fa-trash:before {\n  content: \"\\F1F8\"; }\n\n.fa-trash-alt:before {\n  content: \"\\F2ED\"; }\n\n.fa-trash-restore:before {\n  content: \"\\F829\"; }\n\n.fa-trash-restore-alt:before {\n  content: \"\\F82A\"; }\n\n.fa-tree:before {\n  content: \"\\F1BB\"; }\n\n.fa-trello:before {\n  content: \"\\F181\"; }\n\n.fa-tripadvisor:before {\n  content: \"\\F262\"; }\n\n.fa-trophy:before {\n  content: \"\\F091\"; }\n\n.fa-truck:before {\n  content: \"\\F0D1\"; }\n\n.fa-truck-loading:before {\n  content: \"\\F4DE\"; }\n\n.fa-truck-monster:before {\n  content: \"\\F63B\"; }\n\n.fa-truck-moving:before {\n  content: \"\\F4DF\"; }\n\n.fa-truck-pickup:before {\n  content: \"\\F63C\"; }\n\n.fa-tshirt:before {\n  content: \"\\F553\"; }\n\n.fa-tty:before {\n  content: \"\\F1E4\"; }\n\n.fa-tumblr:before {\n  content: \"\\F173\"; }\n\n.fa-tumblr-square:before {\n  content: \"\\F174\"; }\n\n.fa-tv:before {\n  content: \"\\F26C\"; }\n\n.fa-twitch:before {\n  content: \"\\F1E8\"; }\n\n.fa-twitter:before {\n  content: \"\\F099\"; }\n\n.fa-twitter-square:before {\n  content: \"\\F081\"; }\n\n.fa-typo3:before {\n  content: \"\\F42B\"; }\n\n.fa-uber:before {\n  content: \"\\F402\"; }\n\n.fa-ubuntu:before {\n  content: \"\\F7DF\"; }\n\n.fa-uikit:before {\n  content: \"\\F403\"; }\n\n.fa-umbrella:before {\n  content: \"\\F0E9\"; }\n\n.fa-umbrella-beach:before {\n  content: \"\\F5CA\"; }\n\n.fa-underline:before {\n  content: \"\\F0CD\"; }\n\n.fa-undo:before {\n  content: \"\\F0E2\"; }\n\n.fa-undo-alt:before {\n  content: \"\\F2EA\"; }\n\n.fa-uniregistry:before {\n  content: \"\\F404\"; }\n\n.fa-universal-access:before {\n  content: \"\\F29A\"; }\n\n.fa-university:before {\n  content: \"\\F19C\"; }\n\n.fa-unlink:before {\n  content: \"\\F127\"; }\n\n.fa-unlock:before {\n  content: \"\\F09C\"; }\n\n.fa-unlock-alt:before {\n  content: \"\\F13E\"; }\n\n.fa-untappd:before {\n  content: \"\\F405\"; }\n\n.fa-upload:before {\n  content: \"\\F093\"; }\n\n.fa-ups:before {\n  content: \"\\F7E0\"; }\n\n.fa-usb:before {\n  content: \"\\F287\"; }\n\n.fa-user:before {\n  content: \"\\F007\"; }\n\n.fa-user-alt:before {\n  content: \"\\F406\"; }\n\n.fa-user-alt-slash:before {\n  content: \"\\F4FA\"; }\n\n.fa-user-astronaut:before {\n  content: \"\\F4FB\"; }\n\n.fa-user-check:before {\n  content: \"\\F4FC\"; }\n\n.fa-user-circle:before {\n  content: \"\\F2BD\"; }\n\n.fa-user-clock:before {\n  content: \"\\F4FD\"; }\n\n.fa-user-cog:before {\n  content: \"\\F4FE\"; }\n\n.fa-user-edit:before {\n  content: \"\\F4FF\"; }\n\n.fa-user-friends:before {\n  content: \"\\F500\"; }\n\n.fa-user-graduate:before {\n  content: \"\\F501\"; }\n\n.fa-user-injured:before {\n  content: \"\\F728\"; }\n\n.fa-user-lock:before {\n  content: \"\\F502\"; }\n\n.fa-user-md:before {\n  content: \"\\F0F0\"; }\n\n.fa-user-minus:before {\n  content: \"\\F503\"; }\n\n.fa-user-ninja:before {\n  content: \"\\F504\"; }\n\n.fa-user-nurse:before {\n  content: \"\\F82F\"; }\n\n.fa-user-plus:before {\n  content: \"\\F234\"; }\n\n.fa-user-secret:before {\n  content: \"\\F21B\"; }\n\n.fa-user-shield:before {\n  content: \"\\F505\"; }\n\n.fa-user-slash:before {\n  content: \"\\F506\"; }\n\n.fa-user-tag:before {\n  content: \"\\F507\"; }\n\n.fa-user-tie:before {\n  content: \"\\F508\"; }\n\n.fa-user-times:before {\n  content: \"\\F235\"; }\n\n.fa-users:before {\n  content: \"\\F0C0\"; }\n\n.fa-users-cog:before {\n  content: \"\\F509\"; }\n\n.fa-usps:before {\n  content: \"\\F7E1\"; }\n\n.fa-ussunnah:before {\n  content: \"\\F407\"; }\n\n.fa-utensil-spoon:before {\n  content: \"\\F2E5\"; }\n\n.fa-utensils:before {\n  content: \"\\F2E7\"; }\n\n.fa-vaadin:before {\n  content: \"\\F408\"; }\n\n.fa-vector-square:before {\n  content: \"\\F5CB\"; }\n\n.fa-venus:before {\n  content: \"\\F221\"; }\n\n.fa-venus-double:before {\n  content: \"\\F226\"; }\n\n.fa-venus-mars:before {\n  content: \"\\F228\"; }\n\n.fa-viacoin:before {\n  content: \"\\F237\"; }\n\n.fa-viadeo:before {\n  content: \"\\F2A9\"; }\n\n.fa-viadeo-square:before {\n  content: \"\\F2AA\"; }\n\n.fa-vial:before {\n  content: \"\\F492\"; }\n\n.fa-vials:before {\n  content: \"\\F493\"; }\n\n.fa-viber:before {\n  content: \"\\F409\"; }\n\n.fa-video:before {\n  content: \"\\F03D\"; }\n\n.fa-video-slash:before {\n  content: \"\\F4E2\"; }\n\n.fa-vihara:before {\n  content: \"\\F6A7\"; }\n\n.fa-vimeo:before {\n  content: \"\\F40A\"; }\n\n.fa-vimeo-square:before {\n  content: \"\\F194\"; }\n\n.fa-vimeo-v:before {\n  content: \"\\F27D\"; }\n\n.fa-vine:before {\n  content: \"\\F1CA\"; }\n\n.fa-vk:before {\n  content: \"\\F189\"; }\n\n.fa-vnv:before {\n  content: \"\\F40B\"; }\n\n.fa-volleyball-ball:before {\n  content: \"\\F45F\"; }\n\n.fa-volume-down:before {\n  content: \"\\F027\"; }\n\n.fa-volume-mute:before {\n  content: \"\\F6A9\"; }\n\n.fa-volume-off:before {\n  content: \"\\F026\"; }\n\n.fa-volume-up:before {\n  content: \"\\F028\"; }\n\n.fa-vote-yea:before {\n  content: \"\\F772\"; }\n\n.fa-vr-cardboard:before {\n  content: \"\\F729\"; }\n\n.fa-vuejs:before {\n  content: \"\\F41F\"; }\n\n.fa-walking:before {\n  content: \"\\F554\"; }\n\n.fa-wallet:before {\n  content: \"\\F555\"; }\n\n.fa-warehouse:before {\n  content: \"\\F494\"; }\n\n.fa-water:before {\n  content: \"\\F773\"; }\n\n.fa-weebly:before {\n  content: \"\\F5CC\"; }\n\n.fa-weibo:before {\n  content: \"\\F18A\"; }\n\n.fa-weight:before {\n  content: \"\\F496\"; }\n\n.fa-weight-hanging:before {\n  content: \"\\F5CD\"; }\n\n.fa-weixin:before {\n  content: \"\\F1D7\"; }\n\n.fa-whatsapp:before {\n  content: \"\\F232\"; }\n\n.fa-whatsapp-square:before {\n  content: \"\\F40C\"; }\n\n.fa-wheelchair:before {\n  content: \"\\F193\"; }\n\n.fa-whmcs:before {\n  content: \"\\F40D\"; }\n\n.fa-wifi:before {\n  content: \"\\F1EB\"; }\n\n.fa-wikipedia-w:before {\n  content: \"\\F266\"; }\n\n.fa-wind:before {\n  content: \"\\F72E\"; }\n\n.fa-window-close:before {\n  content: \"\\F410\"; }\n\n.fa-window-maximize:before {\n  content: \"\\F2D0\"; }\n\n.fa-window-minimize:before {\n  content: \"\\F2D1\"; }\n\n.fa-window-restore:before {\n  content: \"\\F2D2\"; }\n\n.fa-windows:before {\n  content: \"\\F17A\"; }\n\n.fa-wine-bottle:before {\n  content: \"\\F72F\"; }\n\n.fa-wine-glass:before {\n  content: \"\\F4E3\"; }\n\n.fa-wine-glass-alt:before {\n  content: \"\\F5CE\"; }\n\n.fa-wix:before {\n  content: \"\\F5CF\"; }\n\n.fa-wizards-of-the-coast:before {\n  content: \"\\F730\"; }\n\n.fa-wolf-pack-battalion:before {\n  content: \"\\F514\"; }\n\n.fa-won-sign:before {\n  content: \"\\F159\"; }\n\n.fa-wordpress:before {\n  content: \"\\F19A\"; }\n\n.fa-wordpress-simple:before {\n  content: \"\\F411\"; }\n\n.fa-wpbeginner:before {\n  content: \"\\F297\"; }\n\n.fa-wpexplorer:before {\n  content: \"\\F2DE\"; }\n\n.fa-wpforms:before {\n  content: \"\\F298\"; }\n\n.fa-wpressr:before {\n  content: \"\\F3E4\"; }\n\n.fa-wrench:before {\n  content: \"\\F0AD\"; }\n\n.fa-x-ray:before {\n  content: \"\\F497\"; }\n\n.fa-xbox:before {\n  content: \"\\F412\"; }\n\n.fa-xing:before {\n  content: \"\\F168\"; }\n\n.fa-xing-square:before {\n  content: \"\\F169\"; }\n\n.fa-y-combinator:before {\n  content: \"\\F23B\"; }\n\n.fa-yahoo:before {\n  content: \"\\F19E\"; }\n\n.fa-yandex:before {\n  content: \"\\F413\"; }\n\n.fa-yandex-international:before {\n  content: \"\\F414\"; }\n\n.fa-yarn:before {\n  content: \"\\F7E3\"; }\n\n.fa-yelp:before {\n  content: \"\\F1E9\"; }\n\n.fa-yen-sign:before {\n  content: \"\\F157\"; }\n\n.fa-yin-yang:before {\n  content: \"\\F6AD\"; }\n\n.fa-yoast:before {\n  content: \"\\F2B1\"; }\n\n.fa-youtube:before {\n  content: \"\\F167\"; }\n\n.fa-youtube-square:before {\n  content: \"\\F431\"; }\n\n.fa-zhihu:before {\n  content: \"\\F63F\"; }\n\n.sr-only {\n  border: 0;\n  clip: rect(0, 0, 0, 0);\n  height: 1px;\n  margin: -1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px; }\n\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  clip: auto;\n  height: auto;\n  margin: 0;\n  overflow: visible;\n  position: static;\n  width: auto; }\n@font-face {\n  font-family: 'Font Awesome 5 Brands';\n  font-style: normal;\n  font-weight: normal;\n  font-display: auto;\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.eot")) + ");\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.woff2 */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.woff */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.ttf */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-brands-400.svg */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.svg")) + "#fontawesome) format(\"svg\"); }\n\n.fab {\n  font-family: 'Font Awesome 5 Brands'; }\n@font-face {\n  font-family: 'Font Awesome 5 Free';\n  font-style: normal;\n  font-weight: 400;\n  font-display: auto;\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.eot")) + ");\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.woff2 */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.woff */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.ttf */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-regular-400.svg */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.svg")) + "#fontawesome) format(\"svg\"); }\n\n.far {\n  font-family: 'Font Awesome 5 Free';\n  font-weight: 400; }\n@font-face {\n  font-family: 'Font Awesome 5 Free';\n  font-style: normal;\n  font-weight: 900;\n  font-display: auto;\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot")) + ");\n  src: url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.eot */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot")) + "?#iefix) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.woff2 */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2")) + ") format(\"woff2\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.woff */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff")) + ") format(\"woff\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.ttf */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf")) + ") format(\"truetype\"), url(" + escape(__webpack_require__(/*! ../webfonts/fa-solid-900.svg */ "./node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.svg")) + "#fontawesome) format(\"svg\"); }\n\n.fa,\n.fas {\n  font-family: 'Font Awesome 5 Free';\n  font-weight: 900; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue?vue&type=style&index=0&id=08f4c480&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue?vue&type=style&index=0&id=08f4c480&scoped=true&lang=css& ***!
@@ -6354,7 +6119,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-08f4c480] {\n   margin-top: -40px;\n}\n.mar2[data-v-08f4c480] {\n   margin-top: 70px;\n   width: 600px;\n   /*position: absolute;*/\n}\n.tm[data-v-08f4c480] {\n   height: 400px;\n}\n.alert[data-v-08f4c480] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-08f4c480] {\r\n   margin-top: -40px;\n}\n.mar2[data-v-08f4c480] {\r\n   margin-top: 70px;\r\n   width: 600px;\r\n   /*position: absolute;*/\n}\n.tm[data-v-08f4c480] {\r\n   height: 400px;\n}\n.alert[data-v-08f4c480] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6373,7 +6138,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-2ef50d88] {\n   margin-top: -40px;\n}\n.mar2[data-v-2ef50d88] {\n   margin-top: 70px;\n   width: 600px;\n   /*position: absolute;*/\n}\n.tm[data-v-2ef50d88] {\n   height: 400px;\n}\n.alert[data-v-2ef50d88] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-2ef50d88] {\r\n   margin-top: -40px;\n}\n.mar2[data-v-2ef50d88] {\r\n   margin-top: 70px;\r\n   width: 600px;\r\n   /*position: absolute;*/\n}\n.tm[data-v-2ef50d88] {\r\n   height: 400px;\n}\n.alert[data-v-2ef50d88] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6392,7 +6157,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.alert[data-v-703f366b] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n.v-table thead tr[data-v-703f366b]:first-child {\n   background-color: black;\n}\n", ""]);
+exports.push([module.i, "\n.alert[data-v-703f366b] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\n.v-table thead tr[data-v-703f366b]:first-child {\r\n   background-color: black;\n}\r\n", ""]);
 
 // exports
 
@@ -6411,7 +6176,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-53ba8bac] {\n   margin-bottom: 5em;\n}\n.alert[data-v-53ba8bac] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-53ba8bac] {\r\n   margin-bottom: 5em;\n}\n.alert[data-v-53ba8bac] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6430,7 +6195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-8befd466] {\n   margin-bottom: 5em;\n}\n.alert[data-v-8befd466] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-8befd466] {\r\n   margin-bottom: 5em;\n}\n.alert[data-v-8befd466] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6449,7 +6214,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.contenedor[data-v-43d17a09] {\n   width: 90%;\n   max-width: 1000px;\n   margin: auto;\n   overflow: hidden;\n   padding: 52px 0;\n}\n.footer[data-v-43d17a09] {\n   background: #2c3e50;\n   height: auto;\n}\n.titulo-footer[data-v-43d17a09] {\n   color: #fff;\n   text-align: center;\n   font-weight: 400;\n   font-size: 56px;\n}\n.subtitulo-footer[data-v-43d17a09] {\n   color: #fff;\n   text-align: center;\n   font-weight: 400;\n   font-size: 56px;\n   font-size: 16px;\n   margin-bottom: 64px;\n}\nform[data-v-43d17a09] {\n   display: flex;\n   width: 100%;\n   justify-content: space-between;\n   flex-wrap: wrap;\n   margin: auto;\n}\ninput[type=\"text\"][data-v-43d17a09],\ninput[type=\"email\"][data-v-43d17a09] {\n   display: inline-block;\n   width: 48%;\n   padding: 13px;\n   border: none;\n   color: #fff;\n   font-family: \"open sans\";\n   background: rgba(37, 37, 33, 0.7);\n   margin-bottom: 16px;\n   border-top: 5px solid rgba(37, 37, 33, 0.7);\n}\ninput[type=\"text\"][data-v-43d17a09]:focus,\ninput[type=\"email\"][data-v-43d17a09]:focus {\n   border-top: 5px solid rgba(255, 255, 255, 0.7);\n}\ntextarea[data-v-43d17a09] {\n   display: block;\n   width: 100%;\n   max-width: 100%;\n   min-width: 100%;\n   max-height: 200px;\n   min-height: 200px;\n   background: rgba(37, 37, 33, 0.7);\n   padding: 13px;\n   border: none;\n   color: #fff;\n   font-family: \"open sans\";\n   margin-bottom: 16px;\n}\ntextarea[data-v-43d17a09]:focus {\n   border-top: 5px solid rgba(255, 255, 255, 0.7);\n}\ninput[type=\"submit\"][data-v-43d17a09] {\n   display: inline-block;\n   padding: 13px;\n   border: none;\n   color: #fff;\n   background: rgba(37, 37, 33, 0.7);\n   width: 96px;\n}\n", ""]);
+exports.push([module.i, "\n.contenedor[data-v-43d17a09] {\r\n   width: 90%;\r\n   max-width: 1000px;\r\n   margin: auto;\r\n   overflow: hidden;\r\n   padding: 52px 0;\n}\n.footer[data-v-43d17a09] {\r\n   background: #2c3e50;\r\n   height: auto;\n}\n.titulo-footer[data-v-43d17a09] {\r\n   color: #fff;\r\n   text-align: center;\r\n   font-weight: 400;\r\n   font-size: 56px;\n}\n.subtitulo-footer[data-v-43d17a09] {\r\n   color: #fff;\r\n   text-align: center;\r\n   font-weight: 400;\r\n   font-size: 56px;\r\n   font-size: 16px;\r\n   margin-bottom: 64px;\n}\nform[data-v-43d17a09] {\r\n   display: flex;\r\n   width: 100%;\r\n   justify-content: space-between;\r\n   flex-wrap: wrap;\r\n   margin: auto;\n}\ninput[type=\"text\"][data-v-43d17a09],\r\ninput[type=\"email\"][data-v-43d17a09] {\r\n   display: inline-block;\r\n   width: 48%;\r\n   padding: 13px;\r\n   border: none;\r\n   color: #fff;\r\n   font-family: \"open sans\";\r\n   background: rgba(37, 37, 33, 0.7);\r\n   margin-bottom: 16px;\r\n   border-top: 5px solid rgba(37, 37, 33, 0.7);\n}\ninput[type=\"text\"][data-v-43d17a09]:focus,\r\ninput[type=\"email\"][data-v-43d17a09]:focus {\r\n   border-top: 5px solid rgba(255, 255, 255, 0.7);\n}\ntextarea[data-v-43d17a09] {\r\n   display: block;\r\n   width: 100%;\r\n   max-width: 100%;\r\n   min-width: 100%;\r\n   max-height: 200px;\r\n   min-height: 200px;\r\n   background: rgba(37, 37, 33, 0.7);\r\n   padding: 13px;\r\n   border: none;\r\n   color: #fff;\r\n   font-family: \"open sans\";\r\n   margin-bottom: 16px;\n}\ntextarea[data-v-43d17a09]:focus {\r\n   border-top: 5px solid rgba(255, 255, 255, 0.7);\n}\ninput[type=\"submit\"][data-v-43d17a09] {\r\n   display: inline-block;\r\n   padding: 13px;\r\n   border: none;\r\n   color: #fff;\r\n   background: rgba(37, 37, 33, 0.7);\r\n   width: 96px;\n}\r\n", ""]);
 
 // exports
 
@@ -6469,7 +6234,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.header[data-v-a1e93352] {\n   width: 100%;\n   height: 650px;\n   background-attachment: fixed;\n   background-size: cover;\n   position: relative;\n   overflow: hidden;\n   text-align: center;\n   background-image: url(" + escape(__webpack_require__(/*! ../../../img/Skewed.png */ "./resources/assets/img/Skewed.png")) + ");\n   background-position-y: 56px;\n}\n.header .textos[data-v-a1e93352] {\n   margin-top: 250px;\n}\n.header .titulo[data-v-a1e93352] {\n   font-size: 85px;\n}\n.header .subtitulo[data-v-a1e93352] {\n   font-size: 42px;\n   font-weight: 300;\n   margin-bottom: 32px;\n}\n.header .boton[data-v-a1e93352] {\n   display: inline-block;\n   padding: 6px;\n   padding-left: 40px;\n   padding-right: 40px;\n   border: 2px solid rgb(0, 70, 3);\n   color: rgb(0, 51, 20);\n   font-size: 19px;\n   text-align: center;\n   text-decoration: none;\n   border-radius: 16px;\n   z-index: 11;\n   position: relative;\n}\n.header a[data-v-a1e93352]:hover {\n   border: 2px solid rgb(23, 153, 29);\n   background-color: rgba(22, 153, 29, 0.5);\n}\n.sesgoabajo[data-v-a1e93352] {\n   z-index: 10;\n   position: absolute;\n   bottom: 0;\n   left: 0;\n   border-width: 0 0 35vh 100vw;\n   border-style: solid;\n   border-color: transparent transparent #fff transparent;\n}\n.container[data-v-a1e93352] {\n   -webkit-box-flex: 1;\n   -ms-flex: 1 1 100%;\n   flex: 1 1 100%;\n   margin: auto;\n   padding: 0px;\n   width: 100%;\n}\n@media screen and (max-width: 960px) {\n.header .textos[data-v-a1e93352] {\n      margin-top: 180px;\n}\n.header .titulo[data-v-a1e93352] {\n      font-size: 75px;\n}\n.header .subtitulo[data-v-a1e93352] {\n      font-size: 25px;\n      margin-bottom: 32px;\n}\n}\n@media screen and (max-width: 610px) {\n.header .textos[data-v-a1e93352] {\n      margin-top: 130px;\n}\n.header .titulo[data-v-a1e93352] {\n      font-size: 65px;\n}\n.header .subtitulo[data-v-a1e93352] {\n      font-size: 25px;\n      margin-bottom: 32px;\n}\n}\n@media screen and (max-width: 492px) {\n.header .textos[data-v-a1e93352] {\n      margin-top: 100px;\n}\n.header .titulo[data-v-a1e93352] {\n      font-size: 55px;\n}\n.header .subtitulo[data-v-a1e93352] {\n      font-size: 20px;\n      margin-bottom: 32px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.header[data-v-a1e93352] {\r\n   width: 100%;\r\n   height: 650px;\r\n   background-attachment: fixed;\r\n   background-size: cover;\r\n   position: relative;\r\n   overflow: hidden;\r\n   text-align: center;\r\n   background-image: url(" + escape(__webpack_require__(/*! ../../../img/Skewed.png */ "./resources/assets/img/Skewed.png")) + ");\r\n   background-position-y: 56px;\n}\n.header .textos[data-v-a1e93352] {\r\n   margin-top: 250px;\n}\n.header .titulo[data-v-a1e93352] {\r\n   font-size: 85px;\n}\n.header .subtitulo[data-v-a1e93352] {\r\n   font-size: 42px;\r\n   font-weight: 300;\r\n   margin-bottom: 32px;\n}\n.header .boton[data-v-a1e93352] {\r\n   display: inline-block;\r\n   padding: 6px;\r\n   padding-left: 40px;\r\n   padding-right: 40px;\r\n   border: 2px solid rgb(0, 70, 3);\r\n   color: rgb(0, 51, 20);\r\n   font-size: 19px;\r\n   text-align: center;\r\n   text-decoration: none;\r\n   border-radius: 16px;\r\n   z-index: 11;\r\n   position: relative;\n}\n.header a[data-v-a1e93352]:hover {\r\n   border: 2px solid rgb(23, 153, 29);\r\n   background-color: rgba(22, 153, 29, 0.5);\n}\n.sesgoabajo[data-v-a1e93352] {\r\n   z-index: 10;\r\n   position: absolute;\r\n   bottom: 0;\r\n   left: 0;\r\n   border-width: 0 0 35vh 100vw;\r\n   border-style: solid;\r\n   border-color: transparent transparent #fff transparent;\n}\n.container[data-v-a1e93352] {\r\n   -webkit-box-flex: 1;\r\n   -ms-flex: 1 1 100%;\r\n   flex: 1 1 100%;\r\n   margin: auto;\r\n   padding: 0px;\r\n   width: 100%;\n}\n@media screen and (max-width: 960px) {\n.header .textos[data-v-a1e93352] {\r\n      margin-top: 180px;\n}\n.header .titulo[data-v-a1e93352] {\r\n      font-size: 75px;\n}\n.header .subtitulo[data-v-a1e93352] {\r\n      font-size: 25px;\r\n      margin-bottom: 32px;\n}\n}\n@media screen and (max-width: 610px) {\n.header .textos[data-v-a1e93352] {\r\n      margin-top: 130px;\n}\n.header .titulo[data-v-a1e93352] {\r\n      font-size: 65px;\n}\n.header .subtitulo[data-v-a1e93352] {\r\n      font-size: 25px;\r\n      margin-bottom: 32px;\n}\n}\n@media screen and (max-width: 492px) {\n.header .textos[data-v-a1e93352] {\r\n      margin-top: 100px;\n}\n.header .titulo[data-v-a1e93352] {\r\n      font-size: 55px;\n}\n.header .subtitulo[data-v-a1e93352] {\r\n      font-size: 20px;\r\n      margin-bottom: 32px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -6488,7 +6253,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.alert[data-v-87b5cdc2] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.alert[data-v-87b5cdc2] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6507,7 +6272,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.box1[data-v-09dcf67a] {\n   margin-top: 40px;\n}\n.box2[data-v-09dcf67a] {\n   margin-top: 90px;\n}\n.father[data-v-09dcf67a] {\n   background-color: red;\n}\n.center[data-v-09dcf67a] {\n   justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.box1[data-v-09dcf67a] {\r\n   margin-top: 40px;\n}\n.box2[data-v-09dcf67a] {\r\n   margin-top: 90px;\n}\n.father[data-v-09dcf67a] {\r\n   background-color: red;\n}\n.center[data-v-09dcf67a] {\r\n   justify-content: center;\n}\r\n", ""]);
 
 // exports
 
@@ -6526,7 +6291,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-efb28c82] {\n   margin-bottom: 5em;\n}\n.alert[data-v-efb28c82] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-efb28c82] {\r\n   margin-bottom: 5em;\n}\n.alert[data-v-efb28c82] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6545,26 +6310,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.mar[data-v-6c0c1562] {\n   margin-bottom: 5em;\n}\n.alert[data-v-6c0c1562] {\n   position: absolute;\n   z-index: 2;\n   right: 0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.full[data-v-5dc0fd0c] {\n   width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.mar[data-v-6c0c1562] {\r\n   margin-bottom: 5em;\n}\n.alert[data-v-6c0c1562] {\r\n   position: absolute;\r\n   z-index: 2;\r\n   right: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -6583,7 +6329,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\na[data-v-50e73d1e] {\n   margin-left: 0.5em;\n   margin-right: 0.5em;\n   color: white;\n}\n#Appbar[data-v-50e73d1e] {\n   font-family: \"Roboto\", sans-serif;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-50e73d1e] {\r\n   margin-left: 0.5em;\r\n   margin-right: 0.5em;\r\n   color: white;\n}\n#Appbar[data-v-50e73d1e] {\r\n   font-family: \"Roboto\", sans-serif;\n}\r\n", ""]);
 
 // exports
 
@@ -6603,7 +6349,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-6c0a33b2] {\n   margin: 0;\n   padding: 0;\n   box-sizing: border-box;\n}\nbody[data-v-6c0a33b2] {\n   font-family: \"open sans\";\n   font-size: 16px;\n}\n#apphome[data-v-6c0a33b2] {\n   line-height: normal;\n   position: absolute;\n   left: 0;\n   top: 0;\n   margin: 0;\n   padding: 0;\n   box-sizing: border-box;\n}\n.sesgoarriba[data-v-6c0a33b2] {\n   z-index: 10;\n   position: absolute;\n   top: 0;\n   left: 0;\n   border-width: 35vh 100vw 0 0;\n   border-style: solid;\n   border-color: #fff transparent transparent transparent;\n}\n.sesgoabajo[data-v-6c0a33b2] {\n   z-index: 10;\n   position: absolute;\n   bottom: 0;\n   left: 0;\n   border-width: 0 0 35vh 100vw;\n   border-style: solid;\n   border-color: transparent transparent #fff transparent;\n}\n.contenedor[data-v-6c0a33b2] {\n   width: 90%;\n   max-width: 1000px;\n   margin: auto;\n   overflow: hidden;\n   padding: 52px 0;\n}\n\n/* Main */\n.sobre-nosotros[data-v-6c0a33b2] {\n   text-align: center;\n   font-size: 56px;\n   margin-bottom: 10px;\n   font-weight: 600;\n}\n.slogan[data-v-6c0a33b2] {\n   font-size: 24px;\n   font-weight: 300;\n   text-align: center;\n   margin-bottom: 24px;\n}\n.parrafo[data-v-6c0a33b2] {\n   margin-bottom: 13px;\n   font-weight: 300;\n   text-align: justify;\n   line-height: 24px;\n   color: rgb(24, 16, 16);\n}\n.acerca-de[data-v-6c0a33b2] {\n   background-color: #fff;\n}\n.acerca-de .boton[data-v-6c0a33b2] {\n   display: inline-block;\n   padding: 6px;\n   width: 128px;\n   font-weight: 300;\n   border: 1px solid rgba(24, 16, 16, 0.7);\n   color: #181010;\n   font-size: 16px;\n   text-align: center;\n   text-decoration: none;\n   border-radius: 16px;\n   margin-top: 24px;\n}\n.galeria[data-v-6c0a33b2] {\n   width: 100%;\n   height: 500px;\n   overflow: hidden;\n   display: flex;\n   position: relative;\n   flex-wrap: wrap;\n}\n.imagenes[data-v-6c0a33b2] {\n   width: 20%;\n   height: 500px;\n   overflow: hidden;\n   position: relative;\n}\n.imagenes img[data-v-6c0a33b2] {\n   width: 100%;\n   height: 100%;\n   object-fit: cover;\n}\n.miembros[data-v-6c0a33b2] {\n   background-color: #fff;\n}\n.encima[data-v-6c0a33b2] {\n   position: absolute;\n   top: 0;\n   left: 0;\n   width: 100%;\n   height: 100%;\n   background: rgba(52, 73, 94, 0.815);\n}\n.encima h2[data-v-6c0a33b2] {\n   position: relative;\n   top: 45%;\n   text-align: center;\n   color: #fff;\n}\n.encima div[data-v-6c0a33b2] {\n   position: relative;\n   display: block;\n   top: 46%;\n   width: 40px;\n   height: 5px;\n   background: #fff;\n   margin: auto;\n}\n.card[data-v-6c0a33b2] {\n   margin: 20px 0;\n   width: 30%;\n   height: 250px;\n   text-align: center;\n   padding: 20px;\n   box-shadow: 0px 0px 4px 0 rgba(52, 73, 94, 0.849);\n}\n.cards[data-v-6c0a33b2] {\n   width: 100%;\n   margin: auto;\n   display: flex;\n   flex-wrap: wrap;\n   justify-content: space-around;\n}\n.cards img[data-v-6c0a33b2] {\n   width: 140px;\n   height: 140px;\n   object-fit: cover;\n   border-radius: 100%;\n   margin: auto;\n}\n.fondo[data-v-6c0a33b2] {\n   height: 900px;\n   position: relative;\n   overflow: hidden;\n   background-attachment: fixed;\n   background-position: center;\n   background-size: cover;\n   padding-top: 130px;\n   background-image: url(" + escape(__webpack_require__(/*! ../../img/fondo.png */ "./resources/assets/img/fondo.png")) + ");\n}\n.sesgoabajo-unico[data-v-6c0a33b2] {\n   z-index: 10;\n   position: absolute;\n   bottom: 0;\n   left: 0;\n   border-width: 0 0 35vh 100vw;\n   border-style: solid;\n   border-color: transparent transparent #2c3e50 transparent;\n}\n.titulo-patrocinadores[data-v-6c0a33b2],\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\n   color: #fff;\n   text-align: center;\n}\n.titulo-patrocinadores[data-v-6c0a33b2] {\n   font-size: 56px;\n   margin-top: 48px;\n}\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\n   font-size: 24px;\n   font-weight: 300;\n   margin-bottom: 64px;\n}\n.clientes[data-v-6c0a33b2] {\n   display: flex;\n   flex-wrap: wrap;\n   margin-bottom: 64px;\n   width: 100%;\n   justify-content: space-between;\n}\n.cliente[data-v-6c0a33b2] {\n   width: 30%;\n}\n.cliente img[data-v-6c0a33b2] {\n   width: 100%;\n}\n\n/* Responsive */\n@media screen and (max-width: 900px) {\n.card[data-v-6c0a33b2] {\n      width: 48%;\n}\n}\n@media screen and (max-width: 610px) {\n.none[data-v-6c0a33b2] {\n      display: none;\n}\n.imagenes[data-v-6c0a33b2] {\n      flex-grow: 1;\n}\n.card[data-v-6c0a33b2] {\n      width: 90%;\n}\n.fondo[data-v-6c0a33b2] {\n      height: auto;\n}\n.especial[data-v-6c0a33b2] {\n      display: none;\n}\n.cliente[data-v-6c0a33b2] {\n      width: 80%;\n      height: auto;\n      margin-bottom: 50px;\n}\n.clientes[data-v-6c0a33b2] {\n      justify-content: center;\n}\n}\n@media screen and (max-width: 380px) {\n.sobre-nosotros[data-v-6c0a33b2] {\n      font-size: 46px;\n}\n.slogan[data-v-6c0a33b2] {\n      font-size: 20px;\n}\n.titulo-patrocinadores[data-v-6c0a33b2] {\n      font-size: 46px;\n}\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\n      font-size: 20px;\n}\n.clientes[data-v-6c0a33b2] {\n      justify-content: center;\n}\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-6c0a33b2] {\r\n   margin: 0;\r\n   padding: 0;\r\n   box-sizing: border-box;\n}\nbody[data-v-6c0a33b2] {\r\n   font-family: \"open sans\";\r\n   font-size: 16px;\n}\n#apphome[data-v-6c0a33b2] {\r\n   line-height: normal;\r\n   position: absolute;\r\n   left: 0;\r\n   top: 0;\r\n   margin: 0;\r\n   padding: 0;\r\n   box-sizing: border-box;\n}\n.sesgoarriba[data-v-6c0a33b2] {\r\n   z-index: 10;\r\n   position: absolute;\r\n   top: 0;\r\n   left: 0;\r\n   border-width: 35vh 100vw 0 0;\r\n   border-style: solid;\r\n   border-color: #fff transparent transparent transparent;\n}\n.sesgoabajo[data-v-6c0a33b2] {\r\n   z-index: 10;\r\n   position: absolute;\r\n   bottom: 0;\r\n   left: 0;\r\n   border-width: 0 0 35vh 100vw;\r\n   border-style: solid;\r\n   border-color: transparent transparent #fff transparent;\n}\n.contenedor[data-v-6c0a33b2] {\r\n   width: 90%;\r\n   max-width: 1000px;\r\n   margin: auto;\r\n   overflow: hidden;\r\n   padding: 52px 0;\n}\r\n\r\n/* Main */\n.sobre-nosotros[data-v-6c0a33b2] {\r\n   text-align: center;\r\n   font-size: 56px;\r\n   margin-bottom: 10px;\r\n   font-weight: 600;\n}\n.slogan[data-v-6c0a33b2] {\r\n   font-size: 24px;\r\n   font-weight: 300;\r\n   text-align: center;\r\n   margin-bottom: 24px;\n}\n.parrafo[data-v-6c0a33b2] {\r\n   margin-bottom: 13px;\r\n   font-weight: 300;\r\n   text-align: justify;\r\n   line-height: 24px;\r\n   color: rgb(24, 16, 16);\n}\n.acerca-de[data-v-6c0a33b2] {\r\n   background-color: #fff;\n}\n.acerca-de .boton[data-v-6c0a33b2] {\r\n   display: inline-block;\r\n   padding: 6px;\r\n   width: 128px;\r\n   font-weight: 300;\r\n   border: 1px solid rgba(24, 16, 16, 0.7);\r\n   color: #181010;\r\n   font-size: 16px;\r\n   text-align: center;\r\n   text-decoration: none;\r\n   border-radius: 16px;\r\n   margin-top: 24px;\n}\n.galeria[data-v-6c0a33b2] {\r\n   width: 100%;\r\n   height: 500px;\r\n   overflow: hidden;\r\n   display: flex;\r\n   position: relative;\r\n   flex-wrap: wrap;\n}\n.imagenes[data-v-6c0a33b2] {\r\n   width: 20%;\r\n   height: 500px;\r\n   overflow: hidden;\r\n   position: relative;\n}\n.imagenes img[data-v-6c0a33b2] {\r\n   width: 100%;\r\n   height: 100%;\r\n   object-fit: cover;\n}\n.miembros[data-v-6c0a33b2] {\r\n   background-color: #fff;\n}\n.encima[data-v-6c0a33b2] {\r\n   position: absolute;\r\n   top: 0;\r\n   left: 0;\r\n   width: 100%;\r\n   height: 100%;\r\n   background: rgba(52, 73, 94, 0.815);\n}\n.encima h2[data-v-6c0a33b2] {\r\n   position: relative;\r\n   top: 45%;\r\n   text-align: center;\r\n   color: #fff;\n}\n.encima div[data-v-6c0a33b2] {\r\n   position: relative;\r\n   display: block;\r\n   top: 46%;\r\n   width: 40px;\r\n   height: 5px;\r\n   background: #fff;\r\n   margin: auto;\n}\n.card[data-v-6c0a33b2] {\r\n   margin: 20px 0;\r\n   width: 30%;\r\n   height: 250px;\r\n   text-align: center;\r\n   padding: 20px;\r\n   box-shadow: 0px 0px 4px 0 rgba(52, 73, 94, 0.849);\n}\n.cards[data-v-6c0a33b2] {\r\n   width: 100%;\r\n   margin: auto;\r\n   display: flex;\r\n   flex-wrap: wrap;\r\n   justify-content: space-around;\n}\n.cards img[data-v-6c0a33b2] {\r\n   width: 140px;\r\n   height: 140px;\r\n   object-fit: cover;\r\n   border-radius: 100%;\r\n   margin: auto;\n}\n.fondo[data-v-6c0a33b2] {\r\n   height: 900px;\r\n   position: relative;\r\n   overflow: hidden;\r\n   background-attachment: fixed;\r\n   background-position: center;\r\n   background-size: cover;\r\n   padding-top: 130px;\r\n   background-image: url(" + escape(__webpack_require__(/*! ../../img/fondo.png */ "./resources/assets/img/fondo.png")) + ");\n}\n.sesgoabajo-unico[data-v-6c0a33b2] {\r\n   z-index: 10;\r\n   position: absolute;\r\n   bottom: 0;\r\n   left: 0;\r\n   border-width: 0 0 35vh 100vw;\r\n   border-style: solid;\r\n   border-color: transparent transparent #2c3e50 transparent;\n}\n.titulo-patrocinadores[data-v-6c0a33b2],\r\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\r\n   color: #fff;\r\n   text-align: center;\n}\n.titulo-patrocinadores[data-v-6c0a33b2] {\r\n   font-size: 56px;\r\n   margin-top: 48px;\n}\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\r\n   font-size: 24px;\r\n   font-weight: 300;\r\n   margin-bottom: 64px;\n}\n.clientes[data-v-6c0a33b2] {\r\n   display: flex;\r\n   flex-wrap: wrap;\r\n   margin-bottom: 64px;\r\n   width: 100%;\r\n   justify-content: space-between;\n}\n.cliente[data-v-6c0a33b2] {\r\n   width: 30%;\n}\n.cliente img[data-v-6c0a33b2] {\r\n   width: 100%;\n}\r\n\r\n/* Responsive */\n@media screen and (max-width: 900px) {\n.card[data-v-6c0a33b2] {\r\n      width: 48%;\n}\n}\n@media screen and (max-width: 610px) {\n.none[data-v-6c0a33b2] {\r\n      display: none;\n}\n.imagenes[data-v-6c0a33b2] {\r\n      flex-grow: 1;\n}\n.card[data-v-6c0a33b2] {\r\n      width: 90%;\n}\n.fondo[data-v-6c0a33b2] {\r\n      height: auto;\n}\n.especial[data-v-6c0a33b2] {\r\n      display: none;\n}\n.cliente[data-v-6c0a33b2] {\r\n      width: 80%;\r\n      height: auto;\r\n      margin-bottom: 50px;\n}\n.clientes[data-v-6c0a33b2] {\r\n      justify-content: center;\n}\n}\n@media screen and (max-width: 380px) {\n.sobre-nosotros[data-v-6c0a33b2] {\r\n      font-size: 46px;\n}\n.slogan[data-v-6c0a33b2] {\r\n      font-size: 20px;\n}\n.titulo-patrocinadores[data-v-6c0a33b2] {\r\n      font-size: 46px;\n}\n.subtitulo-patrocinadores[data-v-6c0a33b2] {\r\n      font-size: 20px;\n}\n.clientes[data-v-6c0a33b2] {\r\n      justify-content: center;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -6622,7 +6368,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.box1[data-v-33212926] {\n   margin-top: 150px;\n}\n.father[data-v-33212926] {\n   background-color: red;\n}\n.center[data-v-33212926] {\n   justify-content: center;\n}\n.bubble-boxes[data-v-33212926] {\n   position: fixed;\n   top: 0;\n   left: 0;\n   width: 100%;\n   height: 40%;\n}\n.bubble-boxes li[data-v-33212926] {\n   position: absolute;\n   list-style: none;\n   display: flex;\n   width: 20px;\n   height: 20px;\n   background: rgba(255, 255, 255, 0.2);\n   animation: animate-data-v-33212926 25s linear infinite;\n   bottom: -800px;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(1) {\n   left: 25%;\n   width: 80px;\n   height: 80px;\n   animation-delay: 0;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(2) {\n   left: 10%;\n   width: 20px;\n   height: 20px;\n   animation-delay: 2s;\n   animation-duration: 12s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(3) {\n   left: 70%;\n   width: 20px;\n   height: 20px;\n   animation-delay: 4s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(4) {\n   left: 40%;\n   width: 60px;\n   height: 60px;\n   animation-delay: 0s;\n   animation-duration: 18s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(5) {\n   left: 65%;\n   width: 20px;\n   height: 20px;\n   animation-delay: 0s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(6) {\n   left: 75%;\n   width: 110px;\n   height: 110px;\n   animation-delay: 3s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(7) {\n   left: 35%;\n   width: 150px;\n   height: 150px;\n   animation-delay: 7s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(8) {\n   left: 50%;\n   width: 25px;\n   height: 25px;\n   animation-delay: 15s;\n   animation-duration: 45s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(9) {\n   left: 20%;\n   width: 15px;\n   height: 15px;\n   animation-delay: 2s;\n   animation-duration: 35s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(10) {\n   left: 85%;\n   width: 150px;\n   height: 150px;\n   animation-delay: 0s;\n   animation-duration: 12s;\n}\n@keyframes animate-data-v-33212926 {\n0% {\n      transform: translateY(0) rotate(0deg);\n      opacity: 1;\n      border-radius: 0;\n}\n100% {\n      transform: translateY(-1000px) rotate(720deg);\n      opacity: 1;\n      border-radius: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.box1[data-v-33212926] {\r\n   margin-top: 150px;\n}\n.father[data-v-33212926] {\r\n   background-color: red;\n}\n.center[data-v-33212926] {\r\n   justify-content: center;\n}\n.bubble-boxes[data-v-33212926] {\r\n   position: fixed;\r\n   top: 0;\r\n   left: 0;\r\n   width: 100%;\r\n   height: 40%;\n}\n.bubble-boxes li[data-v-33212926] {\r\n   position: absolute;\r\n   list-style: none;\r\n   display: flex;\r\n   width: 20px;\r\n   height: 20px;\r\n   background: rgba(255, 255, 255, 0.2);\r\n   animation: animate-data-v-33212926 25s linear infinite;\r\n   bottom: -800px;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(1) {\r\n   left: 25%;\r\n   width: 80px;\r\n   height: 80px;\r\n   animation-delay: 0;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(2) {\r\n   left: 10%;\r\n   width: 20px;\r\n   height: 20px;\r\n   animation-delay: 2s;\r\n   animation-duration: 12s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(3) {\r\n   left: 70%;\r\n   width: 20px;\r\n   height: 20px;\r\n   animation-delay: 4s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(4) {\r\n   left: 40%;\r\n   width: 60px;\r\n   height: 60px;\r\n   animation-delay: 0s;\r\n   animation-duration: 18s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(5) {\r\n   left: 65%;\r\n   width: 20px;\r\n   height: 20px;\r\n   animation-delay: 0s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(6) {\r\n   left: 75%;\r\n   width: 110px;\r\n   height: 110px;\r\n   animation-delay: 3s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(7) {\r\n   left: 35%;\r\n   width: 150px;\r\n   height: 150px;\r\n   animation-delay: 7s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(8) {\r\n   left: 50%;\r\n   width: 25px;\r\n   height: 25px;\r\n   animation-delay: 15s;\r\n   animation-duration: 45s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(9) {\r\n   left: 20%;\r\n   width: 15px;\r\n   height: 15px;\r\n   animation-delay: 2s;\r\n   animation-duration: 35s;\n}\n.bubble-boxes li[data-v-33212926]:nth-child(10) {\r\n   left: 85%;\r\n   width: 150px;\r\n   height: 150px;\r\n   animation-delay: 0s;\r\n   animation-duration: 12s;\n}\n@keyframes animate-data-v-33212926 {\n0% {\r\n      transform: translateY(0) rotate(0deg);\r\n      opacity: 1;\r\n      border-radius: 0;\n}\n100% {\r\n      transform: translateY(-1000px) rotate(720deg);\r\n      opacity: 1;\r\n      border-radius: 50%;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -6641,7 +6387,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.no[data-v-cf84c600] {\n   display: block;\n}\n.si[data-v-cf84c600] {\n   display: none;\n}\n.headline[data-v-cf84c600] {\n   font-size: 20px !important;\n}\n.espejo[data-v-cf84c600] {\n   -webkit-box-reflect: below -15px -webkit-gradient(\n         linear,\n         left top,\n         left bottom,\n         from(transparent),\n         to(rgba(255, 255, 255, 0.7))\n      );\n}\n", ""]);
+exports.push([module.i, "\n.no[data-v-cf84c600] {\r\n   display: block;\n}\n.si[data-v-cf84c600] {\r\n   display: none;\n}\n.headline[data-v-cf84c600] {\r\n   font-size: 20px !important;\n}\n.espejo[data-v-cf84c600] {\r\n   -webkit-box-reflect: below -15px -webkit-gradient(\r\n         linear,\r\n         left top,\r\n         left bottom,\r\n         from(transparent),\r\n         to(rgba(255, 255, 255, 0.7))\r\n      );\n}\r\n", ""]);
 
 // exports
 
@@ -6660,7 +6406,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.no[data-v-6a62e5ae] {\n   display: block;\n}\n.si[data-v-6a62e5ae] {\n   display: none;\n}\n.headline[data-v-6a62e5ae] {\n   font-size: 20px !important;\n}\n.espejo[data-v-6a62e5ae] {\n   -webkit-box-reflect: below -15px -webkit-gradient(\n         linear,\n         left top,\n         left bottom,\n         from(transparent),\n         to(rgba(255, 255, 255, 0.7))\n      );\n}\n", ""]);
+exports.push([module.i, "\n.no[data-v-6a62e5ae] {\r\n   display: block;\n}\n.si[data-v-6a62e5ae] {\r\n   display: none;\n}\n.headline[data-v-6a62e5ae] {\r\n   font-size: 20px !important;\n}\n.espejo[data-v-6a62e5ae] {\r\n   -webkit-box-reflect: below -15px -webkit-gradient(\r\n         linear,\r\n         left top,\r\n         left bottom,\r\n         from(transparent),\r\n         to(rgba(255, 255, 255, 0.7))\r\n      );\n}\r\n", ""]);
 
 // exports
 
@@ -24647,36 +24393,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/App.vue?vue&type=style&index=0&id=50e73d1e&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/App.vue?vue&type=style&index=0&id=50e73d1e&scoped=true&lang=css& ***!
@@ -31204,10 +30920,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -31219,387 +30935,392 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", { attrs: { row: "", "fill-height": "" } }, [
-    _c(
-      "div",
-      [
-        _c(
-          "v-navigation-drawer",
-          {
-            attrs: {
-              "mini-variant": _vm.mini,
-              "hide-overlay": "",
-              stateless: "",
-              "fill-height": ""
-            },
-            on: {
-              "update:miniVariant": function($event) {
-                _vm.mini = $event
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "fill-height": "" } },
+    [
+      _c(
+        "div",
+        [
+          _c(
+            "v-navigation-drawer",
+            {
+              attrs: {
+                "mini-variant": _vm.mini,
+                "hide-overlay": "",
+                stateless: "",
+                "fill-height": ""
               },
-              "update:mini-variant": function($event) {
-                _vm.mini = $event
+              on: {
+                "update:miniVariant": function($event) {
+                  _vm.mini = $event
+                },
+                "update:mini-variant": function($event) {
+                  _vm.mini = $event
+                }
+              },
+              model: {
+                value: _vm.drawer,
+                callback: function($$v) {
+                  _vm.drawer = $$v
+                },
+                expression: "drawer"
               }
             },
-            model: {
-              value: _vm.drawer,
-              callback: function($$v) {
-                _vm.drawer = $$v
-              },
-              expression: "drawer"
-            }
-          },
-          [
-            _c(
-              "v-toolbar",
-              { staticClass: "transparent", attrs: { flat: "" } },
-              [
-                _c(
-                  "v-list",
-                  { staticClass: "pa-0" },
-                  [
-                    _c(
-                      "v-list-tile",
-                      { attrs: { avatar: "" } },
-                      [
-                        _c(
-                          "v-list-tile-avatar",
-                          [
-                            _c("v-icon", { attrs: { "x-large": "" } }, [
-                              _vm._v("vertical_split")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-content",
-                          [
-                            _c("v-list-tile-title", [_vm._v(_vm._s(this.name))])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-action",
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "" },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                    _vm.mini = !_vm.mini
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("chevron_left")])],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-list",
-              { staticClass: "pt-0", attrs: { dense: "" } },
-              [
-                _c("v-divider"),
-                _vm._v(" "),
-                _vm._l(_vm.items, function(item) {
-                  return _c(
-                    "v-list-tile",
-                    {
-                      key: item.title,
-                      on: {
-                        click: function($event) {
-                          return _vm.route(item.ruta)
-                        }
+            [
+              _c(
+                "v-toolbar",
+                { staticClass: "transparent", attrs: { flat: "" } },
+                [
+                  _c("v-toolbar-side-icon", {
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.mini = !_vm.mini
                       }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-toolbar-title",
+                    { staticStyle: { "text-transform": "capitalize" } },
+                    [_vm._v(_vm._s(this.name))]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list",
+                { staticClass: "pt-0", attrs: { dense: "" } },
+                [
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-group",
+                    {
+                      attrs: { "prepend-icon": "offline_pin" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "activator",
+                          fn: function() {
+                            return [
+                              _c(
+                                "v-list-tile",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v("Asignaciones")
+                                  ])
+                                ],
+                                1
+                              )
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
                     },
                     [
-                      _c(
-                        "v-list-tile-action",
-                        [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
-                        1
-                      ),
                       _vm._v(" "),
                       _c(
-                        "v-list-tile-content",
-                        [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
+                        "v-layout",
+                        { attrs: { "pl-5": "" } },
+                        _vm._l(_vm.asignaciones, function(crud, i) {
+                          return _c(
+                            "v-list-tile",
+                            {
+                              key: i,
+                              on: {
+                                click: function($event) {
+                                  return _vm.route(crud[2])
+                                }
+                              }
+                            },
+                            [
+                              _c("v-list-tile-title", {
+                                domProps: { textContent: _vm._s(crud[0]) }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-action",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(crud[1]) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
                         1
                       )
                     ],
                     1
-                  )
-                }),
-                _vm._v(" "),
-                _c(
-                  "v-list-group",
-                  {
-                    attrs: { "prepend-icon": "account_circle" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "activator",
-                        fn: function() {
-                          return [
-                            _c(
-                              "v-list-tile",
-                              [_c("v-list-tile-title", [_vm._v("Usuarios")])],
-                              1
-                            )
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ])
-                  },
-                  [
-                    _vm._v(" "),
-                    _c(
-                      "v-list-group",
-                      {
-                        attrs: { "no-action": "", "sub-group": "" },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "activator",
-                            fn: function() {
-                              return [
-                                _c(
-                                  "v-list-tile",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v("Profesores")
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ])
-                      },
-                      [
-                        _vm._v(" "),
-                        _vm._l(_vm.empleados, function(crud, i) {
-                          return _c(
-                            "v-list-tile",
-                            {
-                              key: i,
-                              on: {
-                                click: function($event) {
-                                  return _vm.route(crud[2])
-                                }
-                              }
-                            },
-                            [
-                              _c("v-list-tile-title", {
-                                domProps: { textContent: _vm._s(crud[0]) }
-                              }),
-                              _vm._v(" "),
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-group",
+                    {
+                      attrs: { "prepend-icon": "notifications" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "activator",
+                          fn: function() {
+                            return [
                               _c(
-                                "v-list-tile-action",
-                                [
-                                  _c("v-icon", {
-                                    domProps: { textContent: _vm._s(crud[1]) }
-                                  })
-                                ],
+                                "v-list-tile",
+                                [_c("v-list-tile-title", [_vm._v("Noticias")])],
                                 1
                               )
-                            ],
-                            1
-                          )
-                        })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-list-group",
-                      {
-                        attrs: { "sub-group": "", "no-action": "" },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "activator",
-                            fn: function() {
-                              return [
-                                _c(
-                                  "v-list-tile",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v("Estudiantes")
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ])
-                      },
-                      [
-                        _vm._v(" "),
-                        _vm._l(_vm.estudiantes, function(crud, i) {
-                          return _c(
-                            "v-list-tile",
-                            {
-                              key: i,
-                              on: {
-                                click: function($event) {
-                                  return _vm.route(crud[2])
-                                }
-                              }
-                            },
-                            [
-                              _c("v-list-tile-title", {
-                                domProps: { textContent: _vm._s(crud[0]) }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-action",
-                                [
-                                  _c("v-icon", {
-                                    domProps: { textContent: _vm._s(crud[1]) }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-list-group",
-                  {
-                    attrs: { "prepend-icon": "offline_pin" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "activator",
-                        fn: function() {
-                          return [
-                            _c(
-                              "v-list-tile",
-                              [
-                                _c("v-list-tile-title", [
-                                  _vm._v("Asignaciones")
-                                ])
-                              ],
-                              1
-                            )
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ])
-                  },
-                  [
-                    _vm._v(" "),
-                    _c(
-                      "v-layout",
-                      { attrs: { "pl-5": "" } },
-                      _vm._l(_vm.asignaciones, function(crud, i) {
-                        return _c(
-                          "v-list-tile",
-                          {
-                            key: i,
-                            on: {
-                              click: function($event) {
-                                return _vm.route(crud[2])
-                              }
-                            }
+                            ]
                           },
-                          [
-                            _c("v-list-tile-title", {
-                              domProps: { textContent: _vm._s(crud[0]) }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "v-list-tile-action",
+                          proxy: true
+                        }
+                      ])
+                    },
+                    [
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "pl-5": "" } },
+                        _vm._l(_vm.noticias, function(crud, i) {
+                          return _c(
+                            "v-list-tile",
+                            {
+                              key: i,
+                              on: {
+                                click: function($event) {
+                                  return _vm.route(crud[2])
+                                }
+                              }
+                            },
+                            [
+                              _c("v-list-tile-title", {
+                                domProps: { textContent: _vm._s(crud[0]) }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-action",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(crud[1]) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-group",
+                    {
+                      attrs: { "prepend-icon": "account_circle" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "activator",
+                          fn: function() {
+                            return [
+                              _c(
+                                "v-list-tile",
+                                [_c("v-list-tile-title", [_vm._v("Usuarios")])],
+                                1
+                              )
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ])
+                    },
+                    [
+                      _vm._v(" "),
+                      _c(
+                        "v-list-group",
+                        {
+                          attrs: { "sub-group": "", "no-action": "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "v-list-tile",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v("Estudiantes")
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ])
+                        },
+                        [
+                          _vm._v(" "),
+                          _vm._l(_vm.estudiantes, function(crud, i) {
+                            return _c(
+                              "v-list-tile",
+                              {
+                                key: i,
+                                on: {
+                                  click: function($event) {
+                                    return _vm.route(crud[2])
+                                  }
+                                }
+                              },
                               [
-                                _c("v-icon", {
-                                  domProps: { textContent: _vm._s(crud[1]) }
-                                })
+                                _c("v-list-tile-title", {
+                                  domProps: { textContent: _vm._s(crud[0]) }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-tile-action",
+                                  [
+                                    _c("v-icon", {
+                                      domProps: { textContent: _vm._s(crud[1]) }
+                                    })
+                                  ],
+                                  1
+                                )
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      }),
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              2
-            )
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "full", attrs: { id: "cuerpo" } },
-      [
-        _vm.mostar === "cuerpo"
-          ? _c("div", { staticClass: "full" }, [
-              _c("h1", [_vm._v("hola este es el cuerpo")])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "credencial" ? _c("credencial") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "profesors/mostrar" ? _c("pmostrarcomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "profesors/editar" ? _c("peditarcomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "profesors/eliminar" ? _c("pborrarcomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "estudiantes/mostrar"
-          ? _c("emostrarcomponent")
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "estudiantes/editar" ? _c("eeditarcomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "estudiantes/eliminar"
-          ? _c("eborrarcomponent")
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "curso" ? _c("cursocomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "horario" ? _c("horariocomponent") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "curso/horario" ? _c("acursohorario") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "curso/profesor" ? _c("acursoprofesor") : _vm._e(),
-        _vm._v(" "),
-        _vm.mostar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
-      ],
-      1
-    )
-  ])
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-group",
+                        {
+                          attrs: { "no-action": "", "sub-group": "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "v-list-tile",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v("Profesores")
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ])
+                        },
+                        [
+                          _vm._v(" "),
+                          _vm._l(_vm.empleados, function(crud, i) {
+                            return _c(
+                              "v-list-tile",
+                              {
+                                key: i,
+                                on: {
+                                  click: function($event) {
+                                    return _vm.route(crud[2])
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-list-tile-title", {
+                                  domProps: { textContent: _vm._s(crud[0]) }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-tile-action",
+                                  [
+                                    _c("v-icon", {
+                                      domProps: { textContent: _vm._s(crud[1]) }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        { attrs: { app: "", id: "cuerpo" } },
+        [
+          _vm.mostar === "cuerpo"
+            ? _c("v-container", { staticClass: "full", attrs: { fluid: "" } }, [
+                _c("h1", [_vm._v("hola este es el cuerpo")])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "credencial" ? _c("credencial") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "profesors/mostrar"
+            ? _c("pmostrarcomponent")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "profesors/editar" ? _c("peditarcomponent") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "profesors/eliminar"
+            ? _c("pborrarcomponent")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "estudiantes/mostrar"
+            ? _c("emostrarcomponent")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "estudiantes/editar"
+            ? _c("eeditarcomponent")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "estudiantes/eliminar"
+            ? _c("eborrarcomponent")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "curso" ? _c("cursocomponent") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "horario" ? _c("horariocomponent") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "curso/horario" ? _c("acursohorario") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "curso/profesor" ? _c("acursoprofesor") : _vm._e(),
+          _vm._v(" "),
+          _vm.mostar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -31956,8 +31677,6 @@ var render = function() {
     "div",
     { staticClass: "box1" },
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c(
         "v-layout",
         { attrs: { "justify-center": "" } },
@@ -31968,7 +31687,7 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "elevation-12", attrs: { fluid: "" } },
+                { staticClass: "elevation-1", attrs: { fluid: "" } },
                 [
                   _c(
                     "v-toolbar",
@@ -31985,61 +31704,77 @@ var render = function() {
                     "v-card-text",
                     { staticClass: "pb-0" },
                     [
-                      _c("v-text-field", {
-                        attrs: {
-                          "prepend-icon": "email",
-                          name: "email",
-                          label: "Correo Electrónico",
-                          type: "text",
-                          rules: _vm.emailRules
-                        },
-                        model: {
-                          value: _vm.email,
-                          callback: function($$v) {
-                            _vm.email = $$v
-                          },
-                          expression: "email"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          "append-icon": _vm.show1
-                            ? "visibility"
-                            : "visibility_off",
-                          rules: [_vm.rules.required, _vm.rules.min],
-                          type: _vm.show1 ? "text" : "password",
-                          name: "password",
-                          label: "Contraseña",
-                          hint: "At least 8 characters",
-                          "prepend-icon": "lock",
-                          counter: ""
-                        },
-                        on: {
-                          "click:append": function($event) {
-                            _vm.show1 = !_vm.show1
+                      _c(
+                        "v-layout",
+                        {
+                          attrs: {
+                            row: "",
+                            wrap: "",
+                            "align-center": "",
+                            "justify-center": ""
                           }
                         },
-                        model: {
-                          value: _vm.password,
-                          callback: function($$v) {
-                            _vm.password = $$v
-                          },
-                          expression: "password"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-switch", {
-                        staticClass: "center",
-                        attrs: { label: "Recordarme", name: "remember" },
-                        model: {
-                          value: _vm.switch1,
-                          callback: function($$v) {
-                            _vm.switch1 = $$v
-                          },
-                          expression: "switch1"
-                        }
-                      })
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "", lg12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "prepend-icon": "email",
+                                  name: "email",
+                                  label: "Correo Electrónico",
+                                  type: "text",
+                                  rules: _vm.emailRules
+                                },
+                                model: {
+                                  value: _vm.email,
+                                  callback: function($$v) {
+                                    _vm.email = $$v
+                                  },
+                                  expression: "email"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "", lg12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "append-icon": _vm.show1
+                                    ? "visibility"
+                                    : "visibility_off",
+                                  rules: [_vm.rules.required, _vm.rules.min],
+                                  type: _vm.show1 ? "text" : "password",
+                                  name: "password",
+                                  label: "Contraseña",
+                                  hint: "At least 8 characters",
+                                  "prepend-icon": "lock",
+                                  counter: ""
+                                },
+                                on: {
+                                  "click:append": function($event) {
+                                    _vm.show1 = !_vm.show1
+                                  }
+                                },
+                                model: {
+                                  value: _vm.password,
+                                  callback: function($$v) {
+                                    _vm.password = $$v
+                                  },
+                                  expression: "password"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
@@ -32048,26 +31783,56 @@ var render = function() {
                     "v-card-actions",
                     [
                       _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            round: "",
-                            dark: "",
-                            color: "green",
-                            block: "",
-                            type: "submit"
-                          }
-                        },
-                        [_vm._v("Ingresar")]
-                      ),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c("p", { staticStyle: { "font-size": "12pt" } }, [
-                        _c("a", { attrs: { href: "/password/reset" } }, [
-                          _vm._v("Recuperar contraseña")
-                        ])
-                      ])
+                        "v-layout",
+                        { attrs: { "align-center": "", "justify-left": "" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                dark: "",
+                                color: "green",
+                                round: "",
+                                flat: "",
+                                type: "submit"
+                              }
+                            },
+                            [_vm._v("Ingresar")]
+                          ),
+                          _vm._v(" "),
+                          _c("v-checkbox", {
+                            staticClass: "center",
+                            attrs: {
+                              height: "10",
+                              color: "dark",
+                              label: "Recuerdame",
+                              name: "remember"
+                            },
+                            model: {
+                              value: _vm.remember,
+                              callback: function($$v) {
+                                _vm.remember = $$v
+                              },
+                              expression: "remember"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                dark: "",
+                                color: "indigo",
+                                round: "",
+                                flat: "",
+                                href: "/password/reset"
+                              }
+                            },
+                            [_vm._v("Recuperar Contraseña")]
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
@@ -32084,34 +31849,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "bubble-boxes mt-5" }, [
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li"),
-      _vm._v(" "),
-      _c("li")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -32416,7 +32154,7 @@ var render = function() {
                             type: "submit"
                           }
                         },
-                        [_vm._v("Registarce")]
+                        [_vm._v("Registrarse")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -32962,7 +32700,7 @@ var render = function() {
                             type: "submit"
                           }
                         },
-                        [_vm._v("Registarce")]
+                        [_vm._v("Registrarse")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -45061,906 +44799,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/vuebar/vuebar.js":
-/*!***************************************!*\
-  !*** ./node_modules/vuebar/vuebar.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*----------------------------------------*\
-    Vuebar
-\*----------------------------------------*/
-;(function(){
-    'use strict';
-
-
-
-    /*------------------------------------*\
-        Vuebar
-    \*------------------------------------*/
-    var Vuebar = {};
-    Vuebar.install = function(Vue, installOptions){
-
-
-        /*------------------------------------*\
-            Custom Directive Name
-        \*------------------------------------*/
-        installOptions = installOptions || {};
-        installOptions.directive = installOptions.directive || 'bar';
-
-
-        /*------------------------------------*\
-            Create State
-            - contains default values
-        \*------------------------------------*/
-        function createState(el){
-            el._vuebarState = {
-
-                // config with default values that may be overwritten on directive intialization
-                config: {
-                    scrollThrottle: 10,
-                    draggerThrottle: 10,
-                    resizeRefresh: true,
-                    observerThrottle: 100,
-                    resizeDebounce: 100,
-                    unselectableBody: true,
-                    overrideFloatingScrollbar: true,
-                    scrollingPhantomDelay: 1000,
-                    draggingPhantomDelay: 1000,
-                    preventParentScroll: false,
-                    useScrollbarPseudo: false, // experimental
-
-                    el1Class: 'vb',
-                    el1ScrollVisibleClass: 'vb-visible',
-                    el1ScrollInvisibleClass: 'vb-invisible',
-                    el1ScrollingClass: 'vb-scrolling',
-                    el1ScrollingPhantomClass: 'vb-scrolling-phantom',
-                    el1DraggingClass: 'vb-dragging',
-                    el1DraggingPhantomClass: 'vb-dragging-phantom',
-
-                    el2Class: 'vb-content',
-
-                    draggerClass: 'vb-dragger',
-                    draggerStylerClass: 'vb-dragger-styler',
-                },
-
-                // reference to binding
-                binding: null,
-
-                // references to directive DOM elements
-                el1: null,
-                el2: null,
-                dragger: null,
-
-                // show dragger
-                draggerEnabled: null,
-
-                // properties computed for internal directive logic & DOM manipulations
-                visibleArea: 0, // ratio between container height and scrollable content height
-                scrollTop: 0, // position of content scrollTop in px
-                barTop: 0, // position of dragger in px
-                barHeight: 0, // height of dragger in px
-                mouseBarOffsetY: 0, // relative position of mouse at the time of clicking on dragger
-                barDragging: false, // when the dragger is used
-
-                // reference to MutationObserver
-                mutationObserver: null,
-
-                // references to timeouts for DOM class manipulation
-                scrollingClassTimeout: null,
-                draggingClassTimeout: null,
-                scrollingPhantomClassTimeout: null,
-                draggingPhantomClassTimeout: null,
-
-                // references to a functions we'll need when removing events
-                barMousedown: null,
-                documentMousemove: null,
-                documentMouseup: null,
-                windowResize: null,
-                scrollHandler: null,
-                wheelHandler: null,
-
-            };
-            return el._vuebarState;
-        }
-
-
-
-
-        /*------------------------------------*\
-            Get State
-        \*------------------------------------*/
-        function getState(el){
-            return el._vuebarState;
-        }
-
-
-
-
-        /*------------------------------------*\
-            Mount Validation
-        \*------------------------------------*/
-        function markupValidation(el){
-            if (!el.firstChild) {
-                Vue.util.warn('(Vuebar) Element 1 with v-bar directive doesn\'t have required child element 2.');
-                return false;
-            }
-            return true;
-        }
-
-
-
-
-
-        /*------------------------------------*\
-            Computing Properties
-        \*------------------------------------*/
-        function computeVisibleArea(el){
-            var state = getState(el);
-            state.visibleArea = (state.el2.clientHeight / state.el2.scrollHeight);
-        }
-
-        function computeScrollTop(el){
-            var state = getState(el);
-            state.scrollTop = state.barTop * (state.el2.scrollHeight / state.el2.clientHeight);
-        }
-
-        function computeBarTop(el, event){
-            var state = getState(el);
-
-            // if the function gets called on scroll event
-            if (!event) {
-                state.barTop = state.el2.scrollTop * state.visibleArea;
-                return false;
-            } // else the function gets called when moving dragger with mouse
-
-
-            var relativeMouseY = (event.clientY - state.el1.getBoundingClientRect().top);
-            if (relativeMouseY <= state.mouseBarOffsetY) { // if bar is trying to go over top
-                state.barTop = 0;
-            }
-
-            if (relativeMouseY > state.mouseBarOffsetY) { // if bar is moving between top and bottom
-                state.barTop = relativeMouseY - state.mouseBarOffsetY;
-            }
-
-
-            if ( (state.barTop + state.barHeight ) >= state.el2.clientHeight ) { // if bar is trying to go over bottom
-                state.barTop = state.el2.clientHeight - state.barHeight;
-            }
-
-        }
-
-        function computeBarHeight(el){
-            var state = getState(el);
-            if (state.visibleArea >= 1) {
-                state.barHeight = 0;
-            } else {
-                state.barHeight = state.el2.clientHeight * state.visibleArea;
-            }
-        }
-
-
-
-
-        /*------------------------------------*\
-            Styles & DOM
-        \*------------------------------------*/
-        function createDragger(el){
-            var state = getState(el);
-
-            var dragger = document.createElement('div');
-            var draggerStyler = document.createElement('div');
-
-            dragger.className = state.config.draggerClass;
-
-            dragger.style.position = 'absolute';
-
-            if (!state.draggerEnabled) {
-                dragger.style.display = 'none';
-            }
-
-            draggerStyler.className = state.config.draggerStylerClass;
-
-            dragger.appendChild(draggerStyler);
-            state.el1.appendChild(dragger);
-
-            return dragger;
-        }
-
-
-        function updateDragger(el, options){
-            var options = options ? options : {};
-            var state = getState(el);
-
-            // setting dragger styles
-            state.dragger.style.height = parseInt( Math.round( state.barHeight)  ) + 'px';
-            state.dragger.style.top = parseInt( Math.round( state.barTop ) ) + 'px';
-            //state.dragger.style.height = Math.ceil( state.barHeight ) + 'px';
-            //state.dragger.style.top = Math.ceil( state.barTop ) + 'px';
-
-            // scrollbar visible / invisible classes
-            if (state.draggerEnabled && (state.visibleArea<1)) {
-                removeClass(state.el1, state.config.el1ScrollInvisibleClass);
-                addClass(state.el1, state.config.el1ScrollVisibleClass);
-            } else {
-                removeClass(state.el1, state.config.el1ScrollVisibleClass);
-                addClass(state.el1, state.config.el1ScrollInvisibleClass);
-            }
-
-
-
-            if (options.withScrollingClasses) {
-
-                // add scrolling class
-                addClass(state.el1, state.config.el1ScrollingClass);
-
-                // remove scrolling class
-                state.scrollingClassTimeout ?
-                    clearTimeout(state.scrollingClassTimeout) : null;
-                state.scrollingClassTimeout = setTimeout(function() {
-                    removeClass(state.el1, state.config.el1ScrollingClass);
-                }, state.config.scrollThrottle + 5);
-
-
-
-                // add phantom scrolling class
-                addClass(state.el1, state.config.el1ScrollingPhantomClass);
-
-                // remove phantom scrolling class
-                state.scrollingPhantomClassTimeout ?
-                    clearTimeout(state.scrollingPhantomClassTimeout) : null;
-                state.scrollingPhantomClassTimeout = setTimeout(function() {
-                    removeClass(state.el1, state.config.el1ScrollingPhantomClass);
-                }, state.config.scrollThrottle + state.config.scrollingPhantomDelay);
-
-            }
-
-        }
-
-
-
-        // this is an experimental feature
-        // - it works only on chrome and safari
-        // - instead of hiding scrollbar by overflowing it with its parent set to overflow:hidden
-        //   we hide scrollbar using pseudo-element selector ::-webkit-scrollbar
-        function hideScrollbarUsingPseudoElement(el){
-            var state = getState(el);
-            var idName = 'vuebar-pseudo-element-styles';
-            var selector = '.' + state.config.el2Class + '::-webkit-scrollbar';
-            var styleElm = document.getElementById(idName);
-            var sheet = null;
-
-            if (styleElm) {
-                sheet = styleElm.sheet;
-            } else {
-                styleElm = document.createElement('style');
-                styleElm.id = idName;
-                document.head.appendChild(styleElm);
-                sheet = styleElm.sheet;
-            }
-
-            // detect if there is a rule already added to the selector
-            var ruleExists = false;
-            for(var i=0, l=sheet.rules.length; i<l; i++){
-                var rule = sheet.rules[i];
-                if (rule.selectorText == selector) {
-                    ruleExists = true;
-                }
-            }
-
-            // if there is rule added already then don't continue
-            if ( ruleExists ) { return false }
-
-            // insert rule
-            // - we only need to use insertRule and don't need to use addRule at all
-            //   because we're only targeting chrome & safari browsers
-            if (sheet.insertRule) {
-                sheet.insertRule(selector + '{display:none}', 0);
-            }
-
-        }
-
-
-
-
-        function preventParentScroll(el, event){
-            var state = getState(el);
-
-            if (state.visibleArea >= 1) {
-                return false;
-            }
-
-            var scrollDist = state.el2.scrollHeight - state.el2.clientHeight;
-            var scrollTop = state.el2.scrollTop;
-
-            var wheelingUp = event.deltaY < 0;
-            var wheelingDown = event.deltaY > 0;
-
-            if ( (scrollTop <= 0) && wheelingUp) {
-                event.preventDefault();
-                return false;
-            }
-
-            if ( (scrollTop >= scrollDist) && wheelingDown) {
-                event.preventDefault();
-                return false;
-            }
-
-        }
-
-
-
-        function updateScroll(el){
-            var state = getState(el);
-            state.el2.scrollTop = state.scrollTop;
-        }
-
-
-
-
-        /*------------------------------------*\
-            Refresh
-        \*------------------------------------*/
-
-        function refreshScrollbar(el, options){
-            var options = options ? options : {};
-
-            if (options.immediate) {
-                computeVisibleArea(el);
-                computeBarTop(el);
-                computeBarHeight(el);
-                updateDragger(el);
-            }
-
-            Vue.nextTick(function(){
-                if ( !getState(el) ) { return false }
-                computeVisibleArea(el);
-                computeBarTop(el);
-                computeBarHeight(el);
-                updateDragger(el);
-            }.bind(this));
-        }
-
-
-
-
-        /*------------------------------------*\
-            Events & Handlers
-        \*------------------------------------*/
-
-        function scrollHandler(el){
-            var state = getState(el);
-            return throttle(function(event){
-                computeVisibleArea(el);
-                computeBarHeight(el); // fallback for an undetected content change
-                if (!state.barDragging) {
-                    computeBarTop(el);
-                    updateDragger(el, {withScrollingClasses: true});
-                }
-            }.bind(this), state.config.scrollThrottle);
-        }
-
-
-        function wheelHandler(el){
-            return function(event){
-                preventParentScroll(el, event);
-            }.bind(this);
-        }
-
-
-        function documentMousemove(el){
-            var state = getState(el);
-            return throttle(function(event){
-                computeBarTop(el, event);
-                updateDragger(el);
-                computeScrollTop(el);
-                updateScroll(el);
-            }.bind(this), state.config.draggerThrottle);
-        }
-
-
-        function documentMouseup(el){
-            var state = getState(el);
-            return function(event){
-
-                //
-                state.barDragging = false;
-
-                // enable user select
-                state.el1.style.userSelect = '';
-                state.config.unselectableBody ? compatStyle(document.body, 'UserSelect', '') : null;
-
-                // remove dragging class
-                removeClass(state.el1, state.config.el1DraggingClass);
-                state.draggingPhantomClassTimeout = setTimeout(function() {
-                    removeClass(state.el1, state.config.el1DraggingPhantomClass);
-                }, state.config.draggingPhantomDelay);
-
-
-                // remove events
-                document.removeEventListener('mousemove', state.documentMousemove, 0);
-                document.removeEventListener('mouseup', state.documentMouseup, 0);
-
-            }.bind(this);
-
-        }
-
-
-        function barMousedown(el){
-            var state = getState(el);
-            return function(event){
-
-                // don't do nothing if it's not left mouse button
-                if ( event.which!==1 ) { return false }
-
-                state.barDragging = true;
-                state.mouseBarOffsetY = event.offsetY;
-
-                // disable user select
-                state.el1.style.userSelect = 'none';
-                state.config.unselectableBody ? compatStyle(document.body, 'UserSelect', 'none') : null;
-
-                // add dragging class
-                addClass(state.el1, state.config.el1DraggingClass);
-                state.draggingPhantomClassTimeout ?
-                    clearTimeout(state.draggingPhantomClassTimeout) : null;
-                addClass(state.el1, state.config.el1DraggingPhantomClass);
-
-                // add events
-                document.addEventListener('mousemove', state.documentMousemove, 0);
-                document.addEventListener('mouseup', state.documentMouseup, 0);
-
-
-            }.bind(this);
-        }
-
-
-        function windowResize(el){
-            var state = getState(el);
-            return debounce(function(event){
-                refreshScrollbar(el);
-            }.bind(this), state.config.resizeDebounce);
-        }
-
-
-
-
-        function initMutationObserver(el){
-            if (typeof MutationObserver === typeof void 0) { return null }
-
-            var state = getState(el);
-
-            var observer = new MutationObserver(throttle(function(mutations) {
-                refreshScrollbar(el);
-            }, state.config.observerThrottle));
-
-            observer.observe(state.el2, {
-                childList: true,
-                characterData: true,
-                subtree: true,
-            });
-
-            return observer;
-        }
-
-
-
-
-        /*------------------------------------*\
-            Initialize Scrollbar
-        \*------------------------------------*/
-        function initScrollbar(el, kwargs){
-
-            // validate on directive bind if the markup is OK
-            if ( !markupValidation.call(this, el) ) { return false }
-
-            // safeguard to not initialize vuebar when it's already initialized
-            if (el._vuebarState) {
-                // and I'm actually curious if that can happen
-                Vue.util.warn('(Vuebar) Tried to initialize second time. If you see this please create an issue on https://github.com/DominikSerafin/vuebar with all relevent debug information. Thank you!');
-                return false;
-            }
-
-            // create state
-            var state = createState(el);
-
-            // get options object
-            // - it will come from directive binding (there is a 'value' property)
-            // - or it will come from public method direct options object
-            var options = kwargs.value ? kwargs.value : (kwargs ? kwargs : {});
-
-            // overwrite defaults with provided options
-            for (var key in options){
-                state.config[key] = options[key];
-            }
-
-            // detect browser
-            var browser = detectBrowser();
-
-            // dragger enabled?
-            var elNativeScrollbarWidth = getNativeScrollbarWidth(el.firstElementChild);
-            var overlayScrollbar = elNativeScrollbarWidth == 0;
-            state.draggerEnabled = ( (!overlayScrollbar) || state.config.overrideFloatingScrollbar ) ? 1 : 0;
-
-            // setup scrollbar "state"
-            state.binding = kwargs.value ? kwargs : null;
-            state.el1 = el;
-            state.el2 = el.firstElementChild;
-            state.dragger = createDragger(el);
-
-            // create and reference event listeners
-            state.barMousedown = barMousedown(el);
-            state.documentMousemove = documentMousemove(el);
-            state.documentMouseup = documentMouseup(el);
-            state.windowResize = windowResize(el);
-            state.scrollHandler = scrollHandler(el);
-            state.wheelHandler = wheelHandler(el);
-
-            // initialize and reference mutation observer
-            state.mutationObserver = initMutationObserver(el);
-
-            // el1 styles and class
-            addClass(state.el1, state.config.el1Class);
-            state.el1.style.position = 'relative';
-            state.el1.style.overflow = 'hidden';
-
-            // el2 styles and class
-            addClass(state.el2, state.config.el2Class);
-            state.el2.style.display = 'block';
-            state.el2.style.overflowX = 'hidden';
-            state.el2.style.overflowY = 'scroll';
-            state.el2.style.height = '100%';
-
-            // do the magic
-            if (state.draggerEnabled) {
-
-                // hide original browser scrollbar using pseudo css selectors (only chrome & safari)
-                if ( state.config.useScrollbarPseudo && (browser.chrome || browser.safari) ) {
-                    state.el2.style.width = '100%';
-                    hideScrollbarUsingPseudoElement(el);
-                }
-
-                // hide original browser overlay scrollbar and add padding to compensate for that
-                else if (overlayScrollbar) {
-                    /* state.el2.style.width = 'calc(100% + ' + 20 + 'px)';
-                    compatStyle(state.el2, 'BoxSizing', 'border-box'); */
-                    state.el2.style.width = '100%';
-                    compatStyle(state.el2, 'BoxSizing', 'content-box');
-                    state.el2.style.paddingRight = '20px';
-                }
-
-                // hide original browser scrollbar behind element edges and hidden overflow
-                else {
-                    state.el2.style.width = 'calc(100% + ' + elNativeScrollbarWidth + 'px)';
-                }
-
-            }
-
-            // add events
-            // - wheel event is only needed when preventParentScroll option is enabled
-            // - resize event is only needed when resizeRefresh option is enabled
-            state.el2.addEventListener('scroll', state.scrollHandler, 0);
-            state.dragger.addEventListener('mousedown', state.barMousedown, 0);
-            state.config.preventParentScroll ? state.el2.addEventListener('wheel', state.wheelHandler, 0) : null;
-            state.config.resizeRefresh ? window.addEventListener('resize', state.windowResize, 0) : null;
-
-            // initial calculations using refresh scrollbar
-            refreshScrollbar(el, {immediate: true});
-
-        }
-
-
-
-
-        /*------------------------------------*\
-            Destroy Scrollbar
-        \*------------------------------------*/
-        function destroyScrollbar(el, options){
-            var options = options ? options : {};
-            var state = getState(el);
-            if (!state) return;
-
-            // clear events
-            state.dragger.removeEventListener('mousedown', state.barMousedown, 0);
-            state.el2.removeEventListener('scroll', state.scrollHandler, 0);
-            state.el2.removeEventListener('wheel', state.scrollHandler, 0);
-            window.removeEventListener('resize', state.windowResize, 0);
-
-            // disconnect mutation observer
-            state.mutationObserver ? state.mutationObserver.disconnect() : null;
-
-            // clear el1 classes
-            removeClass(state.el1, state.config.el1Class);
-            removeClass(state.el1, state.config.el1ScrollVisibleClass);
-            removeClass(state.el1, state.config.el1ScrollInvisibleClass);
-            removeClass(state.el1, state.config.el1ScrollingClass);
-            removeClass(state.el1, state.config.el1ScrollingPhantomClass);
-            removeClass(state.el1, state.config.el1DraggingClass);
-
-            // clear el1 styles
-            if (options.clearStyles) {
-                state.el1.style.position = '';
-                state.el1.style.overflow = '';
-            }
-
-            // clear el2 classes
-            removeClass(state.el2, state.config.el2Class);
-
-            // clear el2 styles
-            if (options.clearStyles) {
-                state.el2.style.display = '';
-                state.el2.style.overflowX = '';
-                state.el2.style.overflowY = '';
-                state.el2.style.msOverflowStyle = '';
-                state.el2.style.height = '';
-                state.el2.style.width = '';
-            }
-
-            // clear dragger
-            state.dragger.removeChild(state.dragger.firstChild);
-            state.el1.removeChild(state.dragger);
-
-            // clear timeouts that may be still running
-            state.scrollingPhantomClassTimeout ?
-                clearTimeout(state.scrollingPhantomClassTimeout) : null;
-            state.draggingPhantomClassTimeout ?
-                clearTimeout(state.draggingPhantomClassTimeout) : null;
-
-            // delete state object from element
-            delete el._vuebarState;
-
-        }
-
-
-
-
-
-
-        /*------------------------------------*\
-            Public Methods Install
-        \*------------------------------------*/
-        function publicMethods(){
-            return {
-                getState: getState,
-                initScrollbar: initScrollbar,
-                destroyScrollbar: destroyScrollbar,
-                refreshScrollbar: refreshScrollbar,
-            };
-        }
-        Vue.vuebar = publicMethods();
-        Vue.prototype.$vuebar = publicMethods();
-
-
-
-
-
-        /*------------------------------------*\
-            Directive Install
-        \*------------------------------------*/
-        Vue.directive(installOptions.directive, {
-
-            inserted: function(el, binding, vnode){
-                initScrollbar.call(this, el, binding);
-            },
-
-            componentUpdated: function(el, binding, vnode, oldVnode){
-                refreshScrollbar.call(this, el);
-            },
-
-            unbind: function(el, binding, vnode, oldVnode){
-                // we shouldn't clearStyles because it actually doesn't matter that much
-                // the element will be always deleted on unbind and its styles also
-                // and if we do clear styles then it looks bad on transitions
-                destroyScrollbar.call(this, el, {clearStyles: false});
-            },
-
-        });
-
-
-
-
-
-
-
-        /*------------------------------------*\
-            Debounce Helper
-            https://remysharp.com/2010/07/21/throttling-function-calls
-        \*------------------------------------*/
-        function debounce(fn, delay) {
-            var timer = null;
-            return function () {
-                var context = this, args = arguments;
-                clearTimeout(timer);
-                timer = setTimeout(function () {
-                    fn.apply(context, args);
-                }, delay);
-            };
-        };
-
-
-
-
-        /*------------------------------------*\
-            Throttle Helper
-            https://remysharp.com/2010/07/21/throttling-function-calls
-        \*------------------------------------*/
-        function throttle(fn, threshhold, scope) {
-            threshhold || (threshhold = 250);
-            var last,
-                deferTimer;
-            return function () {
-                var context = scope || this;
-
-                var now = +new Date,
-                    args = arguments;
-                if (last && now < last + threshhold) {
-                    // hold on to it
-                    clearTimeout(deferTimer);
-                    deferTimer = setTimeout(function () {
-                        last = now;
-                        fn.apply(context, args);
-                    }, threshhold);
-                } else {
-                    last = now;
-                    fn.apply(context, args);
-                }
-            }
-        }
-
-
-
-        /*------------------------------------*\
-            Style Vendor Prefixes Helper
-        \*------------------------------------*/
-        function compatStyle(element, property, value) {
-            element.style['webkit' + property] = value;
-            element.style['moz' + property] = value;
-            element.style['ms' + property] = value;
-            element.style['o' + property] = value;
-            element.style[ property.slice(0,1).toLowerCase() + property.substring(1) ] = value;
-        }
-
-
-
-        /*------------------------------------*\
-            Class Manipulation Helpers
-            https://plainjs.com/javascript/attributes/adding-removing-and-testing-for-classes-9/
-        \*------------------------------------*/
-        function hasClass(el, className) {
-            return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
-        }
-
-        function addClass(el, className) {
-            if (el.classList) el.classList.add(className);
-            else if (!hasClass(el, className)) el.className += ' ' + className;
-        }
-
-        function removeClass(el, className) {
-            if (el.classList) el.classList.remove(className);
-            else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
-        }
-
-
-
-
-
-        /*------------------------------------*\
-            Browser Detection Helper
-        \*------------------------------------*/
-        function detectBrowser(){
-
-            // get ie version helper
-            function getIEVersion() {
-                var match = window.navigator.userAgent.match(/(?:MSIE |Trident\/.*; rv:)(\d+)/);
-                return match ? parseInt(match[1]) : void 0;
-            }
-
-            // user agent & vendor
-            var ua = window.navigator.userAgent;
-            var vendor = window.navigator.vendor;
-
-            // chrome
-            var chrome = (
-                (ua.toLowerCase().indexOf('chrome') > -1) && (vendor.toLowerCase().indexOf('google') > -1)
-            );
-
-            // edge
-            var edge = ua.indexOf('Edge') > -1;
-
-            // safari
-            var safari = !!window.safari || ((ua.toLowerCase().indexOf('safari') > -1) && (vendor.toLowerCase().indexOf('apple') > -1));
-
-            // internet explorer
-            var ie8 = getIEVersion() == 8;
-            var ie9 = getIEVersion() == 9;
-            var ie10 = getIEVersion() == 10;
-            var ie11 = getIEVersion() == 11;
-            var ie = ie8 || ie9 || ie10 || ie11;
-
-            // is it mobile browser?
-            // regex below thanks to http://detectmobilebrowsers.com/
-            var uaOrVendor = ua || vendor || window.opera;
-            var mobile = (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(uaOrVendor)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(uaOrVendor.substr(0,4)));
-
-            // construct return object
-            return {
-                edge: edge,
-                chrome: chrome,
-                safari: safari,
-                mobile: mobile,
-                ie: ie,
-                ie8: ie8,
-                ie9: ie9,
-                ie10: ie10,
-                ie11: ie11,
-            };
-
-        }
-
-
-        /*------------------------------------*\
-            Calculate scrollbar width in element
-            - if the width is 0 it means the scrollbar is floated/overlayed
-            - accepts "container" paremeter because ie & edge can have different
-              scrollbar behaviors for different elements using '-ms-overflow-style'
-        \*------------------------------------*/
-        function getNativeScrollbarWidth(container) {
-            var container = container ? container : document.body;
-
-            var fullWidth = 0;
-            var barWidth = 0;
-
-            var wrapper = document.createElement('div');
-            var child = document.createElement('div');
-
-            wrapper.style.position = 'absolute';
-            wrapper.style.pointerEvents = 'none';
-            wrapper.style.bottom = '0';
-            wrapper.style.right = '0';
-            wrapper.style.width = '100px';
-            wrapper.style.overflow = 'hidden';
-
-            wrapper.appendChild(child);
-            container.appendChild(wrapper);
-
-            fullWidth = child.offsetWidth;
-            child.style.width = '100%';
-            wrapper.style.overflowY = 'scroll';
-            barWidth = fullWidth - child.offsetWidth;
-
-            container.removeChild(wrapper);
-
-            return barWidth;
-        }
-
-
-
-
-    };
-
-
-
-    /*------------------------------------*\
-        Expose / Autoinstall
-    \*------------------------------------*/
-    if (true) {
-        module.exports = Vuebar;
-    } else {}
-
-    if (typeof Vue !== typeof void 0) {
-        Vue.use(Vuebar);
-    }
-
-
-
-
-})();
-
-
-/***/ }),
-
 /***/ "./node_modules/vuetify/dist/vuetify.js":
 /*!**********************************************!*\
   !*** ./node_modules/vuetify/dist/vuetify.js ***!
@@ -52409,7 +51247,7 @@ var __assign = undefined && undefined.__assign || function () {
             // If the dialog content contains
             // the click event, or if the
             // dialog is not active
-            if (this.$refs.content.contains(e.target) || !this.isActive) return false;
+            if (!this.isActive || this.$refs.content.contains(e.target)) return false;
             // If we made it here, the click is outside
             // and is active. If persistent, and the
             // click is on the overlay, animate
@@ -52419,7 +51257,7 @@ var __assign = undefined && undefined.__assign || function () {
             }
             // close dialog if !persistent, clicked outside and we're the topmost dialog.
             // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-            return Object(_util_helpers__WEBPACK_IMPORTED_MODULE_8__["getZIndex"])(this.$refs.content) >= this.getMaxZIndex();
+            return this.activeZIndex >= this.getMaxZIndex();
         },
         hideScroll: function hideScroll() {
             if (this.fullscreen) {
@@ -52431,16 +51269,62 @@ var __assign = undefined && undefined.__assign || function () {
         show: function show() {
             !this.fullscreen && !this.hideOverlay && this.genOverlay();
             this.$refs.content.focus();
-            this.$listeners.keydown && this.bind();
+            this.bind();
         },
         bind: function bind() {
-            window.addEventListener('keydown', this.onKeydown);
+            window.addEventListener('focusin', this.onFocusin);
         },
         unbind: function unbind() {
-            window.removeEventListener('keydown', this.onKeydown);
+            window.removeEventListener('focusin', this.onFocusin);
         },
         onKeydown: function onKeydown(e) {
+            if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_8__["keyCodes"].esc && !this.getOpenDependents().length) {
+                if (!this.persistent) {
+                    this.isActive = false;
+                    var activator_1 = this.getActivator();
+                    this.$nextTick(function () {
+                        return activator_1 && activator_1.focus();
+                    });
+                } else if (!this.noClickAnimation) {
+                    this.animateClick();
+                }
+            }
             this.$emit('keydown', e);
+        },
+        onFocusin: function onFocusin(e) {
+            var target = event.target;
+            if (
+            // It isn't the document or the dialog body
+            ![document, this.$refs.content].includes(target) &&
+            // It isn't inside the dialog body
+            !this.$refs.content.contains(target) &&
+            // We're the topmost dialog
+            this.activeZIndex >= this.getMaxZIndex() &&
+            // It isn't inside a dependent element (like a menu)
+            !this.getOpenDependentElements().some(function (el) {
+                return el.contains(target);
+            })
+            // So we must have focused something outside the dialog and its children
+            ) {
+                    // Find and focus the first available element inside the dialog
+                    var focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                    focusable.length && focusable[0].focus();
+                }
+        },
+        getActivator: function getActivator(e) {
+            if (this.$refs.activator) {
+                return this.$refs.activator.children.length > 0 ? this.$refs.activator.children[0] : this.$refs.activator;
+            }
+            if (e) {
+                this.activatedBy = e.currentTarget || e.target;
+            }
+            if (this.activatedBy) return this.activatedBy;
+            if (this.activatorNode) {
+                var activator = Array.isArray(this.activatorNode) ? this.activatorNode[0] : this.activatorNode;
+                var el = activator && activator.elm;
+                if (el) return el;
+            }
+            Object(_util_console__WEBPACK_IMPORTED_MODULE_10__["consoleError"])('No activator found');
         },
         genActivator: function genActivator() {
             var _this = this;
@@ -52448,6 +51332,7 @@ var __assign = undefined && undefined.__assign || function () {
             var listeners = this.disabled ? {} : {
                 click: function click(e) {
                     e.stopPropagation();
+                    _this.getActivator(e);
                     if (!_this.disabled) _this.isActive = !_this.isActive;
                 }
             };
@@ -52458,9 +51343,10 @@ var __assign = undefined && undefined.__assign || function () {
             }
             return this.$createElement('div', {
                 staticClass: 'v-dialog__activator',
-                'class': {
+                class: {
                     'v-dialog__activator--disabled': this.disabled
                 },
+                ref: 'activator',
                 on: listeners
             }, this.$slots.activator);
         }
@@ -52474,7 +51360,7 @@ var __assign = undefined && undefined.__assign || function () {
             directives: [{
                 name: 'click-outside',
                 value: function value() {
-                    return _this.isActive = false;
+                    _this.isActive = false;
                 },
                 args: {
                     closeConditional: this.closeConditional,
@@ -52506,6 +51392,9 @@ var __assign = undefined && undefined.__assign || function () {
         children.push(h('div', {
             'class': this.contentClasses,
             attrs: __assign({ tabIndex: '-1' }, this.getScopeIdAttrs()),
+            on: {
+                keydown: this.onKeydown
+            },
             style: { zIndex: this.activeZIndex },
             ref: 'content'
         }, [this.$createElement(_util_ThemeProvider__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -55388,8 +54277,8 @@ __webpack_require__.r(__webpack_exports__);
                 });
             });
         },
-        closeConditional: function closeConditional() {
-            return this.isActive && this.closeOnClick;
+        closeConditional: function closeConditional(e) {
+            return this.isActive && this.closeOnClick && !this.$refs.content.contains(e.target);
         },
         onResize: function onResize() {
             if (!this.isActive) return;
@@ -55613,7 +54502,7 @@ var __spread = undefined && undefined.__spread || function () {
             var directives = !this.openOnHover && this.closeOnClick ? [{
                 name: 'click-outside',
                 value: function value() {
-                    return _this.isActive = false;
+                    _this.isActive = false;
                 },
                 args: {
                     closeConditional: this.closeConditional,
@@ -55634,7 +54523,7 @@ var __spread = undefined && undefined.__spread || function () {
             var options = {
                 attrs: this.getScopeIdAttrs(),
                 staticClass: 'v-menu__content',
-                'class': __assign({}, this.rootThemeClasses, (_a = { 'v-menu__content--auto': this.auto, 'menuable__content__active': this.isActive }, _a[this.contentClass.trim()] = true, _a)),
+                'class': __assign({}, this.rootThemeClasses, (_a = { 'v-menu__content--auto': this.auto, 'v-menu__content--fixed': this.activatorFixed, 'menuable__content__active': this.isActive }, _a[this.contentClass.trim()] = true, _a)),
                 style: this.styles,
                 directives: this.genDirectives(),
                 ref: 'content',
@@ -55643,7 +54532,8 @@ var __spread = undefined && undefined.__spread || function () {
                         e.stopPropagation();
                         if (e.target.getAttribute('disabled')) return;
                         if (_this.closeOnContentClick) _this.isActive = false;
-                    }
+                    },
+                    keydown: this.onKeyDown
                 }
             };
             !this.disabled && this.openOnHover && (options.on.mouseenter = this.mouseEnterHandler);
@@ -55704,7 +54594,14 @@ __webpack_require__.r(__webpack_exports__);
         onKeyDown: function onKeyDown(e) {
             var _this = this;
             if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_0__["keyCodes"].esc) {
-                this.isActive = false;
+                // Wait for dependent elements to close first
+                setTimeout(function () {
+                    _this.isActive = false;
+                });
+                var activator_1 = this.getActivator();
+                this.$nextTick(function () {
+                    return activator_1 && activator_1.focus();
+                });
             } else if (e.keyCode === _util_helpers__WEBPACK_IMPORTED_MODULE_0__["keyCodes"].tab) {
                 setTimeout(function () {
                     if (!_this.$refs.content.contains(document.activeElement)) {
@@ -56281,13 +55178,6 @@ __webpack_require__.r(__webpack_exports__);
                     }
                 }
             }, [itemObj.text]);
-        },
-        setSelectedItems: function setSelectedItems() {
-            if (this.internalValue == null) {
-                this.selectedItems = [];
-            } else {
-                this.selectedItems = [this.internalValue];
-            }
         }
     }
 }));
@@ -58474,6 +57364,8 @@ var defaultMenuProps = {
             // open `v-menu`
             if (this.selectedItems.length === 0) {
                 this.isMenuActive = true;
+            } else {
+                this.isMenuActive = false;
             }
             this.selectedIndex = -1;
         },
@@ -58505,11 +57397,15 @@ var defaultMenuProps = {
             }
             this.keyboardLookupPrefix += e.key.toLowerCase();
             this.keyboardLookupLastTime = now;
-            var item = this.allItems.find(function (item) {
+            var index = this.allItems.findIndex(function (item) {
                 return _this.getText(item).toLowerCase().startsWith(_this.keyboardLookupPrefix);
             });
-            if (item !== undefined) {
+            var item = this.allItems[index];
+            if (index !== -1) {
                 this.setValue(this.returnObject ? item : this.getValue(item));
+                setTimeout(function () {
+                    return _this.setMenuIndex(index);
+                });
             }
         },
         onKeyDown: function onKeyDown(e) {
@@ -61989,7 +60885,7 @@ var dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'mo
                 return this.lazyValue;
             },
             set: function set(val) {
-                if (this.mask) {
+                if (this.mask && val !== this.lazyValue) {
                     this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)));
                     this.setSelectionRange();
                 } else {
@@ -63789,7 +62685,7 @@ __webpack_require__.r(__webpack_exports__);
         var _a;
         var tooltip = h('div', this.setBackgroundColor(this.color, {
             staticClass: 'v-tooltip__content',
-            'class': (_a = {}, _a[this.contentClass] = true, _a['menuable__content__active'] = this.isActive, _a),
+            'class': (_a = {}, _a[this.contentClass] = true, _a['menuable__content__active'] = this.isActive, _a['v-tooltip__content--fixed'] = this.activatorFixed, _a),
             style: this.styles,
             attrs: this.getScopeIdAttrs(),
             directives: [{
@@ -65158,7 +64054,7 @@ var Vuetify = {
             return false;
         })(opts.components);
     },
-    version: '1.5.6'
+    version: '1.5.9'
 };
 function checkVueVersion(Vue, requiredVue) {
     var vueDep = requiredVue || '^2.5.18';
@@ -66291,17 +65187,6 @@ var VRowExpandTransition = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_0__["cr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var __values = undefined && undefined.__values || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator],
-        i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function next() {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
 function closeConditional() {
     return false;
 }
@@ -66331,41 +65216,13 @@ function directive(e, el, binding) {
     // Check if it's a click outside our elements, and then if our callback returns true.
     // Non-toggleable components should take action in their callback and return falsy.
     // Toggleable can return true if it wants to deactivate.
-    // Note that, because we're in the capture phase, this callback will occure before
+    // Note that, because we're in the capture phase, this callback will occur before
     // the bubbling click event on any outside elements.
-    !clickedInEls(e, elements) && setTimeout(function () {
+    !elements.some(function (el) {
+        return el.contains(e.target);
+    }) && setTimeout(function () {
         isActive(e) && binding.value && binding.value(e);
     }, 0);
-}
-function clickedInEls(e, elements) {
-    var e_1, _a;
-    // Get position of click
-    var x = e.clientX,
-        y = e.clientY;
-    try {
-        // Loop over all included elements to see if click was in any of them
-        for (var elements_1 = __values(elements), elements_1_1 = elements_1.next(); !elements_1_1.done; elements_1_1 = elements_1.next()) {
-            var el = elements_1_1.value;
-            if (clickedInEl(el, x, y)) return true;
-        }
-    } catch (e_1_1) {
-        e_1 = { error: e_1_1 };
-    } finally {
-        try {
-            if (elements_1_1 && !elements_1_1.done && (_a = elements_1.return)) _a.call(elements_1);
-        } finally {
-            if (e_1) throw e_1.error;
-        }
-    }
-    return false;
-}
-function clickedInEl(el, x, y) {
-    // Get bounding rect for element
-    // (we're in capturing event and we want to check for multiple elements,
-    //  so can't use target.)
-    var b = el.getBoundingClientRect();
-    // Check if the click was in the element's bounding rect
-    return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom;
 }
 /* harmony default export */ __webpack_exports__["default"] = ({
     // [data-app] may not be found
@@ -66883,7 +65740,7 @@ var Vuetify = {
         Vue.use(_components_Vuetify__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({ components: _components__WEBPACK_IMPORTED_MODULE_2__,
             directives: _directives__WEBPACK_IMPORTED_MODULE_3__["default"] }, args));
     },
-    version: '1.5.6'
+    version: '1.5.9'
 };
 if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(Vuetify);
@@ -67842,6 +66699,7 @@ function searchChildren(children) {
         getClickableDependentElements: function getClickableDependentElements() {
             var result = [this.$el];
             if (this.$refs.content) result.push(this.$refs.content);
+            if (this.overlay) result.push(this.overlay);
             result.push.apply(result, __spread(this.getOpenDependentElements()));
             return result;
         }
@@ -68331,9 +67189,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _positionable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./positionable */ "./src/mixins/positionable.ts");
 /* harmony import */ var _stackable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stackable */ "./src/mixins/stackable.ts");
-/* harmony import */ var _util_console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/console */ "./src/util/console.ts");
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 
 
 
@@ -68423,6 +67279,7 @@ var dimensions = {
         return {
             absoluteX: 0,
             absoluteY: 0,
+            activatorFixed: false,
             dimensions: Object.assign({}, dimensions),
             isContentActive: false,
             pageWidth: 0,
@@ -68547,8 +67404,20 @@ var dimensions = {
         },
         checkForPageYOffset: function checkForPageYOffset() {
             if (this.hasWindow) {
-                this.pageYOffset = this.getOffsetTop();
+                this.pageYOffset = this.activatorFixed ? 0 : this.getOffsetTop();
             }
+        },
+        checkActivatorFixed: function checkActivatorFixed() {
+            if (this.attach !== false) return;
+            var el = this.getActivator();
+            while (el) {
+                if (window.getComputedStyle(el).position === 'fixed') {
+                    this.activatorFixed = true;
+                    return;
+                }
+                el = el.offsetParent;
+            }
+            this.activatorFixed = false;
         },
         deactivate: function deactivate() {},
         getActivator: function getActivator(e) {
@@ -68571,7 +67440,6 @@ var dimensions = {
                 var el = activator && activator.elm;
                 if (el) return el;
             }
-            Object(_util_console__WEBPACK_IMPORTED_MODULE_3__["consoleError"])('No activator found');
         },
         getInnerHeight: function getInnerHeight() {
             if (!this.hasWindow) return 0;
@@ -68632,6 +67500,7 @@ var dimensions = {
         updateDimensions: function updateDimensions() {
             var _this = this;
             this.checkForWindow();
+            this.checkActivatorFixed();
             this.checkForPageYOffset();
             this.pageWidth = document.documentElement.clientWidth;
             var dimensions = {};
@@ -69174,8 +68043,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     methods: {
         save: function save(value) {
+            var _this = this;
             this.originalValue = value;
-            this.isActive = false;
+            setTimeout(function () {
+                _this.isActive = false;
+            });
         }
     }
 }));
@@ -73109,103 +71981,24 @@ module.exports = "/images/studens11.jpg?fa2189b52cdb345da218937bb00bdd5c";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/assets/js/store.js");
-/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-free/css/all.css */ "./node_modules/@fortawesome/fontawesome-free/css/all.css");
-/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _views_Home_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Home.vue */ "./resources/assets/js/views/Home.vue");
-/* harmony import */ var _views_RegisterStudents_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/RegisterStudents.vue */ "./resources/assets/js/views/RegisterStudents.vue");
-/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/Login.vue */ "./resources/assets/js/views/Login.vue");
-/* harmony import */ var _views_RegisterProfesor_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/RegisterProfesor.vue */ "./resources/assets/js/views/RegisterProfesor.vue");
-/* harmony import */ var _components_Login_RememberComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Login/RememberComponent.vue */ "./resources/assets/js/components/Login/RememberComponent.vue");
-/* harmony import */ var _views_Administrador_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/Administrador.vue */ "./resources/assets/js/views/Administrador.vue");
-/* harmony import */ var _components_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Asignaciones/Credencial.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoHorario_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoHorario.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoProfesor_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoProfesor.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoProfesor.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoAlumno_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoAlumno.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoAlumno.vue");
-/* harmony import */ var _components_Profesores_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profesores/MostrarComponent.vue */ "./resources/assets/js/components/Profesores/MostrarComponent.vue");
-/* harmony import */ var _components_Profesores_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profesores/EditarComponent.vue */ "./resources/assets/js/components/Profesores/EditarComponent.vue");
-/* harmony import */ var _components_Profesores_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profesores/BorrarComponent.vue */ "./resources/assets/js/components/Profesores/BorrarComponent.vue");
-/* harmony import */ var _components_Estudiantes_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Estudiantes/MostrarComponent.vue */ "./resources/assets/js/components/Estudiantes/MostrarComponent.vue");
-/* harmony import */ var _components_Estudiantes_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Estudiantes/EditarComponent.vue */ "./resources/assets/js/components/Estudiantes/EditarComponent.vue");
-/* harmony import */ var _components_Estudiantes_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Estudiantes/BorrarComponent.vue */ "./resources/assets/js/components/Estudiantes/BorrarComponent.vue");
-/* harmony import */ var _components_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Horario/HorarioComponent.vue");
-/* harmony import */ var _components_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Curso/CursoComponent.vue */ "./resources/assets/js/components/Curso/CursoComponent.vue");
-/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vuebar */ "./node_modules/vuebar/vuebar.js");
-/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(vuebar__WEBPACK_IMPORTED_MODULE_22__);
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
- //import router from './router'
-
- // Ensure you are using css-loader
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/assets/js/store.js");
 
 
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+__webpack_require__(/*! ./components */ "./resources/assets/js/components.js");
 
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuebar__WEBPACK_IMPORTED_MODULE_22___default.a);
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_3___default.a, {
-  iconfont: 'fa'
-});
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('App', __webpack_require__(/*! ./views/App.vue */ "./resources/assets/js/views/App.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('Homeview', _views_Home_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('registerstudents', _views_RegisterStudents_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('registerprofesor', _views_RegisterProfesor_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('remembercomponent', _components_Login_RememberComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('pmostrarcomponent', _components_Profesores_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('peditarcomponent', _components_Profesores_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('pborrarcomponent', _components_Profesores_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('emostrarcomponent', _components_Estudiantes_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('eeditarcomponent', _components_Estudiantes_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('eborrarcomponent', _components_Estudiantes_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('horariocomponent', _components_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('cursocomponent', _components_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('administrador', _views_Administrador_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('credencial', _components_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursohorario', _components_Asignaciones_AsignacionCursoHorario_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursoprofesor', _components_Asignaciones_AsignacionCursoProfesor_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursoalumno', _components_Asignaciones_AsignacionCursoAlumno_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('login', _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  data: function data() {
-    return {};
-  },
-  //router,
-  store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]
+  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),
@@ -73250,6 +72043,35 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/***/ }),
+
+/***/ "./resources/assets/js/components.js":
+/*!*******************************************!*\
+  !*** ./resources/assets/js/components.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('login', __webpack_require__(/*! ./views/Login.vue */ "./resources/assets/js/views/Login.vue").default);
+Vue.component('App', __webpack_require__(/*! ./views/App.vue */ "./resources/assets/js/views/App.vue").default);
+Vue.component('Homeview', __webpack_require__(/*! ./views/Home.vue */ "./resources/assets/js/views/Home.vue").default);
+Vue.component('registerstudents', __webpack_require__(/*! ./views/RegisterStudents.vue */ "./resources/assets/js/views/RegisterStudents.vue").default);
+Vue.component('registerprofesor', __webpack_require__(/*! ./views/RegisterProfesor.vue */ "./resources/assets/js/views/RegisterProfesor.vue").default);
+Vue.component('remembercomponent', __webpack_require__(/*! ./components/Login/RememberComponent.vue */ "./resources/assets/js/components/Login/RememberComponent.vue").default);
+Vue.component('administrador', __webpack_require__(/*! ./views/Administrador.vue */ "./resources/assets/js/views/Administrador.vue").default);
+Vue.component('pmostrarcomponent', __webpack_require__(/*! ./components/Profesores/MostrarComponent.vue */ "./resources/assets/js/components/Profesores/MostrarComponent.vue").default);
+Vue.component('peditarcomponent', __webpack_require__(/*! ./components/Profesores/EditarComponent.vue */ "./resources/assets/js/components/Profesores/EditarComponent.vue").default);
+Vue.component('pborrarcomponent', __webpack_require__(/*! ./components/Profesores/BorrarComponent.vue */ "./resources/assets/js/components/Profesores/BorrarComponent.vue").default);
+Vue.component('emostrarcomponent', __webpack_require__(/*! ./components/Estudiantes/MostrarComponent.vue */ "./resources/assets/js/components/Estudiantes/MostrarComponent.vue").default);
+Vue.component('eeditarcomponent', __webpack_require__(/*! ./components/Estudiantes/EditarComponent.vue */ "./resources/assets/js/components/Estudiantes/EditarComponent.vue").default);
+Vue.component('eborrarcomponent', __webpack_require__(/*! ./components/Estudiantes/BorrarComponent.vue */ "./resources/assets/js/components/Estudiantes/BorrarComponent.vue").default);
+Vue.component('horariocomponent', __webpack_require__(/*! ./components/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Horario/HorarioComponent.vue").default);
+Vue.component('cursocomponent', __webpack_require__(/*! ./components/Curso/CursoComponent.vue */ "./resources/assets/js/components/Curso/CursoComponent.vue").default);
+Vue.component('credencial', __webpack_require__(/*! ./components/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Asignaciones/Credencial.vue").default);
+Vue.component('acursohorario', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoHorario.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue").default);
+Vue.component('acursoprofesor', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoProfesor.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoProfesor.vue").default);
+Vue.component('acursoalumno', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoAlumno.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoAlumno.vue").default);
 
 /***/ }),
 
@@ -75033,11 +73855,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true& */ "./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true&");
+/* harmony import */ var _Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Administrador.vue?vue&type=template&id=5dc0fd0c& */ "./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&");
 /* harmony import */ var _Administrador_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Administrador.vue?vue&type=script&lang=js& */ "./resources/assets/js/views/Administrador.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& */ "./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -75045,13 +73865,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Administrador_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "5dc0fd0c",
+  null,
   null
   
 )
@@ -75077,35 +73897,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& ***!
-  \**************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--5-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--5-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=style&index=0&id=5dc0fd0c&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_style_index_0_id_5dc0fd0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true&":
-/*!************************************************************************************************!*\
-  !*** ./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true& ***!
-  \************************************************************************************************/
+/***/ "./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&":
+/*!************************************************************************************!*\
+  !*** ./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Administrador.vue?vue&type=template&id=5dc0fd0c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/views/Administrador.vue?vue&type=template&id=5dc0fd0c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Administrador_vue_vue_type_template_id_5dc0fd0c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -75553,7 +74357,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/david/Workspace/Laravel/campus/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\aldos\code\campus\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
