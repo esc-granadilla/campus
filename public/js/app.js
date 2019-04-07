@@ -6052,7 +6052,7 @@ __webpack_require__.r(__webpack_exports__);
         title: "Home",
         ruta: "/"
       }, {
-        title: "Registarce",
+        title: "Registrarse",
         ruta: "/register"
       }, {
         title: "Ingresar",
@@ -33113,8 +33113,8 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile-title",
-                    { staticClass: "font-weight-medium font-italic" },
-                    [_vm._v("Campus Granadilla")]
+                    { staticClass: "font-weight-medium" },
+                    [_vm._v("CAMPUS GRANADILLA")]
                   )
                 ],
                 1
