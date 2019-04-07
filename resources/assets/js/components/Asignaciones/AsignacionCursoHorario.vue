@@ -205,6 +205,7 @@ export default {
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.search = "";
             this.noSelected = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
@@ -265,7 +266,6 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   /*position: absolute;*/
 }
 .tm {
    height: 400px;

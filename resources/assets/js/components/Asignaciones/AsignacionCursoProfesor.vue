@@ -304,12 +304,10 @@ export default {
             curso.selected = true;
             this.curso = curso;
             this.obtenerHorarios();
-            /*axios
-               .get("cursohorario/" + curso.id)
-               .then(res => (this.horarios = res.data));*/
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.search = "";
             this.accions[2].invisible = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
@@ -324,12 +322,10 @@ export default {
             if (this.profesor != null) this.profesor.selected = false;
             profesor.selected = true;
             this.profesor = profesor;
-            //axios
-            //   .get("cursohorario/" + profesor.id)
-            //   .then(res => (this.cursoshorarios = res.data));
             var nuevos = [];
             nuevos.push(profesor);
             this.profesores = nuevos;
+            this.search = "";
             this.accions[1].invisible = false;
          } else {
             if (this.profesor != null) this.profesor.selected = false;
@@ -356,18 +352,28 @@ export default {
                )
                .then(function(res) {
                   var crs = res.data;
-                  for (let index = 0; index < crs.length; index++) {
-                     if (crs[index].selected == true)
-                        self.selected[index] = crs[index];
-                  }
                   self.horarios = crs;
+                  self.selected = [];
+                  crs.forEach(c => {
+                     if (c.selected) self.selected.push(c);
+                  });
                });
       },
       enviar() {
          axios
-            .post("asigcursohorario/" + this.curso.id, {
-               horarios: this.selected
-            })
+            .post(
+               "asigcursohorarioprofesor/" +
+                  this.profesor.id +
+                  "/" +
+                  this.curso.id +
+                  "/" +
+                  this.grado.value +
+                  "/" +
+                  this.dia.value,
+               {
+                  horarios: this.selected
+               }
+            )
             .then(res => (this.mensaje = res.data));
       }
    },
@@ -389,18 +395,6 @@ export default {
       }
    },
    watch: {
-      /*tabs(val) {
-         if (val == 2) {
-            this.selected = [];
-            this.horarios = this.cursoshorarios;
-            this.cursoshorarios.forEach(ch => {
-               this.horarios.forEach(h => {
-                  if (h.id == ch.id) this.selected.push(h);
-               });
-         
-            });
-         }
-      },*/
       mensaje(val) {
          this.alert = true;
       }
@@ -425,7 +419,6 @@ export default {
          }
          self.cursos = self.cursostock = cursos;
       });
-      //axios.get("/horarios").then(res => (this.horarios = res.data));
    }
 };
 </script>
@@ -437,7 +430,6 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   /*position: absolute;*/
 }
 .tm {
    height: 400px;

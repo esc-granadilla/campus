@@ -10,4 +10,9 @@ class Profesor extends Model
    {
       return $this->belongsTo('Campus\User');
    }
+
+   public function asignacioncursoprofesor()
+   {
+      return $this->belongsTo('Campus\Asignacioncursoprofesor');
+   }
 }
