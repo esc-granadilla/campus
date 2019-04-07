@@ -26,4 +26,8 @@ class AsignacionCursoProfesor extends Model
    {
       return $this->hasOne('Campus\Profesor');
    }
+   public function estudiantes()
+   {
+      return $this->belongsToMany('Campus\Estudiante');
+   }
 }

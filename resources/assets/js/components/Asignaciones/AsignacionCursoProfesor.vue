@@ -304,9 +304,6 @@ export default {
             curso.selected = true;
             this.curso = curso;
             this.obtenerHorarios();
-            /*axios
-               .get("cursohorario/" + curso.id)
-               .then(res => (this.horarios = res.data));*/
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
@@ -324,9 +321,6 @@ export default {
             if (this.profesor != null) this.profesor.selected = false;
             profesor.selected = true;
             this.profesor = profesor;
-            //axios
-            //   .get("cursohorario/" + profesor.id)
-            //   .then(res => (this.cursoshorarios = res.data));
             var nuevos = [];
             nuevos.push(profesor);
             this.profesores = nuevos;
@@ -399,18 +393,6 @@ export default {
       }
    },
    watch: {
-      /*tabs(val) {
-         if (val == 2) {
-            this.selected = [];
-            this.horarios = this.cursoshorarios;
-            this.cursoshorarios.forEach(ch => {
-               this.horarios.forEach(h => {
-                  if (h.id == ch.id) this.selected.push(h);
-               });
-         
-            });
-         }
-      },*/
       mensaje(val) {
          this.alert = true;
       }
@@ -435,7 +417,6 @@ export default {
          }
          self.cursos = self.cursostock = cursos;
       });
-      //axios.get("/horarios").then(res => (this.horarios = res.data));
    }
 };
 </script>
@@ -447,7 +428,6 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   /*position: absolute;*/
 }
 .tm {
    height: 400px;

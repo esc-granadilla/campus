@@ -161,4 +161,60 @@ class AdministracionController extends Controller
          }
       }
    }
+
+   public function showcursosprofesors(Grado $grado, Request $request)
+   {
+      if ($request->ajax()) {
+         $cursosids = AsignacionCursoProfesor::where('grado_id', $grado->id)->get();
+         $cursosids = $cursosids->groupBy('curso_id');
+         $cursos = [];
+         foreach ($cursosids as $cursosid) {
+            $curso = Curso::find($cursosid[0]->curso_id);
+            if ($curso->estado == 1)
+               array_push($cursos, $curso);
+         }
+         return response()->json($cursos, 200);
+      }
+   }
+
+   public function showprofesorscurso(Curso $curso, Grado $grado, Request $request)
+   {
+      if ($request->ajax()) {
+         $cursosids = AsignacionCursoProfesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
+         $cursosids = $cursosids->groupBy('profesor_id');
+         $profesores = [];
+         foreach ($cursosids as $cursosid) {
+            $profesor = Profesor::find($cursosid[0]->profesor_id);
+            if ($profesor->estado == 1)
+               array_push($profesores, $profesor);
+         }
+         return response()->json($profesores, 200);
+      }
+   }
+
+   public function showhorarioscurso(Profesor $profesor, Curso $curso, Grado $grado, Request $request)
+   {
+      if ($request->ajax()) {
+         $cursosids = AsignacionCursoProfesor::where(
+            ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
+         )->get();
+         $cursosids = $cursosids->groupBy('dia_id');
+         $diasHorarios = [];
+         foreach ($cursosids as $cursosid) {
+            $dia = Dia::find($cursosid[0]->dia_id);
+            $valido = false;
+            $horarios = [];
+            foreach ($cursosid as $cursosi) {
+               $horario = Horario::find($cursosi->id_horario);
+               if ($horario->estado == 1) {
+                  $valido = true;
+                  array_push($horarios, $horario);
+               }
+            }
+            if ($valido)
+               array_push($diasHorarios, ['Dia' => $dia, 'Horarios' => $horarios]);
+         }
+         return response()->json($diasHorarios, 200);
+      }
+   }
 }

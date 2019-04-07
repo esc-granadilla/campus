@@ -265,7 +265,6 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   /*position: absolute;*/
 }
 .tm {
    height: 400px;
