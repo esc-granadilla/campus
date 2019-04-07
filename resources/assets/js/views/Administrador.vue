@@ -88,8 +88,8 @@
          </v-navigation-drawer>
       </div>
       <v-content app id="cuerpo">
-         <v-container fluid class="full" v-if="mostar === 'cuerpo'">
-            <h1>hola este es el cuerpo</h1>
+         <v-container fluid class="full">
+            <p>lorem ipsim dolor</p>
          </v-container>
          <credencial v-if="mostar === 'credencial'"></credencial>
          <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
@@ -136,6 +136,7 @@ export default {
             }
          ],
          noticias: [ 
+            ["Mostrar","insert_drive_file","noticias/mostrar"],
             ["Crear","add","noticias/create"],
             ["Actualizar","update","noticias/editar"],
             ["Eliminar","delete","noticias/eliminar"]

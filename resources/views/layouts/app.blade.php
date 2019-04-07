@@ -18,7 +18,7 @@
     <link href="{{ asset('css/vuetify.min.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="main">
         @if (Auth::guest())
             <App login="false"  name=""></App>
         @else
@@ -29,7 +29,7 @@
         @endif
         <v-app>
          <v-content>
-            <div style="padding-top: 64px; height: 100%;">
+            <div style=" backgroud-color:white; padding-top: 64px; height: 100%;">
                @yield('content')
             </div>
          </v-content>

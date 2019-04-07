@@ -27,6 +27,8 @@ Route::resource('horarios', 'HorarioController');
 
 Route::resource('cursos', 'CursoController');
 
+Route::resource('noticias','NoticiasController');
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/credencial/{user}', 'AdministracionController@credencial')->name('credencial');
