@@ -12,11 +12,11 @@
                <v-list class="pa-0">
                   <v-list-tile avatar>
                      <v-list-tile-avatar>
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg">
+                        <v-icon x-large>vertical_split</v-icon>
                      </v-list-tile-avatar>
 
                      <v-list-tile-content>
-                        <v-list-tile-title>John Leider</v-list-tile-title>
+                        <v-list-tile-title>{{this.name}}</v-list-tile-title>
                      </v-list-tile-content>
 
                      <v-list-tile-action>
@@ -48,7 +48,7 @@
                   <v-list-group no-action sub-group>
                      <template v-slot:activator>
                         <v-list-tile>
-                           <v-list-tile-title>Empleados</v-list-tile-title>
+                           <v-list-tile-title>Profesores</v-list-tile-title>
                         </v-list-tile>
                      </template>
 
@@ -74,6 +74,25 @@
                      </v-list-tile>
                   </v-list-group>
                </v-list-group>
+               <v-list-group prepend-icon="offline_pin">
+                  <template v-slot:activator>
+                     <v-list-tile>
+                        <v-list-tile-title>Asignaciones</v-list-tile-title>
+                     </v-list-tile>
+                  </template>
+                  <v-layout pl-5>
+                     <v-list-tile
+                        v-for="(crud, i) in asignaciones"
+                        :key="i"
+                        @click="route(crud[2])"
+                     >
+                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
+                        <v-list-tile-action>
+                           <v-icon v-text="crud[1]"></v-icon>
+                        </v-list-tile-action>
+                     </v-list-tile>
+                  </v-layout>
+               </v-list-group>
             </v-list>
          </v-navigation-drawer>
       </div>
@@ -82,6 +101,17 @@
             <h1>hola este es el cuerpo</h1>
          </div>
          <credencial v-if="mostar === 'credencial'"></credencial>
+         <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
+         <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
+         <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
+         <emostrarcomponent v-if="mostar === 'estudiantes/mostrar'"></emostrarcomponent>
+         <eeditarcomponent v-if="mostar === 'estudiantes/editar'"></eeditarcomponent>
+         <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
+         <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
+         <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
+         <acursohorario v-if="mostar === 'curso/horario'"></acursohorario>
+         <acursoprofesor v-if="mostar === 'curso/profesor'"></acursoprofesor>
+         <acursoalumno v-if="mostar === 'curso/alumno'"></acursoalumno>
       </div>
    </v-layout>
 </template>
@@ -93,21 +123,41 @@ export default {
          drawer: true,
          items: [
             {
+               title: "Noticias",
+               icon: "notifications",
+               ruta: "noticias"
+            },
+            {
                title: "Credenciales",
                icon: "account_balance_wallet",
                ruta: "credencial"
+            },
+            {
+               title: "Cursos",
+               icon: "donut_small",
+               ruta: "curso"
+            },
+            {
+               title: "Horarios",
+               icon: "alarm",
+               ruta: "horario"
             }
          ],
          empleados: [
             ["Crear", "add", "profesors/create"],
-            ["Mostrar", "insert_drive_file", ""],
-            ["Actualizar", "update", ""],
-            ["Eliminar", "delete", ""]
+            ["Mostrar", "insert_drive_file", "profesors/mostrar"],
+            ["Actualizar", "update", "profesors/editar"],
+            ["Eliminar", "delete", "profesors/eliminar"]
          ],
          estudiantes: [
-            ["Mostrar", "insert_drive_file", ""],
-            ["Actualizar", "update", ""],
-            ["Eliminar", "delete", ""]
+            ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],
+            ["Actualizar", "update", "estudiantes/editar"],
+            ["Eliminar", "delete", "estudiantes/eliminar"]
+         ],
+         asignaciones: [
+            ["Cursos Horarios", "swap_horizontal_circle", "curso/horario"],
+            ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
+            ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
          ],
          mostar: "cuerpo",
          mini: true,
@@ -116,10 +166,12 @@ export default {
    },
    methods: {
       route(ruta) {
-         this.mostar = ruta;
+         if (ruta !== "profesors/create") {
+            this.mostar = ruta;
+         } else location.href = ruta;
       }
    },
-   computed: {}
+   props: ["name"]
 };
 </script>
 

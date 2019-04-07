@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<administrador></administrador>
+@if (!Auth::guest())
+   <administrador name={{ Auth::user()->name }}></administrador>
+@endif
 @endsection

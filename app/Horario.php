@@ -4,11 +4,11 @@ namespace Campus;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profesor extends Model
+class Horario extends Model
 {
-   public function user()
+   public function cursos()
    {
-      return $this->belongsTo('Campus\User');
+      return $this->belongsToMany('Campus\Curso');
    }
 
    public function asignacioncursoprofesor()

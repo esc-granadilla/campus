@@ -15,4 +15,9 @@ class Estudiante extends Model
    {
       return $this->hasOne('Campus\Encargado');
    }
+
+   public function asignacioncursoprofesors()
+   {
+      return $this->belongsToMany('Campus\Asignacioncursoprofesor');
+   }
 }
