@@ -249,7 +249,7 @@ class AdministracionController extends Controller
          $myasignacion = $estudiante->Asignacioncursoprofesors()->get();
          $listnohorarios = [];
          foreach ($myasignacion as $my) {
-            array_push($listnohorarios, ['asignacion' => $my->id, 'horario_id' => $my->horario_id]);
+            array_push($listnohorarios, ['asignacion' => $my->id, 'horario_id' => $my->horario_id, 'dia_id' => $my->dia_id]);
          }
          $cursosids = Asignacioncursoprofesor::where(
             ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
@@ -273,7 +273,7 @@ class AdministracionController extends Controller
                )->first();
                $nuevo = true;
                foreach ($listnohorarios as $no) {
-                  if ($no['horario_id'] === $horario->id) {
+                  if ($no['horario_id'] === $horario->id && $no['dia_id'] === $dia->id) {
                      if ($asigna->id === $no['asignacion']) {
                         $valido = true;
                         array_push($horarios, [
