@@ -23,8 +23,18 @@
                         <v-btn block flat xs12 round @click="enviar">Asignar Horario(s) al curso</v-btn>
                      </v-layout>
                      <template v-slot:extension>
-                        <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
-                           <v-tab v-for="a in accions" :key="a.id">{{ a.text }}</v-tab>
+                        <v-tabs
+                           v-model="tabs"
+                           centered
+                           color="transparent"
+                           slider-color="white"
+                           change
+                        >
+                           <v-tab
+                              v-for="a in accions"
+                              :key="a.id"
+                              :disabled="a.id==2 ? noSelected : false"
+                           >{{ a.text }}</v-tab>
                         </v-tabs>
                      </template>
                   </v-toolbar>
@@ -124,6 +134,7 @@ export default {
          pagination: {
             sortBy: "desde"
          },
+         noSelected: true,
          selected: [],
          mensaje: [],
          cursoshorarios: [],
@@ -156,7 +167,7 @@ export default {
    methods: {
       toggleAll() {
          if (this.selected.length) this.selected = [];
-         else this.selected = this.desserts.slice();
+         else this.selected = this.horarios.slice();
       },
       changeSort(column) {
          if (this.pagination.sortBy === column) {
@@ -194,11 +205,14 @@ export default {
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.search = "";
+            this.noSelected = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
             if (curso != null) curso.selected = false;
             this.curso = null;
             this.cursos = this.cursostock;
+            this.noSelected = true;
          }
       },
       enviar() {
@@ -252,7 +266,6 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-   /*position: absolute;*/
 }
 .tm {
    height: 400px;

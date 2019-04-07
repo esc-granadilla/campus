@@ -10,4 +10,9 @@ class Horario extends Model
    {
       return $this->belongsToMany('Campus\Curso');
    }
+
+   public function asignacioncursoprofesor()
+   {
+      return $this->belongsTo('Campus\Asignacioncursoprofesor');
+   }
 }

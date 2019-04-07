@@ -27,11 +27,11 @@ class HorarioController extends Controller
       $this->middleware('administrador');
    }
    /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function index(Request $request)
    {
       if ($request->ajax()) {
@@ -41,39 +41,49 @@ class HorarioController extends Controller
    }
 
    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
    public function create()
    {
       //
    }
 
    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $horario = new Horario();
-         $horario->hasta = $request->input('hasta');
-         $horario->desde = $request->input('desde');
-         $horario->save();
-         return response()->json(['message' => 'Se registro el Horario correctamente'], 200);
+         $hor = Horario::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+         if ($hor != null) {
+            if ($hor->estado == 0) {
+               $hor->estado = 1;
+               $hor->save();
+            } else {
+               return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
+            }
+         } else {
+            $horario = new Horario();
+            $horario->hasta = $request->input('hasta');
+            $horario->desde = $request->input('desde');
+            $horario->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se registro el Horario correctamente'], 200);
       }
    }
 
    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function show(Horario $horario, Request $request)
    {
       if ($request->ajax()) {
@@ -83,12 +93,12 @@ class HorarioController extends Controller
    }
 
    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function edit(Horario $horario, Request $request)
    {
       if ($request->ajax()) {
@@ -98,36 +108,41 @@ class HorarioController extends Controller
    }
 
    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
 
    public function update(Request $request, Horario $horario)
    {
       if ($request->ajax()) {
-         $horario->hasta = $request->input('hasta');
-         $horario->desde = $request->input('desde');
-         $horario->save();
-         return response()->json(['message' => 'Datos del Horario fueron actualizados correctamente'], 200);
+         $hor = Horario::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+         if ($hor != null) {
+            return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
+         } else {
+            $horario->hasta = $request->input('hasta');
+            $horario->desde = $request->input('desde');
+            $horario->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Datos del Horario fueron actualizados correctamente'], 200);
       }
    }
 
    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function destroy(Horario $horario, Request $request)
    {
       if ($request->ajax()) {
          $horario->estado = 0;
          $horario->save();
-         return response()->json(['message' => 'El Horario fue eliminado exitosamente'], 200);
+         return response()->json(['type' => 'success', 'message' => 'El Horario fue eliminado exitosamente'], 200);
       }
    }
 }

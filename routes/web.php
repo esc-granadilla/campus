@@ -27,6 +27,8 @@ Route::resource('horarios', 'HorarioController');
 
 Route::resource('cursos', 'CursoController');
 
+Route::resource('noticias','NoticiasController');
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/credencial/{user}', 'AdministracionController@credencial')->name('credencial');
@@ -40,3 +42,33 @@ Route::get('/roles', 'AdministracionController@roles')->name('roles');
 Route::get('/roltouser', 'AdministracionController@roltouser')->name('roltouser');
 
 Route::get('/credencial', 'AdministracionController@credencial')->name('credencial');
+
+Route::get(
+   '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@showcursohorarioprofesor'
+)->name('showcursohorarioprofesor');
+
+Route::post(
+   '/asigcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@asigcursohorarioprofesor'
+)->name('asigcursohorarioprofesor');
+
+Route::get(
+   '/showcursosprofesors/{grado}',
+   'AdministracionController@showcursosprofesors'
+)->name('showcursosprofesors');
+
+Route::get(
+   '/showprofesorscurso/{estudiante}/{curso}/{grado}',
+   'AdministracionController@showprofesorscurso'
+)->name('showprofesorscurso');
+
+Route::get(
+   '/showhorarioscurso/{estudiante}/{profesor}/{curso}/{grado}',
+   'AdministracionController@showhorarioscurso'
+)->name('showhorarioscurso');
+
+Route::post(
+   '/asigcursohorarioestudiante/{estudiante}/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@asigcursohorarioestudiante'
+)->name('asigcursohorarioestudiante');
