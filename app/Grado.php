@@ -8,6 +8,6 @@ class Grado extends Model
 {
    public function asignacioncursoprofesor()
    {
-      return $this->belongsTo('Campus\AsignacionCursoProfesor');
+      return $this->belongsTo('Campus\Asignacioncursoprofesor');
    }
 }

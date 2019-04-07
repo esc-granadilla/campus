@@ -16,10 +16,10 @@
                            prepend-inner-icon="search"
                            solo-inverted
                            v-model="search"
-                           @keydown="buscarProfesor()"
+                           @keydown="buscarEstudiante()"
                         ></v-text-field>
                      </v-flex>
-                     <v-flex v-if="ocualtarTab2">
+                     <v-flex v-if="ocualtarTab1">
                         <v-text-field
                            class="mx-3"
                            flat
@@ -30,8 +30,19 @@
                            @keydown="buscarCurso()"
                         ></v-text-field>
                      </v-flex>
+                     <v-flex v-if="ocualtarTab2">
+                        <v-text-field
+                           class="mx-3"
+                           flat
+                           label="Buscar Cedula"
+                           prepend-inner-icon="search"
+                           solo-inverted
+                           v-model="search"
+                           @keydown="buscarProfesor()"
+                        ></v-text-field>
+                     </v-flex>
                      <v-layout v-if="ocualtarTab3" xs12 justify-center align-center wrap>
-                        <v-btn block flat xs12 round @click="enviar">Asignar Profesor al curso</v-btn>
+                        <v-btn block flat xs12 round @click="enviar">Asignar Estudiante al curso</v-btn>
                      </v-layout>
                      <template v-slot:extension>
                         <v-tabs v-model="tabs" centered color="transparent" slider-color="white">
@@ -46,6 +57,66 @@
 
                   <v-tabs-items v-model="tabs">
                      <v-tab-item :key="1">
+                        <div>
+                           <v-layout row>
+                              <v-flex xs12>
+                                 <div v-bar class="tm">
+                                    <v-list subheader two-line>
+                                       <v-subheader>Estudiantes</v-subheader>
+                                       <v-list-tile
+                                          @click.prevent="selectedEstudiante(e)"
+                                          v-for="e in estudiantes"
+                                          :key="e.id"
+                                       >
+                                          <v-list-tile-action>
+                                             <v-checkbox
+                                                v-model="e.selected"
+                                                @click.prevent="selectedEstudiante(e)"
+                                             ></v-checkbox>
+                                          </v-list-tile-action>
+
+                                          <v-list-tile-content>
+                                             <v-list-tile-title>{{'Ced: '}}{{ e.cedula }}{{' - '}}{{ e.nombre }}{{' '}}{{ e.primer_apellido }}{{' '}}{{ e.segundo_apellido }}</v-list-tile-title>
+                                             <v-list-tile-sub-title>{{'Grado: '}}{{ e.grado }}{{' - Adecuación: '}}{{ e.adecuacion }}</v-list-tile-sub-title>
+                                          </v-list-tile-content>
+                                       </v-list-tile>
+                                    </v-list>
+                                 </div>
+                              </v-flex>
+                           </v-layout>
+                        </div>
+                     </v-tab-item>
+                     <v-tab-item :key="2">
+                        <div>
+                           <v-layout row>
+                              <v-flex xs12>
+                                 <div v-bar class="tm">
+                                    <v-list subheader two-line>
+                                       <v-subheader>Cursos</v-subheader>
+                                       <v-list-tile
+                                          @click.prevent="selectedCurso(c)"
+                                          v-for="c in cursos"
+                                          :key="c.id"
+                                       >
+                                          <v-list-tile-action>
+                                             <v-checkbox
+                                                v-model="c.selected"
+                                                @click.prevent="selectedCurso(c)"
+                                             ></v-checkbox>
+                                          </v-list-tile-action>
+
+                                          <v-list-tile-content>
+                                             <v-list-tile-title>{{ c.codigo }}{{' '}}{{ c.nombre }}</v-list-tile-title>
+                                             <v-list-tile-sub-title>{{ c.descripcion }}</v-list-tile-sub-title>
+                                          </v-list-tile-content>
+                                       </v-list-tile>
+                                    </v-list>
+                                 </div>
+                              </v-flex>
+                           </v-layout>
+                        </div>
+                     </v-tab-item>
+                     <v-tab-item :key="3">
                         <div>
                            <v-layout row>
                               <v-flex xs12>
@@ -75,49 +146,7 @@
                            </v-layout>
                         </div>
                      </v-tab-item>
-                     <v-tab-item :key="2">
-                        <div>
-                           <v-layout row>
-                              <v-flex xs12>
-                                 <v-subheader class="mt-4">
-                                    <v-select
-                                       :items="grados"
-                                       item-text="text"
-                                       item-value="value"
-                                       return-object
-                                       v-model="grado"
-                                       label="Seleccione el Grado"
-                                       d-block
-                                       @change="obtenerHorarios"
-                                    ></v-select>
-                                 </v-subheader>
-                                 <div v-bar class="tm">
-                                    <v-list subheader two-line>
-                                       <v-subheader>Cursos</v-subheader>
-                                       <v-list-tile
-                                          @click.prevent="selectedCurso(c)"
-                                          v-for="c in cursos"
-                                          :key="c.id"
-                                       >
-                                          <v-list-tile-action>
-                                             <v-checkbox
-                                                v-model="c.selected"
-                                                @click.prevent="selectedCurso(c)"
-                                             ></v-checkbox>
-                                          </v-list-tile-action>
-
-                                          <v-list-tile-content>
-                                             <v-list-tile-title>{{ c.codigo }}{{' '}}{{ c.nombre }}</v-list-tile-title>
-                                             <v-list-tile-sub-title>{{ c.descripcion }}</v-list-tile-sub-title>
-                                          </v-list-tile-content>
-                                       </v-list-tile>
-                                    </v-list>
-                                 </div>
-                              </v-flex>
-                           </v-layout>
-                        </div>
-                     </v-tab-item>
-                     <v-tab-item :key="3">
+                     <v-tab-item :key="4">
                         <div>
                            <v-subheader class="mt-4">
                               <v-select
@@ -195,26 +224,11 @@ export default {
          },
          selected: [],
          mensaje: [],
-         resultados: [],
-         cursoshorarios: [],
+         horariostock: [],
          alert: false,
          alerttype: "success",
-         grado: { value: 1, text: "Primero" },
-         grados: [
-            { value: 1, text: "Primero" },
-            { value: 2, text: "Segundo" },
-            { value: 3, text: "Tercero" },
-            { value: 4, text: "Cuarto" },
-            { value: 5, text: "Quinto" }
-         ],
-         dia: { value: 1, text: "Lunes" },
-         dias: [
-            { value: 1, text: "Lunes" },
-            { value: 2, text: "Martes" },
-            { value: 3, text: "Miercoles" },
-            { value: 4, text: "Jueves" },
-            { value: 5, text: "Viernes" }
-         ],
+         dia: [],
+         dias: [],
          cursos: [],
          cursostock: [],
          curso: null,
@@ -228,12 +242,15 @@ export default {
          ],
          profesores: [],
          profesorstock: [],
+         estudiantes: [],
+         estudiantestock: [],
          horarios: [],
          profesor: null,
+         estudiante: null,
          accions: [
             {
                id: 1,
-               text: "Profesor",
+               text: "Estudiante",
                invisible: false
             },
             {
@@ -243,6 +260,11 @@ export default {
             },
             {
                id: 3,
+               text: "Profesor",
+               invisible: true
+            },
+            {
+               id: 4,
                text: "Horario",
                invisible: true
             }
@@ -299,21 +321,56 @@ export default {
             self.selectedProfesor(pro);
          }
       },
+      buscarEstudiante(event) {
+         var self = this;
+         if (window.event.keyCode == 13) {
+            var est = self.estudiantestock.find(function(estudiante) {
+               return estudiante.cedula.toString() === self.search;
+            });
+            if (est != null)
+               est = {
+                  id: est.id,
+                  nombre: est.nombre,
+                  cedula: est.cedula,
+                  primer_apellido: est.primer_apellido,
+                  segundo_apellido: est.segundo_apellido,
+                  grado: est.grado,
+                  adecuacion: est.adecuacion,
+                  selected: false
+               };
+            self.selectedEstudiante(est);
+         }
+      },
       selectedCurso(curso) {
          if (curso != null && !curso.selected) {
             if (this.curso != null) this.curso.selected = false;
             curso.selected = true;
             this.curso = curso;
-            this.obtenerHorarios();
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            var self = this;
+            axios
+               .get(
+                  "showprofesorscurso/" +
+                     this.estudiante.id +
+                     "/" +
+                     curso.id +
+                     "/" +
+                     this.estudiante.grado
+               )
+               .then(function(res) {
+                  self.profesores = res.data;
+                  self.profesorstock = res.data;
+               });
+            this.search = "";
             this.accions[2].invisible = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
             if (curso != null) curso.selected = false;
             this.curso = null;
             this.cursos = this.cursostock;
+            this.selectedProfesor(null);
             this.accions[2].invisible = true;
          }
       },
@@ -325,48 +382,98 @@ export default {
             var nuevos = [];
             nuevos.push(profesor);
             this.profesores = nuevos;
-            this.accions[1].invisible = false;
+            var self = this;
+            axios
+               .get(
+                  "showhorarioscurso/" +
+                     this.estudiante.id +
+                     "/" +
+                     +profesor.id +
+                     "/" +
+                     this.curso.id +
+                     "/" +
+                     this.estudiante.grado
+               )
+               .then(function(res) {
+                  var datos = res.data;
+                  self.dias = [];
+                  self.horariostock = [];
+                  datos.forEach(d => {
+                     self.dias.push({ value: d.Dia.id, text: d.Dia.dia });
+                     self.horariostock.push({
+                        id: d.Dia.id,
+                        Horarios: d.Horarios
+                     });
+                  });
+                  if (self.dias.length > 0) {
+                     self.dia = {
+                        value: datos[0].Dia.id,
+                        text: datos[0].Dia.dia
+                     };
+                     self.horarios = datos[0].Horarios;
+                     self.selected = [];
+                     self.horarios.forEach(c => {
+                        if (c.selected) self.selected.push(c);
+                     });
+                  }
+               });
+            this.search = "";
+            this.accions[3].invisible = false;
          } else {
             if (this.profesor != null) this.profesor.selected = false;
             if (profesor != null) profesor.selected = false;
             this.profesor = null;
             this.profesores = this.profesorstock;
+            this.accions[3].invisible = true;
+         }
+      },
+      selectedEstudiante(estudiante) {
+         if (estudiante != null && !estudiante.selected) {
+            if (this.estudiante != null) this.estudiante.selected = false;
+            estudiante.selected = true;
+            this.estudiante = estudiante;
+            var nuevos = [];
+            nuevos.push(estudiante);
+            this.estudiantes = nuevos;
+            var self = this;
+            axios
+               .get("showcursosprofesors/" + estudiante.grado)
+               .then(function(res) {
+                  self.cursos = res.data;
+                  self.cursostock = res.data;
+               });
+            this.search = "";
+            this.accions[1].invisible = false;
+         } else {
+            if (this.estudiante != null) this.estudiante.selected = false;
+            if (estudiante != null) estudiante.selected = false;
+            this.estudiante = null;
+            this.estudiantes = this.estudiantestock;
             this.accions[1].invisible = true;
             this.selectedCurso(null);
          }
       },
       obtenerHorarios() {
          var self = this;
-         if (this.curso != null)
-            axios
-               .get(
-                  "showcursohorarioprofesor/" +
-                     this.profesor.id +
-                     "/" +
-                     this.curso.id +
-                     "/" +
-                     this.grado.value +
-                     "/" +
-                     this.dia.value
-               )
-               .then(function(res) {
-                  var crs = res.data;
-                  self.horarios = crs;
-                  self.selected = [];
-                  crs.forEach(c => {
-                     if (c.selected) self.selected.push(c);
-                  });
-               });
+         this.horarios = this.horariostock.find(function(hora) {
+            return hora.id === self.dia.value;
+         }).Horarios;
+         self.selected = [];
+         self.horarios.forEach(c => {
+            if (c.selected) self.selected.push(c);
+         });
       },
       enviar() {
          axios
             .post(
-               "asigcursohorarioprofesor/" +
+               "asigcursohorarioestudiante/" +
+                  this.estudiante.id +
+                  "/" +
                   this.profesor.id +
                   "/" +
                   this.curso.id +
                   "/" +
-                  this.grado.value +
+                  this.estudiante.grado +
                   "/" +
                   this.dia.value,
                {
@@ -386,11 +493,14 @@ export default {
       ocualtarTab: function() {
          return this.tabs == 0;
       },
-      ocualtarTab2: function() {
+      ocualtarTab1: function() {
          return this.tabs == 1;
       },
-      ocualtarTab3: function() {
+      ocualtarTab2: function() {
          return this.tabs == 2;
+      },
+      ocualtarTab3: function() {
+         return this.tabs == 3;
       }
    },
    watch: {
@@ -400,27 +510,15 @@ export default {
    },
    mounted() {
       var self = this;
-      axios.get("/profesors").then(function(res) {
+      axios.get("/estudiantes").then(function(res) {
          var crs = res.data;
-         var profesores = [];
+         var estudiantes = [];
          for (let index = 0; index < crs.length; index++) {
             crs[index].selected = false;
-            profesores[index] = crs[index];
+            estudiantes[index] = crs[index];
          }
-         self.profesores = self.profesorstock = profesores;
+         self.estudiantes = self.estudiantestock = estudiantes;
       });
-      axios.get("/cursos").then(function(res) {
-         var crs = res.data;
-         var cursos = [];
-         for (let index = 0; index < crs.length; index++) {
-            crs[index].selected = false;
-            cursos[index] = crs[index];
-         }
-         self.cursos = self.cursostock = cursos;
-      });
-      axios
-         .get("/showhorarioscurso/3/1/1")
-         .then(res => (this.resultados = res.data));
    }
 };
 </script>

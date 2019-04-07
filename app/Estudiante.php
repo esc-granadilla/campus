@@ -18,6 +18,6 @@ class Estudiante extends Model
 
    public function asignacioncursoprofesors()
    {
-      return $this->belongsToMany('Campus\AsignacionCursoProfesor');
+      return $this->belongsToMany('Campus\Asignacioncursoprofesor');
    }
 }

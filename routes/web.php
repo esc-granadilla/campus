@@ -57,11 +57,16 @@ Route::get(
 )->name('showcursosprofesors');
 
 Route::get(
-   '/showprofesorscurso/{curso}/{grado}',
+   '/showprofesorscurso/{estudiante}/{curso}/{grado}',
    'AdministracionController@showprofesorscurso'
 )->name('showprofesorscurso');
 
 Route::get(
-   '/showhorarioscurso/{profesor}/{curso}/{grado}',
+   '/showhorarioscurso/{estudiante}/{profesor}/{curso}/{grado}',
    'AdministracionController@showhorarioscurso'
 )->name('showhorarioscurso');
+
+Route::post(
+   '/asigcursohorarioestudiante/{estudiante}/{profesor}/{curso}/{grado}/{dia}',
+   'AdministracionController@asigcursohorarioestudiante'
+)->name('asigcursohorarioestudiante');

@@ -205,6 +205,7 @@ export default {
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.search = "";
             this.noSelected = false;
          } else {
             if (this.curso != null) this.curso.selected = false;

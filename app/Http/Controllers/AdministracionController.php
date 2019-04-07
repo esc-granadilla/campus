@@ -10,7 +10,8 @@ use Campus\Curso;
 use Campus\Horario;
 use Campus\Dia;
 use Campus\Grado;
-use Campus\AsignacionCursoProfesor;
+use Campus\Asignacioncursoprofesor;
+use Campus\Estudiante;
 
 class AdministracionController extends Controller
 {
@@ -97,7 +98,7 @@ class AdministracionController extends Controller
    public function showcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
    {
       if ($request->ajax()) {
-         $asignaciones = AsignacionCursoProfesor::where('profesor_id', $profesor->id)->get();
+         $asignaciones = Asignacioncursoprofesor::where('profesor_id', $profesor->id)->get();
          $horarios = $curso->horarios()->get();
          $horariospermitidos = [];
          foreach ($horarios as $horario) {
@@ -138,34 +139,32 @@ class AdministracionController extends Controller
    public function asigcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
    {
       if ($request->ajax()) {
-         if ($request->ajax()) {
-            $horarios = $request->input('horarios');
-            AsignacionCursoProfesor::where(
-               [
-                  'profesor_id' => $profesor->id,
-                  'curso_id' => $curso->id,
-                  'grado_id' => $grado->id,
-                  'dia_id' => $dia->id
-               ]
-            )->delete();
-            foreach ($horarios as $horario) {
-               $asignacion = new AsignacionCursoProfesor();
-               $asignacion->profesor_id = $profesor->id;
-               $asignacion->curso_id = $curso->id;
-               $asignacion->grado_id = $grado->id;
-               $asignacion->dia_id = $dia->id;
-               $asignacion->horario_id = $horario['id'];
-               $asignacion->save();
-            }
-            return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+         $horarios = $request->input('horarios');
+         Asignacioncursoprofesor::where(
+            [
+               'profesor_id' => $profesor->id,
+               'curso_id' => $curso->id,
+               'grado_id' => $grado->id,
+               'dia_id' => $dia->id
+            ]
+         )->delete();
+         foreach ($horarios as $horario) {
+            $asignacion = new Asignacioncursoprofesor();
+            $asignacion->profesor_id = $profesor->id;
+            $asignacion->curso_id = $curso->id;
+            $asignacion->grado_id = $grado->id;
+            $asignacion->dia_id = $dia->id;
+            $asignacion->horario_id = $horario['id'];
+            $asignacion->save();
          }
+         return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
       }
    }
 
    public function showcursosprofesors(Grado $grado, Request $request)
    {
       if ($request->ajax()) {
-         $cursosids = AsignacionCursoProfesor::where('grado_id', $grado->id)->get();
+         $cursosids = Asignacioncursoprofesor::where('grado_id', $grado->id)->get();
          $cursosids = $cursosids->groupBy('curso_id');
          $cursos = [];
          foreach ($cursosids as $cursosid) {
@@ -176,11 +175,11 @@ class AdministracionController extends Controller
          return response()->json($cursos, 200);
       }
    }
-
+   /*
    public function showprofesorscurso(Curso $curso, Grado $grado, Request $request)
    {
       if ($request->ajax()) {
-         $cursosids = AsignacionCursoProfesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
+         $cursosids = Asignacioncursoprofesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
          $cursosids = $cursosids->groupBy('profesor_id');
          $profesores = [];
          foreach ($cursosids as $cursosid) {
@@ -191,11 +190,37 @@ class AdministracionController extends Controller
          return response()->json($profesores, 200);
       }
    }
-
+*/
+   public function showprofesorscurso(Estudiante $estudiante, Curso $curso, Grado $grado, Request $request)
+   {
+      if ($request->ajax()) {
+         $myasignacion = $estudiante->Asignacioncursoprofesors()->where('curso_id', $curso->id)->first();
+         $profesores = [];
+         $cargar = true;
+         if ($myasignacion != null) {
+            $profesor = Profesor::find($myasignacion->profesor_id);
+            if ($profesor->estado == 1) {
+               array_push($profesores, $profesor);
+               $cargar = false;
+            }
+         }
+         if ($cargar) {
+            $cursosids = Asignacioncursoprofesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
+            $cursosids = $cursosids->groupBy('profesor_id');
+            foreach ($cursosids as $cursosid) {
+               $profesor = Profesor::find($cursosid[0]->profesor_id);
+               if ($profesor->estado == 1)
+                  array_push($profesores, $profesor);
+            }
+         }
+         return response()->json($profesores, 200);
+      }
+   }
+   /*
    public function showhorarioscurso(Profesor $profesor, Curso $curso, Grado $grado, Request $request)
    {
       if ($request->ajax()) {
-         $cursosids = AsignacionCursoProfesor::where(
+         $cursosids = Asignacioncursoprofesor::where(
             ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
          )->get();
          $cursosids = $cursosids->groupBy('dia_id');
@@ -215,6 +240,98 @@ class AdministracionController extends Controller
                array_push($diasHorarios, ['Dia' => $dia, 'Horarios' => $horarios]);
          }
          return response()->json($diasHorarios, 200);
+      }
+   }*/
+
+   public function showhorarioscurso(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Request $request)
+   {
+      if ($request->ajax()) {
+         $myasignacion = $estudiante->Asignacioncursoprofesors()->get();
+         $listnohorarios = [];
+         foreach ($myasignacion as $my) {
+            array_push($listnohorarios, ['asignacion' => $my->id, 'horario_id' => $my->horario_id]);
+         }
+         $cursosids = Asignacioncursoprofesor::where(
+            ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
+         )->get();
+         $cursosids = $cursosids->groupBy('dia_id');
+         $diasHorarios = [];
+         foreach ($cursosids as $cursosid) {
+            $dia = Dia::find($cursosid[0]->dia_id);
+            $valido = false;
+            $horarios = [];
+            foreach ($cursosid as $cursosi) {
+               $horario = Horario::find($cursosi->horario_id);
+               $asigna = Asignacioncursoprofesor::where(
+                  [
+                     'horario_id' => $horario->id,
+                     'dia_id' => $dia->id,
+                     'grado_id' => $grado->id,
+                     'curso_id' => $curso->id,
+                     'profesor_id' => $profesor->id
+                  ]
+               )->first();
+               $nuevo = true;
+               foreach ($listnohorarios as $no) {
+                  if ($no['horario_id'] === $horario->id) {
+                     if ($asigna->id === $no['asignacion']) {
+                        $valido = true;
+                        array_push($horarios, [
+                           'id' => $horario->id,
+                           'desde' => $horario->desde,
+                           'hasta' => $horario->hasta,
+                           'selected' => true
+                        ]);
+                     }
+                     $nuevo = false;
+                     break;
+                  }
+               }
+               if ($horario->estado == 1 && $nuevo) {
+                  $valido = true;
+                  array_push($horarios, [
+                     'id' => $horario->id,
+                     'desde' => $horario->desde,
+                     'hasta' => $horario->hasta,
+                     'selected' => false
+                  ]);
+               }
+            }
+            if ($valido)
+               array_push($diasHorarios, ['Dia' => $dia, 'Horarios' => $horarios]);
+         }
+         return response()->json($diasHorarios, 200);
+      }
+   }
+
+   public function asigcursohorarioestudiante(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   {
+      if ($request->ajax()) {
+         $asignaciones = Asignacioncursoprofesor::where(
+            [
+               'dia_id' => $dia->id,
+               'grado_id' => $grado->id,
+               'curso_id' => $curso->id,
+               'profesor_id' => $profesor->id
+            ]
+         )->get();
+         foreach ($asignaciones as $asig) {
+            $estudiante->asignacioncursoprofesors()->detach($asig);
+         }
+         $horarios = $request->input('horarios');
+         foreach ($horarios as $horario) {
+            $asignacion = Asignacioncursoprofesor::where(
+               [
+                  'horario_id' => $horario['id'],
+                  'dia_id' => $dia->id,
+                  'grado_id' => $grado->id,
+                  'curso_id' => $curso->id,
+                  'profesor_id' => $profesor->id
+               ]
+            )->first();
+            $estudiante->asignacioncursoprofesors()->attach($asignacion);
+         }
+         return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
       }
    }
 }

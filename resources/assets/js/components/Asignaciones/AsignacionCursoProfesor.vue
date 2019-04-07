@@ -307,6 +307,7 @@ export default {
             var nuevos = [];
             nuevos.push(curso);
             this.cursos = nuevos;
+            this.search = "";
             this.accions[2].invisible = false;
          } else {
             if (this.curso != null) this.curso.selected = false;
@@ -324,6 +325,7 @@ export default {
             var nuevos = [];
             nuevos.push(profesor);
             this.profesores = nuevos;
+            this.search = "";
             this.accions[1].invisible = false;
          } else {
             if (this.profesor != null) this.profesor.selected = false;

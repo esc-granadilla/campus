@@ -4,7 +4,7 @@ namespace Campus;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AsignacionCursoProfesor extends Model
+class Asignacioncursoprofesor extends Model
 {
    public function horario()
    {
