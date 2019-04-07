@@ -13,12 +13,12 @@
     <!-- Styles -->
     @yield('styles')
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
     <link href="{{ asset('css/vuetify.min.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="main">
+    <div id="app">
         @if (Auth::guest())
             <App login="false"  name=""></App>
         @else
@@ -29,7 +29,7 @@
         @endif
         <v-app>
          <v-content>
-            <div style=" backgroud-color:white; padding-top: 64px; height: 100%;">
+            <div style="padding-top: 64px; height: 100%;">
                @yield('content')
             </div>
          </v-content>

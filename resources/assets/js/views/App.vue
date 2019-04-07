@@ -63,7 +63,7 @@ export default {
          }
          return [
             { title: "Home", ruta: "/" },
-            { title: "Registrarse", ruta: "/register" },
+            { title: "Registarce", ruta: "/register" },
             { title: "Ingresar", ruta: "/login" }
          ];
       }

@@ -100,7 +100,7 @@
                      block
                      type="submit"
                      :class="registrar"
-                  >Registrarse</v-btn>
+                  >Registarce</v-btn>
                   <v-btn
                      round
                      dark
