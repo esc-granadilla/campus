@@ -91,18 +91,22 @@
          <v-container fluid class="full">
             <p>lorem ipsim dolor</p>
          </v-container>
-         <credencial v-if="mostar === 'credencial'"></credencial>
-         <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
-         <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
-         <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
-         <emostrarcomponent v-if="mostar === 'estudiantes/mostrar'"></emostrarcomponent>
-         <eeditarcomponent v-if="mostar === 'estudiantes/editar'"></eeditarcomponent>
-         <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
-         <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
-         <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
-         <acursohorario v-if="mostar === 'curso/horario'"></acursohorario>
-         <acursoprofesor v-if="mostar === 'curso/profesor'"></acursoprofesor>
-         <acursoalumno v-if="mostar === 'curso/alumno'"></acursoalumno>
+         <credencial v-if="mostrar === 'credencial'"/>
+         <pmostrarcomponent v-if="mostrar === 'profesors/mostrar'"/>
+         <peditarcomponent v-if="mostrar === 'profesors/editar'"/>
+         <pborrarcomponent v-if="mostrar === 'profesors/eliminar'"/>
+         <emostrarcomponent v-if="mostrar === 'estudiantes/mostrar'"/>
+         <eeditarcomponent v-if="mostrar === 'estudiantes/editar'"/>
+         <eborrarcomponent v-if="mostrar === 'estudiantes/eliminar'"/>
+         <cursocomponent v-if="mostrar === 'curso'"/>
+         <horariocomponent v-if="mostrar === 'horario'"/>
+         <acursohorario v-if="mostrar === 'curso/horario'"/>
+         <acursoprofesor v-if="mostrar === 'curso/profesor'"/>
+         <acursoalumno v-if="mostrar === 'curso/alumno'"/>
+         <nmostrarcomponent v-if="mostrar === 'noticias/mostrar'"/>
+         <ncrearcomponent v-if="mostrar === 'noticias/crear'"/>
+         <neditarcomponent v-if="mostrar === 'noticias/editar'"/>
+         <nneliminarcomponent v-if="mostrar === 'noticias/eliminar'"/>
       </v-content>
    </v-layout>
 </template>
@@ -157,7 +161,7 @@ export default {
             ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
             ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
          ],
-         mostar: "cuerpo",
+         mostrar: "cuerpo",
          mini: true,
          right: null
       };
@@ -165,7 +169,7 @@ export default {
    methods: {
       route(ruta) {
          if (ruta !== "profesors/create") {
-            this.mostar = ruta;
+            this.mostrar = ruta;
          } else location.href = ruta;
       }
    },
