@@ -20,56 +20,6 @@ npm install
 npm run build
 ```
 
-Despues de completada la instalación de paquetes se debe reconfigurar el proyecto y indicar la base de datos mysql que se esta utilizando para poder activar las migraciones de las tablas con los siguientes comandos.
-
-Borrar configuraciones anteriores de otra maquinas.
-```
-php artisan cache:clear 
-php artisan config:clear
-```
-
-Ingresar al archivo .env las nuevas configuraciones si el archivo no existe debe crearse a partir del archivo .env.example las configuraciones a cambiar son las siguentes:
-
-```
-//////////////////////////////////////////////////////////////////////////////
-APP_NAME="Campus Granadilla Norte"    ////Nombre de la aplicación
-APP_ENV=local
-APP_KEY=base64:z5bzNBanVtYr/3z7SyCtkylwOFildtDjZ/jqeVfceYI=
-APP_DEBUG=true
-APP_LOG_LEVEL=debug
-APP_URL=http://localhost:8000
-
-DB_CONNECTION=mysql                //aqui se indica el tipo de base de datos a usar en este caso es mysql
-DB_HOST=127.0.0.1                  //la direccion ip de la base de datos en este caso es local
-DB_PORT=3306                       //el puerto de la base de datos
-DB_DATABASE=esc-granadilla         //el nombre de la base de datos donde se realizara la migracion (La base debe existir)
-DB_USERNAME=usuario                //el nombre de usuario de la base de datos
-DB_PASSWORD=contraseña             //la contraseña de la base de datos
-//////////////////////////////////////////////////////////////////////////////
-```
-
-Despues volver a configurar la aplicación con los nuevos datos indicados
-
-```
-php artisan config:cache
-```
-
-Levantar las migraciones a la base de datos.
-
-```
-php artisan migrate
-```
-
-Insertar en la base los datos por default:
-
-```
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Usuario','Otorga permisos a los Estudiantes',1,'2010-01-12 16:50:43',NULL),(2,'Profesor','Otroga permisos a los Maestros en el Sistema',1,'2010-01-12 18:50:43',NULL),(3,'Administrador','Otroga permisos a los Administradores en el Sistema',1,'2010-01-12 17:50:43',NULL);
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-```
-
 Por ultimo debes levantar el servidor Laravel de la aplicación para poder acceder a ella desde el navegador, esto se puede realizar con el comando.
 
 
