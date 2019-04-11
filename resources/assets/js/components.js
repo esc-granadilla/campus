@@ -17,3 +17,7 @@ Vue.component('credencial', require('./components/Asignaciones/Credencial.vue').
 Vue.component('acursohorario', require('./components/Asignaciones/AsignacionCursoHorario.vue').default);
 Vue.component('acursoprofesor', require('./components/Asignaciones/AsignacionCursoProfesor.vue').default);
 Vue.component('acursoalumno', require('./components/Asignaciones/AsignacionCursoAlumno.vue').default);
+Vue.component('nmostrarcomponent',require('./components/Noticias/index.vue').default);
+Vue.component('ncrearcomponent',require('./components/Noticias/DialogCreate.vue').default);
+Vue.component('neditarcomponent',require('./components/Noticias/DialogEdit.vue').default);
+Vue.component('neliminarcomponent',require('./components/Noticias/DialogDelete.vue').default);
