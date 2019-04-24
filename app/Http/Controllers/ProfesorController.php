@@ -8,6 +8,11 @@ use Campus\Http\Controllers\Controller;
 use Campus\User;
 use Campus\Role;
 use Campus\Profesor;
+use Campus\Asignacioncursoprofesor;
+use Campus\Curso;
+use Campus\Grado;
+use Campus\Dia;
+use Campus\Horario;
 
 class ProfesorController extends Controller
 {
@@ -204,6 +209,22 @@ class ProfesorController extends Controller
          $profesor->estado = 0;
          $profesor->save();
          return response()->json(['message' => 'El Profesor fue eliminado correctamente'], 200);
+      }
+   }
+
+   public function getCursosProfesor(Profesor $profesor, Request $request)
+   {
+      if ($request->ajax()) {
+         $asignaciones = Asignacioncursoprofesor::where('profesor_id', $profesor->id)->get();
+         $cursos = [];
+         foreach ($asignaciones as $asig) {
+            $curso = Curso::where('id', $asig->curso_id)->first();
+            $grado = Grado::where('id', $asig->grado_id)->first();
+            $dia = Dia::where('id', $asig->dia_id)->first();
+            $horario = Horario::where('id', $asig->horario_id)->first();
+            array_push($cursos, ['id' => $asig->id, 'curso' => $curso, 'grado' => $grado, 'dia' => $dia, 'horario' => $horario]);
+         }
+         return response()->json($cursos, 200);
       }
    }
 }

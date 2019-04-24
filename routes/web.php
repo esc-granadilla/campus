@@ -74,3 +74,13 @@ Route::post(
    '/asigcursohorarioestudiante/{estudiante}/{profesor}/{curso}/{grado}/{dia}',
    'AdministracionController@asigcursohorarioestudiante'
 )->name('asigcursohorarioestudiante');
+
+Route::get(
+   '/getCursosProfesor/{profesor}',
+   'ProfesorController@getCursosProfesor'
+)->name('getCursosProfesor');
+
+Route::get(
+   '/panelprofesor/{asignacioncursoprofesor}',
+   'MantenimientoProfesorController@panelprofesor'
+)->name('panelprofesor');
