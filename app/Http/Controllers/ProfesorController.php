@@ -168,6 +168,15 @@ class ProfesorController extends Controller
     */
    public function update(Request $request, Profesor $profesor)
    {
+      $this->validate($request, [
+         'nombre' => 'required|string|min:3|max:50',
+         'primer_apellido' => 'required|string|min:3|max:80',
+         'segundo_apellido' => 'required|string|min:3|max:80',
+         'fecha_nacimiento' => ' required',
+         'fecha_ingreso' => ' required',
+         'telefono1' => ' required|string|min:8|max:8',
+         'puesto' => 'required|string|min:3|max:50',
+      ]);
       if ($request->ajax()) {
          $profesor->nombre = $request->input('nombre');
          $profesor->primer_apellido = $request->input('primer_apellido');

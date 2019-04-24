@@ -3850,6 +3850,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Estudiantes_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Estudiantes/DialogDelete.vue */ "./resources/assets/js/components/Estudiantes/DialogDelete.vue");
 //
 //
 //
@@ -3900,6 +3901,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "borrarcomponent",
+  components: {
+    dialogdelete: _Estudiantes_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      search: "",
+      dialogDelete: false,
+      estudiante: {
+        id: null,
+        cedula: "",
+        nombre: "",
+        primer_apellido: "",
+        segundo_apellido: "",
+        fecha_nacimiento: null,
+        grado: "",
+        adecuacion: ""
+      },
+      alert: false,
+      alerttype: "success",
+      mensaje: []
+    };
+  },
+  methods: {
+    buscar: function buscar(event) {
+      var _this = this;
+
+      if (window.event.keyCode == 13) {
+        axios.get("estudiantes/" + this.search).then(function (res) {
+          return _this.estudiante = res.data;
+        });
+      }
+    },
+    borrarMethod: function borrarMethod(msg) {
+      this.dialogDelete = msg.dialogdelete;
+      if (msg.Delete) this.eliminar();
+    },
+    eliminar: function eliminar() {
+      var _this2 = this;
+
+      if (this.estudiante.id != null) {
+        axios.delete("estudiantes/" + this.estudiante.id).then(function (res) {
+          return _this2.mensaje = res.data;
+        });
+      } else {
+        this.$toast.error("Primero busque a un Estudiante", {
+          y: "top",
+          timeout: 8000
+        });
+      }
+    }
+  },
+  watch: {
+    mensaje: function mensaje(val) {
+      this.alert = true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -3936,53 +4052,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "borrarcomponent",
   data: function data() {
     return {
-      search: "",
-      estudiante: {
-        id: null,
-        cedula: "",
-        nombre: "",
-        primer_apellido: "",
-        segundo_apellido: "",
-        fecha_nacimiento: null,
-        grado: "",
-        adecuacion: ""
-      },
-      alert: false,
-      alerttype: "success",
-      mensaje: []
+      dialogdelete: false
     };
   },
-  methods: {
-    buscar: function buscar(event) {
-      var _this = this;
-
-      if (window.event.keyCode == 13) {
-        axios.get("estudiantes/" + this.search).then(function (res) {
-          return _this.estudiante = res.data;
-        });
-      }
-    },
-    eliminar: function eliminar() {
-      var _this2 = this;
-
-      if (this.estudiante.id != null) {
-        axios.delete("estudiantes/" + this.estudiante.id).then(function (res) {
-          return _this2.mensaje = res.data;
-        });
-      } else {
-        this.$toast.error("Primero busque a un Estudiante", {
-          y: "top",
-          timeout: 8000
-        });
-      }
-    }
-  },
+  props: ["dialogDeletes"],
   watch: {
-    mensaje: function mensaje(val) {
-      this.alert = true;
+    dialogDeletes: function dialogDeletes(val) {
+      this.dialogdelete = val;
     }
   }
 });
@@ -4000,6 +4078,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -4182,7 +4261,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return v.length >= 8 || "Min 8 Caracteres";
         },
         max: function max(v) {
-          return v.length >= 50 || "Maximo 50 Caracteres";
+          return v.length <= 50 || "Maximo 50 Caracteres";
+        },
+        max8: function max8(v) {
+          return v.length <= 8 || "Maximo 8 Caracteres";
         },
         mini: function mini(v) {
           return v.length >= 3 || "Min 3 Caracteres";
@@ -4217,9 +4299,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     editar: function editar() {
       var _this3 = this;
 
+      var self = this;
+
       if (this.estudiante.id != null) {
         axios.put("estudiantes/" + this.estudiante.id, this.estudiante).then(function (res) {
           return _this3.mensaje = res.data;
+        }).catch(function (error) {
+          self.$toast.error("Verifica la informacion Ingresada", {
+            y: "top",
+            timeout: 8000
+          });
         });
       } else {
         this.$toast.error("Primero busque a un Estudiante", {
@@ -5079,6 +5168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Profesores_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Profesores/DialogDelete.vue */ "./resources/assets/js/components/Profesores/DialogDelete.vue");
 //
 //
 //
@@ -5148,6 +5238,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "borrarcomponent",
+  components: {
+    dialogdelete: _Profesores_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      search: "",
+      dialogDelete: false,
+      profesor: {
+        id: null,
+        cedula: "",
+        nombre: "",
+        primer_apellido: "",
+        segundo_apellido: "",
+        fecha_nacimiento: null,
+        puesto: "",
+        fecha_ingreso: null,
+        telefono1: "",
+        telefono2: ""
+      },
+      alert: false,
+      alerttype: "success",
+      mensaje: []
+    };
+  },
+  methods: {
+    buscar: function buscar(event) {
+      var _this = this;
+
+      if (window.event.keyCode == 13) {
+        axios.get("profesors/" + this.search).then(function (res) {
+          return _this.profesor = res.data;
+        });
+      }
+    },
+    borrarMethod: function borrarMethod(msg) {
+      this.dialogDelete = msg.dialogdelete;
+      if (msg.Delete) this.eliminar();
+    },
+    eliminar: function eliminar() {
+      var _this2 = this;
+
+      if (this.profesor.id != null) {
+        axios.delete("profesors/" + this.profesor.id).then(function (res) {
+          return _this2.mensaje = res.data;
+        });
+      } else {
+        this.$toast.error("Primero busque a un Profesor", {
+          y: "top",
+          timeout: 8000
+        });
+      }
+    }
+  },
+  watch: {
+    mensaje: function mensaje(val) {
+      this.alert = true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -5184,55 +5391,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "borrarcomponent",
   data: function data() {
     return {
-      search: "",
-      profesor: {
-        id: null,
-        cedula: "",
-        nombre: "",
-        primer_apellido: "",
-        segundo_apellido: "",
-        fecha_nacimiento: null,
-        puesto: "",
-        fecha_ingreso: null,
-        telefono1: "",
-        telefono2: ""
-      },
-      alert: false,
-      alerttype: "success",
-      mensaje: []
+      dialogdelete: false
     };
   },
-  methods: {
-    buscar: function buscar(event) {
-      var _this = this;
-
-      if (window.event.keyCode == 13) {
-        axios.get("profesors/" + this.search).then(function (res) {
-          return _this.profesor = res.data;
-        });
-      }
-    },
-    eliminar: function eliminar() {
-      var _this2 = this;
-
-      if (this.profesor.id != null) {
-        axios.delete("profesors/" + this.profesor.id).then(function (res) {
-          return _this2.mensaje = res.data;
-        });
-      } else {
-        this.$toast.error("Primero busque a un Profesor", {
-          y: "top",
-          timeout: 8000
-        });
-      }
-    }
-  },
+  props: ["dialogDeletes"],
   watch: {
-    mensaje: function mensaje(val) {
-      this.alert = true;
+    dialogDeletes: function dialogDeletes(val) {
+      this.dialogdelete = val;
     }
   }
 });
@@ -5248,6 +5415,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -5437,7 +5606,10 @@ __webpack_require__.r(__webpack_exports__);
           return v.length >= 8 || "Min 8 Caracteres";
         },
         max: function max(v) {
-          return v.length >= 50 || "Maximo 50 Caracteres";
+          return v.length <= 50 || "Maximo 50 Caracteres";
+        },
+        max8: function max8(v) {
+          return v.length <= 8 || "Maximo 8 Caracteres";
         },
         mini: function mini(v) {
           return v.length >= 3 || "Min 3 Caracteres";
@@ -5483,9 +5655,16 @@ __webpack_require__.r(__webpack_exports__);
     editar: function editar() {
       var _this4 = this;
 
+      var self = this;
+
       if (this.profesor.id != null) {
         axios.put("profesors/" + this.profesor.id, this.profesor).then(function (res) {
           return _this4.mensaje = res.data;
+        }).catch(function (error) {
+          self.$toast.error("Verifica la informacion Ingresada", {
+            y: "top",
+            timeout: 8000
+          });
         });
       } else {
         this.$toast.error("Primero busque a un Profesor", {
@@ -39782,6 +39961,15 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("dialogdelete", {
+        attrs: { dialogDeletes: _vm.dialogDelete },
+        on: {
+          speak: function($event) {
+            return _vm.borrarMethod($event)
+          }
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-flex",
         { attrs: { md8: "", xs12: "", "offset-md2": "" } },
@@ -40003,7 +40191,12 @@ var render = function() {
                                 color: "red",
                                 block: ""
                               },
-                              on: { click: _vm.eliminar }
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  _vm.dialogDelete = true
+                                }
+                              }
                             },
                             [_vm._v("Eliminar")]
                           )
@@ -40012,6 +40205,123 @@ var render = function() {
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "290" },
+          model: {
+            value: _vm.dialogdelete,
+            callback: function($$v) {
+              _vm.dialogdelete = $$v
+            },
+            expression: "dialogdelete"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Eliminar estudiante?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { attrs: { error: "" } },
+                [
+                  _c(
+                    "v-alert",
+                    {
+                      attrs: {
+                        value: true,
+                        color: "error",
+                        icon: "priority_high",
+                        outline: ""
+                      }
+                    },
+                    [_vm._v("Seguro que quieres eliminar este estudiante.")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "grey darken-3", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: false
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("NO")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red darken-2", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: true
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("SI")]
                   )
                 ],
                 1
@@ -40127,7 +40437,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Nombre",
                               name: "nombre",
@@ -40152,7 +40466,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: {
                               xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Primer Apellido",
                               name: "primer_apellido",
@@ -40176,7 +40494,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Segundo Apellido",
                               name: "segundo_apellido",
@@ -40229,6 +40551,7 @@ var render = function() {
                                               label: "Fecha Nacimiento",
                                               name: "fecha_nacimiento",
                                               "prepend-icon": "event",
+                                              required: "",
                                               readonly: ""
                                             },
                                             model: {
@@ -42117,6 +42440,15 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("dialogdelete", {
+        attrs: { dialogDeletes: _vm.dialogDelete },
+        on: {
+          speak: function($event) {
+            return _vm.borrarMethod($event)
+          }
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-flex",
         { attrs: { md8: "", xs12: "", "offset-md2": "" } },
@@ -42377,7 +42709,12 @@ var render = function() {
                                 color: "red",
                                 block: ""
                               },
-                              on: { click: _vm.eliminar }
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  _vm.dialogDelete = true
+                                }
+                              }
                             },
                             [_vm._v("Eliminar")]
                           )
@@ -42386,6 +42723,123 @@ var render = function() {
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "290" },
+          model: {
+            value: _vm.dialogdelete,
+            callback: function($$v) {
+              _vm.dialogdelete = $$v
+            },
+            expression: "dialogdelete"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Eliminar profesor?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                { attrs: { error: "" } },
+                [
+                  _c(
+                    "v-alert",
+                    {
+                      attrs: {
+                        value: true,
+                        color: "error",
+                        icon: "priority_high",
+                        outline: ""
+                      }
+                    },
+                    [_vm._v("Seguro que quieres eliminar este profesor.")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "grey darken-3", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: false
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("NO")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red darken-2", flat: "flat" },
+                      on: {
+                        click: function($event) {
+                          ;(_vm.dialogdelete = false),
+                            _vm.$emit("speak", {
+                              dialogdelete: false,
+                              Delete: true
+                            })
+                        }
+                      }
+                    },
+                    [_vm._v("SI")]
                   )
                 ],
                 1
@@ -42501,7 +42955,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Nombre",
                               name: "nombre",
@@ -42526,7 +42984,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: {
                               xs12: "",
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Primer Apellido",
                               name: "primer_apellido",
@@ -42550,7 +43012,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.mini],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.mini,
+                                _vm.rules.max
+                              ],
                               counter: "",
                               label: "Segundo Apellido",
                               name: "segundo_apellido",
@@ -42599,7 +43065,8 @@ var render = function() {
                                               label: "Fecha Nacimiento",
                                               name: "fecha_nacimiento",
                                               "prepend-icon": "event",
-                                              readonly: ""
+                                              readonly: "",
+                                              required: ""
                                             },
                                             model: {
                                               value:
@@ -42671,7 +43138,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.max],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.max,
+                                _vm.rules.mini
+                              ],
                               counter: "",
                               label: "Puesto",
                               name: "puesto",
@@ -42721,6 +43192,7 @@ var render = function() {
                                               label: "Fecha Ingreso",
                                               name: "fecha_ingreso",
                                               "prepend-icon": "event",
+                                              required: "",
                                               readonly: ""
                                             },
                                             model: {
@@ -42781,7 +43253,11 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.required, _vm.rules.min8],
+                              rules: [
+                                _vm.rules.required,
+                                _vm.rules.min8,
+                                _vm.rules.max8
+                              ],
                               counter: 8,
                               xs12: "",
                               label: "1º Telefono",
@@ -42805,7 +43281,7 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              rules: [_vm.rules.min8],
+                              rules: [_vm.rules.min8, _vm.rules.max8],
                               counter: 8,
                               xs12: "",
                               label: "2º Telefono",
@@ -86451,6 +86927,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Estudiantes/DialogDelete.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/assets/js/components/Estudiantes/DialogDelete.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=template&id=2cdf6a58& */ "./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58&");
+/* harmony import */ var _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Estudiantes/DialogDelete.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=template&id=2cdf6a58& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Estudiantes/DialogDelete.vue?vue&type=template&id=2cdf6a58&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_2cdf6a58___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Estudiantes/EditarComponent.vue":
 /*!************************************************************************!*\
   !*** ./resources/assets/js/components/Estudiantes/EditarComponent.vue ***!
@@ -87313,6 +87858,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrarComponent_vue_vue_type_template_id_efb28c82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrarComponent_vue_vue_type_template_id_efb28c82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Profesores/DialogDelete.vue":
+/*!********************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/DialogDelete.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=template&id=4dcc9ae3& */ "./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3&");
+/* harmony import */ var _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DialogDelete.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Profesores/DialogDelete.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DialogDelete.vue?vue&type=template&id=4dcc9ae3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/DialogDelete.vue?vue&type=template&id=4dcc9ae3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DialogDelete_vue_vue_type_template_id_4dcc9ae3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

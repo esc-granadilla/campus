@@ -21,7 +21,7 @@
                   <v-flex xs6 pt-2 px-3>
                      <v-text-field
                         v-model="estudiante.nombre"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Nombre"
                         name="nombre"
@@ -32,7 +32,7 @@
                      <v-text-field
                         xs12
                         v-model="estudiante.primer_apellido"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Primer Apellido"
                         name="primer_apellido"
@@ -42,7 +42,7 @@
                   <v-flex xs6 pt-2 px-3>
                      <v-text-field
                         v-model="estudiante.segundo_apellido"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Segundo Apellido"
                         name="segundo_apellido"
@@ -67,6 +67,7 @@
                               label="Fecha Nacimiento"
                               name="fecha_nacimiento"
                               prepend-icon="event"
+                              required
                               readonly
                               v-on="on"
                            ></v-text-field>
@@ -154,7 +155,8 @@ export default {
             required: value => !!value || "Requerido.",
             min: v => v.length >= 9 || "Min 9 Caracteres",
             min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
+            max: v => v.length <= 50 || "Maximo 50 Caracteres",
+            max8: v => v.length <= 8 || "Maximo 8 Caracteres",
             mini: v => v.length >= 3 || "Min 3 Caracteres"
          }
       };
@@ -177,10 +179,17 @@ export default {
          }
       },
       editar() {
+         var self = this;
          if (this.estudiante.id != null) {
             axios
                .put("estudiantes/" + this.estudiante.id, this.estudiante)
-               .then(res => (this.mensaje = res.data));
+               .then(res => (this.mensaje = res.data))
+               .catch(error => {
+                  self.$toast.error("Verifica la informacion Ingresada", {
+                     y: "top",
+                     timeout: 8000
+                  });
+               });
          } else {
             this.$toast.error("Primero busque a un Estudiante", {
                y: "top",

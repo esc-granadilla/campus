@@ -3,6 +3,7 @@
       <div class="alert">
          <v-alert v-model="alert" dismissible :type="alerttype">{{ mensaje.message }}</v-alert>
       </div>
+      <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
       <v-flex md8 xs12 offset-md2>
          <v-flex xs12 pt-2 px-3>
             <v-layout wrap row class="elevation-12">
@@ -93,7 +94,14 @@
                      ></v-text-field>
                   </v-flex>
                   <v-flex xs12 d-flex px-3 mt-5>
-                     <v-btn round dark flat color="red" block @click="eliminar">Eliminar</v-btn>
+                     <v-btn
+                        round
+                        dark
+                        flat
+                        color="red"
+                        block
+                        @click.stop="dialogDelete = true"
+                     >Eliminar</v-btn>
                   </v-flex>
                </v-layout>
             </v-layout>
@@ -103,11 +111,16 @@
 </template>
 
 <script>
+import dialogdelete from "../Profesores/DialogDelete.vue";
 export default {
    name: "borrarcomponent",
+   components: {
+      dialogdelete
+   },
    data() {
       return {
          search: "",
+         dialogDelete: false,
          profesor: {
             id: null,
             cedula: "",
@@ -132,6 +145,10 @@ export default {
                .get("profesors/" + this.search)
                .then(res => (this.profesor = res.data));
          }
+      },
+      borrarMethod: function(msg) {
+         this.dialogDelete = msg.dialogdelete;
+         if (msg.Delete) this.eliminar();
       },
       eliminar() {
          if (this.profesor.id != null) {

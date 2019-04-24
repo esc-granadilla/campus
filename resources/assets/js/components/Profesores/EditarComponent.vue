@@ -21,7 +21,7 @@
                   <v-flex xs6 pt-2 px-3>
                      <v-text-field
                         v-model="profesor.nombre"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Nombre"
                         name="nombre"
@@ -32,7 +32,7 @@
                      <v-text-field
                         xs12
                         v-model="profesor.primer_apellido"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Primer Apellido"
                         name="primer_apellido"
@@ -42,7 +42,7 @@
                   <v-flex xs6 pt-2 px-3>
                      <v-text-field
                         v-model="profesor.segundo_apellido"
-                        :rules="[rules.required, rules.mini]"
+                        :rules="[rules.required, rules.mini, rules.max]"
                         counter
                         label="Segundo Apellido"
                         name="segundo_apellido"
@@ -68,6 +68,7 @@
                               name="fecha_nacimiento"
                               prepend-icon="event"
                               readonly
+                              required
                               v-on="on"
                            ></v-text-field>
                         </template>
@@ -85,7 +86,7 @@
                   <v-flex xs6 d-flex px-3>
                      <v-text-field
                         v-model="profesor.puesto"
-                        :rules="[rules.required, rules.max]"
+                        :rules="[rules.required, rules.max, rules.mini]"
                         counter
                         label="Puesto"
                         name="puesto"
@@ -111,6 +112,7 @@
                               label="Fecha Ingreso"
                               name="fecha_ingreso"
                               prepend-icon="event"
+                              required
                               readonly
                               v-on="on"
                            ></v-text-field>
@@ -127,7 +129,7 @@
                   <v-flex xs6 d-flex px-3>
                      <v-text-field
                         v-model="profesor.telefono1"
-                        :rules="[rules.required, rules.min8]"
+                        :rules="[rules.required, rules.min8,rules.max8]"
                         :counter="8"
                         xs12
                         label="1º Telefono"
@@ -137,7 +139,7 @@
                   <v-flex xs6 d-flex px-3>
                      <v-text-field
                         v-model="profesor.telefono2"
-                        :rules="[rules.min8]"
+                        :rules="[rules.min8,rules.max8]"
                         :counter="8"
                         xs12
                         label="2º Telefono"
@@ -181,7 +183,8 @@ export default {
             required: value => !!value || "Requerido.",
             min: v => v.length >= 9 || "Min 9 Caracteres",
             min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
+            max: v => v.length <= 50 || "Maximo 50 Caracteres",
+            max8: v => v.length <= 8 || "Maximo 8 Caracteres",
             mini: v => v.length >= 3 || "Min 3 Caracteres"
          }
       };
@@ -212,10 +215,17 @@ export default {
          }
       },
       editar() {
+         var self = this;
          if (this.profesor.id != null) {
             axios
                .put("profesors/" + this.profesor.id, this.profesor)
-               .then(res => (this.mensaje = res.data));
+               .then(res => (this.mensaje = res.data))
+               .catch(error => {
+                  self.$toast.error("Verifica la informacion Ingresada", {
+                     y: "top",
+                     timeout: 8000
+                  });
+               });
          } else {
             this.$toast.error("Primero busque a un Profesor", {
                y: "top",
