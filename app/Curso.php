@@ -15,4 +15,9 @@ class Curso extends Model
    {
       return $this->belongsTo('Campus\Asignacioncursoprofesor');
    }
+
+   public function asignacionnota()
+   {
+      return $this->belongsTo('Campus\Asignacionnota');
+   }
 }

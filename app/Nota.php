@@ -4,13 +4,8 @@ namespace Campus;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Dia extends Model
+class Nota extends Model
 {
-   public function asignacioncursoprofesor()
-   {
-      return $this->belongsTo('Campus\Asignacioncursoprofesor');
-   }
-
    public function asignacionnota()
    {
       return $this->belongsTo('Campus\Asignacionnota');
