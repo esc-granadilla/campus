@@ -216,6 +216,11 @@ export default {
             axios
                .put("profesors/" + this.profesor.id, this.profesor)
                .then(res => (this.mensaje = res.data));
+         } else {
+            this.$toast.error("Primero busque a un Profesor", {
+               y: "top",
+               timeout: 8000
+            });
          }
       }
    }

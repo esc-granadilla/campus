@@ -181,6 +181,11 @@ export default {
             axios
                .put("estudiantes/" + this.estudiante.id, this.estudiante)
                .then(res => (this.mensaje = res.data));
+         } else {
+            this.$toast.error("Primero busque a un Estudiante", {
+               y: "top",
+               timeout: 8000
+            });
          }
       }
    },

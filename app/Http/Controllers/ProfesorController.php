@@ -30,10 +30,10 @@ class ProfesorController extends Controller
 
    use RegistersUsers;
    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
    public function index(Request $request)
    {
       if ($request->ajax()) {
@@ -43,10 +43,10 @@ class ProfesorController extends Controller
    }
 
    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
    public function create()
    {
       return view('registerprofesor');
@@ -54,13 +54,27 @@ class ProfesorController extends Controller
 
 
    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function store(Request $request)
    {
+      $this->validate($request, [
+         'name' => 'required|string|max:32',
+         'email' => 'required|string|email|max:255|unique:users',
+         'password' => 'required|string|min:6|confirmed',
+         'cedula' => 'required|string|min:9|max:9',
+         'nombre' => 'required|string|min:3|max:50',
+         'primer_apellido' => 'required|string|min:3|max:80',
+         'segundo_apellido' => 'required|string|min:3|max:80',
+         'fecha_nacimiento' => ' required',
+         'fecha_ingreso' => ' required',
+         'telefono1' => ' required|string|min:8|max:8',
+         'puesto' => 'required|string|min:3|max:50',
+      ]);
+
       $role = Role::where('nombre', 'Profesor')->first();
       $user = User::create([
          'name' => $request->input('name'),
@@ -88,12 +102,12 @@ class ProfesorController extends Controller
 
 
    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function show($id, Request $request)
    {
       if ($request->ajax()) {
@@ -117,12 +131,12 @@ class ProfesorController extends Controller
    }
 
    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
    public function edit($id, Request $request)
    {
       if ($request->ajax()) {
@@ -146,12 +160,12 @@ class ProfesorController extends Controller
    }
 
    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
    public function update(Request $request, Profesor $profesor)
    {
       if ($request->ajax()) {
@@ -169,12 +183,12 @@ class ProfesorController extends Controller
    }
 
    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
    public function destroy(Request $request, Profesor $profesor)
    {
       if ($request->ajax()) {
