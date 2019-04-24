@@ -138,6 +138,11 @@ export default {
             axios
                .delete("profesors/" + this.profesor.id)
                .then(res => (this.mensaje = res.data));
+         } else {
+            this.$toast.error("Primero busque a un Profesor", {
+               y: "top",
+               timeout: 8000
+            });
          }
       }
    },

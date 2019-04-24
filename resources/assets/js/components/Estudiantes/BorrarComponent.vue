@@ -117,6 +117,11 @@ export default {
             axios
                .delete("estudiantes/" + this.estudiante.id)
                .then(res => (this.mensaje = res.data));
+         } else {
+            this.$toast.error("Primero busque a un Estudiante", {
+               y: "top",
+               timeout: 8000
+            });
          }
       }
    },

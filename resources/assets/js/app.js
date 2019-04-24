@@ -12,13 +12,30 @@ import Vue from 'vue';
 require('./bootstrap');
 import Vuetify from 'vuetify';
 import Vuebar from 'vuebar';
+import VuetifyToast from 'vuetify-toast-snackbar';
 
 Vue.use(Vuebar);
 window.Vue = require('vue');
 Vue.use(Vuetify, {
     iconfont: 'fa'
 });
-
+Vue.use(VuetifyToast, {
+    x: 'right', // default
+    y: 'bottom', // default bottom
+    color: 'info', // default
+    icon: 'info',
+    timeout: 3000, // default
+    dismissable: true, // default
+    autoHeight: false, // default
+    multiLine: false, // default
+    vertical: false, // default
+    shorts: {
+        custom: {
+            color: 'purple'
+        }
+    },
+    property: '$toast' // default
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
