@@ -26,8 +26,12 @@ class Asignacionnota extends Model
    {
       return $this->hasOne('Campus\Profesor');
    }
-   public function estudiantes()
+   public function nota()
    {
-      return $this->belongsToMany('Campus\Estudiante');
+      return $this->hasOne('Campus\Nota');
+   }
+   public function estudiante()
+   {
+      return $this->hasOne('Campus\Estudiante');
    }
 }
