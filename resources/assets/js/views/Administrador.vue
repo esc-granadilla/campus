@@ -98,7 +98,7 @@
       </div>
       <div class="full" id="cuerpo">
          <div class="full" v-if="mostrar === 'cuerpo'">
-            <p>lorem ipsim dolor</p>
+         
          </div>
          <credencial v-if="mostrar === 'credencial'"></credencial>
          <pmostrarcomponent v-if="mostrar === 'profesors/mostrar'"></pmostrarcomponent>
@@ -112,6 +112,7 @@
          <acursohorario v-if="mostrar === 'curso/horario'"></acursohorario>
          <acursoprofesor v-if="mostrar === 'curso/profesor'"></acursoprofesor>
          <acursoalumno v-if="mostrar === 'curso/alumno'"></acursoalumno>
+         <nmostrarcomponent v-if="mostrar === 'noticias/mostrar'"></nmostrarcomponent>
       </div>
    </v-layout>
 </template>
@@ -158,8 +159,6 @@ export default {
          noticias: [
             ["Mostrar", "insert_drive_file", "noticias/mostrar"],
             ["Crear", "add", "noticias/create"],
-            ["Actualizar", "update", "noticias/editar"],
-            ["Eliminar", "delete", "noticias/eliminar"]
          ],
          mostrar: "cuerpo",
          mini: true,

@@ -5155,7 +5155,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      noticias: [{
+        title: "Estudiantes de 5 grado",
+        description: "lorem ipsum dolor"
+      }, {
+        title: "Estudiantes de 5 grado",
+        description: "lorem ipsum dolor"
+      }, {
+        title: "Estudiantes de 5 grado",
+        description: "lorem ipsum dolor"
+      }, {
+        title: "Estudiantes de 5 grado",
+        description: "lorem ipsum dolor"
+      }]
+    };
+  }
+});
 
 /***/ }),
 
@@ -6156,6 +6185,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["name"],
   data: function data() {
@@ -6177,7 +6207,7 @@ __webpack_require__.r(__webpack_exports__);
       empleados: [["Crear", "add", "profesors/create"], ["Mostrar", "insert_drive_file", "profesors/mostrar"], ["Actualizar", "update", "profesors/editar"], ["Eliminar", "delete", "profesors/eliminar"]],
       estudiantes: [["Mostrar", "insert_drive_file", "estudiantes/mostrar"], ["Actualizar", "update", "estudiantes/editar"], ["Eliminar", "delete", "estudiantes/eliminar"]],
       asignaciones: [["Cursos Horarios", "swap_horizontal_circle", "curso/horario"], ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"], ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]],
-      noticias: [["Mostrar", "insert_drive_file", "noticias/mostrar"], ["Crear", "add", "noticias/create"], ["Actualizar", "update", "noticias/editar"], ["Eliminar", "delete", "noticias/eliminar"]],
+      noticias: [["Mostrar", "insert_drive_file", "noticias/mostrar"], ["Crear", "add", "noticias/create"]],
       mostrar: "cuerpo",
       mini: true,
       right: null
@@ -42499,13 +42529,44 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { "grid-list-sm": "", fluid: "" } },
-    [
-      _c("v-layout", { attrs: { row: "", wrap: "" } }, [
-        _c("p", [_vm._v("lorem")])
-      ])
-    ],
+    "v-layout",
+    { attrs: { row: "", wrap: "" } },
+    _vm._l(_vm.noticias, function(item, index) {
+      return _c(
+        "v-flex",
+        { key: index, attrs: { xs4: "", "pa-2": "" } },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                _vm._v(
+                  "\n                " + _vm._s(item.title) + "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [_c("p", [_vm._v(_vm._s(item.description))])]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-btn", { attrs: { flat: "", color: "primary" } }, [
+                    _vm._v("Eliminar")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-btn", { attrs: { flat: "", color: "secondary" } }, [
+                    _vm._v("Editar")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    }),
     1
   )
 }
@@ -44341,9 +44402,7 @@ var render = function() {
       { staticClass: "full", attrs: { id: "cuerpo" } },
       [
         _vm.mostrar === "cuerpo"
-          ? _c("div", { staticClass: "full" }, [
-              _c("p", [_vm._v("lorem ipsim dolor")])
-            ])
+          ? _c("div", { staticClass: "full" })
           : _vm._e(),
         _vm._v(" "),
         _vm.mostrar === "credencial" ? _c("credencial") : _vm._e(),
@@ -44378,7 +44437,9 @@ var render = function() {
         _vm._v(" "),
         _vm.mostrar === "curso/profesor" ? _c("acursoprofesor") : _vm._e(),
         _vm._v(" "),
-        _vm.mostrar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
+        _vm.mostrar === "curso/alumno" ? _c("acursoalumno") : _vm._e(),
+        _vm._v(" "),
+        _vm.mostrar === "noticias/mostrar" ? _c("nmostrarcomponent") : _vm._e()
       ],
       1
     )
@@ -89111,7 +89172,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/david/Workspace/Laravel/campus/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /home/aldo/code/campus/resources/assets/js/app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
