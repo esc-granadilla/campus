@@ -7,6 +7,7 @@ Vue.component('registerprofesor', require('./views/RegisterProfesor.vue').defaul
 Vue.component('remembercomponent', require('./components/Login/RememberComponent.vue').default);
 Vue.component('administrador', require('./views/Administrador.vue').default);
 Vue.component('profesor', require('./views/Profesor.vue').default);
+Vue.component('panelprofesor', require('./views/PanelProfesor.vue').default);
 Vue.component('pmostrarcomponent', require('./components/Profesores/MostrarComponent.vue').default);
 Vue.component('peditarcomponent', require('./components/Profesores/EditarComponent.vue').default);
 Vue.component('pborrarcomponent', require('./components/Profesores/BorrarComponent.vue').default);
