@@ -13,7 +13,9 @@ require('./bootstrap');
 import Vuetify from 'vuetify';
 import Vuebar from 'vuebar';
 import VuetifyToast from 'vuetify-toast-snackbar';
-
+const $ = require('jquery');
+// Lo declaramos globalmente
+window.$ = $;
 Vue.use(Vuebar);
 window.Vue = require('vue');
 Vue.use(Vuetify, {
