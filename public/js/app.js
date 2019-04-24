@@ -5040,6 +5040,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/BorrarComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/BorrarComponent.vue?vue&type=script&lang=js& ***!
@@ -5929,14 +5949,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["name"],
   data: function data() {
     return {
       drawer: true,
       items: [{
-        title: "Noticias",
-        icon: "notifications",
-        ruta: "noticias"
-      }, {
         title: "Credenciales",
         icon: "account_balance_wallet",
         ruta: "credencial"
@@ -5952,7 +5969,8 @@ __webpack_require__.r(__webpack_exports__);
       empleados: [["Crear", "add", "profesors/create"], ["Mostrar", "insert_drive_file", "profesors/mostrar"], ["Actualizar", "update", "profesors/editar"], ["Eliminar", "delete", "profesors/eliminar"]],
       estudiantes: [["Mostrar", "insert_drive_file", "estudiantes/mostrar"], ["Actualizar", "update", "estudiantes/editar"], ["Eliminar", "delete", "estudiantes/eliminar"]],
       asignaciones: [["Cursos Horarios", "swap_horizontal_circle", "curso/horario"], ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"], ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]],
-      mostar: "cuerpo",
+      noticias: [["Mostrar", "insert_drive_file", "noticias/mostrar"], ["Crear", "add", "noticias/create"], ["Actualizar", "update", "noticias/editar"], ["Eliminar", "delete", "noticias/eliminar"]],
+      mostrar: "cuerpo",
       mini: true,
       right: null
     };
@@ -5960,11 +5978,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     route: function route(ruta) {
       if (ruta !== "profesors/create") {
-        this.mostar = ruta;
+        this.mostrar = ruta;
       } else location.href = ruta;
     }
-  },
-  props: ["name"]
+  }
 });
 
 /***/ }),
@@ -6052,7 +6069,7 @@ __webpack_require__.r(__webpack_exports__);
         title: "Home",
         ruta: "/"
       }, {
-        title: "Registarce",
+        title: "Registrarse",
         ruta: "/register"
       }, {
         title: "Ingresar",
@@ -31320,6 +31337,39 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-sm": "", fluid: "" } },
+    [
+      _c("v-layout", { attrs: { row: "", wrap: "" } }, [
+        _c("p", [_vm._v("lorem")])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/BorrarComponent.vue?vue&type=template&id=efb28c82&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/BorrarComponent.vue?vue&type=template&id=efb28c82&scoped=true& ***!
@@ -32658,57 +32708,19 @@ var render = function() {
               "v-toolbar",
               { staticClass: "transparent", attrs: { flat: "" } },
               [
+                _c("v-toolbar-side-icon", {
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      _vm.mini = !_vm.mini
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
-                  "v-list",
-                  { staticClass: "pa-0" },
-                  [
-                    _c(
-                      "v-list-tile",
-                      { attrs: { avatar: "" } },
-                      [
-                        _c(
-                          "v-list-tile-avatar",
-                          [
-                            _c("v-icon", { attrs: { "x-large": "" } }, [
-                              _vm._v("vertical_split")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-content",
-                          [
-                            _c("v-list-tile-title", [_vm._v(_vm._s(this.name))])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-action",
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "" },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                    _vm.mini = !_vm.mini
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("chevron_left")])],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
+                  "v-toolbar-title",
+                  { staticStyle: { "text-transform": "capitalize" } },
+                  [_vm._v(_vm._s(this.name))]
                 )
               ],
               1
@@ -32747,6 +32759,66 @@ var render = function() {
                     1
                   )
                 }),
+                _vm._v(" "),
+                _c(
+                  "v-list-group",
+                  {
+                    attrs: { "prepend-icon": "notifications" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "activator",
+                        fn: function() {
+                          return [
+                            _c(
+                              "v-list-tile",
+                              [_c("v-list-tile-title", [_vm._v("Noticias")])],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "v-layout",
+                      { attrs: { "pl-5": "" } },
+                      _vm._l(_vm.noticias, function(crud, i) {
+                        return _c(
+                          "v-list-tile",
+                          {
+                            key: i,
+                            on: {
+                              click: function($event) {
+                                return _vm.route(crud[2])
+                              }
+                            }
+                          },
+                          [
+                            _c("v-list-tile-title", {
+                              domProps: { textContent: _vm._s(crud[0]) }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "v-list-tile-action",
+                              [
+                                _c("v-icon", {
+                                  domProps: { textContent: _vm._s(crud[1]) }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      }),
+                      1
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c(
                   "v-list-group",
@@ -32968,39 +33040,45 @@ var render = function() {
       "div",
       { staticClass: "full", attrs: { id: "cuerpo" } },
       [
-        _vm.mostar === "cuerpo"
+        _vm.mostrar === "cuerpo"
           ? _c("div", { staticClass: "full" }, [
-              _c("h1", [_vm._v("hola este es el cuerpo")])
+              _c("p", [_vm._v("lorem ipsim dolor")])
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "credencial" ? _c("credencial") : _vm._e(),
+        _vm.mostrar === "credencial" ? _c("credencial") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "profesors/mostrar" ? _c("pmostrarcomponent") : _vm._e(),
+        _vm.mostrar === "profesors/mostrar"
+          ? _c("pmostrarcomponent")
+          : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "profesors/editar" ? _c("peditarcomponent") : _vm._e(),
+        _vm.mostrar === "profesors/editar" ? _c("peditarcomponent") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "profesors/eliminar" ? _c("pborrarcomponent") : _vm._e(),
+        _vm.mostrar === "profesors/eliminar"
+          ? _c("pborrarcomponent")
+          : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "estudiantes/mostrar"
+        _vm.mostrar === "estudiantes/mostrar"
           ? _c("emostrarcomponent")
           : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "estudiantes/editar" ? _c("eeditarcomponent") : _vm._e(),
+        _vm.mostrar === "estudiantes/editar"
+          ? _c("eeditarcomponent")
+          : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "estudiantes/eliminar"
+        _vm.mostrar === "estudiantes/eliminar"
           ? _c("eborrarcomponent")
           : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "curso" ? _c("cursocomponent") : _vm._e(),
+        _vm.mostrar === "curso" ? _c("cursocomponent") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "horario" ? _c("horariocomponent") : _vm._e(),
+        _vm.mostrar === "horario" ? _c("horariocomponent") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "curso/horario" ? _c("acursohorario") : _vm._e(),
+        _vm.mostrar === "curso/horario" ? _c("acursohorario") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "curso/profesor" ? _c("acursoprofesor") : _vm._e(),
+        _vm.mostrar === "curso/profesor" ? _c("acursoprofesor") : _vm._e(),
         _vm._v(" "),
-        _vm.mostar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
+        _vm.mostrar === "curso/alumno" ? _c("acursoalumno") : _vm._e()
       ],
       1
     )
@@ -33113,8 +33191,8 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile-title",
-                    { staticClass: "font-weight-medium font-italic" },
-                    [_vm._v("Campus Granadilla")]
+                    { staticClass: "font-weight-medium" },
+                    [_vm._v("CAMPUS GRANADILLA")]
                   )
                 ],
                 1
@@ -74515,38 +74593,23 @@ module.exports = "/images/studens11.jpg?fa2189b52cdb345da218937bb00bdd5c";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/assets/js/store.js");
-/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-free/css/all.css */ "./node_modules/@fortawesome/fontawesome-free/css/all.css");
-/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _views_Home_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Home.vue */ "./resources/assets/js/views/Home.vue");
-/* harmony import */ var _views_RegisterStudents_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/RegisterStudents.vue */ "./resources/assets/js/views/RegisterStudents.vue");
-/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/Login.vue */ "./resources/assets/js/views/Login.vue");
-/* harmony import */ var _views_RegisterProfesor_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/RegisterProfesor.vue */ "./resources/assets/js/views/RegisterProfesor.vue");
-/* harmony import */ var _components_Login_RememberComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Login/RememberComponent.vue */ "./resources/assets/js/components/Login/RememberComponent.vue");
-/* harmony import */ var _views_Administrador_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/Administrador.vue */ "./resources/assets/js/views/Administrador.vue");
-/* harmony import */ var _components_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Asignaciones/Credencial.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoHorario_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoHorario.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoProfesor_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoProfesor.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoProfesor.vue");
-/* harmony import */ var _components_Asignaciones_AsignacionCursoAlumno_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoAlumno.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoAlumno.vue");
-/* harmony import */ var _components_Profesores_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Profesores/MostrarComponent.vue */ "./resources/assets/js/components/Profesores/MostrarComponent.vue");
-/* harmony import */ var _components_Profesores_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Profesores/EditarComponent.vue */ "./resources/assets/js/components/Profesores/EditarComponent.vue");
-/* harmony import */ var _components_Profesores_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profesores/BorrarComponent.vue */ "./resources/assets/js/components/Profesores/BorrarComponent.vue");
-/* harmony import */ var _components_Estudiantes_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Estudiantes/MostrarComponent.vue */ "./resources/assets/js/components/Estudiantes/MostrarComponent.vue");
-/* harmony import */ var _components_Estudiantes_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Estudiantes/EditarComponent.vue */ "./resources/assets/js/components/Estudiantes/EditarComponent.vue");
-/* harmony import */ var _components_Estudiantes_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Estudiantes/BorrarComponent.vue */ "./resources/assets/js/components/Estudiantes/BorrarComponent.vue");
-/* harmony import */ var _components_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Horario/HorarioComponent.vue");
-/* harmony import */ var _components_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Curso/CursoComponent.vue */ "./resources/assets/js/components/Curso/CursoComponent.vue");
-/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vuebar */ "./node_modules/vuebar/vuebar.js");
-/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(vuebar__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./resources/assets/js/components.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-free/css/all.css */ "./node_modules/@fortawesome/fontawesome-free/css/all.css");
+/* harmony import */ var _fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_css_all_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuebar */ "./node_modules/vuebar/vuebar.js");
+/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vuebar__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
  //import router from './router'
+
 
  // Ensure you are using css-loader
 
@@ -74556,27 +74619,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuebar__WEBPACK_IMPORTED_MODULE_22___default.a);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vuebar__WEBPACK_IMPORTED_MODULE_5___default.a);
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_3___default.a, {
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_4___default.a, {
   iconfont: 'fa'
 });
 /**
@@ -74585,26 +74630,7 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('App', __webpack_require__(/*! ./views/App.vue */ "./resources/assets/js/views/App.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('Homeview', _views_Home_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('registerstudents', _views_RegisterStudents_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('registerprofesor', _views_RegisterProfesor_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('remembercomponent', _components_Login_RememberComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('pmostrarcomponent', _components_Profesores_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('peditarcomponent', _components_Profesores_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('pborrarcomponent', _components_Profesores_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('emostrarcomponent', _components_Estudiantes_MostrarComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('eeditarcomponent', _components_Estudiantes_EditarComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('eborrarcomponent', _components_Estudiantes_BorrarComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('horariocomponent', _components_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('cursocomponent', _components_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('administrador', _views_Administrador_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('credencial', _components_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursohorario', _components_Asignaciones_AsignacionCursoHorario_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursoprofesor', _components_Asignaciones_AsignacionCursoProfesor_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('acursoalumno', _components_Asignaciones_AsignacionCursoAlumno_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('login', _views_Login_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var app = new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
   el: '#app',
   data: function data() {
     return {};
@@ -74655,6 +74681,40 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/***/ }),
+
+/***/ "./resources/assets/js/components.js":
+/*!*******************************************!*\
+  !*** ./resources/assets/js/components.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('login', __webpack_require__(/*! ./views/Login.vue */ "./resources/assets/js/views/Login.vue").default);
+Vue.component('App', __webpack_require__(/*! ./views/App.vue */ "./resources/assets/js/views/App.vue").default);
+Vue.component('Homeview', __webpack_require__(/*! ./views/Home.vue */ "./resources/assets/js/views/Home.vue").default);
+Vue.component('registerstudents', __webpack_require__(/*! ./views/RegisterStudents.vue */ "./resources/assets/js/views/RegisterStudents.vue").default);
+Vue.component('registerprofesor', __webpack_require__(/*! ./views/RegisterProfesor.vue */ "./resources/assets/js/views/RegisterProfesor.vue").default);
+Vue.component('remembercomponent', __webpack_require__(/*! ./components/Login/RememberComponent.vue */ "./resources/assets/js/components/Login/RememberComponent.vue").default);
+Vue.component('administrador', __webpack_require__(/*! ./views/Administrador.vue */ "./resources/assets/js/views/Administrador.vue").default);
+Vue.component('pmostrarcomponent', __webpack_require__(/*! ./components/Profesores/MostrarComponent.vue */ "./resources/assets/js/components/Profesores/MostrarComponent.vue").default);
+Vue.component('peditarcomponent', __webpack_require__(/*! ./components/Profesores/EditarComponent.vue */ "./resources/assets/js/components/Profesores/EditarComponent.vue").default);
+Vue.component('pborrarcomponent', __webpack_require__(/*! ./components/Profesores/BorrarComponent.vue */ "./resources/assets/js/components/Profesores/BorrarComponent.vue").default);
+Vue.component('emostrarcomponent', __webpack_require__(/*! ./components/Estudiantes/MostrarComponent.vue */ "./resources/assets/js/components/Estudiantes/MostrarComponent.vue").default);
+Vue.component('eeditarcomponent', __webpack_require__(/*! ./components/Estudiantes/EditarComponent.vue */ "./resources/assets/js/components/Estudiantes/EditarComponent.vue").default);
+Vue.component('eborrarcomponent', __webpack_require__(/*! ./components/Estudiantes/BorrarComponent.vue */ "./resources/assets/js/components/Estudiantes/BorrarComponent.vue").default);
+Vue.component('horariocomponent', __webpack_require__(/*! ./components/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Horario/HorarioComponent.vue").default);
+Vue.component('cursocomponent', __webpack_require__(/*! ./components/Curso/CursoComponent.vue */ "./resources/assets/js/components/Curso/CursoComponent.vue").default);
+Vue.component('credencial', __webpack_require__(/*! ./components/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Asignaciones/Credencial.vue").default);
+Vue.component('acursohorario', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoHorario.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoHorario.vue").default);
+Vue.component('acursoprofesor', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoProfesor.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoProfesor.vue").default);
+Vue.component('acursoalumno', __webpack_require__(/*! ./components/Asignaciones/AsignacionCursoAlumno.vue */ "./resources/assets/js/components/Asignaciones/AsignacionCursoAlumno.vue").default);
+Vue.component('nmostrarcomponent', __webpack_require__(/*! ./components/Noticias/index.vue */ "./resources/assets/js/components/Noticias/index.vue").default);
+/* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
+Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
+Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */
 
 /***/ }),
 
@@ -76075,6 +76135,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RememberComponent_vue_vue_type_template_id_09dcf67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RememberComponent_vue_vue_type_template_id_09dcf67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Noticias/index.vue":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/components/Noticias/index.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=9225c5f0& */ "./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Noticias/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Noticias/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0&":
+/*!******************************************************************************************!*\
+  !*** ./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=9225c5f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Noticias/index.vue?vue&type=template&id=9225c5f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9225c5f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

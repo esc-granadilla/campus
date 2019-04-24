@@ -9,23 +9,8 @@
             fill-height
          >
             <v-toolbar flat class="transparent">
-               <v-list class="pa-0">
-                  <v-list-tile avatar>
-                     <v-list-tile-avatar>
-                        <v-icon x-large>vertical_split</v-icon>
-                     </v-list-tile-avatar>
-
-                     <v-list-tile-content>
-                        <v-list-tile-title>{{this.name}}</v-list-tile-title>
-                     </v-list-tile-content>
-
-                     <v-list-tile-action>
-                        <v-btn icon @click.stop="mini = !mini">
-                           <v-icon>chevron_left</v-icon>
-                        </v-btn>
-                     </v-list-tile-action>
-                  </v-list-tile>
-               </v-list>
+               <v-toolbar-side-icon @click.stop="mini = !mini"></v-toolbar-side-icon>
+               <v-toolbar-title style="text-transform:capitalize;">{{this.name}}</v-toolbar-title>
             </v-toolbar>
 
             <v-list class="pt-0" dense>
@@ -39,6 +24,21 @@
                      <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                   </v-list-tile-content>
                </v-list-tile>
+               <v-list-group prepend-icon="notifications">
+                  <template v-slot:activator>
+                     <v-list-tile>
+                        <v-list-tile-title>Noticias</v-list-tile-title>
+                     </v-list-tile>
+                  </template>
+                  <v-layout pl-5>
+                     <v-list-tile v-for="(crud, i) in noticias" :key="i" @click="route(crud[2])">
+                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
+                        <v-list-tile-action>
+                           <v-icon v-text="crud[1]"></v-icon>
+                        </v-list-tile-action>
+                     </v-list-tile>
+                  </v-layout>
+               </v-list-group>
                <v-list-group prepend-icon="account_circle">
                   <template v-slot:activator>
                      <v-list-tile>
@@ -97,36 +97,32 @@
          </v-navigation-drawer>
       </div>
       <div class="full" id="cuerpo">
-         <div class="full" v-if="mostar === 'cuerpo'">
-            <h1>hola este es el cuerpo</h1>
+         <div class="full" v-if="mostrar === 'cuerpo'">
+            <p>lorem ipsim dolor</p>
          </div>
-         <credencial v-if="mostar === 'credencial'"></credencial>
-         <pmostrarcomponent v-if="mostar === 'profesors/mostrar'"></pmostrarcomponent>
-         <peditarcomponent v-if="mostar === 'profesors/editar'"></peditarcomponent>
-         <pborrarcomponent v-if="mostar === 'profesors/eliminar'"></pborrarcomponent>
-         <emostrarcomponent v-if="mostar === 'estudiantes/mostrar'"></emostrarcomponent>
-         <eeditarcomponent v-if="mostar === 'estudiantes/editar'"></eeditarcomponent>
-         <eborrarcomponent v-if="mostar === 'estudiantes/eliminar'"></eborrarcomponent>
-         <cursocomponent v-if="mostar === 'curso'"></cursocomponent>
-         <horariocomponent v-if="mostar === 'horario'"></horariocomponent>
-         <acursohorario v-if="mostar === 'curso/horario'"></acursohorario>
-         <acursoprofesor v-if="mostar === 'curso/profesor'"></acursoprofesor>
-         <acursoalumno v-if="mostar === 'curso/alumno'"></acursoalumno>
+         <credencial v-if="mostrar === 'credencial'"></credencial>
+         <pmostrarcomponent v-if="mostrar === 'profesors/mostrar'"></pmostrarcomponent>
+         <peditarcomponent v-if="mostrar === 'profesors/editar'"></peditarcomponent>
+         <pborrarcomponent v-if="mostrar === 'profesors/eliminar'"></pborrarcomponent>
+         <emostrarcomponent v-if="mostrar === 'estudiantes/mostrar'"></emostrarcomponent>
+         <eeditarcomponent v-if="mostrar === 'estudiantes/editar'"></eeditarcomponent>
+         <eborrarcomponent v-if="mostrar === 'estudiantes/eliminar'"></eborrarcomponent>
+         <cursocomponent v-if="mostrar === 'curso'"></cursocomponent>
+         <horariocomponent v-if="mostrar === 'horario'"></horariocomponent>
+         <acursohorario v-if="mostrar === 'curso/horario'"></acursohorario>
+         <acursoprofesor v-if="mostrar === 'curso/profesor'"></acursoprofesor>
+         <acursoalumno v-if="mostrar === 'curso/alumno'"></acursoalumno>
       </div>
    </v-layout>
 </template>
 
 <script>
 export default {
+   props: ["name"],
    data() {
       return {
          drawer: true,
          items: [
-            {
-               title: "Noticias",
-               icon: "notifications",
-               ruta: "noticias"
-            },
             {
                title: "Credenciales",
                icon: "account_balance_wallet",
@@ -159,7 +155,13 @@ export default {
             ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
             ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
          ],
-         mostar: "cuerpo",
+         noticias: [
+            ["Mostrar", "insert_drive_file", "noticias/mostrar"],
+            ["Crear", "add", "noticias/create"],
+            ["Actualizar", "update", "noticias/editar"],
+            ["Eliminar", "delete", "noticias/eliminar"]
+         ],
+         mostrar: "cuerpo",
          mini: true,
          right: null
       };
@@ -167,11 +169,10 @@ export default {
    methods: {
       route(ruta) {
          if (ruta !== "profesors/create") {
-            this.mostar = ruta;
+            this.mostrar = ruta;
          } else location.href = ruta;
       }
-   },
-   props: ["name"]
+   }
 };
 </script>
 
