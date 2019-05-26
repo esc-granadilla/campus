@@ -4,16 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEncargadosTable extends Migration
+class CreateGuardiansTable extends Migration
 {
    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    * Run the migrations.
+    *
+    * @return void
+    */
    public function up()
    {
-      Schema::create('encargados', function (Blueprint $table) {
+      Schema::create('guardians', function (Blueprint $table) {
          $table->increments('id');
          $table->integer('cedula')->nullable(false);
          $table->string('nombre')->nullable(false);
@@ -27,12 +27,12 @@ class CreateEncargadosTable extends Migration
    }
 
    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    * Reverse the migrations.
+    *
+    * @return void
+    */
    public function down()
    {
-      Schema::dropIfExists('encargados');
+      Schema::dropIfExists('guardians');
    }
 }

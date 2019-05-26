@@ -4,16 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCursosTable extends Migration
+class CreateSubjectsTable extends Migration
 {
    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    * Run the migrations.
+    *
+    * @return void
+    */
    public function up()
    {
-      Schema::create('cursos', function (Blueprint $table) {
+      Schema::create('subjects', function (Blueprint $table) {
          $table->increments('id');
          $table->string('codigo')->nullable(false);
          $table->string('nombre')->nullable(false);
@@ -24,12 +24,12 @@ class CreateCursosTable extends Migration
    }
 
    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    * Reverse the migrations.
+    *
+    * @return void
+    */
    public function down()
    {
-      Schema::dropIfExists('cursos');
+      Schema::dropIfExists('subjects');
    }
 }
