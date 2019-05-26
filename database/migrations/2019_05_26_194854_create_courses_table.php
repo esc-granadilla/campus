@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
          $table->integer('teacher_id')->unsigned();
          $table->integer('section_id')->unsigned()->nullable(false);
          $table->integer('subject_id')->unsigned()->nullable(false);
+         $table->unique(['teacher_id', 'section_id', 'subject_id'], 'course_unique');
          $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
          $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
          $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');

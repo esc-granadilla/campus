@@ -17,6 +17,7 @@ class CreateSchedulesTable extends Migration
          $table->increments('id');
          $table->string('desde')->nullable(false);
          $table->string('hasta')->nullable(false);
+         $table->unique(['desde', 'hasta']);
          $table->boolean('estado')->default(1)->nullable(false);
          $table->timestamps();
       });

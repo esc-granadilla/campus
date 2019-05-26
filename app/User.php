@@ -14,14 +14,14 @@ class User extends Authenticatable
       return $this->belongsToMany('Campus\Role');
    }
 
-   public function estudiante()
+   public function student()
    {
-      return $this->hasOne('Campus\Estudiante');
+      return $this->hasOne(Student::class);
    }
 
-   public function profesor()
+   public function teacher()
    {
-      return $this->hasOne('Campus\Profesor');
+      return $this->hasOne(Teacher::class);
    }
 
    public function authorizeRoles($roles)
@@ -54,19 +54,19 @@ class User extends Authenticatable
       return false;
    }
    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
    protected $fillable = [
       'name', 'email', 'password',
    ];
 
    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    * The attributes that should be hidden for arrays.
+    *
+    * @var array
+    */
    protected $hidden = [
       'password', 'remember_token',
    ];

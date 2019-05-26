@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
    {
       Schema::create('students', function (Blueprint $table) {
          $table->increments('id');
-         $table->integer('cedula')->nullable(false);
+         $table->integer('cedula')->unique()->nullable(false);
          $table->string('nombre')->nullable(false);
          $table->string('primer_apellido')->nullable(false);
          $table->string('segundo_apellido')->nullable(false);
