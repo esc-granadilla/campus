@@ -3,18 +3,11 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Campus\Http\Controllers\Controller;
-use Campus\User;
-use Campus\Role;
-use Campus\Asignacioncursoprofesor;
-use Campus\Curso;
-use Campus\Grado;
-use Campus\Dia;
-use Campus\Horario;
 use Campus\Teacher;
+use Campus\Role;
+use Campus\User;
 
-class ProfesorController extends Controller
+class TeacherController extends Controller
 {
    /*
     |--------------------------------------------------------------------------
@@ -33,7 +26,7 @@ class ProfesorController extends Controller
       $this->middleware('administrador');
    }
 
-   use RegistersUsers;
+
    /**
     * Display a listing of the resource.
     *
@@ -102,39 +95,37 @@ class ProfesorController extends Controller
       $profesor->estado = 1;
 
       $user->teacher()->save($profesor);
-      return view('homeprofesores');
+      return redirect('/admin');
    }
 
 
    /**
     * Display the specified resource.
     *
-    * @param  int  $id
+    * @param  Teacher  $teacher
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
    public function show($id, Request $request)
    {
       if ($request->ajax()) {
-         $profesor = Teacher::where('cedula', $id)->first();
-         $profesor = ($profesor != null && $profesor->estado == 0) ? new Teacher() : $profesor;
-         return response()->json($profesor, 200);
+         $teacher = ($teacher != null && $teacher->estado == 0) ? new Teacher() : $teacher;
+         return response()->json($teacher, 200);
       }
    }
 
    /**
     * Show the form for editing the specified resource.
     *
-    * @param  int  $id
+    * @param  Teacher  $teacher
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function edit($id, Request $request)
+   public function edit(Teacher $teacher, Request $request)
    {
       if ($request->ajax()) {
-         $profesor = Teacher::where('cedula', $id)->first();
-         $profesor = ($profesor != null && $profesor->estado == 0) ? new Teacher() : $profesor;
-         return response()->json($profesor, 200);
+         $teacher = ($teacher != null && $teacher->estado == 0) ? new Teacher() : $teacher;
+         return response()->json($teacher, 200);
       }
    }
 
@@ -145,7 +136,7 @@ class ProfesorController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, Teacher $profesor)
+   public function update(Request $request, Teacher $teacher)
    {
       $this->validate($request, [
          'nombre' => 'required|string|min:3|max:50',
@@ -157,16 +148,16 @@ class ProfesorController extends Controller
          'puesto' => 'required|string|min:3|max:50',
       ]);
       if ($request->ajax()) {
-         $profesor->nombre = $request->input('nombre');
-         $profesor->primer_apellido = $request->input('primer_apellido');
-         $profesor->segundo_apellido = $request->input('segundo_apellido');
-         $profesor->fecha_nacimiento = $request->input('fecha_nacimiento');
-         $profesor->puesto = $request->input('puesto');
-         $profesor->fecha_ingreso = $request->input('fecha_ingreso');
-         $profesor->telefono1 = $request->input('telefono1');
-         $profesor->telefono2 = $request->input('telefono2');
-         $profesor->save();
-         return response()->json(['message' => 'Datos del Profesor fueron actualizados correctamente'], 200);
+         $teacher->nombre = $request->input('nombre');
+         $teacher->primer_apellido = $request->input('primer_apellido');
+         $teacher->segundo_apellido = $request->input('segundo_apellido');
+         $teacher->fecha_nacimiento = $request->input('fecha_nacimiento');
+         $teacher->puesto = $request->input('puesto');
+         $teacher->fecha_ingreso = $request->input('fecha_ingreso');
+         $teacher->telefono1 = $request->input('telefono1');
+         $teacher->telefono2 = $request->input('telefono2');
+         $teacher->save();
+         return response()->json(['type' => 'success', 'message' => 'Datos del Profesor fueron actualizados correctamente'], 200);
       }
    }
 
@@ -177,19 +168,19 @@ class ProfesorController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy(Request $request, Teacher $profesor)
+   public function destroy(Request $request, Teacher $teacher)
    {
       if ($request->ajax()) {
-         $profesor->estado = 0;
-         $profesor->save();
-         return response()->json(['message' => 'El Profesor fue eliminado correctamente'], 200);
+         $teacher->estado = 0;
+         $teacher->save();
+         return response()->json(['type' => 'success', 'message' => 'El Profesor fue eliminado correctamente'], 200);
       }
    }
 
-   public function getCursosProfesor(Teacher $profesor, Request $request)
+   public function getCursosProfesor(Teacher $teacher, Request $request)
    {
       if ($request->ajax()) {
-         $asignaciones = $profesor->courses()->get();
+         $asignaciones = $teacher->courses()->get();
          $cursos = [];
          foreach ($asignaciones as $asig) {
             array_push($cursos, [

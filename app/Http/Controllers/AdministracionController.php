@@ -4,14 +4,14 @@ namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Campus\Role;
-use Campus\Profesor;
 use Campus\User;
-use Campus\Curso;
 use Campus\Horario;
 use Campus\Dia;
 use Campus\Grado;
 use Campus\Asignacioncursoprofesor;
 use Campus\Estudiante;
+use Campus\Teacher;
+use Campus\Course;
 
 class AdministracionController extends Controller
 {
@@ -42,7 +42,7 @@ class AdministracionController extends Controller
    {
       if ($request->ajax()) {
          $rolestouser = [];
-         $profesores = Profesor::where('estado', 1)->get();
+         $profesores = Teacher::where('estado', 1)->get();
          for ($i = 0; $i < sizeof($profesores); $i++) {
             $profesor = $profesores[$i]->user->hasRole('Profesor');
             $administrador = $profesores[$i]->user->hasRole('Administrador');
@@ -74,10 +74,10 @@ class AdministracionController extends Controller
       return response()->json(['message' => 'error'], 400);
    }
 
-   public function asigcursohorario(Curso $curso, Request $request)
+   public function asigcursohorario(Course $curso, Request $request)
    {
       if ($request->ajax()) {
-         $curso->horarios()->detach();
+         $curso->schedule()->detach();
          $horarios = $request->input('horarios');
          foreach ($horarios as $horario) {
             $h = Horario::where('id', $horario["id"])->first();

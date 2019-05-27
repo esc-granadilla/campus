@@ -19,13 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('profesors', 'ProfesorController');
+Route::resource('teachers', 'TeacherController');
 
-Route::resource('estudiantes', 'EstudianteController');
+Route::resource('students', 'EstudianteController');
 
-Route::resource('horarios', 'HorarioController');
+Route::resource('schedules', 'ScheduleController');
 
-Route::resource('cursos', 'CursoController');
+Route::resource('subjects', 'SubjectController');
 
 Route::resource('noticias', 'NoticiaController');
 
@@ -76,7 +76,7 @@ Route::post(
 )->name('asigcursohorarioestudiante');
 
 Route::get(
-   '/getCursosProfesor/{profesor}',
+   '/getCursosProfesor/{teacher}',
    'ProfesorController@getCursosProfesor'
 )->name('getCursosProfesor');
 

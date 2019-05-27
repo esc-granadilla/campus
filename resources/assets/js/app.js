@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+/*jshint esversion: 6 */
+
 import store from './store';
 //import router from './router'
 import './components';
@@ -11,6 +13,7 @@ import '@fortawesome/fontawesome-free/css/all.css'; // Ensure you are using css-
 import Vue from 'vue';
 require('./bootstrap');
 import Vuetify from 'vuetify';
+//import es from 'vuetify/src/locale/es';
 import Vuebar from 'vuebar';
 import VuetifyToast from 'vuetify-toast-snackbar';
 const $ = require('jquery');
@@ -19,7 +22,7 @@ window.$ = $;
 Vue.use(Vuebar);
 window.Vue = require('vue');
 Vue.use(Vuetify, {
-    iconfont: 'fa'
+    iconfont: 'fa',
 });
 Vue.use(VuetifyToast, {
     x: 'right', // default

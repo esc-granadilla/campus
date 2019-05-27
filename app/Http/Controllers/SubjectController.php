@@ -3,13 +3,13 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Campus\Curso;
+use Campus\Subject;
 
-class CursoController extends Controller
+class SubjectController extends Controller
 {
    /*
     |--------------------------------------------------------------------------
-    | Curso Controller
+    | Asignatura Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
@@ -32,7 +32,7 @@ class CursoController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $cursos = Curso::where('estado', 1)->get();
+         $cursos = Subject::where('estado', 1)->get();
          return response()->json($cursos, 200);
       }
    }
@@ -56,22 +56,22 @@ class CursoController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $cur = Curso::where('codigo', strtoupper($request->input('codigo')))->first();
-         if ($cur != null) {
-            if ($cur->estado == 0) {
-               $cur->estado = 1;
-               $cur->save();
+         $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
+         if ($asig != null) {
+            if ($asig->estado == 0) {
+               $asig->estado = 1;
+               $asig->save();
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+               return response()->json(['type' => 'error', 'message' => 'Esta asignatura ya esta registrada.'], 200);
             }
          } else {
-            $curso = new Curso();
-            $curso->codigo = strtoupper($request->input('codigo'));
-            $curso->nombre = $request->input('nombre');
-            $curso->descripcion = $request->input('descripcion');
-            $curso->save();
+            $asignatura = new Subject();
+            $asignatura->codigo = strtoupper($request->input('codigo'));
+            $asignatura->nombre = $request->input('nombre');
+            $asignatura->descripcion = $request->input('descripcion');
+            $asignatura->save();
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro el Curso correctamente.'], 200);
+         return response()->json(['type' => 'success', 'message' => 'Se registro la asignatura correctamente.'], 200);
       }
    }
 
@@ -82,11 +82,11 @@ class CursoController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function show(Curso $curso, Request $request)
+   public function show(Subject $subject, Request $request)
    {
       if ($request->ajax()) {
-         $curso = ($curso != null && $curso->estado == 0) ? null : $curso;
-         return response()->json($curso, 200);
+         $subject = ($subject != null && $subject->estado == 0) ? null : $subject;
+         return response()->json($subject, 200);
       }
    }
 
@@ -97,11 +97,11 @@ class CursoController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function edit(Curso $curso, Request $request)
+   public function edit(Subject $subject, Request $request)
    {
       if ($request->ajax()) {
-         $curso = ($curso != null && $curso->estado == 0) ? null : $curso;
-         return response()->json($curso, 200);
+         $subject = ($subject != null && $subject->estado == 0) ? null : $subject;
+         return response()->json($subject, 200);
       }
    }
 
@@ -109,22 +109,22 @@ class CursoController extends Controller
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
+    * @param  Subject  $asignatura
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, Curso $curso)
+   public function update(Request $request, Subject $subject)
    {
       if ($request->ajax()) {
-         $cur = Curso::where('codigo', strtoupper($request->input('codigo')))->first();
-         if ($cur != null) {
-            return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+         $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
+         if ($asig != null && ($asig->id != $subject->id)) {
+            return response()->json(['type' => 'error', 'message' => 'Ya existe una asignatura con este codigo.'], 200);
          } else {
-            $curso->codigo = strtoupper($request->input('codigo'));
-            $curso->nombre = $request->input('nombre');
-            $curso->descripcion = $request->input('descripcion');
-            $curso->save();
+            $subject->codigo = strtoupper($request->input('codigo'));
+            $subject->nombre = $request->input('nombre');
+            $subject->descripcion = $request->input('descripcion');
+            $subject->save();
          }
-         return response()->json(['type' => 'success', 'message' => 'Datos del Curso fueron actualizados correctamente'], 200);
+         return response()->json(['type' => 'success', 'message' => 'Datos de la asignatura fueron actualizados correctamente'], 200);
       }
    }
 
@@ -135,12 +135,12 @@ class CursoController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function destroy(Curso $curso, Request $request)
+   public function destroy(Subject $subject, Request $request)
    {
       if ($request->ajax()) {
-         $curso->estado = 0;
-         $curso->save();
-         return response()->json(['type' => 'success', 'message' => 'El Curso fue eliminado exitosamente'], 200);
+         $subject->estado = 0;
+         $subject->save();
+         return response()->json(['type' => 'success', 'message' => 'La asignatura fue eliminada exitosamente'], 200);
       }
    }
 }

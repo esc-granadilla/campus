@@ -2,7 +2,7 @@
    <v-layout row justify-center>
       <v-dialog v-model="dialogdelete" max-width="290">
          <v-card>
-            <v-card-title class="headline">Eliminar curso?</v-card-title>
+            <v-card-title class="headline">Eliminar asignatura?</v-card-title>
 
             <v-card-text error>
                <v-alert
@@ -10,7 +10,7 @@
                   color="error"
                   icon="priority_high"
                   outline
-               >Seguro que quieres eliminar este curso.</v-alert>
+               >Seguro que quieres eliminar esta asignatura.</v-alert>
             </v-card-text>
 
             <v-card-actions>

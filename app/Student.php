@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+   public function __construct()
+   {
+      $this->cedula = '';
+      $this->nombre = '';
+      $this->primer_apellido = '';
+      $this->segundo_apellido = '';
+      $this->fecha_nacimiento = null;
+      $this->adecuacion = '';
+   }
+
    public function guardian()
    {
       return $this->hasOne(Guardian::class);

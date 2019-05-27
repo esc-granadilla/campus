@@ -8,14 +8,12 @@ Vue.component('remembercomponent', require('./components/Login/RememberComponent
 Vue.component('administrador', require('./views/Administrador.vue').default);
 Vue.component('profesor', require('./views/Profesor.vue').default);
 Vue.component('panelprofesor', require('./views/PanelProfesor.vue').default);
-Vue.component('pmostrarcomponent', require('./components/Profesores/MostrarComponent.vue').default);
-Vue.component('peditarcomponent', require('./components/Profesores/EditarComponent.vue').default);
-Vue.component('pborrarcomponent', require('./components/Profesores/BorrarComponent.vue').default);
+Vue.component('profesorcomponent', require('./components/Profesores/ProfesorComponent.vue').default);
 Vue.component('emostrarcomponent', require('./components/Estudiantes/MostrarComponent.vue').default);
 Vue.component('eeditarcomponent', require('./components/Estudiantes/EditarComponent.vue').default);
 Vue.component('eborrarcomponent', require('./components/Estudiantes/BorrarComponent.vue').default);
 Vue.component('horariocomponent', require('./components/Horario/HorarioComponent.vue').default);
-Vue.component('cursocomponent', require('./components/Curso/CursoComponent.vue').default);
+Vue.component('asignaturacomponent', require('./components/Asignatura/AsignaturaComponent.vue').default);
 Vue.component('credencial', require('./components/Asignaciones/Credencial.vue').default);
 Vue.component('acursohorario', require('./components/Asignaciones/AsignacionCursoHorario.vue').default);
 Vue.component('acursoprofesor', require('./components/Asignaciones/AsignacionCursoProfesor.vue').default);

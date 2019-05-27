@@ -29,18 +29,6 @@
                      <v-layout wrap mx-5>
                         <v-flex xs12 d-flex>
                            <v-select
-                              :items="grados"
-                              item-text="text"
-                              item-value="value"
-                              return-object
-                              v-model="grado"
-                              label="Grado"
-                              d-block
-                           ></v-select>
-                        </v-flex>
-                        <v-text-field v-model="gradotxt" name="grado" v-show="false" required></v-text-field>
-                        <v-flex xs12 d-flex>
-                           <v-select
                               :items="adecuaciones"
                               item-text="text"
                               item-value="value"
@@ -184,14 +172,6 @@ export default {
          ocultarback: "si",
          ocultarParentesco: "si",
          registrar: "si",
-         grado: { value: 1, text: "Primero" },
-         grados: [
-            { value: 1, text: "Primero" },
-            { value: 2, text: "Segundo" },
-            { value: 3, text: "Tercero" },
-            { value: 4, text: "Cuarto" },
-            { value: 5, text: "Quinto" }
-         ],
          adecuacion: { value: 1, text: "Ninguna" },
          adecuaciones: [
             { value: 1, text: "Ninguna" },
@@ -257,13 +237,6 @@ export default {
             this.encargadotext = "Ingresar Encargado";
          }
       },
-      getText() {
-         var values = this.grados.map(function(o) {
-            return o.value;
-         });
-         var index = values.indexOf(this.grado);
-         this.gradotxt = this.grados[index].text;
-      },
       getErrors() {
          this.error = false;
          var self = this;
@@ -299,9 +272,6 @@ export default {
       }
    },
    computed: {
-      gradotxt: function() {
-         return this.grado.value;
-      },
       adecuaciontxt: function() {
          return this.adecuacion.text;
       }

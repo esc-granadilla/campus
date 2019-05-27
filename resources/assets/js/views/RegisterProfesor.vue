@@ -147,7 +147,7 @@ export default {
             required: value => !!value || "Requerido.",
             min: v => v.length >= 9 || "Min 9 Caracteres",
             min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
+            max: v => v.length <= 50 || "Maximo 50 Caracteres",
             mini: v => v.length >= 3 || "Min 3 Caracteres"
          },
          error: false

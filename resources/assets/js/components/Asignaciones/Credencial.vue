@@ -18,7 +18,18 @@
                   hide-details
                ></v-text-field>
             </v-card-title>
-            <v-data-table :headers="headers" :items="profesores" :search="search">
+            <v-data-table
+               :headers="headers"
+               :items="profesores"
+               :search="search"
+               rowsPerPageText="Elementos por página:"
+               rowsPerPageAll="Todos"
+               pageText="{0}-{1} de {2}"
+               noResultsText="Ningún resultado a mostrar"
+               nextPage="Página siguiente"
+               prevPage="Página anterior"
+               noDataText="Ningún dato disponible"
+            >
                <template v-slot:items="props">
                   <td>{{ props.item.nombre }}</td>
                   <td class="text-center">{{ props.item.cedula }}</td>

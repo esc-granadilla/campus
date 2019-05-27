@@ -1,14 +1,11 @@
 <template>
    <div>
-      <div class="alert">
-         <v-alert v-model="alert" dismissible :type="mensaje.type">{{ mensaje.message }}</v-alert>
-      </div>
       <v-flex md8 xs12 offset-md2>
          <v-layout wrap row>
             <v-flex xs12 pt-2 px-3>
                <v-toolbar dark color="green" class="py-1">
                   <v-spacer></v-spacer>
-                  <v-toolbar-title>Listado de Cursos</v-toolbar-title>
+                  <v-toolbar-title>Listado de Asignaturas</v-toolbar-title>
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-card>
@@ -16,11 +13,11 @@
                   <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
                   <dialogedit
                      :dialogEdits="dialogEdit"
-                     :editCurso="curso"
+                     :editAsignacion="asignatura"
                      v-on:speak="editarMethod($event)"
                   ></dialogedit>
                   <v-card-title>
-                     <v-spacer></v-spacer>Cursos
+                     <v-spacer></v-spacer>Asignaturas
                      <v-spacer></v-spacer>
                      <v-text-field
                         v-model="search"
@@ -30,7 +27,18 @@
                         hide-details
                      ></v-text-field>
                   </v-card-title>
-                  <v-data-table :headers="headers" :items="cursos" :search="search">
+                  <v-data-table
+                     :headers="headers"
+                     :items="asignaturas"
+                     :search="search"
+                     rowsPerPageText="Elementos por página:"
+                     rowsPerPageAll="Todos"
+                     pageText="{0}-{1} de {2}"
+                     noResultsText="Ningún resultado a mostrar"
+                     nextPage="Página siguiente"
+                     prevPage="Página anterior"
+                     noDataText="Ningún dato disponible"
+                  >
                      <template v-slot:items="props">
                         <td
                            class="text-xs-left"
@@ -83,12 +91,12 @@
 </template>
 
 <script>
-import dialogcreate from "../Curso/DialogCreate.vue";
-import dialogdelete from "../Curso/DialogDelete.vue";
-import dialogedit from "../Curso/DialogEdit.vue";
+import dialogcreate from "../Asignatura/DialogCreate.vue";
+import dialogdelete from "../Asignatura/DialogDelete.vue";
+import dialogedit from "../Asignatura/DialogEdit.vue";
 
 export default {
-   name: "cursocomponent",
+   name: "asignaturacomponent",
    components: {
       dialogcreate,
       dialogdelete,
@@ -99,7 +107,7 @@ export default {
          search: "",
          dialogDelete: false,
          dialogEdit: false,
-         curso: {
+         asignatura: {
             id: null,
             codigo: "",
             nombre: "",
@@ -107,7 +115,7 @@ export default {
             estado: ""
          },
          alert: false,
-         cursos: [],
+         asignaturas: [],
          mensaje: { type: "success", message: "" },
          headers: [
             {
@@ -132,37 +140,43 @@ export default {
    },
    methods: {
       buscar(id) {
-         this.curso = this.cursos.find(function(c) {
+         this.asignatura = this.asignaturas.find(function(c) {
             return c.id == id;
          });
       },
       crearMethod: function(msg) {
          var self = this;
-         this.curso = msg;
-         if (this.curso.nombre != "") {
-            axios.post("cursos/", this.curso).then(function(res) {
+         this.asignatura = msg;
+         if (this.asignatura.nombre != "") {
+            axios.post("subjects/", this.asignatura).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/cursos").then(res => (self.cursos = res.data));
+               axios
+                  .get("/subjects")
+                  .then(res => (self.asignaturas = res.data));
             });
          }
       },
       eliminar() {
          var self = this;
-         if (this.curso.id != null) {
-            axios.delete("cursos/" + this.curso.id).then(function(res) {
+         if (this.asignatura.id != null) {
+            axios.delete("subjects/" + this.asignatura.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/cursos").then(res => (self.cursos = res.data));
+               axios
+                  .get("/subjects")
+                  .then(res => (self.asignaturas = res.data));
             });
          }
       },
       editar() {
          var self = this;
-         if (this.curso.id != null) {
+         if (this.asignatura.id != null) {
             axios
-               .put("cursos/" + this.curso.id, this.curso)
+               .put("/subjects/" + this.asignatura.id, this.asignatura)
                .then(function(res) {
                   self.mensaje = res.data;
-                  axios.get("/cursos").then(res => (self.cursos = res.data));
+                  axios
+                     .get("/subjects")
+                     .then(res => (self.asignaturas = res.data));
                });
          }
       },
@@ -173,10 +187,10 @@ export default {
       editarMethod: function(msg) {
          this.dialogEdit = msg.dialogedit;
          if (msg.Edit) {
-            this.curso = msg.curso;
+            this.asignatura = msg.asignatura;
             this.editar();
          } else {
-            this.curso = {
+            this.asignatura = {
                id: null,
                codigo: "",
                nombre: "",
@@ -188,21 +202,25 @@ export default {
    },
    watch: {
       mensaje(val) {
-         this.alert = true;
+         if (val.type === "success")
+            this.$toast.success(val.message, {
+               y: "top",
+               timeout: 6000
+            });
+         else
+            this.$toast.error(val.message, {
+               y: "top",
+               timeout: 6000
+            });
       }
    },
    mounted() {
-      axios.get("/cursos").then(res => (this.cursos = res.data));
+      axios.get("/subjects").then(res => (this.asignaturas = res.data));
    }
 };
 </script>
 
 <style scoped>
-.alert {
-   position: absolute;
-   z-index: 2;
-   right: 0;
-}
 .v-table thead tr:first-child {
    background-color: black;
 }

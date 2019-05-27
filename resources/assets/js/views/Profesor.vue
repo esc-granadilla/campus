@@ -4,6 +4,13 @@
          :items="cursos"
          :rows-per-page-items="rowsPerPageItems"
          :pagination.sync="pagination"
+         rowsPerPageText="Elementos por página:"
+         rowsPerPageAll="Todos"
+         pageText="{0}-{1} de {2}"
+         noResultsText="Ningún resultado a mostrar"
+         nextPage="Página siguiente"
+         prevPage="Página anterior"
+         noDataText="Ningún dato disponible"
          content-tag="v-layout"
          row
          wrap
@@ -17,18 +24,8 @@
                   <v-divider></v-divider>
                   <v-list dense>
                      <v-list-tile>
-                        <v-list-tile-content>Grado:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.grado.grado }}</v-list-tile-content>
-                     </v-list-tile>
-                     <v-list-tile>
-                        <v-list-tile-content>Dia:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.dia.dia }}</v-list-tile-content>
-                     </v-list-tile>
-                     <v-list-tile>
-                        <v-list-tile-content>Horario:</v-list-tile-content>
-                        <v-list-tile-content
-                           class="align-end"
-                        >{{ props.item.horario.desde }} a {{ props.item.horario.hasta }}</v-list-tile-content>
+                        <v-list-tile-content>Sección:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.seccion.seccion }}</v-list-tile-content>
                      </v-list-tile>
                      <v-list-tile>
                         <v-list-tile-content class="align-center">
@@ -59,11 +56,9 @@ export default {
       },
       cursos: [],
       selectedCurso: {
-         profesor_id: 0,
-         curso_id: 0,
-         grado_id: 0,
-         horario_id: 0,
-         dia_id: 0
+         id: 0,
+         course_id: 0,
+         section_id: 0
       }
    }),
    methods: {
@@ -92,7 +87,6 @@ export default {
    computed: {},
    watch: {},
    mounted() {
-      this.selectedCurso.profesor_id = this.profesor_id;
       var self = this;
       axios.get("/getCursosProfesor/" + this.profesor_id).then(function(res) {
          self.cursos = res.data;

@@ -3,7 +3,8 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Campus\Estudiante;
+use Campus\Student;
+use Campus\Section;
 
 class EstudianteController extends Controller
 {
@@ -31,7 +32,7 @@ class EstudianteController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $estudiantes = Estudiante::where('estado', 1)->get();
+         $estudiantes = Student::where('estado', 1)->get();
          return response()->json($estudiantes, 200);
       }
    }
@@ -67,19 +68,8 @@ class EstudianteController extends Controller
    public function show($id, Request $request)
    {
       if ($request->ajax()) {
-         $estudiante = Estudiante::where('cedula', $id)->first();
-         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? null : $estudiante;
-         if ($estudiante == null) {
-            $estudiante = new Estudiante();
-            $estudiante->id = null;
-            $estudiante->cedula = '';
-            $estudiante->nombre = '';
-            $estudiante->primer_apellido = '';
-            $estudiante->segundo_apellido = '';
-            $estudiante->fecha_nacimiento = null;
-            $estudiante->grado = '';
-            $estudiante->adecuacion = '';
-         }
+         $estudiante = Student::where('cedula', $id)->first();
+         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? new Student() : $estudiante;
          return response()->json($estudiante, 200);
       }
    }
@@ -91,21 +81,10 @@ class EstudianteController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function edit(Estudiante $estudiante, Request $request)
+   public function edit(Student $estudiante, Request $request)
    {
       if ($request->ajax()) {
-         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? null : $estudiante;
-         if ($estudiante == null) {
-            $estudiante = new Estudiante();
-            $estudiante->id = null;
-            $estudiante->cedula = '';
-            $estudiante->nombre = '';
-            $estudiante->primer_apellido = '';
-            $estudiante->segundo_apellido = '';
-            $estudiante->fecha_nacimiento = null;
-            $estudiante->grado = '';
-            $estudiante->adecuacion = '';
-         }
+         $estudiante = ($estudiante != null && $estudiante->estado == 0) ? new Student() : $estudiante;
          return response()->json($estudiante, 200);
       }
    }
@@ -126,13 +105,16 @@ class EstudianteController extends Controller
          'fecha_nacimiento' => ' required',
       ]);
       if ($request->ajax()) {
+         $estudiante->section()->detach($estudiante);
          $estudiante->nombre = $request->input('nombre');
          $estudiante->primer_apellido = $request->input('primer_apellido');
          $estudiante->segundo_apellido = $request->input('segundo_apellido');
          $estudiante->fecha_nacimiento = $request->input('fecha_nacimiento');
-         $estudiante->grado = $request->input('grado');
+         //$estudiante->section_id = (int)$request->input('section_id');
          $estudiante->adecuacion = $request->input('adecuacion');
          $estudiante->save();
+         $seccion = Section::where('id', (int)$request->input('section_id'))->first();
+         $seccion->students->attach($estudiante);
          return response()->json(['message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
       }
    }
@@ -144,7 +126,7 @@ class EstudianteController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy(Request $request, Estudiante $estudiante)
+   public function destroy(Request $request, Student $estudiante)
    {
       if ($request->ajax()) {
          $estudiante->estado = 0;

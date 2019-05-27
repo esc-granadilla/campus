@@ -45,21 +45,6 @@
                         <v-list-tile-title>Usuarios</v-list-tile-title>
                      </v-list-tile>
                   </template>
-                  <v-list-group no-action sub-group>
-                     <template v-slot:activator>
-                        <v-list-tile>
-                           <v-list-tile-title>Profesores</v-list-tile-title>
-                        </v-list-tile>
-                     </template>
-
-                     <v-list-tile v-for="(crud, i) in empleados" :key="i" @click="route(crud[2])">
-                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-                        <v-list-tile-action>
-                           <v-icon v-text="crud[1]"></v-icon>
-                        </v-list-tile-action>
-                     </v-list-tile>
-                  </v-list-group>
-
                   <v-list-group sub-group no-action>
                      <template v-slot:activator>
                         <v-list-tile>
@@ -101,13 +86,11 @@
             <p>lorem ipsim dolor</p>
          </div>
          <credencial v-if="mostrar === 'credencial'"></credencial>
-         <pmostrarcomponent v-if="mostrar === 'profesors/mostrar'"></pmostrarcomponent>
-         <peditarcomponent v-if="mostrar === 'profesors/editar'"></peditarcomponent>
-         <pborrarcomponent v-if="mostrar === 'profesors/eliminar'"></pborrarcomponent>
+         <profesorcomponent v-if="mostrar === 'profesor'"></profesorcomponent>
          <emostrarcomponent v-if="mostrar === 'estudiantes/mostrar'"></emostrarcomponent>
          <eeditarcomponent v-if="mostrar === 'estudiantes/editar'"></eeditarcomponent>
          <eborrarcomponent v-if="mostrar === 'estudiantes/eliminar'"></eborrarcomponent>
-         <cursocomponent v-if="mostrar === 'curso'"></cursocomponent>
+         <asignaturacomponent v-if="mostrar === 'asignatura'"></asignaturacomponent>
          <horariocomponent v-if="mostrar === 'horario'"></horariocomponent>
          <acursohorario v-if="mostrar === 'curso/horario'"></acursohorario>
          <acursoprofesor v-if="mostrar === 'curso/profesor'"></acursoprofesor>
@@ -129,21 +112,20 @@ export default {
                ruta: "credencial"
             },
             {
-               title: "Cursos",
+               title: "Asignaturas",
                icon: "donut_small",
-               ruta: "curso"
+               ruta: "asignatura"
             },
             {
                title: "Horarios",
-               icon: "alarm",
+               icon: "access_alarm",
                ruta: "horario"
+            },
+            {
+               title: "Profesores",
+               icon: "school",
+               ruta: "profesor"
             }
-         ],
-         empleados: [
-            ["Crear", "add", "profesors/create"],
-            ["Mostrar", "insert_drive_file", "profesors/mostrar"],
-            ["Actualizar", "update", "profesors/editar"],
-            ["Eliminar", "delete", "profesors/eliminar"]
          ],
          estudiantes: [
             ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],

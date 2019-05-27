@@ -3,13 +3,10 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Campus\Horario;
-use Carbon\Carbon;
-use DateTime;
+use Campus\Schedule;
 
-class HorarioController extends Controller
+class ScheduleController extends Controller
 {
-
    /*
     |--------------------------------------------------------------------------
     | Horario Controller
@@ -35,7 +32,7 @@ class HorarioController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $horarios = Horario::where('estado', 1)->get();
+         $horarios = Schedule::where('estado', 1)->get();
          return response()->json($horarios, 200);
       }
    }
@@ -59,7 +56,7 @@ class HorarioController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $hor = Horario::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+         $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
          if ($hor != null) {
             if ($hor->estado == 0) {
                $hor->estado = 1;
@@ -68,7 +65,7 @@ class HorarioController extends Controller
                return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
             }
          } else {
-            $horario = new Horario();
+            $horario = new Schedule();
             $horario->hasta = $request->input('hasta');
             $horario->desde = $request->input('desde');
             $horario->save();
@@ -84,11 +81,11 @@ class HorarioController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function show(Horario $horario, Request $request)
+   public function show(Schedule $schedule, Request $request)
    {
       if ($request->ajax()) {
-         $horario = ($horario != null && $horario->estado == 0) ? null : $horario;
-         return response()->json($horario, 200);
+         $schedule = ($schedule != null && $schedule->estado == 0) ? null : $schedule;
+         return response()->json($schedule, 200);
       }
    }
 
@@ -99,11 +96,11 @@ class HorarioController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function edit(Horario $horario, Request $request)
+   public function edit(Schedule $schedule, Request $request)
    {
       if ($request->ajax()) {
-         $horario = ($horario != null && $horario->estado == 0) ? null : $horario;
-         return response()->json($horario, 200);
+         $schedule = ($schedule != null && $schedule->estado == 0) ? null : $schedule;
+         return response()->json($schedule, 200);
       }
    }
 
@@ -115,16 +112,16 @@ class HorarioController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-   public function update(Request $request, Horario $horario)
+   public function update(Request $request, Schedule $schedule)
    {
       if ($request->ajax()) {
-         $hor = Horario::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+         $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
          if ($hor != null) {
             return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
          } else {
-            $horario->hasta = $request->input('hasta');
-            $horario->desde = $request->input('desde');
-            $horario->save();
+            $schedule->hasta = $request->input('hasta');
+            $schedule->desde = $request->input('desde');
+            $schedule->save();
          }
          return response()->json(['type' => 'success', 'message' => 'Datos del Horario fueron actualizados correctamente'], 200);
       }
@@ -137,11 +134,11 @@ class HorarioController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function destroy(Horario $horario, Request $request)
+   public function destroy(Schedule $schedule, Request $request)
    {
       if ($request->ajax()) {
-         $horario->estado = 0;
-         $horario->save();
+         $schedule->estado = 0;
+         $schedule->save();
          return response()->json(['type' => 'success', 'message' => 'El Horario fue eliminado exitosamente'], 200);
       }
    }

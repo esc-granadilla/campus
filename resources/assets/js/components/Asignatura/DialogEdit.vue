@@ -1,13 +1,10 @@
 
 <template>
    <v-layout row justify-center>
-      <v-dialog v-model="dialogCreate" persistent max-width="300px">
-         <template v-slot:activator="{ on }">
-            <v-btn class="green lighten-4" fab small absolute top left block v-on="on">+</v-btn>
-         </template>
+      <v-dialog v-model="dialogedit" max-width="300px">
          <v-card>
             <v-card-title>
-               <span class="headline">Curso Nuevo</span>
+               <span class="headline">Editar Asignatura</span>
             </v-card-title>
             <v-card-text>
                <v-container grid-list-md>
@@ -15,7 +12,7 @@
                      <v-form ref="form">
                         <v-text-field
                            xs12
-                           v-model="curso.codigo"
+                           v-model="asignatura.codigo"
                            :rules="[rules.required, rules.mini]"
                            counter
                            label="*Codigo"
@@ -25,7 +22,7 @@
 
                         <v-text-field
                            xs12
-                           v-model="curso.nombre"
+                           v-model="asignatura.nombre"
                            :rules="[rules.required, rules.mini]"
                            counter
                            label="*Nombre"
@@ -34,8 +31,7 @@
                         ></v-text-field>
                         <v-text-field
                            xs12
-                           v-model="curso.descripcion"
-                           :rules="[rules.mini]"
+                           v-model="asignatura.descripcion"
                            counter
                            label="Descripción"
                            name="descripcion"
@@ -47,7 +43,11 @@
             </v-card-text>
             <v-card-actions>
                <v-spacer></v-spacer>
-               <v-btn color="blue darken-1" flat @click="dialogCreate = false">Cerrar</v-btn>
+               <v-btn
+                  color="blue darken-1"
+                  flat
+                  @click="dialogedit = false, asignatura = asignaturastock,$emit('speak', {dialogedit:false,Edit:false,asignatura:asignatura})"
+               >Cerrar</v-btn>
                <v-btn color="blue darken-1" flat @click="validar">Salvar</v-btn>
             </v-card-actions>
          </v-card>
@@ -59,7 +59,7 @@
 export default {
    data() {
       return {
-         dialogCreate: false,
+         dialogedit: false,
          rules: {
             required: value => !!value || "Requerido.",
             min: v => v.length >= 9 || "Min 9 Caracteres",
@@ -67,7 +67,14 @@ export default {
             max: v => v.length >= 50 || "Maximo 50 Caracteres",
             mini: v => v.length >= 3 || "Min 3 Caracteres"
          },
-         curso: {
+         asignatura: {
+            id: null,
+            codigo: "",
+            nombre: "",
+            descripcion: "",
+            estado: ""
+         },
+         asignaturastock: {
             id: null,
             codigo: "",
             nombre: "",
@@ -76,11 +83,28 @@ export default {
          }
       };
    },
+   props: ["dialogEdits", "editAsignacion"],
+   watch: {
+      dialogEdits(val) {
+         this.dialogedit = val;
+      },
+      editAsignacion(val) {
+         this.asignatura.id = val.id;
+         this.asignatura.codigo = val.codigo;
+         this.asignatura.nombre = val.nombre;
+         this.asignatura.descripcion = val.descripcion;
+         this.asignatura.estado = val.estado;
+      }
+   },
    methods: {
       validar() {
          if (this.$refs.form.validate()) {
-            this.dialogCreate = false;
-            this.$emit("speak", this.curso);
+            this.dialogedit = false;
+            this.$emit("speak", {
+               dialogedit: false,
+               Edit: true,
+               asignatura: this.asignatura
+            });
          }
       }
    }
