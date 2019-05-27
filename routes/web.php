@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('teachers', 'TeacherController');
 
-Route::resource('students', 'EstudianteController');
+Route::resource('students', 'StudentController');
 
 Route::resource('schedules', 'ScheduleController');
 
@@ -30,6 +30,8 @@ Route::resource('subjects', 'SubjectController');
 Route::resource('noticias', 'NoticiaController');
 
 Route::resource('notas', 'NotaController');
+
+Route::resource('sections', 'SectionController');
 
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 

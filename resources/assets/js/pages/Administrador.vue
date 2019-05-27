@@ -87,6 +87,7 @@
          </div>
          <credencial v-if="mostrar === 'credencial'"></credencial>
          <profesorcomponent v-if="mostrar === 'profesor'"></profesorcomponent>
+         <estudiantecomponent v-if="mostrar === 'estudiante'"></estudiantecomponent>
          <emostrarcomponent v-if="mostrar === 'estudiantes/mostrar'"></emostrarcomponent>
          <eeditarcomponent v-if="mostrar === 'estudiantes/editar'"></eeditarcomponent>
          <eborrarcomponent v-if="mostrar === 'estudiantes/eliminar'"></eborrarcomponent>
@@ -125,6 +126,11 @@ export default {
                title: "Profesores",
                icon: "school",
                ruta: "profesor"
+            },
+            {
+               title: "Estudiantes",
+               icon: "account_circle",
+               ruta: "estudiante"
             }
          ],
          estudiantes: [
