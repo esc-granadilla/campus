@@ -22,7 +22,7 @@
                      <v-text-field
                         v-model="search"
                         append-icon="search"
-                        label="Buscar por Hora"
+                        label="Buscar por Sección"
                         single-line
                         hide-details
                      ></v-text-field>

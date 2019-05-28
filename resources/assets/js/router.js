@@ -8,6 +8,7 @@ import Seccioncomponent from './components/Seccion/SeccionComponent.vue';
 import Asignaturacomponent from './components/Asignatura/AsignaturaComponent.vue';
 import Credencialcomponent from './components/Asignaciones/Credencial.vue';
 import Admincomponent from './components/Administrador/AdministracionDefault.vue';
+import AsigSeccionAlumnoscomponent from './components/Asignaciones/SeccionAlumnos.vue';
 
 Vue.use(Router);
 
@@ -49,6 +50,11 @@ export default new Router({
             path: '/seccion',
             name: 'seccioncomponent',
             component: Seccioncomponent
+        },
+        {
+            path: '/seccion_alumnos',
+            name: 'Asigseccionalumnoscomponent',
+            component: AsigSeccionAlumnoscomponent
         },
     ],
 });

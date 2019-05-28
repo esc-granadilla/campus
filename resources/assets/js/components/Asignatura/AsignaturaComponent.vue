@@ -114,7 +114,6 @@ export default {
             descripcion: "",
             estado: ""
          },
-         alert: false,
          asignaturas: [],
          mensaje: { type: "success", message: "" },
          headers: [

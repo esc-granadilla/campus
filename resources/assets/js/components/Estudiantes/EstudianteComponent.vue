@@ -125,7 +125,6 @@ export default {
             seccion: "",
             estado: 0
          },
-         alert: false,
          students: [],
          seccions: [],
          mensaje: { type: "success", message: "" },

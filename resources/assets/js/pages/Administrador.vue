@@ -113,8 +113,8 @@ export default {
                ruta: "horario"
             },
             {
-               title: "Secciónes",
-               icon: "access_alarm",
+               title: "Secciones",
+               icon: "group_work",
                ruta: "seccion"
             },
             {
@@ -129,6 +129,7 @@ export default {
             }
          ],
          asignaciones: [
+            ["Alumnos a Sección", "swap_horizontal_circle", "seccion_alumnos"],
             ["Cursos Horarios", "swap_horizontal_circle", "curso/horario"],
             ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
             ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]

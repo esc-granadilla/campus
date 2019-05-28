@@ -59,6 +59,8 @@ Route::get('/asignatura', 'AdministracionController@index');
 
 Route::get('/seccion', 'AdministracionController@index');
 
+Route::get('/seccion_alumnos', 'AdministracionController@index');
+
 Route::get(
    '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
    'AdministracionController@showcursohorarioprofesor'

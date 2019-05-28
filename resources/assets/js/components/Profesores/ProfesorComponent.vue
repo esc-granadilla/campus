@@ -135,7 +135,6 @@ export default {
             telefono2: "",
             estado: 0
          },
-         alert: false,
          teachers: [],
          mensaje: { type: "success", message: "" },
          headers: [
