@@ -1,32 +1,54 @@
-import Vue from 'vue'
+/*jshint esversion: 6 */
+import Vue from 'vue';
 import Router from 'vue-router';
-import Login from './views/Login.vue'
-import Home from './views/Home.vue'
-import RegisterEstudents from './views/RegisterEstudents.vue'
+import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
+import Estudiantecomponent from './components/Estudiantes/EstudianteComponent.vue';
+import Horariocomponent from './components/Horario/HorarioComponent.vue';
+import Seccioncomponent from './components/Seccion/SeccionComponent.vue';
+import Asignaturacomponent from './components/Asignatura/AsignaturaComponent.vue';
+import Credencialcomponent from './components/Asignaciones/Credencial.vue';
+import Admincomponent from './components/Administrador/AdministracionDefault.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     linkExactActiveClass: 'list__title--active,',
     routes: [{
-            path: '/',
-            name: 'home',
-            component: Home
-        }, {
-            path: '/login',
-            name: 'login',
-            component: Login
-        }, {
-            path: '/registerestudents',
-            name: 'registerestudents',
-            component: RegisterEstudents
+            path: '/admin',
+            name: 'admin',
+            component: Admincomponent
         },
         {
-            path: '/register',
-            name: 'registerestudents',
-            component: RegisterEstudents
+            path: '/credencial',
+            name: 'credencial',
+            component: Credencialcomponent
+        },
+        {
+            path: '/profesor',
+            name: 'profesorcomponent',
+            component: Profesorcomponent
+        },
+        {
+            path: '/estudiante',
+            name: 'estudiantecomponent',
+            component: Estudiantecomponent
+        },
+        {
+            path: '/asignatura',
+            name: 'asignaturacomponent',
+            component: Asignaturacomponent
+        },
+        {
+            path: '/horario',
+            name: 'horariocomponent',
+            component: Horariocomponent
+        },
+        {
+            path: '/seccion',
+            name: 'seccioncomponent',
+            component: Seccioncomponent
         },
     ],
-})
+});

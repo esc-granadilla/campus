@@ -78,16 +78,21 @@
                         <v-layout wrap mx-5 xs6>
                            <v-flex xs6 pt-2 px-3>
                               <v-select
-                                 :items="grados"
-                                 item-text="text"
-                                 item-value="value"
+                                 :items="sections"
+                                 item-text="seccion"
+                                 item-value="id"
                                  return-object
-                                 v-model="grado"
-                                 label="Grado"
+                                 v-model="section"
+                                 label="Sección"
                                  d-block
                               ></v-select>
                            </v-flex>
-                           <v-text-field v-model="gradotxt" name="grado" v-show="false" required></v-text-field>
+                           <v-text-field
+                              v-model="sectiontxt"
+                              name="section_id"
+                              v-show="false"
+                              required
+                           ></v-text-field>
                            <v-flex xs6 pt-2 px-3>
                               <v-select
                                  :items="adecuaciones"
@@ -116,7 +121,7 @@
                <v-btn
                   color="blue darken-1"
                   flat
-                  @click="dialogedit = false, profesor = profesorstock,$emit('speak', {dialogedit:false,Edit:false,profesor:profesor})"
+                  @click="dialogedit = false, estudiante = estudiantestock,$emit('speak', {dialogedit:false,Edit:false,estudiante:estudiante})"
                >Cerrar</v-btn>
                <v-btn color="blue darken-1" flat @click="validar">Salvar</v-btn>
             </v-card-actions>
@@ -144,11 +149,9 @@ export default {
             nombre: "",
             primer_apellido: "",
             segundo_apellido: "",
-            fecha_nacimiento: "",
-            puesto: "",
-            fecha_ingreso: "",
-            telefono1: "",
-            telefono2: "",
+            fecha_nacimiento: null,
+            section_id: null,
+            adecuacion: "",
             estado: 1
          },
          estudiantestock: {
@@ -157,21 +160,13 @@ export default {
             nombre: "",
             primer_apellido: "",
             segundo_apellido: "",
-            fecha_nacimiento: "",
-            puesto: "",
-            fecha_ingreso: "",
-            telefono1: "",
-            telefono2: "",
+            fecha_nacimiento: null,
+            section_id: null,
+            adecuacion: "",
             estado: 1
          },
-         grado: { value: 1, text: "Primero" },
-         grados: [
-            { value: 1, text: "Primero" },
-            { value: 2, text: "Segundo" },
-            { value: 3, text: "Tercero" },
-            { value: 4, text: "Cuarto" },
-            { value: 5, text: "Quinto" }
-         ],
+         section: {},
+         sections: [],
          adecuacion: { value: 1, text: "Ninguna" },
          adecuaciones: [
             { value: 1, text: "Ninguna" },
@@ -181,10 +176,13 @@ export default {
          menu: false
       };
    },
-   props: ["dialogEdits", "editEstudiante"],
+   props: ["dialogEdits", "editSeccions", "editEstudiante"],
    watch: {
       dialogEdits(val) {
          this.dialogedit = val;
+      },
+      editSeccions(val) {
+         this.sections = val;
       },
       editEstudiante(val) {
          this.estudiante.id = val.id;
@@ -196,6 +194,14 @@ export default {
          this.estudiante.adecuacion = val.adecuacion;
          this.estudiante.section_id = val.section_id;
          this.estudiante.estado = val.estado;
+         if (val.section_id != null) {
+            let self = this;
+            this.section = this.sections.find(function(c) {
+               return (c.id = self.estudiante.section_id);
+            });
+         } else {
+            this.section = {};
+         }
       },
       menu(val) {
          val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
@@ -217,9 +223,9 @@ export default {
       }
    },
    computed: {
-      gradotxt: function() {
-         this.estudiante.grado = this.grado.value;
-         return this.grado.value;
+      sectiontxt: function() {
+         this.estudiante.section_id = this.section.id;
+         return this.section.id;
       },
       adecuaciontxt: function() {
          this.estudiante.adecuacion = this.adecuacion.text;

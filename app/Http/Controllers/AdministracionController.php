@@ -58,7 +58,7 @@ class AdministracionController extends Controller
       }
    }
 
-   public function credencial(User $user, Request $request)
+   public function updatecredencial(User $user, Request $request)
    {
       if ($request->ajax()) {
          $accion = (boolean)$request->input('attach');

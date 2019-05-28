@@ -33,9 +33,11 @@ Route::resource('notas', 'NotaController');
 
 Route::resource('sections', 'SectionController');
 
+Route::resource('grades', 'GradeController');
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
-Route::post('/credencial/{user}', 'AdministracionController@credencial')->name('credencial');
+Route::post('/updatecredencial/{user}', 'AdministracionController@updatecredencial')->name('updatecredencial');
 
 Route::post('/asigcursohorario/{curso}', 'AdministracionController@asigcursohorario')->name('asigcursohorario');
 
@@ -45,7 +47,17 @@ Route::get('/roles', 'AdministracionController@roles')->name('roles');
 
 Route::get('/roltouser', 'AdministracionController@roltouser')->name('roltouser');
 
-Route::get('/credencial', 'AdministracionController@credencial')->name('credencial');
+Route::get('/credencial', 'AdministracionController@index');
+
+Route::get('/horario', 'AdministracionController@index');
+
+Route::get('/profesor', 'AdministracionController@index');
+
+Route::get('/estudiante', 'AdministracionController@index');
+
+Route::get('/asignatura', 'AdministracionController@index');
+
+Route::get('/seccion', 'AdministracionController@index');
 
 Route::get(
    '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
@@ -79,7 +91,7 @@ Route::post(
 
 Route::get(
    '/getCursosProfesor/{teacher}',
-   'ProfesorController@getCursosProfesor'
+   'TeacherController@getCursosProfesor'
 )->name('getCursosProfesor');
 
 Route::get(

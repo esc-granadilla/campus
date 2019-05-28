@@ -11,7 +11,13 @@
 
                <v-list>
                   <v-list-tile v-for="(item, i) in items" :key="i" @click="route(item.ruta)">
-                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                     <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                     </v-list-tile-action>
+
+                     <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                     </v-list-tile-content>
                   </v-list-tile>
                </v-list>
             </v-menu>
@@ -33,7 +39,10 @@
             :key="i"
             @click="route(item.ruta)"
          >
-            <v-btn flat>{{ item.title }}</v-btn>
+            <v-btn flat>
+               <v-icon>{{ item.icon }}</v-icon>
+               {{ item.title }}
+            </v-btn>
          </v-toolbar-items>
       </v-toolbar>
    </div>
@@ -55,16 +64,24 @@ export default {
       items() {
          if (this.login === "true") {
             return [
-               { title: "Administración", ruta: "/admin" },
-               { title: "Mis Cursos", ruta: "/home" },
-               { title: this.name, ruta: "#" },
-               { title: "Cerrar Sessión", ruta: "/logout" }
+               {
+                  title: "Administración",
+                  icon: "security",
+                  ruta: "/admin"
+               },
+               { title: "Mis Cursos", icon: "home", ruta: "/home" },
+               { title: this.name, icon: "account_circle", ruta: "#" },
+               {
+                  title: "Cerrar Sessión",
+                  icon: "exit_to_app",
+                  ruta: "/logout"
+               }
             ];
          }
          return [
-            { title: "Home", ruta: "/" },
-            { title: "Registrarse", ruta: "/register" },
-            { title: "Ingresar", ruta: "/login" }
+            { title: "Home", icon: "home", ruta: "/" },
+            { title: "Registrarse", icon: "person_add", ruta: "/register" },
+            { title: "Ingresar", icon: "open_in_browser", ruta: "/login" }
          ];
       }
    },

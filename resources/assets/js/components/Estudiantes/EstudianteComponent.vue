@@ -12,6 +12,7 @@
                   <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
                   <dialogedit
                      :dialogEdits="dialogEdit"
+                     :editSeccions="seccions"
                      :editEstudiante="student"
                      v-on:speak="editarMethod($event)"
                   ></dialogedit>
@@ -120,7 +121,7 @@ export default {
             segundo_apellido: "",
             fecha_nacimiento: "",
             adecuacion: "",
-            section_id: "",
+            section_id: null,
             seccion: "",
             estado: 0
          },
@@ -168,7 +169,7 @@ export default {
       },
       editar() {
          var self = this;
-         if (this.students.id != null) {
+         if (this.student.id != null) {
             axios
                .put("students/" + this.student.id, this.student)
                .then(function(res) {
@@ -198,18 +199,18 @@ export default {
                segundo_apellido: "",
                fecha_nacimiento: "",
                adecuacion: "",
-               section_id: "",
+               section_id: null,
                estado: 0
             };
          }
       },
       llenarSeccion() {
+         let self = this;
          this.students.forEach(function(estudiante) {
             if (estudiante.section_id != null) {
-               let seccion = this.seccions.find(function(c) {
-                  return c.id == id;
+               estudiante.seccion = self.seccions.find(function(c) {
+                  return c.id == estudiante.section_id;
                }).seccion;
-               estudiante.seccion = seccion;
             } else {
                estudiante.seccion = "No Asignada";
             }
@@ -232,9 +233,12 @@ export default {
    },
    mounted() {
       var self = this;
-      axios.get("/students").then(function(res) {
-         self.students = res.data;
-         self.llenarSeccion();
+      axios.get("/sections").then(function(res) {
+         self.seccions = res.data;
+         axios.get("/students").then(function(res) {
+            self.students = res.data;
+            self.llenarSeccion();
+         });
       });
    }
 };

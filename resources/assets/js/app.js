@@ -7,7 +7,7 @@
 /*jshint esversion: 6 */
 
 import store from './store';
-//import router from './router'
+import router from './router';
 import './components';
 import '@fortawesome/fontawesome-free/css/all.css'; // Ensure you are using css-loader
 import Vue from 'vue';
@@ -54,8 +54,8 @@ const app = new Vue({
     data() {
         return {
 
-        }
+        };
     },
-    //router,
+    router,
     store,
 });

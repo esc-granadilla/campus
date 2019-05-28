@@ -5,7 +5,7 @@
             <v-flex xs12 pt-2 px-3>
                <v-toolbar dark color="green" class="py-1">
                   <v-spacer></v-spacer>
-                  <v-toolbar-title>Listado de Horarios</v-toolbar-title>
+                  <v-toolbar-title>Listado de Secciones</v-toolbar-title>
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-card>
@@ -13,11 +13,11 @@
                   <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
                   <dialogedit
                      :dialogEdits="dialogEdit"
-                     :editHorario="horario"
+                     :editSection="section"
                      v-on:speak="editarMethod($event)"
                   ></dialogedit>
                   <v-card-title>
-                     <v-spacer></v-spacer>Horarios
+                     <v-spacer></v-spacer>Secciones
                      <v-spacer></v-spacer>
                      <v-text-field
                         v-model="search"
@@ -29,7 +29,7 @@
                   </v-card-title>
                   <v-data-table
                      :headers="headers"
-                     :items="horarios"
+                     :items="sections"
                      :search="search"
                      rowsPerPageText="Elementos por página:"
                      rowsPerPageAll="Todos"
@@ -43,11 +43,11 @@
                         <td
                            class="text-xs-left"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >{{ props.item.desde }}</td>
+                        >{{ props.item.seccion }}</td>
                         <td
                            class="text-xs-center"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >{{ props.item.hasta }}</td>
+                        >{{ props.item.grado }}</td>
                         <td
                            class="text-xs-center"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import dialogcreate from "../Horario/DialogCreate.vue";
-import dialogdelete from "../Horario/DialogDelete.vue";
-import dialogedit from "../Horario/DialogEdit.vue";
+import dialogcreate from "./DialogCreate.vue";
+import dialogdelete from "./DialogDelete.vue";
+import dialogedit from "./DialogEdit.vue";
 
 export default {
    components: {
@@ -97,28 +97,29 @@ export default {
       dialogdelete,
       dialogedit
    },
-   name: "horariocomponent",
+   name: "seccioncomponent",
    data() {
       return {
          search: "",
          dialogDelete: false,
          dialogEdit: false,
-         horario: {
+         section: {
             id: null,
-            desde: null,
-            hasta: null,
-            estado: ""
+            seccion: null,
+            grade_id: null,
+            estado: 1
          },
-         horarios: [],
+         grades: [],
+         sections: [],
          mensaje: { type: "success", message: "" },
          headers: [
             {
-               text: "Desde:",
+               text: "Sección:",
                align: "left",
                sortable: false,
-               value: "desde"
+               value: "seccion"
             },
-            { text: "Hasta:", align: "center", value: "hasta" },
+            { text: "Grado:", align: "center", value: "grado" },
             { text: "Editar", align: "center", value: "" },
             { text: "Eliminar", align: "center", value: "" }
          ]
@@ -126,39 +127,46 @@ export default {
    },
    methods: {
       buscar(id) {
-         this.horario = this.horarios.find(function(h) {
+         this.section = this.sections.find(function(h) {
             return h.id == id;
          });
       },
       crearMethod: function(msg) {
          var self = this;
-         this.horario = msg;
-         if (this.horario.desde != null) {
-            axios.post("schedules/", self.horario).then(function(res) {
+         this.section = msg;
+         if (this.section.seccion != null) {
+            axios.post("sections/", self.section).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/schedules").then(res => (self.horarios = res.data));
+               axios.get("/sections").then(function(res) {
+                  self.sections = res.data;
+                  self.llenarGrado();
+               });
             });
          }
       },
       eliminar() {
          var self = this;
-         if (this.horario.id != null) {
-            axios.delete("schedules/" + self.horario.id).then(function(res) {
+         if (this.section.id != null) {
+            axios.delete("sections/" + self.section.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/schedules").then(res => (self.horarios = res.data));
+               axios.get("/sections").then(function(res) {
+                  self.sections = res.data;
+                  self.llenarGrado();
+               });
             });
          }
       },
       editar() {
          var self = this;
-         if (this.horario.id != null) {
+         if (this.section.id != null) {
             axios
-               .put("schedules/" + self.horario.id, self.horario)
+               .put("sections/" + self.section.id, self.section)
                .then(function(res) {
                   self.mensaje = res.data;
-                  axios
-                     .get("/schedules")
-                     .then(res => (self.horarios = res.data));
+                  axios.get("/sections").then(function(res) {
+                     self.sections = res.data;
+                     self.llenarGrado();
+                  });
                });
          }
       },
@@ -169,16 +177,24 @@ export default {
       editarMethod: function(msg) {
          this.dialogEdit = msg.dialogedit;
          if (msg.Edit) {
-            this.horario = msg.horario;
+            this.section = msg.seccion;
             this.editar();
          } else {
-            this.horario = {
+            this.section = {
                id: null,
-               desde: null,
-               hasta: null,
-               estado: ""
+               seccion: null,
+               grade_id: null,
+               estado: 1
             };
          }
+      },
+      llenarGrado() {
+         let self = this;
+         this.sections.forEach(function(seccion) {
+            seccion.grado = self.grades.find(function(c) {
+               return c.id == seccion.grade_id;
+            }).grado;
+         });
       }
    },
    watch: {
@@ -196,7 +212,14 @@ export default {
       }
    },
    mounted() {
-      axios.get("/schedules").then(res => (this.horarios = res.data));
+      var self = this;
+      axios.get("/grades").then(function(res) {
+         self.grades = res.data;
+         axios.get("/sections").then(function(res) {
+            self.sections = res.data;
+            self.llenarGrado();
+         });
+      });
    }
 };
 </script>

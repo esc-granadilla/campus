@@ -28,6 +28,7 @@ class StudentController extends Controller
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
+    * @param  \Illuminate\Http\Request  $request
     */
    public function index(Request $request)
    {
@@ -104,18 +105,21 @@ class StudentController extends Controller
          'segundo_apellido' => 'required|string|min:3|max:80',
          'fecha_nacimiento' => ' required',
       ]);
-      if ($request->ajax()) {
-         $student->section()->detach($student);
-         $student->nombre = $request->input('nombre');
-         $student->primer_apellido = $request->input('primer_apellido');
-         $student->segundo_apellido = $request->input('segundo_apellido');
-         $student->fecha_nacimiento = $request->input('fecha_nacimiento');
-         //$estudiante->section_id = (int)$request->input('section_id');
-         $student->adecuacion = $request->input('adecuacion');
-         $student->save();
-         $seccion = Section::where('id', (int)$request->input('section_id'))->first();
-         $seccion->students()->attach($student);
-         return response()->json(['message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
+      try {
+         if ($request->ajax()) {
+            $student->nombre = $request->input('nombre');
+            $student->primer_apellido = $request->input('primer_apellido');
+            $student->segundo_apellido = $request->input('segundo_apellido');
+            $student->fecha_nacimiento = $request->input('fecha_nacimiento');
+            $student->adecuacion = $request->input('adecuacion');
+            if ($request->input('section_id') != null) {
+               $student->section_id = (int)$request->input('section_id');
+            }
+            $student->save();
+            return response()->json(['type' => 'success', 'message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
+         }
+      } catch (\Exception $e) {
+         return response()->json(['type' => 'error', 'message' => $e->getMessage()], 500);
       }
    }
 
@@ -131,7 +135,7 @@ class StudentController extends Controller
       if ($request->ajax()) {
          $student->estado = 0;
          $student->save();
-         return response()->json(['message' => 'El Estudiante fue eliminado correctamente'], 200);
+         return response()->json(['type' => 'success', 'message' => 'El Estudiante fue eliminado correctamente'], 200);
       }
    }
 }

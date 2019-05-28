@@ -1,6 +1,6 @@
 <template>
    <v-layout row fill-height>
-      <div>
+      <template>
          <v-navigation-drawer
             v-model="drawer"
             :mini-variant.sync="mini"
@@ -15,7 +15,11 @@
 
             <v-list class="pt-0" dense>
                <v-divider></v-divider>
-               <v-list-tile v-for="item in items" :key="item.title" @click="route(item.ruta)">
+               <v-list-tile
+                  v-for="item in items"
+                  :key="item.title"
+                  @click="$router.push(item.ruta)"
+               >
                   <v-list-tile-action>
                      <v-icon>{{ item.icon }}</v-icon>
                   </v-list-tile-action>
@@ -31,33 +35,17 @@
                      </v-list-tile>
                   </template>
                   <v-layout pl-5>
-                     <v-list-tile v-for="(crud, i) in noticias" :key="i" @click="route(crud[2])">
+                     <v-list-tile
+                        v-for="(crud, i) in noticias"
+                        :key="i"
+                        @click="$router.push(crud[2])"
+                     >
                         <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
                         <v-list-tile-action>
                            <v-icon v-text="crud[1]"></v-icon>
                         </v-list-tile-action>
                      </v-list-tile>
                   </v-layout>
-               </v-list-group>
-               <v-list-group prepend-icon="account_circle">
-                  <template v-slot:activator>
-                     <v-list-tile>
-                        <v-list-tile-title>Usuarios</v-list-tile-title>
-                     </v-list-tile>
-                  </template>
-                  <v-list-group sub-group no-action>
-                     <template v-slot:activator>
-                        <v-list-tile>
-                           <v-list-tile-title>Estudiantes</v-list-tile-title>
-                        </v-list-tile>
-                     </template>
-                     <v-list-tile v-for="(crud, i) in estudiantes" :key="i" @click="route(crud[2])">
-                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-                        <v-list-tile-action>
-                           <v-icon v-text="crud[1]"></v-icon>
-                        </v-list-tile-action>
-                     </v-list-tile>
-                  </v-list-group>
                </v-list-group>
                <v-list-group prepend-icon="offline_pin">
                   <template v-slot:activator>
@@ -69,7 +57,7 @@
                      <v-list-tile
                         v-for="(crud, i) in asignaciones"
                         :key="i"
-                        @click="route(crud[2])"
+                        @click="$router.push(crud[2])"
                      >
                         <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
                         <v-list-tile-action>
@@ -80,23 +68,25 @@
                </v-list-group>
             </v-list>
          </v-navigation-drawer>
-      </div>
-      <div class="full" id="cuerpo">
+      </template>
+      <v-flex>
+         <router-view></router-view>
+      </v-flex>
+      <!-- <div class="full" id="cuerpo">
+         <router-view>lorem ipsim dolor</router-view>
+         <router-link to="/horario"></router-link>
          <div class="full" v-if="mostrar === 'cuerpo'">
             <p>lorem ipsim dolor</p>
          </div>
          <credencial v-if="mostrar === 'credencial'"></credencial>
          <profesorcomponent v-if="mostrar === 'profesor'"></profesorcomponent>
          <estudiantecomponent v-if="mostrar === 'estudiante'"></estudiantecomponent>
-         <emostrarcomponent v-if="mostrar === 'estudiantes/mostrar'"></emostrarcomponent>
-         <eeditarcomponent v-if="mostrar === 'estudiantes/editar'"></eeditarcomponent>
-         <eborrarcomponent v-if="mostrar === 'estudiantes/eliminar'"></eborrarcomponent>
          <asignaturacomponent v-if="mostrar === 'asignatura'"></asignaturacomponent>
          <horariocomponent v-if="mostrar === 'horario'"></horariocomponent>
          <acursohorario v-if="mostrar === 'curso/horario'"></acursohorario>
          <acursoprofesor v-if="mostrar === 'curso/profesor'"></acursoprofesor>
          <acursoalumno v-if="mostrar === 'curso/alumno'"></acursoalumno>
-      </div>
+      </div>-->
    </v-layout>
 </template>
 
@@ -123,6 +113,11 @@ export default {
                ruta: "horario"
             },
             {
+               title: "Secciónes",
+               icon: "access_alarm",
+               ruta: "seccion"
+            },
+            {
                title: "Profesores",
                icon: "school",
                ruta: "profesor"
@@ -132,11 +127,6 @@ export default {
                icon: "account_circle",
                ruta: "estudiante"
             }
-         ],
-         estudiantes: [
-            ["Mostrar", "insert_drive_file", "estudiantes/mostrar"],
-            ["Actualizar", "update", "estudiantes/editar"],
-            ["Eliminar", "delete", "estudiantes/eliminar"]
          ],
          asignaciones: [
             ["Cursos Horarios", "swap_horizontal_circle", "curso/horario"],
@@ -149,23 +139,12 @@ export default {
             ["Actualizar", "update", "noticias/editar"],
             ["Eliminar", "delete", "noticias/eliminar"]
          ],
-         mostrar: "cuerpo",
          mini: true,
          right: null
       };
-   },
-   methods: {
-      route(ruta) {
-         if (ruta !== "profesors/create") {
-            this.mostrar = ruta;
-         } else location.href = ruta;
-      }
    }
 };
 </script>
 
 <style scoped lang="css">
-.full {
-   width: 100%;
-}
 </style>
