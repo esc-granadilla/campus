@@ -15,7 +15,7 @@
                      ></v-text-field>
                   </v-flex>
                   <v-layout v-if="!ocualtarTab" xs12 justify-center align-center wrap>
-                     <v-card-title class="title">Seleccione los Lecciones del Curso</v-card-title>
+                     <v-card-title class="title">Seleccione las Lecciones del Curso</v-card-title>
                   </v-layout>
                   <template v-slot:extension>
                      <v-tabs
@@ -42,11 +42,11 @@
                      ></selectcoursecomponent>
                   </v-tab-item>
                   <v-tab-item :key="2">
-                     <selectlecssonscomponent
+                     <selectlessonscomponent
                         :seleccionados="selected"
-                        :sections="sections"
+                        :lessonstock="lessonstock"
                         v-on:speak="SalvarMethod($event)"
-                     ></selectlecssonscomponent>
+                     ></selectlessonscomponent>
                   </v-tab-item>
                </v-tabs-items>
             </v-flex>
@@ -66,7 +66,7 @@ export default {
          mensaje: [],
          course: null,
          sections: [],
-         students: [],
+         lessonstock: [],
          accions: [
             {
                id: 1,
@@ -105,14 +105,9 @@ export default {
             axios
                .get("/lessonsforcourses/" + this.course.id)
                .then(res => (this.selected = res.data));
-            // axios
-            //    .get("/sections")
-            //    .then(
-            //       res =>
-            //          (this.sections = res.data.filter(
-            //             s => s.id != this.section.id
-            //          ))
-            //    );
+            axios
+               .get("/lessonsstock/" + this.course.id)
+               .then(res => (this.lessonstock = res.data));
          }
       },
       mensaje(val) {

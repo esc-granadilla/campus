@@ -75,6 +75,8 @@ Route::post('/setstudentsforsection/{section}', 'AdministracionController@setstu
 
 Route::get('/lessonsforcourses/{course}', 'AdministracionController@lessonsforcourses');
 
+Route::get('/lessonsstock/{course}', 'AdministracionController@lessonsstock');
+
 Route::get(
    '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
    'AdministracionController@showcursohorarioprofesor'

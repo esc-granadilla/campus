@@ -1,14 +1,14 @@
 <template>
    <v-flex>
-      <combostudents
-         :students="studentstock"
-         :dialogOpens="dialogOpen"
+      <combolessons
+         :lessons="lessonstock"
+         :dialogOpen="dialogOpen"
          v-on:speak="nuevoMethod($event)"
-      ></combostudents>
+      ></combolessons>
       <v-data-table
          v-model="selected"
          :headers="headers"
-         :items="students"
+         :items="lessons"
          :pagination.sync="pagination"
          rowsPerPageText="Elementos por página:"
          rowsPerPageAll="Todos"
@@ -49,30 +49,25 @@
                </td>
                <td class="text-xs-center">{{ props.item.dia.dia }}</td>
                <td class="text-xs-center">{{ props.item.horario.desde }}</td>
-               <td
-                  class="text-xs-center"
-               >{{ props.item.primer_apellido }} {{ props.item.horario.hasta }}</td>
+               <td class="text-xs-center">{{ props.item.horario.hasta }}</td>
             </tr>
          </template>
       </v-data-table>
       <v-layout row>
-         <v-btn color="warning" flat="flat" @click="dialogOpent=true">Pasar a</v-btn>
-         <v-spacer></v-spacer>
          <v-btn color="info" flat="flat" @click="dialogOpen=true">Agregar Nuevo</v-btn>
+         <v-spacer></v-spacer>
          <v-btn color="success" flat="flat" @click="salvar()">Salvar</v-btn>
       </v-layout>
    </v-flex>
 </template>
 
 <script>
-import combostudents from "../Asignaciones/Modals/ComboStudents.vue";
-import combosections from "../Asignaciones/Modals/ComboSections.vue";
+import combolessons from "../Asignaciones/Modals/ComboLessons.vue";
 
 export default {
    name: "selectlessons",
    components: {
-      combostudents,
-      combosections
+      combolessons
    },
    data() {
       return {
@@ -92,15 +87,14 @@ export default {
             { text: "Desde", value: "desde" },
             { text: "Hasta", value: "hasta" }
          ],
-         lessons: [],
-         lessonstock: []
+         lessons: []
       };
    },
-   props: ["seleccionados", "sections"],
+   props: ["seleccionados", "lessonstock"],
    methods: {
       toggleAll() {
          if (this.selected.length) this.selected = [];
-         else this.selected = this.students.slice();
+         else this.selected = this.lessons.slice();
       },
       changeSort(column) {
          if (this.pagination.sortBy === column) {
@@ -111,17 +105,17 @@ export default {
          }
       },
       salvar() {
-         this.$emit("speak", { Students: this.selected });
+         this.$emit("speak", { Lessons: this.selected });
       },
       nuevoMethod: function(msg) {
          this.dialogOpen = msg.dialogselect;
          if (msg.Selected) {
-            if (!this.selected.some(e => e.id === msg.Student.id)) {
-               if (this.students.some(e => e.id === msg.Student.id)) {
-                  this.selected.push(msg.Student);
+            if (!this.selected.some(e => e.id === msg.Lesson.id)) {
+               if (this.lessons.some(e => e.id === msg.Lesson.id)) {
+                  this.selected.push(msg.Lesson);
                } else {
-                  this.students.push(msg.Student);
-                  this.selected.push(msg.Student);
+                  this.students.push(msg.Lesson);
+                  this.selected.push(msg.Lesson);
                }
             }
          }

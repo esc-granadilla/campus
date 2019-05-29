@@ -13,8 +13,9 @@ use Campus\Estudiante;
 use Campus\Teacher;
 use Campus\Course;
 use Campus\Section;
-use PhpParser\Node\Stmt\TryCatch;
 use Campus\Student;
+use Campus\Day;
+use Campus\Schedule;
 
 class AdministracionController extends Controller
 {
@@ -404,8 +405,117 @@ class AdministracionController extends Controller
    public function lessonsforcourses(Request $request, Course $course)
    {
       if ($request->ajax()) {
-         $lessons = $course->lessons()->where('estado', 1)->get();
-         return response()->json($lessons, 200);
+         $lessons = $course->lessons()->get();
+         $array = [];
+         foreach ($lessons as $lesson) {
+            array_push($array, [
+               'id' => $lesson->id,
+               'day_id' => $lesson->day_id,
+               'schedule_id' => $lesson->schedule_id,
+               'course_id' => $lesson->course_id,
+               'dia' => $lesson->day()->first(),
+               'horario' => $lesson->schedule()->first(),
+               'curso' => $lesson->course()->first(),
+            ]);
+         }
+         return response()->json($array, 200);
+      }
+   }
+
+   public function lessonsstock(Request $request, Course $course)
+   {
+      try {
+         if ($request->ajax()) {
+            $teacher = $course->teacher()->first();
+            $section = $course->section()->first();
+            $lessons = $this->MatrizLessons();
+            $lessons = $this->filter_teacher($teacher, $lessons);
+            if ($lessons == null) $lessons = [];
+            $lessons = $this->filter_section($section, $lessons);
+            if ($lessons == null) $lessons = [];
+            return response()->json($lessons, 200);
+         }
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function MatrizLessons()
+   {
+      try {
+         $days = Day::all()->toArray();
+         $schedule = Schedule::where('estado', 1)->get()->toArray();
+         $matriz = [];
+         foreach ($days as $day) {
+            array_push($matriz, ['dia' => $day, 'horario' => $schedule]);
+         }
+         return $matriz;
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function filter_teacher(Teacher $teacher, array $matriz)
+   {
+      try {
+         $courses = $teacher->courses()->where('estado', 1)->get();
+         $lessons = [];
+         foreach ($courses as $course) {
+            $lesson = $course->lessons()->get();
+            if ($lesson != null && $lesson->count() > 0)
+               array_push($lessons, $lesson);
+         }
+         foreach ($lessons as $lesson) {
+            $day = $lesson->day()->first();
+            $schedule = $lesson->schedule()->first();
+            foreach ($matriz as $array) {
+               if ($array['dia']['id'] == $day->id) {
+                  $array['horario'] = array_filter($array['horario'], function ($var) use ($schedule) {
+                     return $var['id'] != $schedule->id;
+                  });
+               }
+            }
+         }
+         $matriz = array_filter($matriz, function ($var) {
+            return ($var['horario'] != null) && (count($var['horario']) > 0);
+         });
+         return $matriz;
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function filter_section(Section $section, array $matriz)
+   {
+      try {
+         $courses = $section->courses()->where('estado', 1)->get();
+         $lessons = [];
+         foreach ($courses as $course) {
+            $lesson = $course->lessons()->get();
+            if ($lesson != null && $lesson->count() > 0)
+               array_push($lessons, $lesson);
+         }
+         foreach ($lessons as $lesson) {
+            $day = $lesson->day()->first();
+            $schedule = $lesson->schedule()->first();
+            foreach ($matriz as $array) {
+               if ($array['dia']['id'] == $day->id) {
+                  $array['horario'] = array_filter($array['horario'], function ($var) use ($schedule) {
+                     return $var['id'] != $schedule->id;
+                  });
+               }
+            }
+         }
+         $matriz = array_filter($matriz, function ($var) {
+            return ($var['horario'] != null) && (count($var['horario']) > 0);
+         });
+         return $matriz;
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
       }
    }
 }
