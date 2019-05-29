@@ -7,8 +7,10 @@ import Horariocomponent from './components/Horario/HorarioComponent.vue';
 import Seccioncomponent from './components/Seccion/SeccionComponent.vue';
 import Asignaturacomponent from './components/Asignatura/AsignaturaComponent.vue';
 import Credencialcomponent from './components/Asignaciones/Credencial.vue';
+import Cursocomponent from './components/Curso/CursoComponent.vue';
 import Admincomponent from './components/Administrador/AdministracionDefault.vue';
 import AsigSeccionAlumnoscomponent from './components/Asignaciones/SeccionAlumnos.vue';
+import AsigCursoLeccionescomponent from './components/Asignaciones/CursoLecciones.vue';
 
 Vue.use(Router);
 
@@ -53,8 +55,18 @@ export default new Router({
         },
         {
             path: '/seccion_alumnos',
-            name: 'Asigseccionalumnoscomponent',
+            name: 'asigseccionalumnoscomponent',
             component: AsigSeccionAlumnoscomponent
+        },
+        {
+            path: '/curso',
+            name: 'cursocomponent',
+            component: Cursocomponent
+        },
+        {
+            path: '/curso_leccion',
+            name: 'asigcursoleccionescomponent',
+            component: AsigCursoLeccionescomponent
         },
     ],
 });

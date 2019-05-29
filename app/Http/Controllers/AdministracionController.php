@@ -379,7 +379,6 @@ class AdministracionController extends Controller
             }
             return response()->json(['type' => 'success', 'message' => 'Se asigno la sección a los estudiantes exitosamente'], 200);
          } catch (\Exception $e) {
-            $output = new \Symfony\Component\Console\Output\ConsoleOutput();
             return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
       }
@@ -397,9 +396,16 @@ class AdministracionController extends Controller
             }
             return response()->json(['type' => 'success', 'message' => 'Se cambio la sección a los estudiantes exitosamente'], 200);
          } catch (\Exception $e) {
-            $output = new \Symfony\Component\Console\Output\ConsoleOutput();
             return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
+      }
+   }
+
+   public function lessonsforcourses(Request $request, Course $course)
+   {
+      if ($request->ajax()) {
+         $lessons = $course->lessons()->where('estado', 1)->get();
+         return response()->json($lessons, 200);
       }
    }
 }

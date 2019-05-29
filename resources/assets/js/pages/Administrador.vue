@@ -118,6 +118,11 @@ export default {
                ruta: "seccion"
             },
             {
+               title: "Cursos",
+               icon: "donut_small",
+               ruta: "curso"
+            },
+            {
                title: "Profesores",
                icon: "school",
                ruta: "profesor"
@@ -130,7 +135,7 @@ export default {
          ],
          asignaciones: [
             ["Alumnos a Sección", "swap_horizontal_circle", "seccion_alumnos"],
-            ["Cursos Horarios", "swap_horizontal_circle", "curso/horario"],
+            ["Lecciones a Curso", "swap_horizontal_circle", "curso_leccion"],
             ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
             ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
          ],

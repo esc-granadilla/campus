@@ -10,6 +10,8 @@ Vue.component('profesor', require('./pages/Profesor.vue').default);
 Vue.component('panelprofesor', require('./pages/PanelProfesor.vue').default);
 Vue.component('selectsectioncomponent', require('./components/Partials/SelectSectionComponent.vue').default);
 Vue.component('selectstudentscomponent', require('./components/Partials/SelectStudentsComponent.vue').default);
+Vue.component('selectcoursecomponent', require('./components/Partials/SelectCourseComponent.vue').default);
+Vue.component('selectlecssonscomponent', require('./components/Partials/SelectLecssonsComponent.vue').default);
 Vue.component('horariocomponent', require('./components/Horario/HorarioComponent.vue').default);
 Vue.component('asignaturacomponent', require('./components/Asignatura/AsignaturaComponent.vue').default);
 Vue.component('credencial', require('./components/Asignaciones/Credencial.vue').default);

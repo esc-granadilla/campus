@@ -33,6 +33,8 @@ Route::resource('notas', 'NotaController');
 
 Route::resource('sections', 'SectionController');
 
+Route::resource('courses', 'CourseController');
+
 Route::resource('grades', 'GradeController');
 
 Route::get('/admin', 'AdministracionController@index')->name('admin');
@@ -61,11 +63,17 @@ Route::get('/seccion', 'AdministracionController@index');
 
 Route::get('/seccion_alumnos', 'AdministracionController@index');
 
+Route::get('/curso', 'AdministracionController@index');
+
+Route::get('/curso_leccion', 'AdministracionController@index');
+
 Route::get('/studentsforsection/{section}', 'AdministracionController@studentsforsection');
 
 Route::post('/addstudentsforsection/{section}', 'AdministracionController@addstudentsforsection');
 
 Route::post('/setstudentsforsection/{section}', 'AdministracionController@setstudentsforsection');
+
+Route::get('/lessonsforcourses/{course}', 'AdministracionController@lessonsforcourses');
 
 Route::get(
    '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',

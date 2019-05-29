@@ -185,6 +185,7 @@ class TeacherController extends Controller
          foreach ($asignaciones as $asig) {
             array_push($cursos, [
                'id' => $asig->id,
+               'nombre' => $asig->nombre,
                'curso' => $asig->subject()->first(),
                'seccion' => $asig->section()->first()
             ]);
