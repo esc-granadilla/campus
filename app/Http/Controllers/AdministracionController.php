@@ -12,6 +12,9 @@ use Campus\Asignacioncursoprofesor;
 use Campus\Estudiante;
 use Campus\Teacher;
 use Campus\Course;
+use Campus\Section;
+use PhpParser\Node\Stmt\TryCatch;
+use Campus\Student;
 
 class AdministracionController extends Controller
 {
@@ -332,6 +335,71 @@ class AdministracionController extends Controller
             $estudiante->asignacioncursoprofesors()->attach($asignacion);
          }
          return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+      }
+   }
+
+   public function studentsforsection(Request $request, Section $section)
+   {
+      if ($request->ajax()) {
+         $students = $section->students()->where('estado', 1)->get();
+         return response()->json($students, 200);
+      }
+   }
+
+   /**
+    * Get all values from specific key in a multidimensional array
+    *
+    * @param $key string
+    * @param $arr array
+    * @return null|string|array
+    */
+   public function array_value_recursive($key, array $arr)
+   {
+      $val = array();
+      array_walk_recursive($arr, function ($v, $k) use ($key, &$val) {
+         if ($k == $key) array_push($val, $v);
+      });
+      return $val;
+   }
+
+   public function addstudentsforsection(Request $request, Section $section)
+   {
+      if ($request->ajax()) {
+         try {
+            $students = $section->students()->where('estado', 1)->get();
+            foreach ($students as $student) {
+               $student->section_id = null;
+               $student->save();
+            }
+            $students_ids = $this->array_value_recursive('id', $request->input('students'));
+            $students = Student::whereIn('id', $students_ids)->get();
+            foreach ($students as $student) {
+               $student->section_id = $section->id;
+               $student->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se asigno la sección a los estudiantes exitosamente'], 200);
+         } catch (\Exception $e) {
+            $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+         }
+      }
+   }
+
+   public function setstudentsforsection(Request $request, Section $section)
+   {
+      if ($request->ajax()) {
+         try {
+            $students_ids = $this->array_value_recursive('id', $request->input('students'));
+            $students = Student::whereIn('id', $students_ids)->get();
+            foreach ($students as $student) {
+               $student->section_id = $section->id;
+               $student->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se cambio la sección a los estudiantes exitosamente'], 200);
+         } catch (\Exception $e) {
+            $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+         }
       }
    }
 }

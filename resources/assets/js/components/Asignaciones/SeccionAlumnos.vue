@@ -15,7 +15,7 @@
                      ></v-text-field>
                   </v-flex>
                   <v-layout v-if="!ocualtarTab" xs12 justify-center align-center wrap>
-                     <v-btn block flat xs12 round @click="enviar">Asignar Horario(s) al curso</v-btn>
+                     <v-card-title class="title">Seleccione los Estudiantes de la sección</v-card-title>
                   </v-layout>
                   <template v-slot:extension>
                      <v-tabs
@@ -42,51 +42,11 @@
                      ></selectsectioncomponent>
                   </v-tab-item>
                   <v-tab-item :key="2">
-                     <!-- <div>
-                           <v-data-table
-                              v-model="selected"
-                              :headers="headers"
-                              :items="horarios"
-                              :pagination.sync="pagination"
-                              select-all
-                              item-key="id"
-                           >
-                              <template v-slot:headers="props">
-                                 <tr>
-                                    <th>
-                                       <v-checkbox
-                                          :input-value="props.all"
-                                          :indeterminate="props.indeterminate"
-                                          primary
-                                          hide-details
-                                          @click.stop="toggleAll"
-                                       ></v-checkbox>
-                                    </th>
-                                    <th
-                                       v-for="header in props.headers"
-                                       :key="header.text"
-                                       :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
-                                       @click="changeSort(header.value)"
-                                    >
-                                       <v-icon small>arrow_upward</v-icon>
-                                       {{ header.text }}
-                                    </th>
-                                 </tr>
-                              </template>
-                              <template v-slot:items="props">
-                                 <tr
-                                    :active="props.selected"
-                                    @click="props.selected = !props.selected"
-                                 >
-                                    <td>
-                                       <v-checkbox :input-value="props.selected" hide-details></v-checkbox>
-                                    </td>
-                                    <td class="text-xs-center">{{ props.item.desde }}</td>
-                                    <td class="text-xs-center">{{ props.item.hasta }}</td>
-                                 </tr>
-                              </template>
-                           </v-data-table>
-                     </div>-->
+                     <selectstudentscomponent
+                        :seleccionados="selected"
+                        :sections="sections"
+                        v-on:speak="SalvarMethod($event)"
+                     ></selectstudentscomponent>
                   </v-tab-item>
                </v-tabs-items>
             </v-flex>
@@ -101,23 +61,12 @@ export default {
       return {
          tabs: 0,
          search: "",
-         pagination: {
-            sortBy: "desde"
-         },
          noSelected: true,
          selected: [],
          mensaje: [],
-         cursoshorarios: [],
-         headers: [
-            {
-               text: "Desde:",
-               align: "left",
-               value: "desde"
-            },
-            { text: "Hasta", value: "hasta" }
-         ],
-         horarios: [],
          section: null,
+         sections: [],
+         students: [],
          accions: [
             {
                id: 1,
@@ -131,27 +80,15 @@ export default {
       };
    },
    methods: {
-      toggleAll() {
-         if (this.selected.length) this.selected = [];
-         else this.selected = this.horarios.slice();
-      },
-      changeSort(column) {
-         if (this.pagination.sortBy === column) {
-            this.pagination.descending = !this.pagination.descending;
-         } else {
-            this.pagination.sortBy = column;
-            this.pagination.descending = false;
-         }
-      },
       SelectSectionMethod: function(msg) {
          this.noSelected = msg.noSelected;
          if (!this.noSelected) this.section = msg.section;
          else this.section = null;
       },
-      enviar() {
+      SalvarMethod: function(msg) {
          axios
-            .post("asigcursohorario/" + this.curso.id, {
-               horarios: this.selected
+            .post("addstudentsforsection/" + this.section.id, {
+               students: msg.Students
             })
             .then(res => (this.mensaje = res.data));
       }
@@ -165,30 +102,33 @@ export default {
       tabs(val) {
          if (val == 1) {
             this.selected = [];
-            this.cursoshorarios.forEach(ch => {
-               this.horarios.forEach(h => {
-                  if (h.id == ch.id) this.selected.push(h);
-               });
-            });
+            axios
+               .get("/studentsforsection/" + this.section.id)
+               .then(res => (this.selected = res.data));
+            axios
+               .get("/sections")
+               .then(
+                  res =>
+                     (this.sections = res.data.filter(
+                        s => s.id != this.section.id
+                     ))
+               );
          }
       },
       mensaje(val) {
-         this.alert = true;
+         if (val.type === "success")
+            this.$toast.success(val.message, {
+               y: "top",
+               timeout: 6000
+            });
+         else
+            this.$toast.error(val.message, {
+               y: "top",
+               timeout: 6000
+            });
       }
    },
-   mounted() {
-      // var self = this;
-      // axios.get("/cursos").then(function(res) {
-      //    var crs = res.data;
-      //    var cursos = [];
-      //    for (let index = 0; index < crs.length; index++) {
-      //       crs[index].selected = false;
-      //       cursos[index] = crs[index];
-      //    }
-      //    self.cursos = self.cursostock = cursos;
-      // });
-      // axios.get("/horarios").then(res => (this.horarios = res.data));
-   }
+   mounted() {}
 };
 </script>
 
@@ -199,13 +139,5 @@ export default {
 .mar2 {
    margin-top: 70px;
    width: 600px;
-}
-.tm {
-   height: 400px;
-}
-.alert {
-   position: absolute;
-   z-index: 2;
-   right: 0;
 }
 </style>
