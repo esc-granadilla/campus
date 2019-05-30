@@ -3,9 +3,9 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Campus\Noticia;
+use Campus\News;
 
-class NoticiaController extends Controller
+class NewsController extends Controller
 {
    /**
     * Display a listing of the resource.
@@ -15,7 +15,7 @@ class NoticiaController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         return response()->json(Noticia::all(), 200);
+         return response()->json(News::all(), 200);
       } else {
          return;
       }

@@ -4,7 +4,6 @@ namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Campus\Student;
-use Campus\Section;
 
 class StudentController extends Controller
 {
