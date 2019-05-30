@@ -20,7 +20,6 @@
                   <v-spacer></v-spacer>
                </v-toolbar>
                <v-card-text class="pb-0">
-                  <!--<v-form>-->
                   <v-text-field
                      prepend-icon="email"
                      name="email"
@@ -42,10 +41,8 @@
                      @click:append="show1 = !show1"
                   ></v-text-field>
                   <v-switch class="center" v-model="switch1" label="Recordarme" name="remember"></v-switch>
-                  <!--</v-form>-->
                </v-card-text>
                <v-card-actions>
-                  <!--<v-btn color="teal" @click="sendLoginRequest" block dark>Ingresar</v-btn>-->
                   <v-btn round dark color="green" block type="submit">Ingresar</v-btn>
                   <v-spacer></v-spacer>
                   <p style="font-size:12pt;">
@@ -59,7 +56,6 @@
 </template>
 
 <script>
-//const axios = require("axios");
 export default {
    data() {
       return {

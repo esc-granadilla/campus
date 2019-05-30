@@ -27,10 +27,6 @@ Route::resource('schedules', 'ScheduleController');
 
 Route::resource('subjects', 'SubjectController');
 
-Route::resource('noticias', 'NoticiaController');
-
-Route::resource('notas', 'NotaController');
-
 Route::resource('sections', 'SectionController');
 
 Route::resource('courses', 'CourseController');
@@ -40,10 +36,6 @@ Route::resource('grades', 'GradeController');
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/updatecredencial/{user}', 'AdministracionController@updatecredencial')->name('updatecredencial');
-
-Route::post('/asigcursohorario/{curso}', 'AdministracionController@asigcursohorario')->name('asigcursohorario');
-
-Route::get('/cursohorario/{curso}', 'AdministracionController@cursohorario')->name('cursohorario');
 
 Route::get('/roles', 'AdministracionController@roles')->name('roles');
 
@@ -77,35 +69,7 @@ Route::get('/lessonsforcourses/{course}', 'AdministracionController@lessonsforco
 
 Route::get('/lessonsstock/{course}', 'AdministracionController@lessonsstock');
 
-Route::get(
-   '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@showcursohorarioprofesor'
-)->name('showcursohorarioprofesor');
-
-Route::post(
-   '/asigcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@asigcursohorarioprofesor'
-)->name('asigcursohorarioprofesor');
-
-Route::get(
-   '/showcursosprofesors/{grado}',
-   'AdministracionController@showcursosprofesors'
-)->name('showcursosprofesors');
-
-Route::get(
-   '/showprofesorscurso/{estudiante}/{curso}/{grado}',
-   'AdministracionController@showprofesorscurso'
-)->name('showprofesorscurso');
-
-Route::get(
-   '/showhorarioscurso/{estudiante}/{profesor}/{curso}/{grado}',
-   'AdministracionController@showhorarioscurso'
-)->name('showhorarioscurso');
-
-Route::post(
-   '/asigcursohorarioestudiante/{estudiante}/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@asigcursohorarioestudiante'
-)->name('asigcursohorarioestudiante');
+Route::post('/addlessonsforcourse/{course}', 'AdministracionController@addlessonsforcourse');
 
 Route::get(
    '/getCursosProfesor/{teacher}',

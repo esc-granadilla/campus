@@ -23,14 +23,10 @@
                <v-btn
                   color="grey darken-3"
                   flat="flat"
-                  @click="dialogselect = false,$emit('speak', {dialogselect:false,Selected:false,Section:select})"
+                  @click="dialogselect = false,$emit('speak', {dialogselect:false,Selected:false,Lesson:select})"
                >Salir</v-btn>
 
-               <v-btn
-                  color="success"
-                  flat="flat"
-                  @click="dialogselect = false,$emit('speak', {dialogselect:false,Selected:true,Section:select})"
-               >Aceptar</v-btn>
+               <v-btn color="success" flat="flat" @click="salvar">Aceptar</v-btn>
             </v-card-actions>
          </v-card>
       </v-dialog>
@@ -42,15 +38,38 @@ export default {
    data() {
       return {
          dialogselect: false,
-         select: null,
+         select: {
+            id: null,
+            dia: null,
+            horario: null,
+            schedule_id: null,
+            day_id: null,
+            course_id: null
+         },
          dias: [],
          day: null,
          horarios: [],
-         disabled: false,
+         disabled: true,
          schedule: null
       };
    },
    props: ["dialogOpen", "lessons"],
+   methods: {
+      salvar() {
+         if (this.select.day_id != null && this.select.schedule_id != null) {
+            this.dialogselect = false;
+            this.$emit("speak", {
+               dialogselect: false,
+               Selected: true,
+               Lesson: this.select
+            });
+         } else
+            this.$toast.error("Ingrese todos los datos", {
+               y: "top",
+               timeout: 6000
+            });
+      }
+   },
    watch: {
       dialogOpen(val) {
          this.dialogselect = val;
@@ -60,17 +79,41 @@ export default {
          val.forEach(lesson => {
             this.dias.push(lesson.dia);
          });
+         this.day = null;
+         this.horarios = [];
+         this.disabled = true;
+         this.schedule = null;
+         this.select.day_id = null;
+         this.select.schedule_id = null;
       },
       day(val) {
-         lessons.forEach(lesson => {
-            if (lesson.dia.id == val.id) {
-               this.horarios == lesson.horarios;
-               this.horarios.forEach(horario => {
-                  horario.horario = `${horario.desde} a ${horario.hasta}`;
-               });
-            }
-         });
-         this.disabled = true;
+         if (val != null) {
+            this.lessons.forEach(lesson => {
+               if (lesson.dia.id == val.id) {
+                  if (Array.isArray(lesson.horario)) {
+                     this.horarios = lesson.horario;
+                     this.horarios.forEach(horario => {
+                        horario.horario = `${horario.desde} a ${horario.hasta}`;
+                     });
+                  } else {
+                     this.horarios = [];
+                     this.horarios[0] = lesson.horario["1"];
+                     this.horarios[0].horario = `${this.horarios[0].desde} a ${
+                        this.horarios[0].hasta
+                     }`;
+                  }
+               }
+            });
+            this.select.dia = val;
+            this.select.day_id = val.id;
+            this.disabled = false;
+         }
+      },
+      schedule(val) {
+         if (val != null) {
+            this.select.horario = val;
+            this.select.schedule_id = val.id;
+         }
       }
    }
 };

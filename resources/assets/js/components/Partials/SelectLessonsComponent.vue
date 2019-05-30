@@ -114,7 +114,7 @@ export default {
                if (this.lessons.some(e => e.id === msg.Lesson.id)) {
                   this.selected.push(msg.Lesson);
                } else {
-                  this.students.push(msg.Lesson);
+                  this.lessons.push(msg.Lesson);
                   this.selected.push(msg.Lesson);
                }
             }
@@ -128,7 +128,7 @@ export default {
          val.forEach(lesson => {
             self.lessons.push(lesson);
          });
-         this.toggleAll();
+         this.selected = this.lessons.slice();
       },
       mensaje(val) {
          if (val.type === "success")

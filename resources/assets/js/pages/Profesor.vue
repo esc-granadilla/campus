@@ -64,7 +64,6 @@ export default {
    methods: {
       seleccionarCurso(id) {
          location.href = "/panelprofesor/" + id;
-         //alert(c_id + " " + g_id + " " + h_id + " " + d_id);
       },
       buscarCurso(event) {
          /* var self = this;

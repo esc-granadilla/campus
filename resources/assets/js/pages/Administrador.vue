@@ -72,21 +72,6 @@
       <v-flex>
          <router-view></router-view>
       </v-flex>
-      <!-- <div class="full" id="cuerpo">
-         <router-view>lorem ipsim dolor</router-view>
-         <router-link to="/horario"></router-link>
-         <div class="full" v-if="mostrar === 'cuerpo'">
-            <p>lorem ipsim dolor</p>
-         </div>
-         <credencial v-if="mostrar === 'credencial'"></credencial>
-         <profesorcomponent v-if="mostrar === 'profesor'"></profesorcomponent>
-         <estudiantecomponent v-if="mostrar === 'estudiante'"></estudiantecomponent>
-         <asignaturacomponent v-if="mostrar === 'asignatura'"></asignaturacomponent>
-         <horariocomponent v-if="mostrar === 'horario'"></horariocomponent>
-         <acursohorario v-if="mostrar === 'curso/horario'"></acursohorario>
-         <acursoprofesor v-if="mostrar === 'curso/profesor'"></acursoprofesor>
-         <acursoalumno v-if="mostrar === 'curso/alumno'"></acursoalumno>
-      </div>-->
    </v-layout>
 </template>
 
@@ -135,9 +120,7 @@ export default {
          ],
          asignaciones: [
             ["Alumnos a Sección", "swap_horizontal_circle", "seccion_alumnos"],
-            ["Lecciones a Curso", "swap_horizontal_circle", "curso_leccion"],
-            ["Profesor Curso", "swap_horizontal_circle", "curso/profesor"],
-            ["Alumno Curso", "swap_horizontal_circle", "curso/alumno"]
+            ["Lecciones a Curso", "swap_horizontal_circle", "curso_leccion"]
          ],
          noticias: [
             ["Mostrar", "insert_drive_file", "noticias/mostrar"],

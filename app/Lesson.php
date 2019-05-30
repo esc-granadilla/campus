@@ -3,10 +3,19 @@
 namespace Campus;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Console\Scheduling\Schedule;
+use Campus\Schedule;
 
 class Lesson extends Model
 {
+   /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+   protected $fillable = [
+      'schedule_id', 'day_id', 'course_id',
+   ];
+
    public function day()
    {
       return $this->belongsTo(Day::class);

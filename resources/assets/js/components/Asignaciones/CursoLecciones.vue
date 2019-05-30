@@ -86,11 +86,21 @@ export default {
          else this.course = null;
       },
       SalvarMethod: function(msg) {
+         let self = this;
          axios
-            .post("addstudentsforsection/" + this.section.id, {
-               students: msg.Students
+            .post("addlessonsforcourse/" + this.course.id, {
+               lessons: msg.Lessons
             })
-            .then(res => (this.mensaje = res.data));
+            .then(function(res) {
+               self.mensaje = res.data;
+               axios
+                  .get("/lessonsforcourses/" + self.course.id)
+                  .then(res => (self.selected = res.data));
+               axios
+                  .get("/lessonsstock/" + self.course.id)
+                  .then(res => (self.lessonstock = res.data));
+            });
+         //.then(res => (this.mensaje = res.data));
       }
    },
    computed: {
