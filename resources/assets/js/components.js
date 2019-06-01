@@ -12,9 +12,6 @@ Vue.component('selectsectioncomponent', require('./components/Partials/SelectSec
 Vue.component('selectstudentscomponent', require('./components/Partials/SelectStudentsComponent.vue').default);
 Vue.component('selectcoursecomponent', require('./components/Partials/SelectCourseComponent.vue').default);
 Vue.component('selectlessonscomponent', require('./components/Partials/SelectLessonsComponent.vue').default);
-Vue.component('horariocomponent', require('./components/Horario/HorarioComponent.vue').default);
-Vue.component('asignaturacomponent', require('./components/Asignatura/AsignaturaComponent.vue').default);
-Vue.component('credencial', require('./components/Asignaciones/Credencial.vue').default);
 Vue.component('nmostrarcomponent', require('./components/Noticias/index.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);

@@ -31,7 +31,7 @@ class Student extends Model
       return $this->belongsTo(User::class);
    }
 
-   public function qualification()
+   public function qualifications()
    {
       return $this->hasMany(Qualification::class);
    }

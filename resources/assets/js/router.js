@@ -4,15 +4,15 @@ import Router from 'vue-router';
 import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
 import Profesornoticiascomponent from './components/Profesores/Noticias/NoticiaComponent.vue';
 import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
-import Estudiantecomponent from './components/Estudiantes/EstudianteComponent.vue';
-import Horariocomponent from './components/Horario/HorarioComponent.vue';
-import Seccioncomponent from './components/Seccion/SeccionComponent.vue';
-import Asignaturacomponent from './components/Asignatura/AsignaturaComponent.vue';
-import Credencialcomponent from './components/Asignaciones/Credencial.vue';
-import Cursocomponent from './components/Curso/CursoComponent.vue';
-import Admincomponent from './components/Administrador/AdministracionDefault.vue';
-import AsigSeccionAlumnoscomponent from './components/Asignaciones/SeccionAlumnos.vue';
-import AsigCursoLeccionescomponent from './components/Asignaciones/CursoLecciones.vue';
+import Estudiantecomponent from './components/Administradores/Estudiantes/EstudianteComponent.vue';
+import Horariocomponent from './components/Administradores/Horario/HorarioComponent.vue';
+import Seccioncomponent from './components/Administradores/Seccion/SeccionComponent.vue';
+import Asignaturacomponent from './components/Administradores/Asignatura/AsignaturaComponent.vue';
+import Credencialcomponent from './components/Administradores/Asignaciones/Credencial.vue';
+import Cursocomponent from './components/Administradores/Curso/CursoComponent.vue';
+import Admincomponent from './components/Administradores/AdministracionDefault.vue';
+import AsigSeccionAlumnoscomponent from './components/Administradores/Asignaciones/SeccionAlumnos.vue';
+import AsigCursoLeccionescomponent from './components/Administradores/Asignaciones/CursoLecciones.vue';
 
 Vue.use(Router);
 

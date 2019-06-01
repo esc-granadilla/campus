@@ -64,10 +64,10 @@ class ProfesorController extends Controller
       }
    }
 
-   public function studentqualifications(Student $student, Request $request)
+   public function qualificationsforstudent(Student $student, Request $request)
    {
       if ($request->ajax()) {
-         $qualifications = Qualification::where('student_id', $student->id)->get();
+         $qualifications = $student->qualifications()->get();
          return response()->json($qualifications, 200);
       }
    }

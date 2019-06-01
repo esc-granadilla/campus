@@ -1,94 +1,97 @@
 <template>
-   <div>
-      <v-flex md8 xs12 offset-md2>
-         <v-layout wrap row>
-            <v-flex xs12 pt-2 px-3>
-               <v-toolbar dark color="green" class="py-1">
+   <v-flex md8 xs12 offset-md2>
+      <v-layout wrap row>
+         <v-flex xs12 pt-2 px-3>
+            <v-toolbar dark color="green" class="py-1">
+               <v-spacer></v-spacer>
+               <v-toolbar-title>Listado de Secciones</v-toolbar-title>
+               <v-spacer></v-spacer>
+            </v-toolbar>
+            <v-card>
+               <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
+               <dialogdelete
+                  :text="text"
+                  :title="title"
+                  :dialogDeletes="dialogDelete"
+                  v-on:speak="borrarMethod($event)"
+               ></dialogdelete>
+               <dialogedit
+                  :dialogEdits="dialogEdit"
+                  :editSection="section"
+                  v-on:speak="editarMethod($event)"
+               ></dialogedit>
+               <v-card-title>
+                  <v-spacer></v-spacer>Secciones
                   <v-spacer></v-spacer>
-                  <v-toolbar-title>Listado de Secciones</v-toolbar-title>
-                  <v-spacer></v-spacer>
-               </v-toolbar>
-               <v-card>
-                  <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
-                  <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
-                  <dialogedit
-                     :dialogEdits="dialogEdit"
-                     :editSection="section"
-                     v-on:speak="editarMethod($event)"
-                  ></dialogedit>
-                  <v-card-title>
-                     <v-spacer></v-spacer>Secciones
-                     <v-spacer></v-spacer>
-                     <v-text-field
-                        v-model="search"
-                        append-icon="search"
-                        label="Buscar por Sección"
-                        single-line
-                        hide-details
-                     ></v-text-field>
-                  </v-card-title>
-                  <v-data-table
-                     :headers="headers"
-                     :items="sections"
-                     :search="search"
-                     rowsPerPageText="Elementos por página:"
-                     rowsPerPageAll="Todos"
-                     pageText="{0}-{1} de {2}"
-                     noResultsText="Ningún resultado a mostrar"
-                     nextPage="Página siguiente"
-                     prevPage="Página anterior"
-                     noDataText="Ningún dato disponible"
-                  >
-                     <template v-slot:items="props">
-                        <td
-                           class="text-xs-left"
-                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >{{ props.item.seccion }}</td>
-                        <td
-                           class="text-xs-center"
-                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >{{ props.item.grado }}</td>
-                        <td
-                           class="text-xs-center"
-                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >
-                           <v-btn
-                              flat
-                              small
-                              color="primary"
-                              @click="buscar(props.item.id),dialogEdit = true"
-                           >Editar</v-btn>
-                        </td>
-                        <td
-                           class="text-xs-center"
-                           :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >
-                           <v-btn
-                              flat
-                              small
-                              color="error"
-                              dark
-                              @click.stop="buscar(props.item.id),dialogDelete = true"
-                           >Eliminar</v-btn>
-                        </td>
-                     </template>
-                     <v-alert
-                        v-slot:no-results
-                        :value="true"
-                        color="error"
-                        icon="warning"
-                     >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
-                  </v-data-table>
-               </v-card>
-            </v-flex>
-         </v-layout>
-      </v-flex>
-   </div>
+                  <v-text-field
+                     v-model="search"
+                     append-icon="search"
+                     label="Buscar por Sección"
+                     single-line
+                     hide-details
+                  ></v-text-field>
+               </v-card-title>
+               <v-data-table
+                  :headers="headers"
+                  :items="sections"
+                  :search="search"
+                  rowsPerPageText="Elementos por página:"
+                  rowsPerPageAll="Todos"
+                  pageText="{0}-{1} de {2}"
+                  noResultsText="Ningún resultado a mostrar"
+                  nextPage="Página siguiente"
+                  prevPage="Página anterior"
+                  noDataText="Ningún dato disponible"
+               >
+                  <template v-slot:items="props">
+                     <td
+                        class="text-xs-left"
+                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                     >{{ props.item.seccion }}</td>
+                     <td
+                        class="text-xs-center"
+                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                     >{{ props.item.grado }}</td>
+                     <td
+                        class="text-xs-center"
+                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                     >
+                        <v-btn
+                           flat
+                           small
+                           color="primary"
+                           @click="buscar(props.item.id),dialogEdit = true"
+                        >Editar</v-btn>
+                     </td>
+                     <td
+                        class="text-xs-center"
+                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+                     >
+                        <v-btn
+                           flat
+                           small
+                           color="error"
+                           dark
+                           @click.stop="buscar(props.item.id),dialogDelete = true"
+                        >Eliminar</v-btn>
+                     </td>
+                  </template>
+                  <v-alert
+                     v-slot:no-results
+                     :value="true"
+                     color="error"
+                     icon="warning"
+                  >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
+               </v-data-table>
+            </v-card>
+         </v-flex>
+      </v-layout>
+   </v-flex>
 </template>
 
 <script>
 import dialogcreate from "./DialogCreate.vue";
-import dialogdelete from "./DialogDelete.vue";
+import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogedit from "./DialogEdit.vue";
 
 export default {
@@ -109,6 +112,8 @@ export default {
             grade_id: null,
             estado: 1
          },
+         title: "Eliminar Sección?",
+         text: "Seguro que quieres eliminar esta Sección.",
          grades: [],
          sections: [],
          mensaje: { type: "success", message: "" },

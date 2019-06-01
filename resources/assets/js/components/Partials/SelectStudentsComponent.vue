@@ -70,8 +70,8 @@
 </template>
 
 <script>
-import combostudents from "../Asignaciones/Modals/ComboStudents.vue";
-import combosections from "../Asignaciones/Modals/ComboSections.vue";
+import combostudents from "../Modals/ComboStudents.vue";
+import combosections from "../Modals/ComboSections.vue";
 
 export default {
    name: "selectsudents",

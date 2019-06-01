@@ -1,23 +1,14 @@
 <template>
-   <v-flex md10 xs12 offset-md1>
+   <v-flex md8 xs12 offset-md2>
       <v-layout wrap row>
          <v-flex xs12 pt-2 px-3>
             <v-toolbar dark color="green" class="py-1">
                <v-spacer></v-spacer>
-               <v-toolbar-title>Listado de Profesores</v-toolbar-title>
+               <v-toolbar-title>Listado de Horarios</v-toolbar-title>
                <v-spacer></v-spacer>
             </v-toolbar>
             <v-card>
-               <v-btn
-                  class="green lighten-4"
-                  fab
-                  small
-                  absolute
-                  top
-                  left
-                  block
-                  @click="crearMethod"
-               >+</v-btn>
+               <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
                <dialogdelete
                   :text="text"
                   :title="title"
@@ -26,23 +17,23 @@
                ></dialogdelete>
                <dialogedit
                   :dialogEdits="dialogEdit"
-                  :editProfesor="teacher"
+                  :editHorario="horario"
                   v-on:speak="editarMethod($event)"
                ></dialogedit>
                <v-card-title>
-                  <v-spacer></v-spacer>Profesores
+                  <v-spacer></v-spacer>Horarios
                   <v-spacer></v-spacer>
                   <v-text-field
                      v-model="search"
                      append-icon="search"
-                     label="Buscar por Cedula"
+                     label="Buscar por Hora"
                      single-line
                      hide-details
                   ></v-text-field>
                </v-card-title>
                <v-data-table
                   :headers="headers"
-                  :items="teachers"
+                  :items="horarios"
                   :search="search"
                   rowsPerPageText="Elementos por página:"
                   rowsPerPageAll="Todos"
@@ -56,23 +47,11 @@
                      <td
                         class="text-xs-left"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.cedula }}</td>
+                     >{{ props.item.desde }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.nombre }} {{ props.item.primer_apellido }} {{ props.item.segundo_apellido }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >Nacimiento: {{ props.item.fecha_nacimiento }} Ingreso: {{ props.item.fecha_ingreso }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.puesto }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.telefono1 }} {{ props.item.telefono2 }}</td>
+                     >{{ props.item.hasta }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
@@ -111,52 +90,40 @@
 </template>
 
 <script>
-import dialogdelete from "../Modals/DialogDelete.vue";
+import dialogcreate from "./DialogCreate.vue";
+import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogedit from "./DialogEdit.vue";
 
 export default {
-   name: "profesorcomponent",
    components: {
+      dialogcreate,
       dialogdelete,
       dialogedit
    },
+   name: "horariocomponent",
    data() {
       return {
          search: "",
          dialogDelete: false,
          dialogEdit: false,
-         title: "Eliminar Profesor?",
-         text: "Seguro que quieres eliminar este profesor.",
-         teacher: {
+         title: "Eliminar Horario?",
+         text: "Seguro que quieres eliminar este Horario.",
+         horario: {
             id: null,
-            cedula: "",
-            nombre: "",
-            primer_apellido: "",
-            segundo_apellido: "",
-            fecha_nacimiento: "",
-            puesto: "",
-            fecha_ingreso: "",
-            telefono1: "",
-            telefono2: "",
-            estado: 0
+            desde: null,
+            hasta: null,
+            estado: ""
          },
-         teachers: [],
+         horarios: [],
          mensaje: { type: "success", message: "" },
          headers: [
             {
-               text: "Cedula",
+               text: "Desde:",
                align: "left",
                sortable: false,
-               value: "cedula"
+               value: "desde"
             },
-            { text: "Nombre Completo", align: "center", value: "nombre" },
-            {
-               text: "Fechas",
-               align: "center",
-               value: "fecha_nacimiento"
-            },
-            { text: "Puesto", align: "center", value: "puesto" },
-            { text: "Telefonos", align: "center", value: "telefono1" },
+            { text: "Hasta:", align: "center", value: "hasta" },
             { text: "Editar", align: "center", value: "" },
             { text: "Eliminar", align: "center", value: "" }
          ]
@@ -164,32 +131,39 @@ export default {
    },
    methods: {
       buscar(id) {
-         this.teacher = this.teachers.find(function(c) {
-            return c.id == id;
+         this.horario = this.horarios.find(function(h) {
+            return h.id == id;
          });
       },
-      crearMethod() {
-         location.href = "teachers/create";
+      crearMethod: function(msg) {
+         var self = this;
+         this.horario = msg;
+         if (this.horario.desde != null) {
+            axios.post("schedules/", self.horario).then(function(res) {
+               self.mensaje = res.data;
+               axios.get("/schedules").then(res => (self.horarios = res.data));
+            });
+         }
       },
       eliminar() {
          var self = this;
-         if (this.teacher.id != null) {
-            axios.delete("teachers/" + this.teacher.id).then(function(res) {
+         if (this.horario.id != null) {
+            axios.delete("schedules/" + self.horario.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/teachers").then(res => (self.teachers = res.data));
+               axios.get("/schedules").then(res => (self.horarios = res.data));
             });
          }
       },
       editar() {
          var self = this;
-         if (this.teacher.id != null) {
+         if (this.horario.id != null) {
             axios
-               .put("teachers/" + this.teacher.id, this.teacher)
+               .put("schedules/" + self.horario.id, self.horario)
                .then(function(res) {
                   self.mensaje = res.data;
                   axios
-                     .get("/teachers")
-                     .then(res => (self.teachers = res.data));
+                     .get("/schedules")
+                     .then(res => (self.horarios = res.data));
                });
          }
       },
@@ -200,21 +174,14 @@ export default {
       editarMethod: function(msg) {
          this.dialogEdit = msg.dialogedit;
          if (msg.Edit) {
-            this.teacher = msg.profesor;
+            this.horario = msg.horario;
             this.editar();
          } else {
-            this.teacher = {
+            this.horario = {
                id: null,
-               cedula: "",
-               nombre: "",
-               primer_apellido: "",
-               segundo_apellido: "",
-               fecha_nacimiento: "",
-               puesto: "",
-               fecha_ingreso: "",
-               telefono1: "",
-               telefono2: "",
-               estado: 0
+               desde: null,
+               hasta: null,
+               estado: ""
             };
          }
       }
@@ -234,13 +201,10 @@ export default {
       }
    },
    mounted() {
-      axios.get("/teachers").then(res => (this.teachers = res.data));
+      axios.get("/schedules").then(res => (this.horarios = res.data));
    }
 };
 </script>
 
 <style scoped>
-.v-table thead tr:first-child {
-   background-color: black;
-}
 </style>

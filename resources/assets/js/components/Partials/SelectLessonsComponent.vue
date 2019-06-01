@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import combolessons from "../Asignaciones/Modals/ComboLessons.vue";
+import combolessons from "../Modals/ComboLessons.vue";
 
 export default {
    name: "selectlessons",

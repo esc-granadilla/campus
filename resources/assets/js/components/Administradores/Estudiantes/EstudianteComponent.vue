@@ -4,20 +4,10 @@
          <v-flex xs12 pt-2 px-3>
             <v-toolbar dark color="green" class="py-1">
                <v-spacer></v-spacer>
-               <v-toolbar-title>Listado de Profesores</v-toolbar-title>
+               <v-toolbar-title>Listado de Estudiantes</v-toolbar-title>
                <v-spacer></v-spacer>
             </v-toolbar>
             <v-card>
-               <v-btn
-                  class="green lighten-4"
-                  fab
-                  small
-                  absolute
-                  top
-                  left
-                  block
-                  @click="crearMethod"
-               >+</v-btn>
                <dialogdelete
                   :text="text"
                   :title="title"
@@ -26,11 +16,12 @@
                ></dialogdelete>
                <dialogedit
                   :dialogEdits="dialogEdit"
-                  :editProfesor="teacher"
+                  :editSeccions="seccions"
+                  :editEstudiante="student"
                   v-on:speak="editarMethod($event)"
                ></dialogedit>
                <v-card-title>
-                  <v-spacer></v-spacer>Profesores
+                  <v-spacer></v-spacer>Estudiantes
                   <v-spacer></v-spacer>
                   <v-text-field
                      v-model="search"
@@ -42,7 +33,7 @@
                </v-card-title>
                <v-data-table
                   :headers="headers"
-                  :items="teachers"
+                  :items="students"
                   :search="search"
                   rowsPerPageText="Elementos por página:"
                   rowsPerPageAll="Todos"
@@ -64,15 +55,15 @@
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >Nacimiento: {{ props.item.fecha_nacimiento }} Ingreso: {{ props.item.fecha_ingreso }}</td>
+                     >{{ props.item.fecha_nacimiento }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.puesto }}</td>
+                     >{{ props.item.adecuacion }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.telefono1 }} {{ props.item.telefono2 }}</td>
+                     >{{ props.item.seccion }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
@@ -111,11 +102,11 @@
 </template>
 
 <script>
-import dialogdelete from "../Modals/DialogDelete.vue";
+import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogedit from "./DialogEdit.vue";
 
 export default {
-   name: "profesorcomponent",
+   name: "estudiantecomponent",
    components: {
       dialogdelete,
       dialogedit
@@ -125,22 +116,22 @@ export default {
          search: "",
          dialogDelete: false,
          dialogEdit: false,
-         title: "Eliminar Profesor?",
-         text: "Seguro que quieres eliminar este profesor.",
-         teacher: {
+         title: "Eliminar Estudiante?",
+         text: "Seguro que quieres eliminar este Estudiante.",
+         student: {
             id: null,
             cedula: "",
             nombre: "",
             primer_apellido: "",
             segundo_apellido: "",
             fecha_nacimiento: "",
-            puesto: "",
-            fecha_ingreso: "",
-            telefono1: "",
-            telefono2: "",
+            adecuacion: "",
+            section_id: null,
+            seccion: "",
             estado: 0
          },
-         teachers: [],
+         students: [],
+         seccions: [],
          mensaje: { type: "success", message: "" },
          headers: [
             {
@@ -151,12 +142,12 @@ export default {
             },
             { text: "Nombre Completo", align: "center", value: "nombre" },
             {
-               text: "Fechas",
+               text: "Fecha Nacimiento",
                align: "center",
                value: "fecha_nacimiento"
             },
-            { text: "Puesto", align: "center", value: "puesto" },
-            { text: "Telefonos", align: "center", value: "telefono1" },
+            { text: "adecuacion", align: "center", value: "adecuacion" },
+            { text: "Seccion", align: "center", value: "seccion" },
             { text: "Editar", align: "center", value: "" },
             { text: "Eliminar", align: "center", value: "" }
          ]
@@ -164,32 +155,33 @@ export default {
    },
    methods: {
       buscar(id) {
-         this.teacher = this.teachers.find(function(c) {
+         this.student = this.students.find(function(c) {
             return c.id == id;
          });
       },
-      crearMethod() {
-         location.href = "teachers/create";
-      },
       eliminar() {
          var self = this;
-         if (this.teacher.id != null) {
-            axios.delete("teachers/" + this.teacher.id).then(function(res) {
+         if (this.student.id != null) {
+            axios.delete("students/" + this.student.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/teachers").then(res => (self.teachers = res.data));
+               axios.get("/students").then(function(res) {
+                  self.students = res.data;
+                  self.llenarSeccion();
+               });
             });
          }
       },
       editar() {
          var self = this;
-         if (this.teacher.id != null) {
+         if (this.student.id != null) {
             axios
-               .put("teachers/" + this.teacher.id, this.teacher)
+               .put("students/" + this.student.id, this.student)
                .then(function(res) {
                   self.mensaje = res.data;
-                  axios
-                     .get("/teachers")
-                     .then(res => (self.teachers = res.data));
+                  axios.get("/students").then(function(res) {
+                     self.students = res.data;
+                     self.llenarSeccion();
+                  });
                });
          }
       },
@@ -200,23 +192,33 @@ export default {
       editarMethod: function(msg) {
          this.dialogEdit = msg.dialogedit;
          if (msg.Edit) {
-            this.teacher = msg.profesor;
+            this.student = msg.estudiante;
             this.editar();
          } else {
-            this.teacher = {
+            this.student = {
                id: null,
                cedula: "",
                nombre: "",
                primer_apellido: "",
                segundo_apellido: "",
                fecha_nacimiento: "",
-               puesto: "",
-               fecha_ingreso: "",
-               telefono1: "",
-               telefono2: "",
+               adecuacion: "",
+               section_id: null,
                estado: 0
             };
          }
+      },
+      llenarSeccion() {
+         let self = this;
+         this.students.forEach(function(estudiante) {
+            if (estudiante.section_id != null) {
+               estudiante.seccion = self.seccions.find(function(c) {
+                  return c.id == estudiante.section_id;
+               }).seccion;
+            } else {
+               estudiante.seccion = "No Asignada";
+            }
+         });
       }
    },
    watch: {
@@ -234,7 +236,14 @@ export default {
       }
    },
    mounted() {
-      axios.get("/teachers").then(res => (this.teachers = res.data));
+      var self = this;
+      axios.get("/sections").then(function(res) {
+         self.seccions = res.data;
+         axios.get("/students").then(function(res) {
+            self.students = res.data;
+            self.llenarSeccion();
+         });
+      });
    }
 };
 </script>

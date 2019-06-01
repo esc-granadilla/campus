@@ -26,7 +26,7 @@ class Course extends Model
       return $this->hasMany(Lesson::class);
    }
 
-   public function qualification()
+   public function qualifications()
    {
       return $this->hasMany(Qualification::class);
    }

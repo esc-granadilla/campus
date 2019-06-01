@@ -1,23 +1,14 @@
 <template>
-   <v-flex md10 xs12 offset-md1>
+   <v-flex md8 xs12 offset-md2>
       <v-layout wrap row>
          <v-flex xs12 pt-2 px-3>
             <v-toolbar dark color="green" class="py-1">
                <v-spacer></v-spacer>
-               <v-toolbar-title>Listado de Profesores</v-toolbar-title>
+               <v-toolbar-title>Listado de Asignaturas</v-toolbar-title>
                <v-spacer></v-spacer>
             </v-toolbar>
             <v-card>
-               <v-btn
-                  class="green lighten-4"
-                  fab
-                  small
-                  absolute
-                  top
-                  left
-                  block
-                  @click="crearMethod"
-               >+</v-btn>
+               <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
                <dialogdelete
                   :text="text"
                   :title="title"
@@ -26,23 +17,23 @@
                ></dialogdelete>
                <dialogedit
                   :dialogEdits="dialogEdit"
-                  :editProfesor="teacher"
+                  :editAsignacion="asignatura"
                   v-on:speak="editarMethod($event)"
                ></dialogedit>
                <v-card-title>
-                  <v-spacer></v-spacer>Profesores
+                  <v-spacer></v-spacer>Asignaturas
                   <v-spacer></v-spacer>
                   <v-text-field
                      v-model="search"
                      append-icon="search"
-                     label="Buscar por Cedula"
+                     label="Buscar por Nombre"
                      single-line
                      hide-details
                   ></v-text-field>
                </v-card-title>
                <v-data-table
                   :headers="headers"
-                  :items="teachers"
+                  :items="asignaturas"
                   :search="search"
                   rowsPerPageText="Elementos por página:"
                   rowsPerPageAll="Todos"
@@ -56,23 +47,15 @@
                      <td
                         class="text-xs-left"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.cedula }}</td>
+                     >{{ props.item.nombre }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.nombre }} {{ props.item.primer_apellido }} {{ props.item.segundo_apellido }}</td>
+                     >{{ props.item.codigo }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >Nacimiento: {{ props.item.fecha_nacimiento }} Ingreso: {{ props.item.fecha_ingreso }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.puesto }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.telefono1 }} {{ props.item.telefono2 }}</td>
+                     >{{ props.item.descripcion }}</td>
                      <td
                         class="text-xs-center"
                         :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
@@ -111,12 +94,14 @@
 </template>
 
 <script>
-import dialogdelete from "../Modals/DialogDelete.vue";
+import dialogcreate from "./DialogCreate.vue";
+import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogedit from "./DialogEdit.vue";
 
 export default {
-   name: "profesorcomponent",
+   name: "asignaturacomponent",
    components: {
+      dialogcreate,
       dialogdelete,
       dialogedit
    },
@@ -125,71 +110,77 @@ export default {
          search: "",
          dialogDelete: false,
          dialogEdit: false,
-         title: "Eliminar Profesor?",
-         text: "Seguro que quieres eliminar este profesor.",
-         teacher: {
+         title: "Eliminar Asignatura?",
+         text: "Seguro que quieres eliminar esta Asignatura.",
+         asignatura: {
             id: null,
-            cedula: "",
+            codigo: "",
             nombre: "",
-            primer_apellido: "",
-            segundo_apellido: "",
-            fecha_nacimiento: "",
-            puesto: "",
-            fecha_ingreso: "",
-            telefono1: "",
-            telefono2: "",
-            estado: 0
+            descripcion: "",
+            estado: ""
          },
-         teachers: [],
+         asignaturas: [],
          mensaje: { type: "success", message: "" },
          headers: [
             {
-               text: "Cedula",
+               text: "Nombre",
                align: "left",
                sortable: false,
-               value: "cedula"
+               value: "nombre"
             },
-            { text: "Nombre Completo", align: "center", value: "nombre" },
-            {
-               text: "Fechas",
-               align: "center",
-               value: "fecha_nacimiento"
-            },
-            { text: "Puesto", align: "center", value: "puesto" },
-            { text: "Telefonos", align: "center", value: "telefono1" },
+            { text: "Codigo", align: "center", value: "codigo" },
+            { text: "Descripción", align: "center", value: "descripcion" },
             { text: "Editar", align: "center", value: "" },
             { text: "Eliminar", align: "center", value: "" }
-         ]
+         ],
+         rules: {
+            required: value => !!value || "Requerido.",
+            min: v => v.length >= 9 || "Min 9 Caracteres",
+            min8: v => v.length >= 8 || "Min 8 Caracteres",
+            max: v => v.length >= 50 || "Maximo 50 Caracteres",
+            mini: v => v.length >= 3 || "Min 3 Caracteres"
+         }
       };
    },
    methods: {
       buscar(id) {
-         this.teacher = this.teachers.find(function(c) {
+         this.asignatura = this.asignaturas.find(function(c) {
             return c.id == id;
          });
       },
-      crearMethod() {
-         location.href = "teachers/create";
+      crearMethod: function(msg) {
+         var self = this;
+         this.asignatura = msg;
+         if (this.asignatura.nombre != "") {
+            axios.post("subjects/", this.asignatura).then(function(res) {
+               self.mensaje = res.data;
+               axios
+                  .get("/subjects")
+                  .then(res => (self.asignaturas = res.data));
+            });
+         }
       },
       eliminar() {
          var self = this;
-         if (this.teacher.id != null) {
-            axios.delete("teachers/" + this.teacher.id).then(function(res) {
+         if (this.asignatura.id != null) {
+            axios.delete("subjects/" + this.asignatura.id).then(function(res) {
                self.mensaje = res.data;
-               axios.get("/teachers").then(res => (self.teachers = res.data));
+               axios
+                  .get("/subjects")
+                  .then(res => (self.asignaturas = res.data));
             });
          }
       },
       editar() {
          var self = this;
-         if (this.teacher.id != null) {
+         if (this.asignatura.id != null) {
             axios
-               .put("teachers/" + this.teacher.id, this.teacher)
+               .put("/subjects/" + this.asignatura.id, this.asignatura)
                .then(function(res) {
                   self.mensaje = res.data;
                   axios
-                     .get("/teachers")
-                     .then(res => (self.teachers = res.data));
+                     .get("/subjects")
+                     .then(res => (self.asignaturas = res.data));
                });
          }
       },
@@ -200,21 +191,15 @@ export default {
       editarMethod: function(msg) {
          this.dialogEdit = msg.dialogedit;
          if (msg.Edit) {
-            this.teacher = msg.profesor;
+            this.asignatura = msg.asignatura;
             this.editar();
          } else {
-            this.teacher = {
+            this.asignatura = {
                id: null,
-               cedula: "",
+               codigo: "",
                nombre: "",
-               primer_apellido: "",
-               segundo_apellido: "",
-               fecha_nacimiento: "",
-               puesto: "",
-               fecha_ingreso: "",
-               telefono1: "",
-               telefono2: "",
-               estado: 0
+               descripcion: "",
+               estado: ""
             };
          }
       }
@@ -234,7 +219,7 @@ export default {
       }
    },
    mounted() {
-      axios.get("/teachers").then(res => (this.teachers = res.data));
+      axios.get("/subjects").then(res => (this.asignaturas = res.data));
    }
 };
 </script>

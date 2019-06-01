@@ -33,6 +33,8 @@ Route::resource('courses', 'CourseController');
 
 Route::resource('grades', 'GradeController');
 
+Route::resource('qualifications', 'QualificationController');
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/updatecredencial/{user}', 'AdministracionController@updatecredencial')->name('updatecredencial');
@@ -88,3 +90,5 @@ Route::post(
 )->name('screenteacher');
 
 Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');
+
+Route::get('/qualificationsforstudent/{student}', 'ProfesorController@qualificationsforstudent');
