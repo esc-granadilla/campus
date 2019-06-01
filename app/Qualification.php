@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Qualification extends Model
 {
-   public function qualificationshistory()
+   public function student()
    {
-      return $this->hasOne(Qualificationshistory::class);
+      return $this->belongsTo(Student::class);
+   }
+
+   public function course()
+   {
+      return $this->belongsTo(Course::class);
    }
 }

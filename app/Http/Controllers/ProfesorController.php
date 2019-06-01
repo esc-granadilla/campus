@@ -9,6 +9,22 @@ use Campus\Student;
 
 class ProfesorController extends Controller
 {
+   /*
+    |--------------------------------------------------------------------------
+    | Profesor Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+   public function __construct()
+   {
+      $this->middleware('auth');
+      $this->middleware('profesor');
+   }
+
    public function index()
    {
       return view('panelprofesores');
@@ -45,6 +61,14 @@ class ProfesorController extends Controller
          $course = Course::where('id', (int)$course_id)->first();
          $students = $course->section()->first()->students()->where('estado', 1)->get();
          return response()->json($students, 200);
+      }
+   }
+
+   public function studentqualifications(Student $student, Request $request)
+   {
+      if ($request->ajax()) {
+         $qualifications = Qualification::where('student_id', $student->id)->get();
+         return response()->json($qualifications, 200);
       }
    }
 }

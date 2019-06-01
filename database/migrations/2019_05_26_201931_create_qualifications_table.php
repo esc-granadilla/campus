@@ -23,7 +23,11 @@ class CreateQualificationsTable extends Migration
          $table->string('descripcion')->nullable(true);
          $table->integer('trimestre')->nullable(false);
          $table->date('fecha')->nullable(false);
+         $table->integer('student_id')->unsigned();
+         $table->integer('course_id')->unsigned();
          $table->boolean('estado')->default(1)->nullable(false);
+         $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+         $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
          $table->timestamps();
       });
    }

@@ -31,8 +31,8 @@ class Student extends Model
       return $this->belongsTo(User::class);
    }
 
-   public function qualificationshistories()
+   public function qualification()
    {
-      return $this->hasMany(Qualificationshistory::class);
+      return $this->hasMany(Qualification::class);
    }
 }
