@@ -1,5 +1,8 @@
 <template>
    <v-container grid-list-md>
+      <v-form id="nativeForm" method="post" action="/screenteacher">
+         <v-text-field id="ids" required hidden name="id"></v-text-field>
+      </v-form>
       <v-data-iterator
          :items="cursos"
          :rows-per-page-items="rowsPerPageItems"
@@ -63,7 +66,9 @@ export default {
    }),
    methods: {
       seleccionarCurso(id) {
-         location.href = "/panelprofesor/" + id;
+         document.getElementById("ids").value = "" + id;
+         nativeForm.submit();
+         //location.href = "/screenteacher/" + id;
       },
       buscarCurso(event) {
          /* var self = this;
@@ -87,7 +92,7 @@ export default {
    watch: {},
    mounted() {
       var self = this;
-      axios.get("/getCursosProfesor/" + this.profesor_id).then(function(res) {
+      axios.get("/getcoursesteacher/" + this.profesor_id).then(function(res) {
          self.cursos = res.data;
       });
    }

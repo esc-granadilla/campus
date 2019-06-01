@@ -89,7 +89,7 @@ export default {
             },
             {
                title: "Asignaturas",
-               icon: "donut_small",
+               icon: "class",
                ruta: "asignatura"
             },
             {
@@ -99,7 +99,7 @@ export default {
             },
             {
                title: "Secciones",
-               icon: "group_work",
+               icon: "supervised_user_circle",
                ruta: "seccion"
             },
             {

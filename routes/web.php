@@ -71,12 +71,20 @@ Route::get('/lessonsstock/{course}', 'AdministracionController@lessonsstock');
 
 Route::post('/addlessonsforcourse/{course}', 'AdministracionController@addlessonsforcourse');
 
-Route::get(
-   '/getCursosProfesor/{teacher}',
-   'TeacherController@getCursosProfesor'
-)->name('getCursosProfesor');
+Route::get('/pnotas', 'ProfesorController@index');
+
+Route::get('/pnoticias', 'ProfesorController@index');
+
+Route::get('/screenteacher', 'ProfesorController@index');
 
 Route::get(
-   '/panelprofesor/{asignacioncursoprofesor}',
-   'MantenimientoProfesorController@panelprofesor'
-)->name('panelprofesor');
+   '/getcoursesteacher/{teacher}',
+   'ProfesorController@getcoursesteacher'
+)->name('getcoursesteacher');
+
+Route::post(
+   '/screenteacher',
+   'ProfesorController@screenteacher'
+)->name('screenteacher');
+
+Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');

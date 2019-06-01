@@ -176,21 +176,4 @@ class TeacherController extends Controller
          return response()->json(['type' => 'success', 'message' => 'El Profesor fue eliminado correctamente'], 200);
       }
    }
-
-   public function getCursosProfesor(Teacher $teacher, Request $request)
-   {
-      if ($request->ajax()) {
-         $asignaciones = $teacher->courses()->get();
-         $cursos = [];
-         foreach ($asignaciones as $asig) {
-            array_push($cursos, [
-               'id' => $asig->id,
-               'nombre' => $asig->nombre,
-               'curso' => $asig->subject()->first(),
-               'seccion' => $asig->section()->first()
-            ]);
-         }
-         return response()->json($cursos, 200);
-      }
-   }
 }

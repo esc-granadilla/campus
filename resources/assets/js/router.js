@@ -2,6 +2,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
+import Profesornoticiascomponent from './components/Profesores/Noticias/NoticiaComponent.vue';
+import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
 import Estudiantecomponent from './components/Estudiantes/EstudianteComponent.vue';
 import Horariocomponent from './components/Horario/HorarioComponent.vue';
 import Seccioncomponent from './components/Seccion/SeccionComponent.vue';
@@ -67,6 +69,21 @@ export default new Router({
             path: '/curso_leccion',
             name: 'asigcursoleccionescomponent',
             component: AsigCursoLeccionescomponent
+        },
+        {
+            path: '/pnoticias',
+            name: 'pnoticias',
+            component: Profesornoticiascomponent
+        },
+        {
+            path: '/pnotas',
+            name: 'pnota',
+            component: Profesornotacomponent
+        },
+        {
+            path: '/screenteacher',
+            name: 'screenteacher',
+            component: Profesornoticiascomponent
         },
     ],
 });

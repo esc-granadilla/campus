@@ -28,6 +28,7 @@ class HomeController extends Controller
          return view('home');
       } elseif ($request->user()->hasAnyRole(['Profesor', 'Administrador'])) {
          $profesor = $request->user()->teacher()->first();
+         $request->session()->push('teacher', $profesor);
          return view('homeprofesores', compact('profesor'));
       }
    }
