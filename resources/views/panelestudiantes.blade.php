@@ -2,6 +2,6 @@
 
 @section('content')
 @if (!Auth::guest())
-   <estudiante estudiante_id={{ $estudiante->id }}></estudiante>
+   <panelestudiante name={{ Auth::user()->name }}></panelestudiante>
 @endif
 @endsection

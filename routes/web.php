@@ -81,15 +81,27 @@ Route::get('/ppromedios', 'ProfesorController@index');
 
 Route::get('/screenteacher', 'ProfesorController@index');
 
+Route::get('/screenstudent', 'EstudianteController@index');
+
 Route::get(
    '/getcoursesteacher/{teacher}',
    'ProfesorController@getcoursesteacher'
 )->name('getcoursesteacher');
 
+Route::get(
+   '/getcoursesstudent/{student}',
+   'EstudianteController@getcoursesstudent'
+)->name('getcoursesstudent');
+
 Route::post(
    '/screenteacher',
    'ProfesorController@screenteacher'
 )->name('screenteacher');
+
+Route::post(
+   '/screenstudent',
+   'EstudianteController@screenstudent'
+)->name('screenstudent');
 
 Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');
 

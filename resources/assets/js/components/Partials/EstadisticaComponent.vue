@@ -5,9 +5,14 @@
          <v-progress-circular :size="70" :width="7" color="primary" indeterminate></v-progress-circular>
          <v-spacer></v-spacer>
       </v-layout>
-      <v-layout v-show="!indeterminate">
-         <v-flex id="table"></v-flex>
-         <v-flex></v-flex>
+      <v-layout v-show="!indeterminate" wrap row>
+         <v-flex id="table" xs12></v-flex>
+         <v-layout xs12>
+            <v-spacer></v-spacer>
+            <v-btn dark color="primary" outline>Exportar Estudiante</v-btn>
+            <v-btn dark color="primary" outline>Exportar Informe</v-btn>
+            <v-spacer></v-spacer>
+         </v-layout>
       </v-layout>
    </v-flex>
 </template>
@@ -184,19 +189,13 @@ table th.r {
       top: 0;
    }
    table tbody tr td:nth-child(1):before {
-      content: "Code";
+      content: "Cedula";
    }
    table tbody tr td:nth-child(2):before {
-      content: "Stock";
+      content: "Nombre";
    }
    table tbody tr td:nth-child(3):before {
-      content: "Cap";
-   }
-   table tbody tr td:nth-child(4):before {
-      content: "Inch";
-   }
-   table tbody tr td:nth-child(5):before {
-      content: "Box Type";
+      content: "Rubros";
    }
 }
 

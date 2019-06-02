@@ -7,6 +7,7 @@ use Campus\Course;
 use Campus\Teacher;
 use Campus\Student;
 use PhpParser\JsonDecoder;
+use Illuminate\Support\Facades\Session;
 
 class ProfesorController extends Controller
 {
@@ -76,22 +77,45 @@ class ProfesorController extends Controller
       }
    }
 
+   private function matrizqualifications(int $id, Request $request)
+   {
+      $course = Course::where('id', (int)$request->session()->get('course'))->first();
+      $section = $course->section()->first();
+      $students = $section->students()->where('estado', 1)->get();
+      $calificaciones = [];
+      foreach ($students as $student) {
+         $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen'])->get();
+         $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea'])->get();
+         $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación'])->get();
+         $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra'])->get();
+         $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
+         array_push($calificaciones, $calificacion);
+      }
+      return $calificaciones;
+   }
+
    public function qualificationsfortrimester($id, Request $request)
    {
       if ($request->ajax()) {
-         $course = Course::where('id', (int)$request->session()->get('course'))->first();
-         $section = $course->section()->first();
-         $students = $section->students()->where('estado', 1)->get();
-         $calificaciones = [];
-         foreach ($students as $student) {
-            $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen'])->get();
-            $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea'])->get();
-            $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación'])->get();
-            $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra'])->get();
-            $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
-            array_push($calificaciones, $calificacion);
+         $qualifications = $this->matrizqualifications($id, $request);
+         return response()->json($qualifications, 200);
+      }
+   }
+
+   public function qualificationsexport($id, Request $request)
+   {
+      $calificaciones = $this->matrizqualifications($id, $request);
+   }
+
+   public function studentsexport($id, Student $student, Request $request)
+   {
+      $qualifications = $this->matrizqualifications($id, $request);
+      $calificacion = [];
+      foreach ($qualifications as $qualification) {
+         if ($qualification['estudiante']->id == $student->id) {
+            $calificacion = $qualification;
+            break;
          }
-         return response()->json($calificaciones, 200);
       }
    }
 }

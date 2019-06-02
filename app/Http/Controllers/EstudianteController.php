@@ -1,0 +1,52 @@
+<?php
+
+namespace Campus\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Campus\Student;
+
+class EstudianteController extends Controller
+{
+   /*
+    |--------------------------------------------------------------------------
+    | Estudiante Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
+   public function __construct()
+   {
+      $this->middleware('auth');
+   }
+
+   public function index()
+   {
+      return view('panelestudiantes');
+   }
+
+   public function screenstudent(Request $request)
+   {
+      $request->session()->put('course', $request->input('id'));
+      return view('panelestudiantes');
+   }
+
+   public function getcoursesstudent(Student $student, Request $request)
+   {
+      if ($request->ajax()) {
+         $asignaciones = ($student->section()->first() == null) ? [] : $student->section()->first()->courses()->get();
+         $cursos = [];
+         foreach ($asignaciones as $asig) {
+            array_push($cursos, [
+               'id' => $asig->id,
+               'nombre' => $asig->nombre,
+               'curso' => $asig->subject()->first(),
+               'seccion' => $asig->section()->first()
+            ]);
+         }
+         return response()->json($cursos, 200);
+      }
+   }
+}

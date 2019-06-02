@@ -1,6 +1,6 @@
 <template>
    <v-container grid-list-md>
-      <v-form id="nativeForm" method="post" action="/screenteacher">
+      <v-form id="nativeForm" method="post" action="/screenstudent">
          <v-text-field id="ids" required hidden name="id"></v-text-field>
       </v-form>
       <v-data-iterator
@@ -51,7 +51,7 @@
 
 <script>
 export default {
-   props: ["profesor_id"],
+   props: ["estudiante_id"],
    data: () => ({
       rowsPerPageItems: [4, 8, 12],
       pagination: {
@@ -72,7 +72,7 @@ export default {
    },
    mounted() {
       var self = this;
-      axios.get("/getcoursesteacher/" + this.profesor_id).then(function(res) {
+      axios.get("/getcoursesstudent/" + this.estudiante_id).then(function(res) {
          self.cursos = res.data;
       });
    }
