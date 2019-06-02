@@ -34,6 +34,7 @@
                                  name="valor_porcentual"
                                  prefix="%"
                                  :mask="mask"
+                                 :return-masked-value="true"
                                  required
                               ></v-text-field>
                            </v-flex>
@@ -46,6 +47,7 @@
                                  name="porcentaje_obtenido"
                                  prefix="%"
                                  :mask="mask1"
+                                 :return-masked-value="true"
                                  required
                               ></v-text-field>
                            </v-flex>
@@ -99,7 +101,7 @@
                                  :rules="[rules.required]"
                                  item-text="text"
                                  item-value="value"
-                                 return-object
+                                 :menu-props="{returnValue:'value'}"
                                  v-model="nota.tipo"
                                  label="*Tipo"
                                  d-block
@@ -111,7 +113,7 @@
                                  :rules="[rules.required]"
                                  item-text="text"
                                  item-value="value"
-                                 return-object
+                                 :menu-props="{returnValue:'value'}"
                                  v-model="nota.condicion"
                                  label="*Condición"
                                  d-block
@@ -123,7 +125,7 @@
                                  :rules="[rules.required]"
                                  item-text="text"
                                  item-value="value"
-                                 return-object
+                                 :menu-props="{returnValue:'value'}"
                                  v-model="nota.trimestre"
                                  label="*Trimestre"
                                  d-block
@@ -153,10 +155,7 @@ export default {
          menu: false,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 9 || "Min 9 Caracteres",
-            min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
-            mini: v => v.length >= 3 || "Min 3 Caracteres"
+            max: v => v == null || v.length <= 50 || "Maximo 50 Caracteres"
          },
          mask1: "##.##",
          mask: "##",
@@ -199,9 +198,14 @@ export default {
    methods: {
       validar() {
          if (this.$refs.form.validate()) {
-            this.dialogCreate = false;
             this.$emit("speak", this.nota);
+            this.dialogCreate = false;
          }
+      }
+   },
+   watch: {
+      dialogCreate(val) {
+         if (val) this.$refs.form.reset();
       }
    }
 };

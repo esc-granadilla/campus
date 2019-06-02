@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Campus\Course;
 use Campus\Teacher;
 use Campus\Student;
+use PhpParser\JsonDecoder;
 
 class ProfesorController extends Controller
 {
@@ -67,8 +68,30 @@ class ProfesorController extends Controller
    public function qualificationsforstudent(Student $student, Request $request)
    {
       if ($request->ajax()) {
-         $qualifications = $student->qualifications()->get();
+         $qualifications = $student->qualifications()->where([
+            'estado' => 1,
+            'course_id' => (int)$request->session()->get('course')
+         ])->get();
          return response()->json($qualifications, 200);
+      }
+   }
+
+   public function qualificationsfortrimester($id, Request $request)
+   {
+      if ($request->ajax()) {
+         $course = Course::where('id', (int)$request->session()->get('course'))->first();
+         $section = $course->section()->first();
+         $students = $section->students()->where('estado', 1)->get();
+         $calificaciones = [];
+         foreach ($students as $student) {
+            $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen'])->get();
+            $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea'])->get();
+            $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación'])->get();
+            $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra'])->get();
+            $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
+            array_push($calificaciones, $calificacion);
+         }
+         return response()->json($calificaciones, 200);
       }
    }
 }

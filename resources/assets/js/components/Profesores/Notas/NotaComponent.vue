@@ -15,12 +15,17 @@
                </v-toolbar>
                <v-card>
                   <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
-                  <dialogdelete :dialogDeletes="dialogDelete" v-on:speak="borrarMethod($event)"></dialogdelete>
-                  <!-- <dialogedit
+                  <dialogdelete
+                     :dialogDeletes="dialogDelete"
+                     :text="text"
+                     :title="title"
+                     v-on:speak="borrarMethod($event)"
+                  ></dialogdelete>
+                  <dialogedit
                      :dialogEdits="dialogEdit"
-                     :editSection="section"
+                     :editNota="nota"
                      v-on:speak="editarMethod($event)"
-                  ></dialogedit>-->
+                  ></dialogedit>
                   <v-card-title>
                      <v-spacer></v-spacer>Notas
                      <v-spacer></v-spacer>
@@ -52,11 +57,11 @@
                         <td
                            class="text-xs-center"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >{{ props.item.fecha }} - {{ props.item.trimestre }} Trimestre</td>
+                        >Realizada: {{ props.item.fecha }} - Trimestre {{ props.item.trimestre }}</td>
                         <td
                            class="text-xs-center"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                        >Valor: {{ props.item.valor_porcentual }} - Obtenido: {{ props.item.porcentaje_obtenido }} Trimestre</td>
+                        >Valor: {{ props.item.valor_porcentual }} - Obtenido: {{ props.item.porcentaje_obtenido }}</td>
                         <td
                            class="text-xs-center"
                            :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
@@ -103,11 +108,13 @@
 import combostudents from "../../Modals/ComboStudents.vue";
 import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogcreate from "./DialogCreate.vue";
+import dialogedit from "./DialogEdit.vue";
 
 export default {
    components: {
       combostudents,
       dialogcreate,
+      dialogedit,
       dialogdelete
    },
    data() {
@@ -146,7 +153,7 @@ export default {
    },
    methods: {
       selectMethod: function(msj) {
-         if (msj.Selected) {
+         if (msj.Selected && msj.Student != null) {
             this.student = msj.Student;
             this.reset();
          } else this.$router.push("screenteacher");
@@ -175,7 +182,7 @@ export default {
                qualifications.forEach(qualification => {
                   let x =
                      (100 / qualification.valor_porcentual) *
-                     porcentaje_obtenido;
+                     qualification.porcentaje_obtenido;
                   qualification.nota = x.toFixed(2);
                });
                self.notas = qualifications;

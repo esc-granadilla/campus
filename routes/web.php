@@ -77,6 +77,8 @@ Route::get('/pnotas', 'ProfesorController@index');
 
 Route::get('/pnoticias', 'ProfesorController@index');
 
+Route::get('/ppromedios', 'ProfesorController@index');
+
 Route::get('/screenteacher', 'ProfesorController@index');
 
 Route::get(
@@ -92,3 +94,5 @@ Route::post(
 Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');
 
 Route::get('/qualificationsforstudent/{student}', 'ProfesorController@qualificationsforstudent');
+
+Route::get('/qualificationsfortrimester/{id}', 'ProfesorController@qualificationsfortrimester');
