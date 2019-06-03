@@ -1,5 +1,10 @@
 <template>
    <v-flex>
+      <combostudents
+         :students="studentstock"
+         :dialogOpens="dialogOpen"
+         v-on:speak="selectMethod($event)"
+      ></combostudents>
       <v-layout v-show="indeterminate">
          <v-spacer></v-spacer>
          <v-progress-circular :size="70" :width="7" color="primary" indeterminate></v-progress-circular>
@@ -9,8 +14,8 @@
          <v-flex id="table" xs12></v-flex>
          <v-layout xs12>
             <v-spacer></v-spacer>
-            <v-btn dark color="primary" outline>Exportar Estudiante</v-btn>
-            <v-btn dark color="primary" outline>Exportar Informe</v-btn>
+            <v-btn dark color="primary" outline @click="dialogOpen=true">Exportar Estudiante</v-btn>
+            <v-btn dark color="primary" outline @click="exportAll">Exportar Informe</v-btn>
             <v-spacer></v-spacer>
          </v-layout>
       </v-layout>
@@ -18,15 +23,33 @@
 </template>
 
 <script>
+import combostudents from "../Modals/ComboStudents.vue";
 export default {
+   components: {
+      combostudents
+   },
    data() {
       return {
          indeterminate: true,
+         dialogOpen: false,
+         studentstock: [],
          qualifications: []
       };
    },
    props: ["data"],
    methods: {
+      exportAll() {
+         location.href = "/qualificationsexport/" + this.data;
+      },
+      exportOne(id) {
+         location.href = "/studentsexport/" + this.data + "/" + id;
+      },
+      selectMethod: function(msg) {
+         this.dialogOpen = msg.dialogselect;
+         if (msg.Selected) {
+            this.exportOne(msg.Student.id);
+         }
+      },
       getthead() {
          let table = `<table><thead><tr>`;
          let quali = this.qualifications[0];
@@ -102,6 +125,9 @@ export default {
          self.indeterminate = false;
          self.drawtable();
       });
+      axios
+         .get("/studentsforcourse")
+         .then(res => (this.studentstock = res.data));
    }
 };
 </script>

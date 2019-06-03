@@ -8,6 +8,8 @@ use Campus\Teacher;
 use Campus\Student;
 use PhpParser\JsonDecoder;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+use Campus\Section;
 
 class ProfesorController extends Controller
 {
@@ -102,20 +104,161 @@ class ProfesorController extends Controller
       }
    }
 
+   private function Cabeceras($calificaciones)
+   {
+      $cabeceras = ['Cedula', 'Nombre'];
+      $final = 0;
+      if (count($calificaciones) > 0) {
+         $calificacion = $calificaciones[0];
+         $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
+         $final = 2;
+         foreach ($arrays as $array) {
+            $final += $array->count();
+            foreach ($array as $cali) {
+               array_push($cabeceras, $cali->titulo);
+            }
+         }
+         array_push($cabeceras, 'Nota');
+      }
+      return [$final, $cabeceras];
+   }
+
+
+   private function Cuerpo($calificaciones)
+   {
+      $rows = [];
+      foreach ($calificaciones as $calificacion) {
+         $row = [
+            $calificacion['estudiante']->cedula,
+            $calificacion['estudiante']->nombre . ' ' .
+               $calificacion['estudiante']->primer_apellido . ' ' .
+               $calificacion['estudiante']->segundo_apellido
+         ];
+         $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
+         $nota = 0;
+         foreach ($arrays as $array) {
+            foreach ($array as $cali) {
+               array_push($row, $cali->porcentaje_obtenido);
+               $nota += $cali->porcentaje_obtenido;
+            }
+         }
+         array_push($row, $nota);
+         array_push($rows, $row);
+      }
+      return $rows;
+   }
+
+   private function CuerpoLlenado($calificaciones, $text, &$array, &$nota)
+   {
+      if ($calificaciones->count() > 0) {
+         $total = 0;
+         foreach ($calificaciones as $cali) {
+            $total += $cali->porcentaje_obtenido;
+         }
+         $nota += $total;
+         $row = [$text, "", "", $total];
+         array_push($array, $row);
+         $row = [];
+         foreach ($calificaciones as $cali) {
+            $row = [$cali->titulo, $cali->valor_porcentual, $cali->porcentaje_obtenido, ""];
+            array_push($array, $row);
+         }
+      }
+   }
+
+   private function CuerpoEstudiante($calificaciones)
+   {
+      $rows = [];
+      if (
+         $calificaciones['examenes']->count() > 0 ||
+         $calificaciones['tareas']->count() > 0 ||
+         $calificaciones['trabajos']->count() > 0 ||
+         $calificaciones['otros']
+      ) {
+         $nota = 0;
+         $this->CuerpoLlenado($calificaciones['examenes'], "Exámenes", $rows, $nota);
+         $this->CuerpoLlenado($calificaciones['tareas'], "Tareas", $rows, $nota);
+         $this->CuerpoLlenado($calificaciones['trabajos'], "Trabajos", $rows, $nota);
+         $this->CuerpoLlenado($calificaciones['otros'], "Otros", $rows, $nota);
+         array_push($rows, ["", "", "Nota", $nota]);
+      }
+      return $rows;
+   }
+
    public function qualificationsexport($id, Request $request)
    {
-      $calificaciones = $this->matrizqualifications($id, $request);
+      try {
+         $course = $request->session()->get('course');
+         $course = Course::where('id', $course)->first();
+         $profesor = $course->teacher()->first();
+         $section = $course->section()->first();
+         $course = $course->subject()->first();
+         $calificaciones = $this->matrizqualifications($id, $request);
+         $Heads = $this->Cabeceras($calificaciones);
+         $cabeceras = $Heads[1];
+         $final = $Heads[0];
+         $rows = $this->Cuerpo($calificaciones);
+         Excel::create('Notas trimestrales', function ($excel) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
+            $excel->sheet('Notas Estudiantes', function ($sheet) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
+               if ($final > 0) {
+                  $Listado = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+                  $sheet->mergeCells('A1:' . $Listado[$final] . '1');
+                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre']);
+                  $sheet->mergeCells('A2:' . $Listado[$final] . '2');
+                  $sheet->row(2, ['Curso ' . $course->nombre . '        Sección ' . $section->seccion]);
+                  $sheet->mergeCells('A3:' . $Listado[$final] . '3');
+                  $sheet->row(3, ['Profesor: ' . $profesor->nombre . ' ' . $profesor->primer_apellido . ' ' . $profesor->segundo_apellido]);
+                  $sheet->row(4, $cabeceras);
+                  foreach ($rows as $row) {
+                     $sheet->appendRow($row);
+                  }
+               }
+            });
+         })->export('xlsx');
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
    }
 
    public function studentsexport($id, Student $student, Request $request)
    {
-      $qualifications = $this->matrizqualifications($id, $request);
-      $calificacion = [];
-      foreach ($qualifications as $qualification) {
-         if ($qualification['estudiante']->id == $student->id) {
-            $calificacion = $qualification;
-            break;
+      try {
+         $qualifications = $this->matrizqualifications($id, $request);
+         $calificaciones = [];
+         foreach ($qualifications as $qualification) {
+            if ($qualification['estudiante']->id == $student->id) {
+               $calificaciones = $qualification;
+               break;
+            }
          }
+         $course = $request->session()->get('course');
+         $course = Course::where('id', $course)->first();
+         $profesor = $course->teacher()->first();
+         $section = $course->section()->first();
+         $course = $course->subject()->first();
+         $rows = $this->CuerpoEstudiante($calificaciones);
+         Excel::create('Nota trimestral', function ($excel) use ($profesor, $course, $id, $section, $student, $rows) {
+            $excel->sheet('Nota Estudiante', function ($sheet) use ($profesor, $course, $id, $section, $student, $rows) {
+               if (count($rows) > 0) {
+                  $sheet->mergeCells('A1:D1');
+                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre']);
+                  $sheet->mergeCells('A2:D2');
+                  $sheet->row(2, ['Curso ' . $course->nombre . '        Sección ' . $section->seccion]);
+                  $sheet->mergeCells('A3:D3');
+                  $sheet->row(3, ['Profesor: ' . $profesor->nombre . ' ' . $profesor->primer_apellido . ' ' . $profesor->segundo_apellido]);
+                  $sheet->mergeCells('A4:D4');
+                  $sheet->row(4, ['Alumno=     Cedula: ' . $student->cedula . '     Nombre: ' . $student->nombre . ' ' . $student->primer_apellido . ' ' . $student->segundo_apellido]);
+                  $sheet->row(5, ['Rubro', 'Valor', 'Obtenido', 'Totales']);
+                  foreach ($rows as $row) {
+                     $sheet->appendRow($row);
+                  }
+               }
+            });
+         })->export('xlsx');
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
       }
    }
 }

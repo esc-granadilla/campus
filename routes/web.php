@@ -103,6 +103,16 @@ Route::post(
    'EstudianteController@screenstudent'
 )->name('screenstudent');
 
+Route::get(
+   'qualificationsexport/{id}',
+   'ProfesorController@qualificationsexport'
+)->name('qualificationsexport');
+
+Route::get(
+   'studentsexport/{id}/{student}',
+   'ProfesorController@studentsexport'
+)->name('studentsexport');
+
 Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');
 
 Route::get('/qualificationsforstudent/{student}', 'ProfesorController@qualificationsforstudent');

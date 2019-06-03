@@ -5314,6 +5314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Modals_ComboStudents_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/ComboStudents.vue */ "./resources/assets/js/components/Modals/ComboStudents.vue");
 //
 //
 //
@@ -5333,15 +5334,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    combostudents: _Modals_ComboStudents_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       indeterminate: true,
+      dialogOpen: false,
+      studentstock: [],
       qualifications: []
     };
   },
   props: ["data"],
   methods: {
+    exportAll: function exportAll() {
+      location.href = "/qualificationsexport/" + this.data;
+    },
+    exportOne: function exportOne(id) {
+      location.href = "/studentsexport/" + this.data + "/" + id;
+    },
+    selectMethod: function selectMethod(msg) {
+      this.dialogOpen = msg.dialogselect;
+
+      if (msg.Selected) {
+        this.exportOne(msg.Student.id);
+      }
+    },
     getthead: function getthead() {
       var table = "<table><thead><tr>";
       var quali = this.qualifications[0];
@@ -5405,11 +5430,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     self = this;
     axios.get("/qualificationsfortrimester/" + this.data).then(function (res) {
       self.qualifications = res.data;
       self.indeterminate = false;
       self.drawtable();
+    });
+    axios.get("/studentsforcourse").then(function (res) {
+      return _this.studentstock = res.data;
     });
   }
 });
@@ -43748,6 +43778,15 @@ var render = function() {
   return _c(
     "v-flex",
     [
+      _c("combostudents", {
+        attrs: { students: _vm.studentstock, dialogOpens: _vm.dialogOpen },
+        on: {
+          speak: function($event) {
+            return _vm.selectMethod($event)
+          }
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-layout",
         {
@@ -43796,13 +43835,23 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { dark: "", color: "primary", outline: "" } },
+                {
+                  attrs: { dark: "", color: "primary", outline: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.dialogOpen = true
+                    }
+                  }
+                },
                 [_vm._v("Exportar Estudiante")]
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { dark: "", color: "primary", outline: "" } },
+                {
+                  attrs: { dark: "", color: "primary", outline: "" },
+                  on: { click: _vm.exportAll }
+                },
                 [_vm._v("Exportar Informe")]
               ),
               _vm._v(" "),
