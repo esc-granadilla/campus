@@ -30,4 +30,9 @@ class Course extends Model
    {
       return $this->hasMany(Qualification::class);
    }
+
+   public function taskhistories()
+   {
+      return $this->hasMany(Taskhistory::class);
+   }
 }
