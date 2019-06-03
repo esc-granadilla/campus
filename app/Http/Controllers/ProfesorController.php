@@ -203,15 +203,44 @@ class ProfesorController extends Controller
                if ($final > 0) {
                   $Listado = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
                   $sheet->mergeCells('A1:' . $Listado[$final] . '1');
-                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre']);
+                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre.']);
                   $sheet->mergeCells('A2:' . $Listado[$final] . '2');
-                  $sheet->row(2, ['Curso ' . $course->nombre . '        Sección ' . $section->seccion]);
+                  $sheet->row(2, ['Curso: ' . $course->nombre . '        Sección: ' . $section->seccion]);
                   $sheet->mergeCells('A3:' . $Listado[$final] . '3');
                   $sheet->row(3, ['Profesor: ' . $profesor->nombre . ' ' . $profesor->primer_apellido . ' ' . $profesor->segundo_apellido]);
                   $sheet->row(4, $cabeceras);
                   foreach ($rows as $row) {
                      $sheet->appendRow($row);
                   }
+                  for ($i = 0; $i < 3; $i++) {
+                     $sheet->cells('A' . ($i + 1) . ':' . $Listado[$final] . ($i + 1), function ($cells) {
+                        $cells->setBackground('#022450');
+                        $cells->setFontColor('#ffffff');
+                        $cells->setFont(array(
+                           'family'     => 'Calibri',
+                           'size'       => '16',
+                           'bold'       =>  true
+                        ));
+                        $cells->setAlignment('center');
+                        $cells->setValignment('center');
+                     });
+                  }
+                  $sheet->cells('A4:' . $Listado[$final] . '4', function ($cells) {
+                     $cells->setBackground('#91bdee');
+                     $cells->setFontColor('#000000');
+                     $cells->setFont(array(
+                        'family'     => 'Calibri',
+                        'size'       => '14',
+                        'bold'       =>  true
+                     ));
+                  });
+                  $sheet->setHeight(array(
+                     1     =>  25,
+                     2     =>  25,
+                     3     =>  25,
+                     4     =>  25,
+                  ));
+                  $sheet->setAutoSize(true);
                }
             });
          })->export('xlsx');
@@ -242,9 +271,9 @@ class ProfesorController extends Controller
             $excel->sheet('Nota Estudiante', function ($sheet) use ($profesor, $course, $id, $section, $student, $rows) {
                if (count($rows) > 0) {
                   $sheet->mergeCells('A1:D1');
-                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre']);
+                  $sheet->row(1, ['Lista de Notas del ' . $id . ' Trimestre.']);
                   $sheet->mergeCells('A2:D2');
-                  $sheet->row(2, ['Curso ' . $course->nombre . '        Sección ' . $section->seccion]);
+                  $sheet->row(2, ['Curso: ' . $course->nombre . '        Sección: ' . $section->seccion]);
                   $sheet->mergeCells('A3:D3');
                   $sheet->row(3, ['Profesor: ' . $profesor->nombre . ' ' . $profesor->primer_apellido . ' ' . $profesor->segundo_apellido]);
                   $sheet->mergeCells('A4:D4');
@@ -253,6 +282,35 @@ class ProfesorController extends Controller
                   foreach ($rows as $row) {
                      $sheet->appendRow($row);
                   }
+                  $sheet->cells('A1:A4', function ($cells) {
+                     $cells->setBackground('#022450');
+                     $cells->setFontColor('#ffffff');
+                     $cells->setFont(array(
+                        'family'     => 'Calibri',
+                        'size'       => '16',
+                        'bold'       =>  true
+                     ));
+                     $cells->setAlignment('center');
+                     $cells->setValignment('center');
+                  });
+                  $sheet->cells('A5:D5', function ($cells) {
+                     $cells->setBackground('#91bdee');
+                     $cells->setFontColor('#000000');
+                     $cells->setFont(array(
+                        'family'     => 'Calibri',
+                        'size'       => '14',
+                        'bold'       =>  true
+                     ));
+                  });
+                  $sheet->setHeight(array(
+                     1     =>  25,
+                     2     =>  25,
+                     3     =>  25,
+                     4     =>  25,
+                     5     =>  25,
+                  ));
+                  $sheet->setAutoSize(true);
+                  $sheet->setWidth('A', 75);
                }
             });
          })->export('xlsx');

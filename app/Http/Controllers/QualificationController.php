@@ -55,7 +55,11 @@ class QualificationController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $qualifi = Qualification::where('titulo', $request->input('titulo'))->first();
+         $qualifi = Qualification::where([
+            'titulo' => $request->input('titulo'),
+            'trimestre' => $request->input('trimestre'),
+            'student_id' => $request->input('student_id')
+         ])->first();
          if ($qualifi != null) {
             if ($qualifi->estado == 0) {
                $qualifi->estado = 1;
@@ -121,7 +125,11 @@ class QualificationController extends Controller
    public function update(Request $request, Qualification $qualification)
    {
       if ($request->ajax()) {
-         $quali = Qualification::where('titulo', $request->input('titulo'))->first();
+         $quali = Qualification::where([
+            'titulo' => $request->input('titulo'),
+            'trimestre' => $request->input('trimestre'),
+            'student_id' => $request->input('student_id')
+         ])->first();
          if ($quali != null && $quali->id != $qualification->id) {
             return response()->json(['type' => 'error', 'message' => 'Esta nota ya esta registrada.'], 200);
          } else {

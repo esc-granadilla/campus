@@ -15,11 +15,7 @@
 
             <v-list class="pt-0" dense>
                <v-divider></v-divider>
-               <v-list-tile
-                  v-for="item in items"
-                  :key="item.title"
-                  @click="$router.push(item.ruta)"
-               >
+               <v-list-tile v-for="item in items" :key="item.title" @click="rutas(item.ruta)">
                   <v-list-tile-action>
                      <v-icon>{{ item.icon }}</v-icon>
                   </v-list-tile-action>
@@ -32,7 +28,9 @@
          </v-navigation-drawer>
       </template>
       <v-flex>
-         <router-view></router-view>
+         <transition name="component-fade" mode="out-in">
+            <router-view></router-view>
+         </transition>
       </v-flex>
    </v-layout>
 </template>
@@ -67,7 +65,45 @@ export default {
       mini: true,
       right: null,
       curso: [],
+      rutatemp: "",
       estudiantes: []
-   })
+   }),
+   methods: {
+      rutas(ruta) {
+         if (this.rutatemp == "pnotas" && this.rutatemp == ruta)
+            this.$router.go("pnotas");
+         this.rutatemp = ruta;
+         this.$router.push(ruta);
+      }
+   }
 };
 </script>
+
+
+<style scoped lang="css">
+.component-fade-enter-active,
+.component-fade-leave-active {
+   transition: opacity 0.3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active below version 2.1.8 */ {
+   opacity: 0;
+}
+.component-fade-leave-active {
+   animation: bounce-in 0.5s reverse;
+}
+.component-fade-enter {
+   animation: bounce-in 0.5s;
+}
+@keyframes bounce-in {
+   0% {
+      transform: scale(0);
+   }
+   50% {
+      transform: scale(1.2);
+   }
+   100% {
+      transform: scale(1);
+   }
+}
+</style>
