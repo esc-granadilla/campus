@@ -77,6 +77,8 @@ Route::get('/pnotas', 'ProfesorController@index');
 
 Route::get('/pnoticias', 'ProfesorController@index');
 
+Route::get('/ptareas', 'ProfesorController@index');
+
 Route::get('/ppromedios', 'ProfesorController@index');
 
 Route::get('/screenteacher', 'ProfesorController@index');

@@ -19,7 +19,9 @@ class CreateTasksTable extends Migration
          $table->longText('descripcion')->nullable(false);
          $table->decimal('valor', 6, 2)->nullable(false);
          $table->longText('respuestas')->nullable(false);
+         $table->integer('subject_id')->unsigned();
          $table->boolean('estado')->default(1)->nullable(false);
+         $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
          $table->timestamps();
       });
    }

@@ -1,5 +1,6 @@
 <template>
    <v-container grid-list-md>
+      <createtaskcomponent></createtaskcomponent>
       <v-form id="nativeForm" method="post" action="/screenteacher">
          <v-text-field id="ids" required hidden name="id"></v-text-field>
       </v-form>

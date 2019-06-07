@@ -16,6 +16,8 @@ Vue.component('selectstudentscomponent', require('./components/Partials/SelectSt
 Vue.component('selectcoursecomponent', require('./components/Partials/SelectCourseComponent.vue').default);
 Vue.component('selectlessonscomponent', require('./components/Partials/SelectLessonsComponent.vue').default);
 Vue.component('nmostrarcomponent', require('./components/Administradores/Noticias/index.vue').default);
+Vue.component('createtaskcomponent', require('./components/Partials/Task/CreateTaskComponent.vue').default);
+Vue.component('tasksteppercomponent', require('./components/Partials/Task/TaskStepperComponent.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
 Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */

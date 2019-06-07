@@ -46,7 +46,7 @@
                                  label="*Porcentaje Obtenido"
                                  name="porcentaje_obtenido"
                                  prefix="%"
-                                 :mask="mask1"
+                                 :mask="mask"
                                  :return-masked-value="true"
                                  required
                               ></v-text-field>
@@ -157,8 +157,7 @@ export default {
             required: value => !!value || "Requerido.",
             max: v => v == null || v.length <= 50 || "Maximo 50 Caracteres"
          },
-         mask1: "##.##",
-         mask: "##",
+         mask: "##.##",
          trimestres: [
             { text: "Primer Trimestre", value: 1 },
             { text: "Segundo Trimestre", value: 2 },

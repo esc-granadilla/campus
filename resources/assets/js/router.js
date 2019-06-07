@@ -5,6 +5,7 @@ import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
 import Profesornoticiascomponent from './components/Profesores/Noticias/NoticiaComponent.vue';
 import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
 import Profesorpromediocomponent from './components/Profesores/Promedios/PromedioComponent.vue';
+import Profesortareacomponent from './components/Profesores/Tareas/TareaComponent.vue';
 import Estudiantecomponent from './components/Administradores/Estudiantes/EstudianteComponent.vue';
 import Horariocomponent from './components/Administradores/Horario/HorarioComponent.vue';
 import Seccioncomponent from './components/Administradores/Seccion/SeccionComponent.vue';
@@ -90,6 +91,11 @@ export default new Router({
             path: '/ppromedios',
             name: 'ppromedios',
             component: Profesorpromediocomponent
+        },
+        {
+            path: '/ptareas',
+            name: 'ptareas',
+            component: Profesortareacomponent
         },
     ],
 });
