@@ -107,7 +107,24 @@ class TaskController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function update(Request $request, Task $task)
-   { }
+   {
+      if ($request->ajax()) {
+         $questions = $task->questions()->get();
+         foreach ($questions as $question) {
+            $question->delete();
+         }
+         $task->respuestas = $request->input('respuestas');
+         $task->save();
+         $id = $task->id;
+         $preguntas = $request->all()['preguntas'];
+         foreach ($preguntas as $pregunta) {
+            $pregunta['task_id'] = $id;
+            $question = new Question($pregunta);
+            $question->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se actualizo la tarea correctamente.'], 200);
+      }
+   }
 
    /**
     * Remove the specified resource from storage.

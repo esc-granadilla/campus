@@ -5305,10 +5305,71 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["tarea", "dialogEdit"],
+  data: function data() {
+    return {
+      open: false
+    };
+  },
+  methods: {
+    CerrarMethod: function CerrarMethod(msj) {
+      this.open = msj.Open;
+      this.$emit("speak", {
+        Open: msj.Open,
+        Status: "success"
+      });
+    },
+    Cerrar: function Cerrar() {
+      this.open = false;
+      this.$emit("speak", {
+        Open: false,
+        Status: "none"
+      });
+    }
+  },
+  watch: {
+    dialogEdit: function dialogEdit(val) {
+      this.open = val;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6141,6 +6202,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Modals/DialogDelete.vue */ "./resources/assets/js/components/Modals/DialogDelete.vue");
+/* harmony import */ var _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Modals/Task/EditDialog.vue */ "./resources/assets/js/components/Modals/Task/EditDialog.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -6210,11 +6272,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
- // import dialogedit from "./DialogEdit.vue";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    // dialogedit,
+    dialogedit: _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     dialogdelete: _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ["tareas"],
@@ -6256,8 +6332,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     buscar: function buscar(id) {
-      this.tarea = this.tareas.find(function (c) {
-        return c.id == id;
+      var self = this;
+      axios.get("questionsfortask/" + id).then(function (res) {
+        var item = self.tareas.find(function (c) {
+          return c.id == id;
+        });
+        item.preguntas = res.data;
+        self.tarea = item;
       });
     },
     eliminar: function eliminar() {
@@ -6278,6 +6359,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     borrarMethod: function borrarMethod(msg) {
       this.dialogDelete = msg.dialogdelete;
       if (msg.Delete) this.eliminar();
+    },
+    editarMethod: function editarMethod(msg) {
+      this.dialogEdit = msg.Open;
+      if (msg.Status == "success") this.$emit("speak", {
+        Open: msg.Open
+      });
     }
   },
   watch: {
@@ -6343,13 +6430,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["tarea", "type"],
   data: function data() {
-    return {};
+    return {
+      mensaje: ""
+    };
   },
-  methods: {},
-  watch: {}
+  methods: {
+    Editar: function Editar() {
+      var editar = true;
+      var respuestas = "";
+      var self = this;
+      this.tarea.preguntas.forEach(function (pregunta) {
+        if (pregunta.pregunta == "" || pregunta.opcion_a == "" || pregunta.opcion_b == "" || pregunta.opcion_c == "" || pregunta.answer == "" || pregunta.opcion_ == "") editar = false;
+        respuestas += pregunta.answer + ",";
+      });
+
+      if (editar) {
+        this.tarea.respuestas = respuestas;
+        axios.put("tasks/" + this.tarea.id, this.tarea).then(function (res) {
+          self.mensaje = res.data;
+          if (res.data.type === "success") self.$emit("speak", {
+            Open: false
+          });
+        });
+      } else this.mensaje = {
+        type: "error",
+        message: "Complete todo el formulario."
+      };
+    },
+    Calificar: function Calificar() {}
+  },
+  watch: {
+    tarea: function tarea(val) {
+      if (this.type === "edit") {
+        var respuestas = val.respuestas.split(",");
+
+        for (var index = 0; index < val.preguntas.length; index++) {
+          val.preguntas[index].answer = respuestas[index];
+        }
+      }
+
+      if (this.type === "none") {
+        this.tarea.preguntas.forEach(function (pregunta) {
+          pregunta.answer = null;
+        });
+      }
+    },
+    mensaje: function mensaje(val) {
+      if (val.type === "success") this.$toast.success(val.message, {
+        y: "top",
+        timeout: 6000
+      });else this.$toast.error(val.message, {
+        y: "top",
+        timeout: 6000
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -9220,6 +9372,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Modals_Task_TaskDialog_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Modals/Task/TaskDialog.vue */ "./resources/assets/js/components/Modals/Task/TaskDialog.vue");
 //
 //
 //
@@ -9275,8 +9428,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["profesor_id"],
+  components: {
+    edittaskdialog: _components_Modals_Task_TaskDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       rowsPerPageItems: [4, 8, 12],
@@ -44730,10 +44887,99 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "900px" },
+          model: {
+            value: _vm.open,
+            callback: function($$v) {
+              _vm.open = $$v
+            },
+            expression: "open"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v("Edite la tarea")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("taskcomponent", {
+                    attrs: { tarea: _vm.tarea, type: "edit" },
+                    on: {
+                      speak: function($event) {
+                        return _vm.CerrarMethod($event)
+                      }
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: { click: _vm.Cerrar }
+                    },
+                    [_vm._v("Cerrar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45715,6 +45961,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-layout",
+    { attrs: { wrap: "", row: "" } },
     [
       _c("dialogdelete", {
         attrs: {
@@ -45728,6 +45975,54 @@ var render = function() {
           }
         }
       }),
+      _vm._v(" "),
+      _c("dialogedit", {
+        attrs: { dialogEdit: _vm.dialogEdit, tarea: _vm.tarea },
+        on: {
+          speak: function($event) {
+            return _vm.editarMethod($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs6: "" } },
+        [
+          _c("v-text-field", {
+            attrs: {
+              label: "Listado de tareas",
+              "single-line": "",
+              "hide-details": "",
+              readonly: ""
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs6: "" } },
+        [
+          _c("v-text-field", {
+            attrs: {
+              "append-icon": "search",
+              label: "Buscar por Titulo",
+              "single-line": "",
+              "hide-details": ""
+            },
+            model: {
+              value: _vm.search,
+              callback: function($$v) {
+                _vm.search = $$v
+              },
+              expression: "search"
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-data-table",
@@ -45900,177 +46195,240 @@ var render = function() {
   return _c(
     "v-layout",
     { attrs: { row: "", wrap: "" } },
-    _vm._l(_vm.tarea.preguntas, function(item, index) {
-      return _c(
+    [
+      _vm._l(_vm.tarea.preguntas, function(item, index) {
+        return _c(
+          "v-flex",
+          { key: item.id, attrs: { xs12: "" } },
+          [
+            _vm.type != "edit"
+              ? _c("v-flex", { attrs: { xs12: "" } }, [
+                  _c("p", { staticClass: "headline" }, [
+                    _vm._v(_vm._s(index + 1) + ") " + _vm._s(item.pregunta))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.type == "edit"
+              ? _c(
+                  "v-flex",
+                  { attrs: { xs12: "" } },
+                  [
+                    _c("v-textarea", {
+                      staticClass: "ma-2",
+                      attrs: {
+                        name: "pregunta",
+                        box: "",
+                        label: index + 1 + " Pregunta:",
+                        "auto-grow": ""
+                      },
+                      model: {
+                        value: item.pregunta,
+                        callback: function($$v) {
+                          _vm.$set(item, "pregunta", $$v)
+                        },
+                        expression: "item.pregunta"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "v-flex",
+              { attrs: { xs12: "" } },
+              [
+                _c("p", { staticClass: "mb" }, [
+                  _vm._v("Seleccione su respueta:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "v-radio-group",
+                  {
+                    staticClass: "mb mt flex xs12",
+                    attrs: { row: "", light: "" },
+                    model: {
+                      value: item.answer,
+                      callback: function($$v) {
+                        _vm.$set(item, "answer", $$v)
+                      },
+                      expression: "item.answer"
+                    }
+                  },
+                  [
+                    _c(
+                      "v-flex",
+                      { attrs: { xs6: "" } },
+                      [
+                        _c(
+                          "v-layout",
+                          { attrs: { "align-center": "" } },
+                          [
+                            _c("v-radio", {
+                              attrs: {
+                                label: "A)",
+                                value: "A)",
+                                color: "primary"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: { readonly: _vm.type != "edit" },
+                              model: {
+                                value: item.opcion_a,
+                                callback: function($$v) {
+                                  _vm.$set(item, "opcion_a", $$v)
+                                },
+                                expression: "item.opcion_a"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      { attrs: { xs6: "" } },
+                      [
+                        _c(
+                          "v-layout",
+                          { attrs: { "align-center": "" } },
+                          [
+                            _c("v-radio", {
+                              attrs: {
+                                label: "B)",
+                                value: "B)",
+                                color: "primary"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: { readonly: _vm.type != "edit" },
+                              model: {
+                                value: item.opcion_b,
+                                callback: function($$v) {
+                                  _vm.$set(item, "opcion_b", $$v)
+                                },
+                                expression: "item.opcion_b"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      { attrs: { xs6: "" } },
+                      [
+                        _c(
+                          "v-layout",
+                          { attrs: { "align-center": "" } },
+                          [
+                            _c("v-radio", {
+                              attrs: {
+                                label: "C)",
+                                value: "C)",
+                                color: "primary"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: { readonly: _vm.type != "edit" },
+                              model: {
+                                value: item.opcion_c,
+                                callback: function($$v) {
+                                  _vm.$set(item, "opcion_c", $$v)
+                                },
+                                expression: "item.opcion_c"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      { attrs: { xs6: "" } },
+                      [
+                        _c(
+                          "v-layout",
+                          { attrs: { "align-center": "" } },
+                          [
+                            _c("v-radio", {
+                              attrs: {
+                                label: "D)",
+                                value: "D)",
+                                color: "primary"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: { readonly: _vm.type != "edit" },
+                              model: {
+                                value: item.opcion_d,
+                                callback: function($$v) {
+                                  _vm.$set(item, "opcion_d", $$v)
+                                },
+                                expression: "item.opcion_d"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _c(
         "v-flex",
-        { key: item.id, attrs: { xs12: "" } },
+        { staticClass: "text-xs-right", attrs: { xs12: "" } },
         [
-          _c("v-flex", { attrs: { xs12: "" } }, [
-            _c("p", { staticClass: "headline" }, [
-              _vm._v(_vm._s(index + 1) + ") " + _vm._s(item.pregunta))
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "" } },
-            [
-              _c("p", { staticClass: "mb" }, [
-                _vm._v("Seleccione su respueta:")
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-radio-group",
+          _vm.type == "edit"
+            ? _c(
+                "v-btn",
                 {
-                  staticClass: "mb mt flex xs12",
-                  attrs: { row: "", light: "" },
-                  model: {
-                    value: item.answer,
-                    callback: function($$v) {
-                      _vm.$set(item, "answer", $$v)
-                    },
-                    expression: "item.answer"
-                  }
+                  attrs: { outline: "", color: "primary" },
+                  on: { click: _vm.Editar }
                 },
-                [
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "" } },
-                        [
-                          _c("v-radio", {
-                            attrs: {
-                              label: "A)",
-                              value: "A)",
-                              color: "primary"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            model: {
-                              value: item.opcion_a,
-                              callback: function($$v) {
-                                _vm.$set(item, "opcion_a", $$v)
-                              },
-                              expression: "item.opcion_a"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "" } },
-                        [
-                          _c("v-radio", {
-                            attrs: {
-                              label: "B)",
-                              value: "B)",
-                              color: "primary"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            model: {
-                              value: item.opcion_b,
-                              callback: function($$v) {
-                                _vm.$set(item, "opcion_b", $$v)
-                              },
-                              expression: "item.opcion_b"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "" } },
-                        [
-                          _c("v-radio", {
-                            attrs: {
-                              label: "C)",
-                              value: "C)",
-                              color: "primary"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            model: {
-                              value: item.opcion_c,
-                              callback: function($$v) {
-                                _vm.$set(item, "opcion_c", $$v)
-                              },
-                              expression: "item.opcion_c"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "" } },
-                        [
-                          _c("v-radio", {
-                            attrs: {
-                              label: "D)",
-                              value: "D)",
-                              color: "primary"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            model: {
-                              value: item.opcion_d,
-                              callback: function($$v) {
-                                _vm.$set(item, "opcion_d", $$v)
-                              },
-                              expression: "item.opcion_d"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
+                [_vm._v("Editar")]
               )
-            ],
-            1
-          )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.type == "none"
+            ? _c(
+                "v-btn",
+                {
+                  attrs: { outline: "", color: "success" },
+                  on: { click: _vm.Calificar }
+                },
+                [_vm._v("Enviar a Calificar")]
+              )
+            : _vm._e()
         ],
         1
       )
-    }),
-    1
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -94945,7 +95303,6 @@ Vue.component('selectlessonscomponent', __webpack_require__(/*! ./components/Par
 Vue.component('nmostrarcomponent', __webpack_require__(/*! ./components/Administradores/Noticias/index.vue */ "./resources/assets/js/components/Administradores/Noticias/index.vue").default);
 Vue.component('createtaskcomponent', __webpack_require__(/*! ./components/Partials/Task/CreateTaskComponent.vue */ "./resources/assets/js/components/Partials/Task/CreateTaskComponent.vue").default);
 Vue.component('edittaskcomponent', __webpack_require__(/*! ./components/Partials/Task/EditTaskComponent.vue */ "./resources/assets/js/components/Partials/Task/EditTaskComponent.vue").default);
-Vue.component('edittaskdialog', __webpack_require__(/*! ./components/Modals/Task/EditTaskDialog.vue */ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue").default);
 Vue.component('tasksteppercomponent', __webpack_require__(/*! ./components/Partials/Task/TaskStepperComponent.vue */ "./resources/assets/js/components/Partials/Task/TaskStepperComponent.vue").default);
 Vue.component('taskcomponent', __webpack_require__(/*! ./components/Partials/Task/TaskComponent.vue */ "./resources/assets/js/components/Partials/Task/TaskComponent.vue").default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
@@ -96823,17 +97180,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/assets/js/components/Modals/Task/EditTaskDialog.vue ***!
-  \***********************************************************************/
+/***/ "./resources/assets/js/components/Modals/Task/EditDialog.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/EditDialog.vue ***!
+  \*******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true& */ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true&");
-/* harmony import */ var _EditTaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTaskDialog.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditDialog.vue?vue&type=template&id=333338ec&scoped=true& */ "./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true&");
+/* harmony import */ var _EditDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditDialog.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -96843,50 +97200,119 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _EditTaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _EditDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "14792def",
+  "333338ec",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/assets/js/components/Modals/Task/EditTaskDialog.vue"
+component.options.__file = "resources/assets/js/components/Modals/Task/EditDialog.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
+/***/ "./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditTaskDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true& ***!
-  \******************************************************************************************************************/
+/***/ "./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true& ***!
+  \**************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditTaskDialog.vue?vue&type=template&id=14792def&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditDialog.vue?vue&type=template&id=333338ec&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/EditDialog.vue?vue&type=template&id=333338ec&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTaskDialog_vue_vue_type_template_id_14792def_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDialog_vue_vue_type_template_id_333338ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Modals/Task/TaskDialog.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/TaskDialog.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true& */ "./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true&");
+/* harmony import */ var _TaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskDialog.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "67c24d45",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Modals/Task/TaskDialog.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TaskDialog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskDialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Modals/Task/TaskDialog.vue?vue&type=template&id=67c24d45&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskDialog_vue_vue_type_template_id_67c24d45_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

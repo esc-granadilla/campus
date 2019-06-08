@@ -1,11 +1,25 @@
 <template>
-   <v-layout>
+   <v-layout wrap row>
       <dialogdelete
          :dialogDeletes="dialogDelete"
          :text="text"
          :title="title"
          v-on:speak="borrarMethod($event)"
       ></dialogdelete>
+      <dialogedit :dialogEdit="dialogEdit" :tarea="tarea" v-on:speak="editarMethod($event)"></dialogedit>
+      <v-flex xs6>
+         <v-text-field label="Listado de tareas" single-line hide-details readonly></v-text-field>
+      </v-flex>
+      <v-flex xs6>
+         <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Buscar por Titulo"
+            single-line
+            hide-details
+         ></v-text-field>
+      </v-flex>
+
       <v-data-table
          :headers="headers"
          :items="tareas"
@@ -67,11 +81,11 @@
 
 <script>
 import dialogdelete from "../../Modals/DialogDelete.vue";
-// import dialogedit from "./DialogEdit.vue";
+import dialogedit from "../../Modals/Task/EditDialog.vue";
 
 export default {
    components: {
-      // dialogedit,
+      dialogedit,
       dialogdelete
    },
    props: ["tareas"],
@@ -105,8 +119,13 @@ export default {
    }),
    methods: {
       buscar(id) {
-         this.tarea = this.tareas.find(function(c) {
-            return c.id == id;
+         let self = this;
+         axios.get("questionsfortask/" + id).then(function(res) {
+            let item = self.tareas.find(function(c) {
+               return c.id == id;
+            });
+            item.preguntas = res.data;
+            self.tarea = item;
          });
       },
       eliminar() {
@@ -125,6 +144,13 @@ export default {
       borrarMethod: function(msg) {
          this.dialogDelete = msg.dialogdelete;
          if (msg.Delete) this.eliminar();
+      },
+      editarMethod: function(msg) {
+         this.dialogEdit = msg.Open;
+         if (msg.Status == "success")
+            this.$emit("speak", {
+               Open: msg.Open
+            });
       }
    },
    watch: {

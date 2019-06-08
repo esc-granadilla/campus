@@ -54,8 +54,12 @@
 </template>
 
 <script>
+import edittaskdialog from "../components/Modals/Task/TaskDialog.vue";
 export default {
    props: ["profesor_id"],
+   components: {
+      edittaskdialog
+   },
    data: () => ({
       rowsPerPageItems: [4, 8, 12],
       pagination: {

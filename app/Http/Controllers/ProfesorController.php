@@ -10,6 +10,7 @@ use PhpParser\JsonDecoder;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Campus\Section;
+use Campus\Task;
 
 class ProfesorController extends Controller
 {
@@ -317,6 +318,14 @@ class ProfesorController extends Controller
       } catch (\Exception $e) {
          $output = new \Symfony\Component\Console\Output\ConsoleOutput();
          $output->writeln($e->getMessage());
+      }
+   }
+
+   public function questionsfortask(Task $task, Request $request)
+   {
+      if ($request->ajax()) {
+         $questions = $task->questions()->get();
+         return response()->json($questions, 200);
       }
    }
 }
