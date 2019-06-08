@@ -20,13 +20,12 @@
                   </v-flex>
                </v-layout>
                <v-flex xs12>
-                  <v-radio-group v-model="subject" row light>
+                  <v-radio-group v-model="tarea.subject_id" row light>
                      <v-radio
                         v-for="item in subjects"
                         :key="item.id"
                         :label="item.nombre"
                         :value="item.id"
-                        :v-model="tarea.subject_id"
                         color="success"
                         class="pa-3"
                      ></v-radio>
@@ -93,7 +92,10 @@
 
       <v-stepper-step step="3">Confirme el custionario creado.</v-stepper-step>
       <v-stepper-content step="3">
-         <v-card color="grey lighten-1" class="mb-2" height="200px"></v-card>
+         <v-card color="white" class="mb-2" height="200px" v-bar light px-2>
+            <taskcomponent :type="'success'" :tarea="tarea"></taskcomponent>
+         </v-card>
+         <v-btn color="primary" @click="crear">Crear</v-btn>
          <v-btn flat @click="e6 = 2">Volver</v-btn>
          <v-btn flat @click="close">Cancelar</v-btn>
       </v-stepper-content>
@@ -109,6 +111,7 @@ export default {
          subjects: [],
          numero: 1,
          puntero: 0,
+         mensaje: "",
          next: false,
          pregunta: {
             id: 0,
@@ -133,8 +136,7 @@ export default {
             respuestas: "",
             subject_id: null,
             preguntas: []
-         },
-         subject: null
+         }
       };
    },
    props: ["sheet"],
@@ -171,11 +173,23 @@ export default {
                if (item.selected) this.respuesta = item.id;
             });
          }
+      },
+      mensaje(val) {
+         if (val.type === "success")
+            this.$toast.success(val.message, {
+               y: "top",
+               timeout: 6000
+            });
+         else
+            this.$toast.error(val.message, {
+               y: "top",
+               timeout: 6000
+            });
       }
    },
    computed: {
       part1() {
-         return this.subject != null &&
+         return this.tarea.subject_id != null &&
             this.tarea.titulo != "" &&
             this.tarea.valor != "" &&
             this.tarea.descripcion != ""
@@ -203,6 +217,44 @@ export default {
    methods: {
       close() {
          this.$emit("speak", false);
+      },
+      crear() {
+         let self = this;
+         axios.post("/tasks", this.tarea).then(function(res) {
+            self.mensaje = res.data;
+            if (res.data.type === "success") {
+               self.e6 = 1;
+               self.numero = 1;
+               self.puntero = 0;
+               self.next = false;
+               self.pregunta = {
+                  id: 0,
+                  task_id: 0,
+                  pregunta: "",
+                  opcion_a: "",
+                  opcion_b: "",
+                  opcion_c: "",
+                  opcion_d: "",
+                  respuestas: [
+                     { id: "A)", opcion: "", selected: false },
+                     { id: "B)", opcion: "", selected: false },
+                     { id: "C)", opcion: "", selected: false },
+                     { id: "D)", opcion: "", selected: false }
+                  ]
+               };
+               self.respuesta = null;
+               self.tarea = {
+                  titulo: "",
+                  valor: "",
+                  descripcion: "",
+                  respuestas: "",
+                  subject_id: null,
+                  preguntas: []
+               };
+               self.tarea.subject_id = null;
+               self.$emit("speak", false);
+            }
+         });
       },
       agregar() {
          if (

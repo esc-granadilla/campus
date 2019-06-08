@@ -33,6 +33,12 @@ Route::resource('courses', 'CourseController');
 
 Route::resource('grades', 'GradeController');
 
+Route::resource('tasks', 'TaskController');
+
+Route::resource('taskhistories', 'TaskhistoryController');
+
+Route::resource('questions', 'QuestionController');
+
 Route::resource('qualifications', 'QualificationController');
 
 Route::get('/admin', 'AdministracionController@index')->name('admin');
