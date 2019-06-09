@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration
          $table->string('titulo', 255)->nullable(false);
          $table->string('tipo', 100)->nullable(false);
          $table->string('link', 1000)->nullable(false);
-         $table->integer('news_id')->unsigned()->nullable(true);
+         $table->integer('news_id')->unsigned()->nullable(false);
          $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
          $table->timestamps();
       });
