@@ -20,6 +20,8 @@ Vue.component('createtaskcomponent', require('./components/Partials/Task/CreateT
 Vue.component('edittaskcomponent', require('./components/Partials/Task/EditTaskComponent.vue').default);
 Vue.component('tasksteppercomponent', require('./components/Partials/Task/TaskStepperComponent.vue').default);
 Vue.component('taskcomponent', require('./components/Partials/Task/TaskComponent.vue').default);
+Vue.component('selecttaskcomponent', require('./components/Partials/Task/SelectTaskComponent.vue').default);
+Vue.component('taskschedulecomponent', require('./components/Partials/Task/TaskScheduleComponent.vue').default);
 
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);

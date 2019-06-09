@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Campus\Course;
 use Campus\Teacher;
 use Campus\Student;
-use PhpParser\JsonDecoder;
-use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Campus\Section;
 use Campus\Task;
+use Campus\Taskhistory;
+use Campus\Qualification;
 
 class ProfesorController extends Controller
 {
@@ -87,10 +87,10 @@ class ProfesorController extends Controller
       $students = $section->students()->where('estado', 1)->get();
       $calificaciones = [];
       foreach ($students as $student) {
-         $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen'])->get();
-         $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea'])->get();
-         $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación'])->get();
-         $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra'])->get();
+         $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen', 'course_id' => $course->id])->get();
+         $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea', 'course_id' => $course->id])->get();
+         $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación', 'course_id' => $course->id])->get();
+         $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra', 'course_id' => $course->id])->get();
          $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
          array_push($calificaciones, $calificacion);
       }
@@ -326,6 +326,35 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $questions = $task->questions()->get();
          return response()->json($questions, 200);
+      }
+   }
+
+   public function addtaskforstudents(Request $request)
+   {
+      if ($request->ajax()) {
+         $tarea = $request->all();
+         $history = $request->all()['history'];
+         $course = Course::all()->find((int)$request->session()->get('course'));
+         $history['course_id'] = $course->id;
+         $students = $course->section()->first()->students()->get();
+         foreach ($students as $student) {
+            $history['student_id'] = $student->id;
+            $taskhistory = new Taskhistory($history);
+            $taskhistory->save();
+            $qualification = new Qualification();
+            $qualification->titulo = $history['nombre'];
+            $qualification->valor_porcentual = (float)$tarea['valor'];
+            $qualification->porcentaje_obtenido = (float)0.0;
+            $qualification->tipo = 'Tarea';
+            $qualification->condicion = 'No realisada';
+            $qualification->descripcion = $tarea['titulo'];
+            $qualification->trimestre = $taskhistory->trimestre;
+            $qualification->fecha = $taskhistory->inicio;
+            $qualification->student_id = $student->id;
+            $qualification->course_id = $course->id;
+            $qualification->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se asigno la tarea correctamente.'], 200);
       }
    }
 }

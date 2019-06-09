@@ -5,6 +5,7 @@ namespace Campus\Http\Controllers;
 use Campus\Task;
 use Illuminate\Http\Request;
 use Campus\Question;
+use Campus\Course;
 
 class TaskController extends Controller
 {
@@ -72,15 +73,23 @@ class TaskController extends Controller
    /**
     * Display the specified resource.
     *
-    * @param  Task  $task
+    * @param  int  $id
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function show(Task $task, Request $request)
+   public function show(int $id, Request $request)
    {
       if ($request->ajax()) {
-         $task = ($task != null && $task->estado == 0) ? null : $task;
-         return response()->json($task, 200);
+         if ($id == 0) {
+            $course = Course::all()->find((int)$request->session()->get('course'));
+            $id = $course->subject()->first()->id;
+            $tasks = Task::where(['estado' => 1, 'subject_id' => $id])->get();
+            return response()->json($tasks, 200);
+         } else {
+            $task = Task::where('id', $id)->first();
+            $task = ($task != null && $task->estado == 0) ? null : $task;
+            return response()->json($task, 200);
+         }
       }
    }
 
