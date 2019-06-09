@@ -26,6 +26,11 @@ class Course extends Model
       return $this->hasMany(Lesson::class);
    }
 
+   public function news()
+   {
+      return $this->hasMany(News::class);
+   }
+
    public function qualifications()
    {
       return $this->hasMany(Qualification::class);

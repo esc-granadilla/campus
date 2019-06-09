@@ -15,9 +15,14 @@ class CreateNewsTable extends Migration
    {
       Schema::create('news', function (Blueprint $table) {
          $table->increments('id');
-         $table->string('titulo', 255);
-         $table->longText('descripcion');
-         $table->string('links_attachments', 1000);
+         $table->string('titulo', 255)->nullable(false);
+         $table->longText('descripcion')->nullable(true);
+         $table->longText('contenido')->nullable(true);
+         $table->string('tipo', 100)->default('Global')->nullable(false);
+         $table->string('fecha')->nullable(false);
+         $table->boolean('estado')->default(1)->nullable(false);
+         $table->integer('course_id')->unsigned()->nullable(true);
+         $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
          $table->timestamps();
       });
    }
