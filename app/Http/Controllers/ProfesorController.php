@@ -337,24 +337,69 @@ class ProfesorController extends Controller
          $course = Course::all()->find((int)$request->session()->get('course'));
          $history['course_id'] = $course->id;
          $students = $course->section()->first()->students()->get();
-         foreach ($students as $student) {
-            $history['student_id'] = $student->id;
-            $taskhistory = new Taskhistory($history);
-            $taskhistory->save();
-            $qualification = new Qualification();
-            $qualification->titulo = $history['nombre'];
-            $qualification->valor_porcentual = (float)$tarea['valor'];
-            $qualification->porcentaje_obtenido = (float)0.0;
-            $qualification->tipo = 'Tarea';
-            $qualification->condicion = 'No realisada';
-            $qualification->descripcion = $tarea['titulo'];
-            $qualification->trimestre = $taskhistory->trimestre;
-            $qualification->fecha = $taskhistory->inicio;
-            $qualification->student_id = $student->id;
-            $qualification->course_id = $course->id;
-            $qualification->save();
+         if ($students == null || $students->count() == 0) {
+            return response()->json(['type' => 'error', 'message' => 'No alumnos en este curso imposible asignar tareas.'], 200);
+         } else {
+            $taskhistory = Taskhistory::where([
+               'course_id' => $course->id,
+               'task_id' => $history['task_id'],
+               'student_id' => $students->first()->id,
+            ])->first();
+            if ($taskhistory != null) {
+               return response()->json(['type' => 'error', 'message' => 'Ya se ha asignado esta tarea al curso.'], 200);
+            } else {
+               foreach ($students as $student) {
+                  $history['student_id'] = $student->id;
+                  $taskhistory = new Taskhistory($history);
+                  $taskhistory->save();
+                  $info = [
+                     'titulo' => $history['nombre'], 'valor_porcentual' => (float)$tarea['valor'],
+                     'porcentaje_obtenido' => (float)0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
+                     'descripcion' => $tarea['titulo'], 'trimestre' => $taskhistory->trimestre,
+                     'fecha' => $taskhistory->inicio, 'student_id' => $student->id, 'course_id' => $course->id,
+                  ];
+                  $qualification = new Qualification($info);
+                  $qualification->save();
+               }
+               return response()->json(['type' => 'success', 'message' => 'Se asigno la tarea correctamente.'], 200);
+            }
          }
-         return response()->json(['type' => 'success', 'message' => 'Se asigno la tarea correctamente.'], 200);
+      }
+   }
+
+   public function removetaskforstudents(Request $request, Task $task)
+   {
+      if ($request->ajax()) {
+         $taskhistories = $task->taskhistories()->where(
+            'course_id',
+            (int)$request->session()->get('course')
+         )->get();
+         foreach ($taskhistories as $taskhistory) {
+            $student = $taskhistory->student()->first();
+            $qualification = $student->qualifications()->where([
+               'tipo' => 'Tarea', 'fecha' => $taskhistory->inicio,
+               'course_id' => $taskhistory->course_id, 'trimestre' => $taskhistory->trimestre,
+               'descripcion' => $task->titulo, 'valor_porcentual' => $task->valor
+            ])->first();
+            $taskhistory->delete();
+            $qualification->delete();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se elimino la asignacion la tarea correctamente.'], 200);
+      }
+   }
+
+   public function taskforcourse(Request $request, Task $task)
+   {
+      if ($request->ajax()) {
+         $taskhistories = $task->taskhistories()->where(
+            'course_id',
+            (int)$request->session()->get('course')
+         )->get();
+         $taskhistory = null;
+         if ($taskhistories != null && $taskhistories->count() > 0) {
+            $taskhistory = $taskhistories->first();
+         }
+         return response()->json($taskhistory, 200);
       }
    }
 }

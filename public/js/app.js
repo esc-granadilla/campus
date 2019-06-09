@@ -6746,7 +6746,7 @@ __webpack_require__.r(__webpack_exports__);
       if (val != null) {
         this.taskhistory = val;
       } else {
-        taskhistory = {
+        this.taskhistory = {
           nombre: "",
           course_id: 0,
           task_id: 0,
@@ -8604,8 +8604,7 @@ __webpack_require__.r(__webpack_exports__);
       search: "",
       data: null,
       noSelected: true,
-      selected: [],
-      mensaje: [],
+      mensaje: "",
       tarea: null,
       tareahistorial: null,
       accions: [{
@@ -8633,6 +8632,15 @@ __webpack_require__.r(__webpack_exports__);
           self.mensaje = res.data;
           if (res.data.type === "success") self.tabs = 0;
         });
+      } else {
+        axios.post("removetaskforstudents/" + this.tarea.id).then(function (res) {
+          self.mensaje = res.data;
+
+          if (res.data.type === "success") {
+            self.tabs = 0;
+            self.data = null;
+          }
+        });
       }
     }
   },
@@ -8643,13 +8651,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     tabs: function tabs(val) {
+      var self = this;
+
       if (val == 1) {
-        this.selected = []; // axios
-        //    .get("/lessonsforcourses/" + this.course.id)
-        //    .then(res => (this.selected = res.data));
-        // axios
-        //    .get("/lessonsstock/" + this.course.id)
-        //    .then(res => (this.lessonstock = res.data));
+        axios.get("/taskforcourse/" + this.tarea.id).then(function (res) {
+          if (res.data != null && Object.keys(res.data).length === 0 && res.data.constructor === Object) {
+            res.data = null;
+          }
+
+          self.data = res.data;
+        });
       }
     },
     mensaje: function mensaje(val) {

@@ -129,4 +129,8 @@ Route::get('/qualificationsfortrimester/{id}', 'ProfesorController@qualification
 
 Route::get('/questionsfortask/{task}', 'ProfesorController@questionsfortask');
 
+Route::get('/taskforcourse/{task}', 'ProfesorController@taskforcourse');
+
 Route::post('/addtaskforstudents', 'ProfesorController@addtaskforstudents');
+
+Route::post('/removetaskforstudents/{task}', 'ProfesorController@removetaskforstudents');

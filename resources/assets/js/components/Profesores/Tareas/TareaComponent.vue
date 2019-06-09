@@ -56,8 +56,7 @@ export default {
          search: "",
          data: null,
          noSelected: true,
-         selected: [],
-         mensaje: [],
+         mensaje: "",
          tarea: null,
          tareahistorial: null,
          accions: [
@@ -88,6 +87,16 @@ export default {
                self.mensaje = res.data;
                if (res.data.type === "success") self.tabs = 0;
             });
+         } else {
+            axios
+               .post("removetaskforstudents/" + this.tarea.id)
+               .then(function(res) {
+                  self.mensaje = res.data;
+                  if (res.data.type === "success") {
+                     self.tabs = 0;
+                     self.data = null;
+                  }
+               });
          }
       }
    },
@@ -98,14 +107,18 @@ export default {
    },
    watch: {
       tabs(val) {
+         let self = this;
          if (val == 1) {
-            this.selected = [];
-            // axios
-            //    .get("/lessonsforcourses/" + this.course.id)
-            //    .then(res => (this.selected = res.data));
-            // axios
-            //    .get("/lessonsstock/" + this.course.id)
-            //    .then(res => (this.lessonstock = res.data));
+            axios.get("/taskforcourse/" + this.tarea.id).then(function(res) {
+               if (
+                  res.data != null &&
+                  Object.keys(res.data).length === 0 &&
+                  res.data.constructor === Object
+               ) {
+                  res.data = null;
+               }
+               self.data = res.data;
+            });
          }
       },
       mensaje(val) {

@@ -134,7 +134,7 @@ export default {
          if (val != null) {
             this.taskhistory = val;
          } else {
-            taskhistory = {
+            this.taskhistory = {
                nombre: "",
                course_id: 0,
                task_id: 0,
