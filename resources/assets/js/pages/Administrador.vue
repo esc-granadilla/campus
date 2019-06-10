@@ -28,25 +28,6 @@
                      <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                   </v-list-tile-content>
                </v-list-tile>
-               <v-list-group prepend-icon="notifications">
-                  <template v-slot:activator>
-                     <v-list-tile>
-                        <v-list-tile-title>Noticias</v-list-tile-title>
-                     </v-list-tile>
-                  </template>
-                  <v-layout pl-5>
-                     <v-list-tile
-                        v-for="(crud, i) in noticias"
-                        :key="i"
-                        @click="$router.push(crud[2])"
-                     >
-                        <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-                        <v-list-tile-action>
-                           <v-icon v-text="crud[1]"></v-icon>
-                        </v-list-tile-action>
-                     </v-list-tile>
-                  </v-layout>
-               </v-list-group>
                <v-list-group prepend-icon="offline_pin">
                   <template v-slot:activator>
                      <v-list-tile>
@@ -118,17 +99,16 @@ export default {
                title: "Estudiantes",
                icon: "account_circle",
                ruta: "estudiante"
+            },
+            {
+               title: "Noticias",
+               icon: "notifications",
+               ruta: "anoticias"
             }
          ],
          asignaciones: [
             ["Alumnos a Sección", "swap_horizontal_circle", "seccion_alumnos"],
             ["Lecciones a Curso", "swap_horizontal_circle", "curso_leccion"]
-         ],
-         noticias: [
-            ["Mostrar", "insert_drive_file", "noticias/mostrar"],
-            ["Crear", "add", "noticias/create"],
-            ["Actualizar", "update", "noticias/editar"],
-            ["Eliminar", "delete", "noticias/eliminar"]
          ],
          mini: true,
          right: null

@@ -61,6 +61,8 @@ Route::get('/asignatura', 'AdministracionController@index');
 
 Route::get('/seccion', 'AdministracionController@index');
 
+Route::get('/anoticias', 'AdministracionController@index');
+
 Route::get('/seccion_alumnos', 'AdministracionController@index');
 
 Route::get('/curso', 'AdministracionController@index');
@@ -134,3 +136,5 @@ Route::get('/taskforcourse/{task}', 'ProfesorController@taskforcourse');
 Route::post('/addtaskforstudents', 'ProfesorController@addtaskforstudents');
 
 Route::post('/removetaskforstudents/{task}', 'ProfesorController@removetaskforstudents');
+
+Route::post('/store', 'ProfesorController@store');

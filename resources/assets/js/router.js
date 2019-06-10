@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
-import Profesornoticiascomponent from './components/Profesores/Noticias/NoticiaComponent.vue';
 import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
 import Profesorpromediocomponent from './components/Profesores/Promedios/PromedioComponent.vue';
 import Profesortareacomponent from './components/Profesores/Tareas/TareaComponent.vue';
@@ -15,6 +14,8 @@ import Cursocomponent from './components/Administradores/Curso/CursoComponent.vu
 import Admincomponent from './components/Administradores/AdministracionDefault.vue';
 import AsigSeccionAlumnoscomponent from './components/Administradores/Asignaciones/SeccionAlumnos.vue';
 import AsigCursoLeccionescomponent from './components/Administradores/Asignaciones/CursoLecciones.vue';
+import Administradornoticiascomponent from './components/Administradores/Noticias/NewsComponent.vue';
+import Profesornoticiascomponent from './components/Profesores/Noticias/NewsComponent.vue';
 
 Vue.use(Router);
 
@@ -76,6 +77,11 @@ export default new Router({
             path: '/pnoticias',
             name: 'pnoticias',
             component: Profesornoticiascomponent
+        },
+        {
+            path: '/anoticias',
+            name: 'anoticias',
+            component: Administradornoticiascomponent
         },
         {
             path: '/pnotas',

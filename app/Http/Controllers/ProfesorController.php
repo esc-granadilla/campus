@@ -11,6 +11,7 @@ use Campus\Section;
 use Campus\Task;
 use Campus\Taskhistory;
 use Campus\Qualification;
+use Illuminate\Http\File;
 
 class ProfesorController extends Controller
 {
@@ -401,5 +402,15 @@ class ProfesorController extends Controller
          }
          return response()->json($taskhistory, 200);
       }
+   }
+
+   public function store(Request $request)
+   {
+      if ($request->ajax() && $request->hasFile('imagen')) {
+         $file = $request->file('imagen');
+         $name = $file->store('public/imagen');
+         return response()->json(['name' => $name], 200);
+      }
+      return response()->json(['name' => 'error'], 200);
    }
 }

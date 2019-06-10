@@ -19,63 +19,64 @@
             hide-details
          ></v-text-field>
       </v-flex>
-
-      <v-data-table
-         :headers="headers"
-         :items="tareas"
-         :search="search"
-         rowsPerPageText="Elementos por página:"
-         rowsPerPageAll="Todos"
-         pageText="{0}-{1} de {2}"
-         noResultsText="Ningún resultado a mostrar"
-         nextPage="Página siguiente"
-         prevPage="Página anterior"
-         noDataText="Ningún dato disponible"
-      >
-         <template v-slot:items="props">
-            <td
-               class="text-xs-left"
-               :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-            >{{ props.item.titulo }}</td>
-            <td
-               class="text-xs-center"
-               :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-            >{{ props.item.descripcion }}</td>
-            <td
-               class="text-xs-right"
-               :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-            >{{ props.item.valor }}</td>
-            <td
-               class="text-xs-center"
-               :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-            >
-               <v-btn
-                  flat
-                  small
-                  color="primary"
-                  @click="buscar(props.item.id),dialogEdit = true"
-               >Editar</v-btn>
-            </td>
-            <td
-               class="text-xs-center"
-               :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-            >
-               <v-btn
-                  flat
-                  small
-                  color="error"
-                  dark
-                  @click.stop="buscar(props.item.id),dialogDelete = true"
-               >Eliminar</v-btn>
-            </td>
-         </template>
-         <v-alert
-            v-slot:no-results
-            :value="true"
-            color="error"
-            icon="warning"
-         >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
-      </v-data-table>
+      <v-flex xs12>
+         <v-data-table
+            :headers="headers"
+            :items="tareas"
+            :search="search"
+            rowsPerPageText="Elementos por página:"
+            rowsPerPageAll="Todos"
+            pageText="{0}-{1} de {2}"
+            noResultsText="Ningún resultado a mostrar"
+            nextPage="Página siguiente"
+            prevPage="Página anterior"
+            noDataText="Ningún dato disponible"
+         >
+            <template v-slot:items="props">
+               <td
+                  class="text-xs-left"
+                  :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+               >{{ props.item.titulo }}</td>
+               <td
+                  class="text-xs-center"
+                  :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+               >{{ props.item.descripcion }}</td>
+               <td
+                  class="text-xs-right"
+                  :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+               >{{ props.item.valor }}</td>
+               <td
+                  class="text-xs-center"
+                  :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+               >
+                  <v-btn
+                     flat
+                     small
+                     color="primary"
+                     @click="buscar(props.item.id),dialogEdit = true"
+                  >Editar</v-btn>
+               </td>
+               <td
+                  class="text-xs-center"
+                  :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
+               >
+                  <v-btn
+                     flat
+                     small
+                     color="error"
+                     dark
+                     @click.stop="buscar(props.item.id),dialogDelete = true"
+                  >Eliminar</v-btn>
+               </td>
+            </template>
+            <v-alert
+               v-slot:no-results
+               :value="true"
+               color="error"
+               icon="warning"
+            >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
+         </v-data-table>
+      </v-flex>
    </v-layout>
 </template>
 

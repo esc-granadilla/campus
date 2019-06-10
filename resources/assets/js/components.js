@@ -15,13 +15,14 @@ Vue.component('selectsectioncomponent', require('./components/Partials/SelectSec
 Vue.component('selectstudentscomponent', require('./components/Partials/SelectStudentsComponent.vue').default);
 Vue.component('selectcoursecomponent', require('./components/Partials/SelectCourseComponent.vue').default);
 Vue.component('selectlessonscomponent', require('./components/Partials/SelectLessonsComponent.vue').default);
-Vue.component('nmostrarcomponent', require('./components/Administradores/Noticias/index.vue').default);
 Vue.component('createtaskcomponent', require('./components/Partials/Task/CreateTaskComponent.vue').default);
 Vue.component('edittaskcomponent', require('./components/Partials/Task/EditTaskComponent.vue').default);
 Vue.component('tasksteppercomponent', require('./components/Partials/Task/TaskStepperComponent.vue').default);
 Vue.component('taskcomponent', require('./components/Partials/Task/TaskComponent.vue').default);
 Vue.component('selecttaskcomponent', require('./components/Partials/Task/SelectTaskComponent.vue').default);
 Vue.component('taskschedulecomponent', require('./components/Partials/Task/TaskScheduleComponent.vue').default);
+Vue.component('selectnewscomponent', require('./components/Partials/News/SelectNewsComponent.vue').default);
+
 
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
