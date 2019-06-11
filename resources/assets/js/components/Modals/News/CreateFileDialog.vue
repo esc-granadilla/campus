@@ -37,7 +37,7 @@
                                  @click="pickFile"
                                  v-model="imageName"
                                  name="imagenes"
-                                 prepend-icon="attach_file"
+                                 prepend-icon="image"
                               ></v-text-field>
                               <input
                                  type="file"
@@ -52,6 +52,7 @@
                               v-model="file.link"
                               :label="texto.label"
                               :placeholder="texto.placeholder"
+                              :prepend-icon="texto.icon"
                               name="archivos"
                               v-show="bottomNav != 2"
                            ></v-text-field>
@@ -71,7 +72,7 @@
 
                            <v-btn dark>
                               <span>Archivo</span>
-                              <v-icon>book</v-icon>
+                              <v-icon>attach_file</v-icon>
                            </v-btn>
 
                            <v-btn dark>
@@ -85,7 +86,7 @@
                </v-card-text>
                <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="red darken-1" flat @click="dialogCreate = false">Cerrar</v-btn>
+                  <v-btn color="red darken-1" flat @click="restaurar();dialogCreate = false;">Cerrar</v-btn>
                   <v-btn color="green darken-1" flat @click="validar">Salvar</v-btn>
                </v-card-actions>
             </v-card>
@@ -109,7 +110,8 @@ export default {
          imageName: "",
          texto: {
             label: "*Ingrese el link del video a compartir",
-            placeholder: "Solo videos de youtube"
+            placeholder: "Solo videos de youtube",
+            icon: "ondemand_video"
          },
          imageUrl: "",
          imageFile: "",
@@ -125,9 +127,23 @@ export default {
    methods: {
       validar() {
          if (this.$refs.form.validate()) {
+            let newfile = {
+               id: null,
+               titulo: this.file.titulo,
+               tipo: this.file.tipo,
+               link: this.file.link,
+               news_id: ""
+            };
             if (this.file.tipo != "imagen" && this.file.link != "") {
+               if (
+                  this.file.tipo == "video" &&
+                  !this.file.link.startsWith("https://www.youtube.com")
+               ) {
+                  this.mensajeerror("Solo se permiten videos de youtube.");
+                  return;
+               }
                this.dialogCreate = false;
-               this.$emit("speak", this.file);
+               this.$emit("speak", newfile);
                this.restaurar();
             } else if (this.file.tipo == "imagen" && this.imageName != "") {
                let self = this;
@@ -138,9 +154,9 @@ export default {
                };
                axios.post("/store", data, config).then(function(res) {
                   if (res.data.name != "error") {
-                     self.file.link = res.data.name;
+                     newfile.link = "/storage" + res.data.name.substr(6);
                      self.dialogCreate = false;
-                     self.$emit("speak", self.file);
+                     self.$emit("speak", newfile);
                      self.restaurar();
                   } else {
                      self.mensajeerror("Esta imagen no pudo ser almacenada.");
@@ -169,6 +185,7 @@ export default {
          this.imageName = "";
          this.imageUrl = "";
          this.imageFile = "";
+         this.$refs.form.resetValidation();
       },
       pickFile() {
          this.$refs.image.click();
@@ -225,7 +242,8 @@ export default {
                this.file.tipo = "video";
                this.texto = {
                   label: "*Ingrese el link del video a compartir",
-                  placeholder: "Solo videos de youtube"
+                  placeholder: "Solo videos de youtube",
+                  icon: "ondemand_video"
                };
                this.file.link = "";
                break;
@@ -233,7 +251,8 @@ export default {
                this.file.tipo = "archivo";
                this.texto = {
                   label: "*Ingrese el link del archivo a compartir",
-                  placeholder: ""
+                  placeholder: "",
+                  icon: "attach_file"
                };
                this.file.link = "";
                break;

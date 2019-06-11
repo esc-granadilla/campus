@@ -1,10 +1,10 @@
 <template>
    <v-container grid-list-md>
       <v-layout justify-end>
-         <createnewsdialog :tipo="'Global'"></createnewsdialog>
+         <createnewsdialog :tipo="'Global'" v-on:speak="actualizarMethod($event)"></createnewsdialog>
       </v-layout>
       <br>
-      <selectnewscomponent></selectnewscomponent>
+      <selectnewscomponent :news="news" v-on:speak="actualizarMethod($event)"></selectnewscomponent>
    </v-container>
 </template>
 <script>
@@ -14,7 +14,20 @@ export default {
       createnewsdialog
    },
    data() {
-      return {};
+      return {
+         news: [],
+         data: {
+            tipo: "Global"
+         }
+      };
+   },
+   methods: {
+      actualizarMethod: function(msj) {
+         axios.get("news", this.data).then(res => (this.news = res.data));
+      }
+   },
+   mounted() {
+      axios.get("news", this.data).then(res => (this.news = res.data));
    }
 };
 </script>

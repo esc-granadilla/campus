@@ -35,6 +35,8 @@ Route::resource('grades', 'GradeController');
 
 Route::resource('tasks', 'TaskController');
 
+Route::resource('news', 'NewsController');
+
 Route::resource('taskhistories', 'TaskhistoryController');
 
 Route::resource('questions', 'QuestionController');
