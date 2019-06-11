@@ -6,6 +6,12 @@
          :dialogDeletes="dialogDelete"
          v-on:speak="borrarMethod($event)"
       ></dialogdelete>
+      <createnewsdialog
+         :tipo="tipo"
+         :accion="'edit'"
+         :data="data"
+         v-on:speak="actualizarMethod($event)"
+      ></createnewsdialog>
       <v-data-iterator
          :items="news"
          :rows-per-page-items="rowsPerPageItems"
@@ -43,7 +49,7 @@
                   <v-divider light></v-divider>
                   <v-card-actions class="pa-3 jcr">
                      <v-btn flat dark>ver mas</v-btn>
-                     <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+                     <v-icon small class="mr-2" @click="select(props.item)">edit</v-icon>
                      <v-icon small @click="noticia = props.item; dialogDelete= true;">delete</v-icon>
                   </v-card-actions>
                </v-card>
@@ -55,12 +61,14 @@
 
 <script>
 import dialogdelete from "../../Modals/DialogDelete.vue";
+import createnewsdialog from "../../Modals/News/CreateNewsDialog.vue";
 
 export default {
    components: {
+      createnewsdialog,
       dialogdelete
    },
-   props: ["news"],
+   props: ["news", "tipo"],
    data() {
       return {
          rowsPerPageItems: [3, 6, 9],
@@ -71,6 +79,7 @@ export default {
             rowsPerPage: 3
          },
          mensaje: "",
+         data: null,
          noticia: { id: null }
       };
    },
@@ -91,9 +100,34 @@ export default {
             });
          }
       },
+      select(news) {
+         this.data = {
+            id: news.id,
+            titulo: news.titulo,
+            descripcion: news.descripcion,
+            contenido: news.contenido,
+            tipo: news.tipo,
+            fecha: news.fecha,
+            estado: news.estado,
+            course_id: news.course_id,
+            files: []
+         };
+         news.files.forEach(f => {
+            this.data.files.push({
+               id: f.if,
+               titulo: f.titulo,
+               tipo: f.tipo,
+               link: f.link,
+               news_id: f.news_id
+            });
+         });
+      },
       borrarMethod: function(msg) {
          this.dialogDelete = msg.dialogdelete;
          if (msg.Delete) this.eliminar();
+      },
+      actualizarMethod: function(msj) {
+         this.$emit("speak", true);
       }
    },
    watch: {

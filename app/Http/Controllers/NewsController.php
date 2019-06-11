@@ -32,12 +32,7 @@ class NewsController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $news = [];
-         if ($request->input('tipo') == 'Grupal') {
-            $course_id = (int)$request->session()->get('course');
-            $news = News::where(['estado' => 1, 'tipo' => 'Grupal', 'course_id' => $course_id])->get();
-         } else
-            $news = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
+         $news = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
          foreach ($news as $item) {
             $item->files = File::where('news_id', $item->id)->get();
          }
@@ -90,35 +85,68 @@ class NewsController extends Controller
    /**
     * Display the specified resource.
     *
-    * @param  int  $id
+    * @param  int  $news
+    * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function show($id)
+   public function show(int $id, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $course_id = (int)$request->session()->get('course');
+         $news = News::where(['estado' => 1, 'tipo' => 'Grupal', 'course_id' => $course_id])->get();
+         foreach ($news as $item) {
+            $item->files = File::where('news_id', $item->id)->get();
+         }
+         return response()->json($news, 200);
+      } else {
+         return;
+      }
    }
 
    /**
     * Show the form for editing the specified resource.
     *
-    * @param  int  $id
+    * @param  News  $news
+    * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function edit($id)
+   public function edit(News $news, Request $request)
    {
-      //
+      if ($request->ajax()) {
+         $news = ($news != null && $news->estado == 0) ? null : $news;
+         return response()->json($news, 200);
+      }
    }
 
    /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
+    * @param  News  $news
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, $id)
+   public function update(Request $request, News $news)
    {
-      //
+      if ($request->ajax()) {
+         $files = $news->files()->get();
+         foreach ($files as $file) {
+            $file->delete();
+         }
+         $newsarray = $request->all();
+         $files = $request->input('files');
+         $news->titulo = $newsarray['titulo'];
+         $news->descripcion = $newsarray['descripcion'];
+         $news->contenido = $newsarray['contenido'];
+         $news->save();
+         foreach ($files as $fil) {
+            $fil['news_id'] = $news->id;
+            $file = new File($fil);
+            $file->save();
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se actualizo la noticia correctamente.'], 200);
+      } else {
+         return;
+      }
    }
 
    /**

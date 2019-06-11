@@ -1,6 +1,13 @@
 <template>
    <div>
-      <v-btn round outline color="success" dark @click="dialogCreate = true">Crear Noticia</v-btn>
+      <v-btn
+         round
+         outline
+         color="success"
+         dark
+         @click="dialogCreate = true"
+         v-if="accion=='create'"
+      >Crear Noticia</v-btn>
       <v-layout row justify-center>
          <v-dialog v-model="dialogCreate" persistent max-width="600px">
             <v-card>
@@ -98,7 +105,7 @@ export default {
    components: {
       createfiledialog
    },
-   props: ["tipo"],
+   props: ["tipo", "data", "accion"],
    data() {
       return {
          dialogCreate: false,
@@ -123,14 +130,17 @@ export default {
    methods: {
       validar() {
          if (this.$refs.form.validate()) {
-            if (this.news.contenido == "" && this.news.files.length == 0) {
+            if (
+               (this.news.contenido == null || this.news.contenido == "") &&
+               (this.news.files == null || this.news.files.length == 0)
+            ) {
                this.mensajeerror(
                   "La noticia tiene que tener archivos o contenido escrito."
                );
                return;
             }
             let data = {
-               id: null,
+               id: this.news.id,
                titulo: this.news.titulo,
                descripcion: this.news.descripcion,
                contenido: this.news.contenido,
@@ -140,14 +150,25 @@ export default {
                estado: 1
             };
             let self = this;
-            axios.post("news", data).then(function(res) {
-               self.mensaje = res.data;
-               if (res.data.type == "success") {
-                  self.dialogCreate = false;
-                  self.$emit("speak", data);
-                  self.restaurar();
-               }
-            });
+            if (this.accion == "create") {
+               axios.post("news", data).then(function(res) {
+                  self.mensaje = res.data;
+                  if (res.data.type == "success") {
+                     self.dialogCreate = false;
+                     self.$emit("speak", data);
+                     self.restaurar();
+                  }
+               });
+            } else {
+               axios.put("news/" + data.id, data).then(function(res) {
+                  self.mensaje = res.data;
+                  if (res.data.type == "success") {
+                     self.dialogCreate = false;
+                     self.$emit("speak", data);
+                     self.restaurar();
+                  }
+               });
+            }
          }
       },
       fileMethod: function(msj) {
@@ -188,6 +209,21 @@ export default {
                y: "top",
                timeout: 6000
             });
+      },
+      data(val) {
+         if (val != null) {
+            this.news = {
+               id: val.id,
+               titulo: val.titulo,
+               descripcion: val.descripcion,
+               contenido: val.contenido,
+               fecha: val.fecha,
+               tipo: val.tipo,
+               files: val.files,
+               estado: 1
+            };
+            this.dialogCreate = true;
+         }
       }
    }
 };

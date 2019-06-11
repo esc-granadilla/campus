@@ -4280,6 +4280,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -4287,17 +4292,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      news: [],
-      data: {
-        tipo: "Global"
-      }
+      news: []
     };
   },
   methods: {
     actualizarMethod: function actualizarMethod(msj) {
       var _this = this;
 
-      axios.get("news", this.data).then(function (res) {
+      axios.get("news").then(function (res) {
         return _this.news = res.data;
       });
     }
@@ -4305,7 +4307,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
-    axios.get("news", this.data).then(function (res) {
+    axios.get("news").then(function (res) {
       return _this2.news = res.data;
     });
   }
@@ -5727,12 +5729,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     createfiledialog: _CreateFileDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ["tipo"],
+  props: ["tipo", "data", "accion"],
   data: function data() {
     return {
       dialogCreate: false,
@@ -5763,13 +5772,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     validar: function validar() {
       if (this.$refs.form.validate()) {
-        if (this.news.contenido == "" && this.news.files.length == 0) {
+        if ((this.news.contenido == null || this.news.contenido == "") && (this.news.files == null || this.news.files.length == 0)) {
           this.mensajeerror("La noticia tiene que tener archivos o contenido escrito.");
           return;
         }
 
         var data = {
-          id: null,
+          id: this.news.id,
           titulo: this.news.titulo,
           descripcion: this.news.descripcion,
           contenido: this.news.contenido,
@@ -5779,15 +5788,28 @@ __webpack_require__.r(__webpack_exports__);
           estado: 1
         };
         var self = this;
-        axios.post("news", data).then(function (res) {
-          self.mensaje = res.data;
 
-          if (res.data.type == "success") {
-            self.dialogCreate = false;
-            self.$emit("speak", data);
-            self.restaurar();
-          }
-        });
+        if (this.accion == "create") {
+          axios.post("news", data).then(function (res) {
+            self.mensaje = res.data;
+
+            if (res.data.type == "success") {
+              self.dialogCreate = false;
+              self.$emit("speak", data);
+              self.restaurar();
+            }
+          });
+        } else {
+          axios.put("news/" + data.id, data).then(function (res) {
+            self.mensaje = res.data;
+
+            if (res.data.type == "success") {
+              self.dialogCreate = false;
+              self.$emit("speak", data);
+              self.restaurar();
+            }
+          });
+        }
       }
     },
     fileMethod: function fileMethod(msj) {
@@ -5827,6 +5849,21 @@ __webpack_require__.r(__webpack_exports__);
         y: "top",
         timeout: 6000
       });
+    },
+    data: function data(val) {
+      if (val != null) {
+        this.news = {
+          id: val.id,
+          titulo: val.titulo,
+          descripcion: val.descripcion,
+          contenido: val.contenido,
+          fecha: val.fecha,
+          tipo: val.tipo,
+          files: val.files,
+          estado: 1
+        };
+        this.dialogCreate = true;
+      }
     }
   }
 });
@@ -6104,6 +6141,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Modals/DialogDelete.vue */ "./resources/assets/js/components/Modals/DialogDelete.vue");
+/* harmony import */ var _Modals_News_CreateNewsDialog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Modals/News/CreateNewsDialog.vue */ "./resources/assets/js/components/Modals/News/CreateNewsDialog.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6160,11 +6204,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    createnewsdialog: _Modals_News_CreateNewsDialog_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     dialogdelete: _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ["news"],
+  props: ["news", "tipo"],
   data: function data() {
     return {
       rowsPerPageItems: [3, 6, 9],
@@ -6175,6 +6221,7 @@ __webpack_require__.r(__webpack_exports__);
         rowsPerPage: 3
       },
       mensaje: "",
+      data: null,
       noticia: {
         id: null
       }
@@ -6202,9 +6249,36 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    select: function select(news) {
+      var _this = this;
+
+      this.data = {
+        id: news.id,
+        titulo: news.titulo,
+        descripcion: news.descripcion,
+        contenido: news.contenido,
+        tipo: news.tipo,
+        fecha: news.fecha,
+        estado: news.estado,
+        course_id: news.course_id,
+        files: []
+      };
+      news.files.forEach(function (f) {
+        _this.data.files.push({
+          id: f.if,
+          titulo: f.titulo,
+          tipo: f.tipo,
+          link: f.link,
+          news_id: f.news_id
+        });
+      });
+    },
     borrarMethod: function borrarMethod(msg) {
       this.dialogDelete = msg.dialogdelete;
       if (msg.Delete) this.eliminar();
+    },
+    actualizarMethod: function actualizarMethod(msj) {
+      this.$emit("speak", true);
     }
   },
   watch: {
@@ -8829,13 +8903,46 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Modals_News_CreateNewsDialog_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Modals/News/CreateNewsDialog.vue */ "./resources/assets/js/components/Modals/News/CreateNewsDialog.vue");
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    createnewsdialog: _Modals_News_CreateNewsDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      news: []
+    };
+  },
+  methods: {
+    actualizarMethod: function actualizarMethod(msj) {
+      var _this = this;
+
+      axios.get("news/0").then(function (res) {
+        return _this.news = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    axios.get("news/0").then(function (res) {
+      return _this2.news = res.data;
+    });
   }
 });
 
@@ -44757,7 +44864,7 @@ var render = function() {
         { attrs: { "justify-end": "" } },
         [
           _c("createnewsdialog", {
-            attrs: { tipo: "Global" },
+            attrs: { tipo: "Global", accion: "create", data: null },
             on: {
               speak: function($event) {
                 return _vm.actualizarMethod($event)
@@ -44771,7 +44878,7 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c("selectnewscomponent", {
-        attrs: { news: _vm.news },
+        attrs: { tipo: "Global", news: _vm.news },
         on: {
           speak: function($event) {
             return _vm.actualizarMethod($event)
@@ -46475,18 +46582,20 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-btn",
-        {
-          attrs: { round: "", outline: "", color: "success", dark: "" },
-          on: {
-            click: function($event) {
-              _vm.dialogCreate = true
-            }
-          }
-        },
-        [_vm._v("Crear Noticia")]
-      ),
+      _vm.accion == "create"
+        ? _c(
+            "v-btn",
+            {
+              attrs: { round: "", outline: "", color: "success", dark: "" },
+              on: {
+                click: function($event) {
+                  _vm.dialogCreate = true
+                }
+              }
+            },
+            [_vm._v("Crear Noticia")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "v-layout",
@@ -47175,6 +47284,15 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("createnewsdialog", {
+        attrs: { tipo: _vm.tipo, accion: "edit", data: _vm.data },
+        on: {
+          speak: function($event) {
+            return _vm.actualizarMethod($event)
+          }
+        }
+      }),
+      _vm._v(" "),
       _c("v-data-iterator", {
         attrs: {
           items: _vm.news,
@@ -47298,7 +47416,7 @@ var render = function() {
                                 attrs: { small: "" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.editItem(props.item)
+                                    return _vm.select(props.item)
                                   }
                                 }
                               },
@@ -51423,9 +51541,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-layout", { attrs: { row: "", "justify-center": "" } }, [
-    _vm._v("Lorem ipsum dolor sit amet consectetur, adipisicing elit.")
-  ])
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { "justify-end": "" } },
+        [
+          _c("createnewsdialog", {
+            attrs: { tipo: "Grupal", accion: "create", data: null },
+            on: {
+              speak: function($event) {
+                return _vm.actualizarMethod($event)
+              }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("selectnewscomponent", {
+        attrs: { tipo: "Grupal", news: _vm.news },
+        on: {
+          speak: function($event) {
+            return _vm.actualizarMethod($event)
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
