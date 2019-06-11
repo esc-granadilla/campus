@@ -3,6 +3,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
 import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
+import Profesornotasagregarcomponent from './components/Profesores/Notas/NotasAgregarComponent.vue';
 import Profesorpromediocomponent from './components/Profesores/Promedios/PromedioComponent.vue';
 import Profesortareacomponent from './components/Profesores/Tareas/TareaComponent.vue';
 import Estudiantecomponent from './components/Administradores/Estudiantes/EstudianteComponent.vue';
@@ -85,8 +86,13 @@ export default new Router({
         },
         {
             path: '/pnotas',
-            name: 'pnota',
+            name: 'pnotas',
             component: Profesornotacomponent
+        },
+        {
+            path: '/pnotasagregar',
+            name: 'pnotasagregar',
+            component: Profesornotasagregarcomponent
         },
         {
             path: '/screenteacher',

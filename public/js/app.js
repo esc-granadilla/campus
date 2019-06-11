@@ -8894,6 +8894,297 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      menu: false,
+      mensaje: "",
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        },
+        max: function max(v) {
+          return v == null || v.length <= 50 || "Maximo 50 Caracteres";
+        }
+      },
+      mask: "##.##",
+      trimestres: [{
+        text: "Primer Trimestre",
+        value: 1
+      }, {
+        text: "Segundo Trimestre",
+        value: 2
+      }, {
+        text: "Tercer Trimestre",
+        value: 3
+      }],
+      condiciones: [{
+        text: "Aprobada",
+        value: "Aprobada"
+      }, {
+        text: "Reprobada",
+        value: "Reprobada"
+      }, {
+        text: "Realisada",
+        value: "Realisada"
+      }, {
+        text: "No realisada",
+        value: "No realisada"
+      }],
+      tipos: [{
+        text: "Examen",
+        value: "Examen"
+      }, {
+        text: "Tarea",
+        value: "Tarea"
+      }, {
+        text: "Trabajo o investigación",
+        value: "Trabajo o investigación"
+      }, {
+        text: "Otra",
+        value: "Otra"
+      }],
+      nota: {
+        id: null,
+        titulo: "",
+        valor_porcentual: "",
+        porcentaje_obtenido: "",
+        condicion: "",
+        tipo: "",
+        descripcion: "",
+        trimestre: "",
+        fecha: new Date().toISOString().substr(0, 10),
+        students: [],
+        course_id: null,
+        student_id: "",
+        estado: 1
+      }
+    };
+  },
+  methods: {
+    validar: function validar() {
+      if (this.$refs.form.validate()) {
+        var self = this;
+        axios.post("qualificationstudents/", this.nota).then(function (res) {
+          self.mensaje = res.data;
+          if (res.data.type === "success") self.reset();
+        });
+      }
+    },
+    reset: function reset() {
+      this.nota.students.forEach(function (student) {
+        student.porcentaje_obtenido = "";
+        student.condicion = "";
+      });
+      this.nota = {
+        id: null,
+        titulo: "",
+        valor_porcentual: "",
+        porcentaje_obtenido: "",
+        condicion: "",
+        tipo: "",
+        descripcion: "",
+        trimestre: "",
+        fecha: new Date().toISOString().substr(0, 10),
+        students: this.nota.students,
+        student_id: "",
+        course_id: null,
+        estado: 1
+      };
+      this.$refs.form.resetValidation();
+    }
+  },
+  watch: {
+    mensaje: function mensaje(val) {
+      if (val.type === "success") this.$toast.success(val.message, {
+        y: "top",
+        timeout: 6000
+      });else this.$toast.error(val.message, {
+        y: "top",
+        timeout: 6000
+      });
+    }
+  },
+  mounted: function mounted() {
+    var self = this;
+    axios.get("/studentsforcourse").then(function (res) {
+      self.nota.students = res.data;
+      self.nota.students.forEach(function (student) {
+        student.porcentaje_obtenido = "";
+        student.condicion = "";
+      });
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue?vue&type=script&lang=js& ***!
@@ -10456,9 +10747,13 @@ __webpack_require__.r(__webpack_exports__);
         icon: "notifications",
         ruta: "pnoticias"
       }, {
-        title: "Notas",
+        title: "Ver Notas",
         icon: "spellcheck",
         ruta: "pnotas"
+      }, {
+        title: "Agregar Notas",
+        icon: "spellcheck",
+        ruta: "pnotasagregar"
       }, {
         title: "Promedios",
         icon: "trending_up",
@@ -51508,6 +51803,483 @@ var render = function() {
                   )
                 ],
                 1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "", "max-width": "800px" } },
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", [
+            _c("span", { staticClass: "headline" }, [_vm._v("Agregar Notas")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-container",
+                { attrs: { "grid-list-md": "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { wrap: "" } },
+                    [
+                      _c(
+                        "v-form",
+                        { ref: "form" },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "", "mx-5": "", xs6: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      xs12: "",
+                                      rules: [
+                                        _vm.rules.required,
+                                        _vm.rules.max
+                                      ],
+                                      counter: "",
+                                      label: "*Titulo",
+                                      name: "titulo",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.nota.titulo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.nota, "titulo", $$v)
+                                      },
+                                      expression: "nota.titulo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      xs12: "",
+                                      rules: [_vm.rules.required],
+                                      label: "*Valor Porcentual",
+                                      name: "valor_porcentual",
+                                      prefix: "%",
+                                      mask: _vm.mask,
+                                      "return-masked-value": true,
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.nota.valor_porcentual,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.nota,
+                                          "valor_porcentual",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "nota.valor_porcentual"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "", "mx-5": "", xs6: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      xs12: "",
+                                      counter: "",
+                                      label: "Descripción",
+                                      name: "descripcion"
+                                    },
+                                    model: {
+                                      value: _vm.nota.descripcion,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.nota, "descripcion", $$v)
+                                      },
+                                      expression: "nota.descripcion"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      ref: "menu",
+                                      attrs: {
+                                        "close-on-content-click": false,
+                                        "nudge-right": 40,
+                                        "return-value": _vm.nota.fecha,
+                                        lazy: "",
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "min-width": "290px"
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          return _vm.$set(
+                                            _vm.nota,
+                                            "fecha",
+                                            $event
+                                          )
+                                        },
+                                        "update:return-value": function(
+                                          $event
+                                        ) {
+                                          return _vm.$set(
+                                            _vm.nota,
+                                            "fecha",
+                                            $event
+                                          )
+                                        }
+                                      },
+                                      scopedSlots: _vm._u([
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      label: "*Fecha",
+                                                      "prepend-icon": "event",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.nota.fecha,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.nota,
+                                                          "fecha",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression: "nota.fecha"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ]),
+                                      model: {
+                                        value: _vm.menu,
+                                        callback: function($$v) {
+                                          _vm.menu = $$v
+                                        },
+                                        expression: "menu"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-date-picker",
+                                        {
+                                          attrs: {
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.nota.fecha,
+                                            callback: function($$v) {
+                                              _vm.$set(_vm.nota, "fecha", $$v)
+                                            },
+                                            expression: "nota.fecha"
+                                          }
+                                        },
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.menu = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$refs.menu.save(
+                                                    _vm.nota.fecha
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "", "mx-5": "", xs6: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.tipos,
+                                      rules: [_vm.rules.required],
+                                      "item-text": "text",
+                                      "item-value": "value",
+                                      "menu-props": { returnValue: "value" },
+                                      label: "*Tipo",
+                                      "d-block": ""
+                                    },
+                                    model: {
+                                      value: _vm.nota.tipo,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.nota, "tipo", $$v)
+                                      },
+                                      expression: "nota.tipo"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs6: "", "pt-2": "", "px-3": "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.trimestres,
+                                      rules: [_vm.rules.required],
+                                      "item-text": "text",
+                                      "item-value": "value",
+                                      "menu-props": { returnValue: "value" },
+                                      label: "*Trimestre",
+                                      "d-block": ""
+                                    },
+                                    model: {
+                                      value: _vm.nota.trimestre,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.nota, "trimestre", $$v)
+                                      },
+                                      expression: "nota.trimestre"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.nota.students, function(student) {
+                            return _c(
+                              "v-layout",
+                              {
+                                key: student.id,
+                                attrs: {
+                                  wrap: "",
+                                  "mx-5": "",
+                                  "pt-2": "",
+                                  "px-3": "",
+                                  xs12: "",
+                                  row: ""
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-flex",
+                                  {
+                                    staticStyle: { "align-self": "center" },
+                                    attrs: { xs6: "" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(student.cedula) +
+                                        " " +
+                                        _vm._s(student.nombre) +
+                                        " " +
+                                        _vm._s(student.primer_apellido) +
+                                        " " +
+                                        _vm._s(student.segundo_apellido)
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs3: "" } },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        xs12: "",
+                                        rules: [_vm.rules.required],
+                                        label: "*Porcentaje Obtenido",
+                                        name: "porcentaje_obtenido",
+                                        prefix: "%",
+                                        mask: _vm.mask,
+                                        "return-masked-value": true,
+                                        required: ""
+                                      },
+                                      model: {
+                                        value: student.porcentaje_obtenido,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            student,
+                                            "porcentaje_obtenido",
+                                            $$v
+                                          )
+                                        },
+                                        expression:
+                                          "student.porcentaje_obtenido"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs3: "" } },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.condiciones,
+                                        rules: [_vm.rules.required],
+                                        "item-text": "text",
+                                        "item-value": "value",
+                                        "menu-props": { returnValue: "value" },
+                                        label: "*Condición",
+                                        "d-block": ""
+                                      },
+                                      model: {
+                                        value: student.condicion,
+                                        callback: function($$v) {
+                                          _vm.$set(student, "condicion", $$v)
+                                        },
+                                        expression: "student.condicion"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("small", [_vm._v("*Campos requeridos")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "blue darken-1", flat: "" },
+                  on: { click: _vm.validar }
+                },
+                [_vm._v("Salvar")]
               )
             ],
             1
@@ -101591,6 +102363,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true& */ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true&");
+/* harmony import */ var _NotasAgregarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NotasAgregarComponent.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _NotasAgregarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1e89aa8e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotasAgregarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NotasAgregarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotasAgregarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true& ***!
+  \******************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue?vue&type=template&id=1e89aa8e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotasAgregarComponent_vue_vue_type_template_id_1e89aa8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue":
 /*!******************************************************************************!*\
   !*** ./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue ***!
@@ -102958,20 +103799,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_Profesores_ProfesorComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Profesores/ProfesorComponent.vue */ "./resources/assets/js/components/Profesores/ProfesorComponent.vue");
 /* harmony import */ var _components_Profesores_Notas_NotaComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Profesores/Notas/NotaComponent.vue */ "./resources/assets/js/components/Profesores/Notas/NotaComponent.vue");
-/* harmony import */ var _components_Profesores_Promedios_PromedioComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Profesores/Promedios/PromedioComponent.vue */ "./resources/assets/js/components/Profesores/Promedios/PromedioComponent.vue");
-/* harmony import */ var _components_Profesores_Tareas_TareaComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profesores/Tareas/TareaComponent.vue */ "./resources/assets/js/components/Profesores/Tareas/TareaComponent.vue");
-/* harmony import */ var _components_Administradores_Estudiantes_EstudianteComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Administradores/Estudiantes/EstudianteComponent.vue */ "./resources/assets/js/components/Administradores/Estudiantes/EstudianteComponent.vue");
-/* harmony import */ var _components_Administradores_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administradores/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Administradores/Horario/HorarioComponent.vue");
-/* harmony import */ var _components_Administradores_Seccion_SeccionComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administradores/Seccion/SeccionComponent.vue */ "./resources/assets/js/components/Administradores/Seccion/SeccionComponent.vue");
-/* harmony import */ var _components_Administradores_Asignatura_AsignaturaComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administradores/Asignatura/AsignaturaComponent.vue */ "./resources/assets/js/components/Administradores/Asignatura/AsignaturaComponent.vue");
-/* harmony import */ var _components_Administradores_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Administradores/Asignaciones/Credencial.vue");
-/* harmony import */ var _components_Administradores_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administradores/Curso/CursoComponent.vue */ "./resources/assets/js/components/Administradores/Curso/CursoComponent.vue");
-/* harmony import */ var _components_Administradores_AdministracionDefault_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administradores/AdministracionDefault.vue */ "./resources/assets/js/components/Administradores/AdministracionDefault.vue");
-/* harmony import */ var _components_Administradores_Asignaciones_SeccionAlumnos_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/SeccionAlumnos.vue */ "./resources/assets/js/components/Administradores/Asignaciones/SeccionAlumnos.vue");
-/* harmony import */ var _components_Administradores_Asignaciones_CursoLecciones_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/CursoLecciones.vue */ "./resources/assets/js/components/Administradores/Asignaciones/CursoLecciones.vue");
-/* harmony import */ var _components_Administradores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administradores/Noticias/NewsComponent.vue */ "./resources/assets/js/components/Administradores/Noticias/NewsComponent.vue");
-/* harmony import */ var _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Profesores/Noticias/NewsComponent.vue */ "./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue");
+/* harmony import */ var _components_Profesores_Notas_NotasAgregarComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Profesores/Notas/NotasAgregarComponent.vue */ "./resources/assets/js/components/Profesores/Notas/NotasAgregarComponent.vue");
+/* harmony import */ var _components_Profesores_Promedios_PromedioComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profesores/Promedios/PromedioComponent.vue */ "./resources/assets/js/components/Profesores/Promedios/PromedioComponent.vue");
+/* harmony import */ var _components_Profesores_Tareas_TareaComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profesores/Tareas/TareaComponent.vue */ "./resources/assets/js/components/Profesores/Tareas/TareaComponent.vue");
+/* harmony import */ var _components_Administradores_Estudiantes_EstudianteComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administradores/Estudiantes/EstudianteComponent.vue */ "./resources/assets/js/components/Administradores/Estudiantes/EstudianteComponent.vue");
+/* harmony import */ var _components_Administradores_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administradores/Horario/HorarioComponent.vue */ "./resources/assets/js/components/Administradores/Horario/HorarioComponent.vue");
+/* harmony import */ var _components_Administradores_Seccion_SeccionComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administradores/Seccion/SeccionComponent.vue */ "./resources/assets/js/components/Administradores/Seccion/SeccionComponent.vue");
+/* harmony import */ var _components_Administradores_Asignatura_AsignaturaComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administradores/Asignatura/AsignaturaComponent.vue */ "./resources/assets/js/components/Administradores/Asignatura/AsignaturaComponent.vue");
+/* harmony import */ var _components_Administradores_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/Credencial.vue */ "./resources/assets/js/components/Administradores/Asignaciones/Credencial.vue");
+/* harmony import */ var _components_Administradores_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administradores/Curso/CursoComponent.vue */ "./resources/assets/js/components/Administradores/Curso/CursoComponent.vue");
+/* harmony import */ var _components_Administradores_AdministracionDefault_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administradores/AdministracionDefault.vue */ "./resources/assets/js/components/Administradores/AdministracionDefault.vue");
+/* harmony import */ var _components_Administradores_Asignaciones_SeccionAlumnos_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/SeccionAlumnos.vue */ "./resources/assets/js/components/Administradores/Asignaciones/SeccionAlumnos.vue");
+/* harmony import */ var _components_Administradores_Asignaciones_CursoLecciones_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administradores/Asignaciones/CursoLecciones.vue */ "./resources/assets/js/components/Administradores/Asignaciones/CursoLecciones.vue");
+/* harmony import */ var _components_Administradores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Administradores/Noticias/NewsComponent.vue */ "./resources/assets/js/components/Administradores/Noticias/NewsComponent.vue");
+/* harmony import */ var _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Profesores/Noticias/NewsComponent.vue */ "./resources/assets/js/components/Profesores/Noticias/NewsComponent.vue");
 /*jshint esversion: 6 */
+
 
 
 
@@ -102997,11 +103840,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/admin',
     name: 'admin',
-    component: _components_Administradores_AdministracionDefault_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_Administradores_AdministracionDefault_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   }, {
     path: '/credencial',
     name: 'credencial',
-    component: _components_Administradores_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _components_Administradores_Asignaciones_Credencial_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: '/profesor',
     name: 'profesorcomponent',
@@ -103009,55 +103852,59 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, {
     path: '/estudiante',
     name: 'estudiantecomponent',
-    component: _components_Administradores_Estudiantes_EstudianteComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Administradores_Estudiantes_EstudianteComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/asignatura',
     name: 'asignaturacomponent',
-    component: _components_Administradores_Asignatura_AsignaturaComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _components_Administradores_Asignatura_AsignaturaComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   }, {
     path: '/horario',
     name: 'horariocomponent',
-    component: _components_Administradores_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_Administradores_Horario_HorarioComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
     path: '/seccion',
     name: 'seccioncomponent',
-    component: _components_Administradores_Seccion_SeccionComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_Administradores_Seccion_SeccionComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: '/seccion_alumnos',
     name: 'asigseccionalumnoscomponent',
-    component: _components_Administradores_Asignaciones_SeccionAlumnos_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _components_Administradores_Asignaciones_SeccionAlumnos_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
     path: '/curso',
     name: 'cursocomponent',
-    component: _components_Administradores_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_Administradores_Curso_CursoComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: '/curso_leccion',
     name: 'asigcursoleccionescomponent',
-    component: _components_Administradores_Asignaciones_CursoLecciones_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _components_Administradores_Asignaciones_CursoLecciones_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: '/pnoticias',
     name: 'pnoticias',
-    component: _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   }, {
     path: '/anoticias',
     name: 'anoticias',
-    component: _components_Administradores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _components_Administradores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }, {
     path: '/pnotas',
-    name: 'pnota',
+    name: 'pnotas',
     component: _components_Profesores_Notas_NotaComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }, {
+    path: '/pnotasagregar',
+    name: 'pnotasagregar',
+    component: _components_Profesores_Notas_NotasAgregarComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
     path: '/screenteacher',
     name: 'screenteacher',
-    component: _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_Profesores_Noticias_NewsComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   }, {
     path: '/ppromedios',
     name: 'ppromedios',
-    component: _components_Profesores_Promedios_PromedioComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _components_Profesores_Promedios_PromedioComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/ptareas',
     name: 'ptareas',
-    component: _components_Profesores_Tareas_TareaComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _components_Profesores_Tareas_TareaComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 }));
 

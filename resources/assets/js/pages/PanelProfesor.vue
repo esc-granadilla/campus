@@ -47,9 +47,14 @@ export default {
             ruta: "pnoticias"
          },
          {
-            title: "Notas",
+            title: "Ver Notas",
             icon: "spellcheck",
             ruta: "pnotas"
+         },
+         {
+            title: "Agregar Notas",
+            icon: "spellcheck",
+            ruta: "pnotasagregar"
          },
          {
             title: "Promedios",

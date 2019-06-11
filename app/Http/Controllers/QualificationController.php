@@ -55,10 +55,12 @@ class QualificationController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
+         $course = (int)$request->session()->get('course');
          $qualifi = Qualification::where([
             'titulo' => $request->input('titulo'),
             'trimestre' => $request->input('trimestre'),
-            'student_id' => $request->input('student_id')
+            'student_id' => $request->input('student_id'),
+            'course_id' => $course
          ])->first();
          if ($qualifi != null) {
             if ($qualifi->estado == 0) {
@@ -68,20 +70,50 @@ class QualificationController extends Controller
                return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
             }
          } else {
-            $qualification = new Qualification();
-            $qualification->titulo = $request->input('titulo');
-            $qualification->valor_porcentual = (float)$request->input('valor_porcentual');
-            $qualification->porcentaje_obtenido = (float)$request->input('porcentaje_obtenido');
-            $qualification->tipo = $request->input('tipo');
-            $qualification->condicion = $request->input('condicion');
-            $qualification->descripcion = $request->input('descripcion');
-            $qualification->trimestre = (int)$request->input('trimestre');
-            $qualification->fecha = $request->input('fecha');
-            $qualification->student_id = $request->input('student_id');
-            $qualification->course_id = (int)$request->session()->get('course');
+            $qualificationarray = $request->all();
+            $qualificationarray['course_id'] = $course;
+            $qualification = new Qualification($qualificationarray);
             $qualification->save();
          }
          return response()->json(['type' => 'success', 'message' => 'Se registro la nota correctamente'], 200);
+      }
+   }
+
+   /**
+    * Store any a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function qualificationstudents(Request $request)
+   {
+      if ($request->ajax()) {
+         $students = $request->input('students');
+         $qualificationarray = $request->all();
+         $course = (int)$request->session()->get('course');
+         $estado = false;
+         foreach ($students as $student) {
+            $qualifi = Qualification::where([
+               'titulo' => $qualificationarray['titulo'],
+               'trimestre' => $qualificationarray['trimestre'],
+               'student_id' => $student['id'],
+               'course_id' => $course
+            ])->first();
+            if ($qualifi != null) $estado = true;
+         }
+         if ($estado) {
+            return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
+         } else {
+            foreach ($students as $student) {
+               $qualificationarray['porcentaje_obtenido'] = $student['porcentaje_obtenido'];
+               $qualificationarray['condicion'] = $student['condicion'];
+               $qualificationarray['student_id'] = $student['id'];
+               $qualificationarray['course_id'] = $course;
+               $qualification = new Qualification($qualificationarray);
+               $qualification->save();
+            }
+         }
+         return response()->json(['type' => 'success', 'message' => 'Se registraron las notas correctamente'], 200);
       }
    }
 

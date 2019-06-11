@@ -43,6 +43,8 @@ Route::resource('questions', 'QuestionController');
 
 Route::resource('qualifications', 'QualificationController');
 
+Route::post('/qualificationstudents', 'QualificationController@qualificationstudents')->name('qualificationstudents');;
+
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
 Route::post('/updatecredencial/{user}', 'AdministracionController@updatecredencial')->name('updatecredencial');
@@ -84,6 +86,8 @@ Route::get('/lessonsstock/{course}', 'AdministracionController@lessonsstock');
 Route::post('/addlessonsforcourse/{course}', 'AdministracionController@addlessonsforcourse');
 
 Route::get('/pnotas', 'ProfesorController@index');
+
+Route::get('/pnotasagregar', 'ProfesorController@index');
 
 Route::get('/pnoticias', 'ProfesorController@index');
 
