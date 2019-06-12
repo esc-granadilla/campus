@@ -55,6 +55,10 @@ class EstudianteController extends Controller
       if ($request->session()->has('student')) {
          $student = $request->session()->get('student');
          $student = Student::where('cedula', $student[0]['cedula'])->first();
+         $section = $student->section()->first();
+         $student->seccion = "no asignada";
+         if ($section != null)
+            $student->seccion = $section->seccion;
          return view('profilestudent', compact('student'));
       }
       return view('home');

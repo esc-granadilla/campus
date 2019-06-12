@@ -20,7 +20,7 @@ class StudentController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->middleware('administrador', ['only' => ['create', 'store', 'update', 'destroy']]);
+      $this->middleware('administrador', ['only' => ['create', 'store', 'destroy']]);
       $this->middleware('profesor', ['only' => ['index', 'show', 'edit']]);
    }
    /**

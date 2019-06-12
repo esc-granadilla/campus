@@ -2,7 +2,7 @@
 
 @section('content')
    @if (!Auth::guest())
-      <profilestudents student="{{$student}}"></profilestudents>
+      <profilestudents student="{{$student->toJson()}}"></profilestudents>
    @endif
 @endsection
 
