@@ -104,6 +104,8 @@ Route::get('/screenteacher', 'ProfesorController@index');
 
 Route::get('/screenstudent', 'EstudianteController@index');
 
+Route::get('/enoticias', 'HomeController@index');
+
 Route::get(
    '/getcoursesteacher/{teacher}',
    'ProfesorController@getcoursesteacher'

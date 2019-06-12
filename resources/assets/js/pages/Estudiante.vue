@@ -1,80 +1,42 @@
 <template>
-   <v-container grid-list-md>
-      <v-form id="nativeForm" method="post" action="/screenstudent">
-         <v-text-field id="ids" required hidden name="id"></v-text-field>
-      </v-form>
-      <v-data-iterator
-         :items="cursos"
-         :rows-per-page-items="rowsPerPageItems"
-         :pagination.sync="pagination"
-         rowsPerPageText="Elementos por página:"
-         rowsPerPageAll="Todos"
-         pageText="{0}-{1} de {2}"
-         noResultsText="Ningún resultado a mostrar"
-         nextPage="Página siguiente"
-         prevPage="Página anterior"
-         noDataText="Ningún dato disponible"
-         content-tag="v-layout"
-         row
-         wrap
-      >
-         <template v-slot:item="props">
-            <v-flex xs12 sm6 md4 lg3>
-               <v-card>
-                  <v-card-title>
-                     <h4>{{ props.item.curso.nombre }}</h4>
-                  </v-card-title>
-                  <v-divider></v-divider>
-                  <v-list dense>
-                     <v-list-tile>
-                        <v-list-tile-content>Sección:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ props.item.seccion.seccion }}</v-list-tile-content>
-                     </v-list-tile>
-                     <v-list-tile>
-                        <v-list-tile-content class="align-center">
-                           <v-btn
-                              round
-                              dark
-                              color="primary"
-                              block
-                              @click="seleccionarCurso(props.item.id)"
-                           >Seleccionar</v-btn>
-                        </v-list-tile-content>
-                     </v-list-tile>
-                  </v-list>
-               </v-card>
-            </v-flex>
-         </template>
-      </v-data-iterator>
-   </v-container>
+   <v-flex>
+      <transition name="component-fade" mode="out-in">
+         <router-view :estudiante_id="estudiante_id"></router-view>
+      </transition>
+   </v-flex>
 </template>
 
 <script>
 export default {
    props: ["estudiante_id"],
-   data: () => ({
-      rowsPerPageItems: [4, 8, 12],
-      pagination: {
-         rowsPerPage: 4
-      },
-      cursos: [],
-      selectedCurso: {
-         id: 0,
-         course_id: 0,
-         section_id: 0
-      }
-   }),
-   methods: {
-      seleccionarCurso(id) {
-         document.getElementById("ids").value = "" + id;
-         nativeForm.submit();
-      }
-   },
-   mounted() {
-      var self = this;
-      axios.get("/getcoursesstudent/" + this.estudiante_id).then(function(res) {
-         self.cursos = res.data;
-      });
-   }
+   data: () => ({})
 };
 </script>
+
+<style scoped>
+.component-fade-enter-active,
+.component-fade-leave-active {
+   transition: opacity 0.3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active below version 2.1.8 */ {
+   opacity: 0;
+}
+.component-fade-leave-active {
+   animation: bounce-in 0.5s reverse;
+}
+.component-fade-enter {
+   animation: bounce-in 0.5s;
+}
+@keyframes bounce-in {
+   0% {
+      transform: translateY(-25%);
+   }
+   50% {
+      transform: translateY(-75%);
+   }
+   100% {
+      transform: translateY(0%);
+   }
+}
+</style>
