@@ -49,4 +49,14 @@ class EstudianteController extends Controller
          return response()->json($cursos, 200);
       }
    }
+
+   public function show(Request $request)
+   {
+      if ($request->session()->has('student')) {
+         $student = $request->session()->get('student');
+         $student = Student::where('cedula', $student[0]['cedula'])->first();
+         return view('profilestudent', compact('student'));
+      }
+      return view('home');
+   }
 }

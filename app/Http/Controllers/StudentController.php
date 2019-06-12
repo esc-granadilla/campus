@@ -114,6 +114,9 @@ class StudentController extends Controller
             if ($request->input('section_id') != null) {
                $student->section_id = (int)$request->input('section_id');
             }
+            if ($request->has('foto')) {
+               $student->foto = $request->input('foto');
+            }
             $student->save();
             return response()->json(['type' => 'success', 'message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
          }

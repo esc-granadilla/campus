@@ -1,4 +1,6 @@
 <?php
+use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,9 @@
 Route::get('/', function () {
    return view('welcome');
 });
+
+Route::get('/profileteacher', 'ProfesorController@show')->name('profileteacher');
+Route::get('/profilestudent', 'EstudianteController@show')->name('profilestudent');
 
 Auth::routes();
 

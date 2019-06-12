@@ -65,7 +65,11 @@ export default {
          if (this.login === "true") {
             return [
                { title: "Mis Cursos", icon: "home", ruta: "/home" },
-               { title: this.name, icon: "account_circle", ruta: "#" },
+               {
+                  title: this.name,
+                  icon: "account_circle",
+                  ruta: "/profilestudent"
+               },
                {
                   title: "Cerrar Sessión",
                   icon: "exit_to_app",

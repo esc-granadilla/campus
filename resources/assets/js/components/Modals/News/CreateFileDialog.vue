@@ -104,7 +104,7 @@ export default {
          bottomNav: 0,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 3 || "Min 9 Caracteres",
+            min: v => v.length >= 3 || "Min 3 Caracteres",
             max: v => v.length <= 250 || "Maximo 250 Caracteres"
          },
          imageName: "",

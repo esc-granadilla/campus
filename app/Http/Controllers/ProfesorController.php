@@ -12,6 +12,7 @@ use Campus\Task;
 use Campus\Taskhistory;
 use Campus\Qualification;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Session;
 
 class ProfesorController extends Controller
 {
@@ -412,5 +413,15 @@ class ProfesorController extends Controller
          return response()->json(['name' => $name], 200);
       }
       return response()->json(['name' => 'error'], 200);
+   }
+
+   public function show(Request $request)
+   {
+      if ($request->session()->has('teacher')) {
+         $teacher = $request->session()->get('teacher');
+         $teacher = Teacher::where('cedula', $teacher[0]['cedula'])->first();
+         return view('profileteacher', compact('teacher'));
+      }
+      return view('home');
    }
 }

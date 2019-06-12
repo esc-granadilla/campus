@@ -106,7 +106,7 @@ class TeacherController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function show($id, Request $request)
+   public function show(Teacher $teacher, Request $request)
    {
       if ($request->ajax()) {
          $teacher = ($teacher != null && $teacher->estado == 0) ? new Teacher() : $teacher;
@@ -156,6 +156,9 @@ class TeacherController extends Controller
          $teacher->fecha_ingreso = $request->input('fecha_ingreso');
          $teacher->telefono1 = $request->input('telefono1');
          $teacher->telefono2 = $request->input('telefono2');
+         if ($request->has('foto')) {
+            $teacher->foto = $request->input('foto');
+         }
          $teacher->save();
          return response()->json(['type' => 'success', 'message' => 'Datos del Profesor fueron actualizados correctamente'], 200);
       }

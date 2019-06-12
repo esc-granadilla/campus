@@ -28,7 +28,7 @@
                               :rules="[rules.required]"
                               label="*Valor Porcentual"
                               name="valor_porcentual"
-                              prefix="%"
+                              suffix="%"
                               :mask="mask"
                               :return-masked-value="true"
                               required
@@ -123,7 +123,7 @@
                               :rules="[rules.required]"
                               label="*Porcentaje Obtenido"
                               name="porcentaje_obtenido"
-                              prefix="%"
+                              suffix="%"
                               :mask="mask"
                               :return-masked-value="true"
                               required

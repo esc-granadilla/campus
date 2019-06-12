@@ -26,6 +26,7 @@ class HomeController extends Controller
    {
       if ($request->user()->hasRole('Usuario')) {
          $estudiante = $request->user()->student()->first();
+         $request->session()->push('student', $estudiante);
          return view('home', compact('estudiante'));
       } elseif ($request->user()->hasAnyRole(['Profesor', 'Administrador'])) {
          $profesor = $request->user()->teacher()->first();

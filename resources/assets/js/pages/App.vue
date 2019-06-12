@@ -70,7 +70,11 @@ export default {
                   ruta: "/admin"
                },
                { title: "Mis Cursos", icon: "home", ruta: "/home" },
-               { title: this.name, icon: "account_circle", ruta: "#" },
+               {
+                  title: this.name,
+                  icon: "account_circle",
+                  ruta: "/profileteacher"
+               },
                {
                   title: "Cerrar Sessión",
                   icon: "exit_to_app",
@@ -89,7 +93,7 @@ export default {
 };
 </script>
 
-<style scoped lang="css">
+<style scoped>
 a {
    margin-left: 0.5em;
    margin-right: 0.5em;
