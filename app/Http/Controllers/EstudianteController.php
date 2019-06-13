@@ -4,6 +4,8 @@ namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Campus\Student;
+use Campus\News;
+use Carbon\Carbon;
 
 class EstudianteController extends Controller
 {
@@ -62,5 +64,15 @@ class EstudianteController extends Controller
          return view('profilestudent', compact('student'));
       }
       return view('home');
+   }
+
+   public function statusnotifications(Request $request)
+   {
+      if ($request->ajax()) {
+         $notificaciones = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
+         $fecha = Carbon::now('America/Costa_Rica')->subWeek(1)->format('Y-m-d');
+         $notificacionespasadas = News::whereDate('created_at', '>=', $fecha)->where(['estado' => 1, 'tipo' => 'Global'])->get();
+         return response()->json(['totales' => $notificaciones->count(), 'actuales' => $notificacionespasadas->count()], 200);
+      }
    }
 }

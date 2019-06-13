@@ -11,7 +11,7 @@
                      <v-layout xs12>
                         <v-flex xs5 class="text-xs-center">
                            <img
-                              :src="estudiante.foto!='none'?estudiante.foto:'/storage/imagen/profile.jpg'"
+                              :src="estudiante.foto!='none'?estudiante.foto:'/storage/imagen/default-user.png'"
                               height="125"
                            >
                            <v-flex
@@ -129,7 +129,7 @@
                   <v-icon small>edit</v-icon>
                </v-btn>
                <v-btn fab dark small color="error" @click="edit=false" v-if="edit">
-                  <v-icon small>exit</v-icon>
+                  <v-icon small>close</v-icon>
                </v-btn>
                <v-btn fab dark small color="green" @click="validar()" v-if="edit">
                   <v-icon small>save</v-icon>

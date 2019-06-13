@@ -18,7 +18,8 @@ import AsigSeccionAlumnoscomponent from './components/Administradores/Asignacion
 import AsigCursoLeccionescomponent from './components/Administradores/Asignaciones/CursoLecciones.vue';
 import Administradornoticiascomponent from './components/Administradores/Noticias/NewsComponent.vue';
 import Profesornoticiascomponent from './components/Profesores/Noticias/NewsComponent.vue';
-import Estudiantenoticiascomponent from './components/Estudiantes/Noticias/NewsComponent.vue';
+import Estudiantenoticiasglobalcomponent from './components/Estudiantes/Noticias/NewsGlobalComponent.vue';
+import Estudiantenoticiasgrupalcomponent from './components/Estudiantes/Noticias/NewsGrupalComponent.vue';
 
 Vue.use(Router);
 
@@ -84,7 +85,7 @@ export default new Router({
         {
             path: '/enoticias',
             name: 'enoticias',
-            component: Estudiantenoticiascomponent
+            component: Estudiantenoticiasglobalcomponent
         },
         {
             path: '/anoticias',
@@ -105,6 +106,16 @@ export default new Router({
             path: '/screenteacher',
             name: 'screenteacher',
             component: Profesornoticiascomponent
+        },
+        {
+            path: '/screenstudent',
+            name: 'screenstudent',
+            component: Estudiantenoticiasgrupalcomponent
+        },
+        {
+            path: '/egnoticias',
+            name: 'egnoticias',
+            component: Estudiantenoticiasgrupalcomponent
         },
         {
             path: '/home',

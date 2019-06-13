@@ -33,7 +33,7 @@ class TaskController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $tareas = Task::where('estado', 1)->get();
+         $tareas = Task::where('estado', 1)->orderBy('created_at', 'des')->get();
          return response()->json($tareas, 200);
       }
    }
@@ -83,7 +83,7 @@ class TaskController extends Controller
          if ($id == 0) {
             $course = Course::all()->find((int)$request->session()->get('course'));
             $id = $course->subject()->first()->id;
-            $tasks = Task::where(['estado' => 1, 'subject_id' => $id])->get();
+            $tasks = Task::where(['estado' => 1, 'subject_id' => $id])->orderBy('created_at', 'des')->get();
             return response()->json($tasks, 200);
          } else {
             $task = Task::where('id', $id)->first();

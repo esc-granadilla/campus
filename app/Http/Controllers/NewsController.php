@@ -22,7 +22,7 @@ class NewsController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->middleware('profesor');
+      $this->middleware('profesor', ['except' => ['show', 'index']]);
    }
    /**
     * Display a listing of the resource.
@@ -32,9 +32,9 @@ class NewsController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $news = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
+         $news = News::where(['estado' => 1, 'tipo' => 'Global'])->orderBy('created_at', 'des')->get();
          foreach ($news as $item) {
-            $item->files = File::where('news_id', $item->id)->get();
+            $item->files = File::where('news_id', $item->id)->orderBy('created_at', 'des')->get();
          }
          return response()->json($news, 200);
       } else {

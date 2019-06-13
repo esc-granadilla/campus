@@ -48,17 +48,9 @@
       </v-data-iterator>
       <v-flex class="footer" height="auto">
          <v-card-text style="height: 100px;">
-            <v-btn
-               absolute
-               dark
-               fab
-               top
-               right
-               color="indigo darken-4"
-               @click="$router.push('/enoticias')"
-            >
-               1
-               <v-icon>add</v-icon>
+            <v-btn absolute dark fab top right color="indigo darken-4" @click="shownews">
+               {{actual}}
+               <v-icon class="unido">{{notificacion}}</v-icon>
             </v-btn>
          </v-card-text>
       </v-flex>
@@ -73,6 +65,8 @@ export default {
       pagination: {
          rowsPerPage: 4
       },
+      total: "",
+      actual: "",
       cursos: [],
       selectedCurso: {
          id: 0,
@@ -84,6 +78,9 @@ export default {
       seleccionarCurso(id) {
          document.getElementById("ids").value = "" + id;
          nativeForm.submit();
+      },
+      shownews() {
+         if (this.total != "0") this.$router.push("/enoticias");
       }
    },
    mounted() {
@@ -91,6 +88,17 @@ export default {
       axios.get("/getcoursesstudent/" + this.estudiante_id).then(function(res) {
          self.cursos = res.data;
       });
+      axios.get("/statusnotifications/").then(function(res) {
+         self.total = res.data.totales;
+         self.actual = res.data.actuales == "0" ? "" : res.data.actuales;
+      });
+   },
+   computed: {
+      notificacion() {
+         if (this.total == 0) return "notifications_none";
+         if (this.actual != "") return "notifications_active";
+         return "notifications";
+      }
    }
 };
 </script>
@@ -103,5 +111,10 @@ export default {
    bottom: 4px;
    right: 68px;
    position: absolute;
+}
+.unido {
+   padding: 0px;
+   margin: 0px;
+   width: auto;
 }
 </style>
