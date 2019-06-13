@@ -73,6 +73,8 @@ class NewsController extends Controller
          $news->save();
          foreach ($files as $fil) {
             $fil['news_id'] = $news->id;
+            if ($fil['tipo'] == 'video')
+               $fil['link'] = 'https://www.youtube.com/embed/' . explode('&', explode('=', $fil['link'])[1])[0];
             $file = new File($fil);
             $file->save();
          }

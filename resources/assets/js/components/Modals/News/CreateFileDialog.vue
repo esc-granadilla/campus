@@ -137,7 +137,8 @@ export default {
             if (this.file.tipo != "imagen" && this.file.link != "") {
                if (
                   this.file.tipo == "video" &&
-                  !this.file.link.startsWith("https://www.youtube.com")
+                  (!this.file.link.startsWith("https://www.youtube.com") &&
+                     !this.file.link.startsWith("http://www.youtube.com"))
                ) {
                   this.mensajeerror("Solo se permiten videos de youtube.");
                   return;

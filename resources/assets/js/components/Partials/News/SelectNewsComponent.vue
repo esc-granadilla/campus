@@ -12,6 +12,7 @@
          :data="data"
          v-on:speak="actualizarMethod($event)"
       ></createnewsdialog>
+      <shownewsdialog :news="newstemp" v-on:speak="cerrarMethod($event)"></shownewsdialog>
       <v-data-iterator
          :items="news"
          :rows-per-page-items="rowsPerPageItems"
@@ -48,7 +49,7 @@
                   </v-layout>
                   <v-divider light></v-divider>
                   <v-card-actions class="pa-3 jcr">
-                     <v-btn flat dark>ver mas</v-btn>
+                     <v-btn flat dark @click="mostrar(props.item)">ver mas</v-btn>
                      <v-icon small class="mr-2" @click="select(props.item)">edit</v-icon>
                      <v-icon small @click="noticia = props.item; dialogDelete= true;">delete</v-icon>
                   </v-card-actions>
@@ -62,11 +63,13 @@
 <script>
 import dialogdelete from "../../Modals/DialogDelete.vue";
 import createnewsdialog from "../../Modals/News/CreateNewsDialog.vue";
+import shownewsdialog from "../../Modals/News/ShowNewsDialog.vue";
 
 export default {
    components: {
       createnewsdialog,
-      dialogdelete
+      dialogdelete,
+      shownewsdialog
    },
    props: ["news", "tipo"],
    data() {
@@ -80,6 +83,7 @@ export default {
          },
          mensaje: "",
          data: null,
+         newstemp: null,
          noticia: { id: null }
       };
    },
@@ -99,6 +103,31 @@ export default {
                self.mensaje = res.data;
             });
          }
+      },
+      mostrar(news) {
+         this.newstemp = {
+            id: news.id,
+            titulo: news.titulo,
+            descripcion: news.descripcion,
+            contenido: news.contenido,
+            tipo: news.tipo,
+            fecha: news.fecha,
+            estado: news.estado,
+            course_id: news.course_id,
+            files: []
+         };
+         news.files.forEach(f => {
+            this.newstemp.files.push({
+               id: f.if,
+               titulo: f.titulo,
+               tipo: f.tipo,
+               link: f.link,
+               news_id: f.news_id
+            });
+         });
+      },
+      cerrarMethod: function(msj) {
+         this.newstemp = null;
       },
       select(news) {
          this.data = {
