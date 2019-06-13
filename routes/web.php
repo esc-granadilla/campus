@@ -1,4 +1,6 @@
 <?php
+use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,72 +17,137 @@ Route::get('/', function () {
    return view('welcome');
 });
 
+Route::get('/profileteacher', 'ProfesorController@show')->name('profileteacher');
+Route::get('/profilestudent', 'EstudianteController@show')->name('profilestudent');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('profesors', 'ProfesorController');
+Route::resource('teachers', 'TeacherController');
 
-Route::resource('estudiantes', 'EstudianteController');
+Route::resource('students', 'StudentController');
 
-Route::resource('horarios', 'HorarioController');
+Route::resource('schedules', 'ScheduleController');
 
-Route::resource('cursos', 'CursoController');
+Route::resource('subjects', 'SubjectController');
 
-Route::resource('noticias', 'NoticiaController');
+Route::resource('sections', 'SectionController');
 
-Route::resource('notas', 'NotaController');
+Route::resource('courses', 'CourseController');
+
+Route::resource('grades', 'GradeController');
+
+Route::resource('tasks', 'TaskController');
+
+Route::resource('news', 'NewsController');
+
+Route::resource('taskhistories', 'TaskhistoryController');
+
+Route::resource('questions', 'QuestionController');
+
+Route::resource('qualifications', 'QualificationController');
+
+Route::post('/qualificationstudents', 'QualificationController@qualificationstudents')->name('qualificationstudents');;
 
 Route::get('/admin', 'AdministracionController@index')->name('admin');
 
-Route::post('/credencial/{user}', 'AdministracionController@credencial')->name('credencial');
-
-Route::post('/asigcursohorario/{curso}', 'AdministracionController@asigcursohorario')->name('asigcursohorario');
-
-Route::get('/cursohorario/{curso}', 'AdministracionController@cursohorario')->name('cursohorario');
+Route::post('/updatecredencial/{user}', 'AdministracionController@updatecredencial')->name('updatecredencial');
 
 Route::get('/roles', 'AdministracionController@roles')->name('roles');
 
 Route::get('/roltouser', 'AdministracionController@roltouser')->name('roltouser');
 
-Route::get('/credencial', 'AdministracionController@credencial')->name('credencial');
+Route::get('/credencial', 'AdministracionController@index');
+
+Route::get('/horario', 'AdministracionController@index');
+
+Route::get('/profesor', 'AdministracionController@index');
+
+Route::get('/estudiante', 'AdministracionController@index');
+
+Route::get('/asignatura', 'AdministracionController@index');
+
+Route::get('/seccion', 'AdministracionController@index');
+
+Route::get('/anoticias', 'AdministracionController@index');
+
+Route::get('/seccion_alumnos', 'AdministracionController@index');
+
+Route::get('/curso', 'AdministracionController@index');
+
+Route::get('/curso_leccion', 'AdministracionController@index');
+
+Route::get('/studentsforsection/{section}', 'AdministracionController@studentsforsection');
+
+Route::post('/addstudentsforsection/{section}', 'AdministracionController@addstudentsforsection');
+
+Route::post('/setstudentsforsection/{section}', 'AdministracionController@setstudentsforsection');
+
+Route::get('/lessonsforcourses/{course}', 'AdministracionController@lessonsforcourses');
+
+Route::get('/lessonsstock/{course}', 'AdministracionController@lessonsstock');
+
+Route::post('/addlessonsforcourse/{course}', 'AdministracionController@addlessonsforcourse');
+
+Route::get('/pnotas', 'ProfesorController@index');
+
+Route::get('/pnotasagregar', 'ProfesorController@index');
+
+Route::get('/pnoticias', 'ProfesorController@index');
+
+Route::get('/ptareas', 'ProfesorController@index');
+
+Route::get('/ppromedios', 'ProfesorController@index');
+
+Route::get('/screenteacher', 'ProfesorController@index');
+
+Route::get('/screenstudent', 'EstudianteController@index');
+
+Route::get('/enoticias', 'HomeController@index');
 
 Route::get(
-   '/showcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@showcursohorarioprofesor'
-)->name('showcursohorarioprofesor');
+   '/getcoursesteacher/{teacher}',
+   'ProfesorController@getcoursesteacher'
+)->name('getcoursesteacher');
+
+Route::get(
+   '/getcoursesstudent/{student}',
+   'EstudianteController@getcoursesstudent'
+)->name('getcoursesstudent');
 
 Route::post(
-   '/asigcursohorarioprofesor/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@asigcursohorarioprofesor'
-)->name('asigcursohorarioprofesor');
-
-Route::get(
-   '/showcursosprofesors/{grado}',
-   'AdministracionController@showcursosprofesors'
-)->name('showcursosprofesors');
-
-Route::get(
-   '/showprofesorscurso/{estudiante}/{curso}/{grado}',
-   'AdministracionController@showprofesorscurso'
-)->name('showprofesorscurso');
-
-Route::get(
-   '/showhorarioscurso/{estudiante}/{profesor}/{curso}/{grado}',
-   'AdministracionController@showhorarioscurso'
-)->name('showhorarioscurso');
+   '/screenteacher',
+   'ProfesorController@screenteacher'
+)->name('screenteacher');
 
 Route::post(
-   '/asigcursohorarioestudiante/{estudiante}/{profesor}/{curso}/{grado}/{dia}',
-   'AdministracionController@asigcursohorarioestudiante'
-)->name('asigcursohorarioestudiante');
+   '/screenstudent',
+   'EstudianteController@screenstudent'
+)->name('screenstudent');
 
 Route::get(
-   '/getCursosProfesor/{profesor}',
-   'ProfesorController@getCursosProfesor'
-)->name('getCursosProfesor');
+   'qualificationsexport/{id}',
+   'ProfesorController@qualificationsexport'
+)->name('qualificationsexport');
 
 Route::get(
-   '/panelprofesor/{asignacioncursoprofesor}',
-   'MantenimientoProfesorController@panelprofesor'
-)->name('panelprofesor');
+   'studentsexport/{id}/{student}',
+   'ProfesorController@studentsexport'
+)->name('studentsexport');
+
+Route::get('/studentsforcourse', 'ProfesorController@studentsforcourse');
+
+Route::get('/qualificationsforstudent/{student}', 'ProfesorController@qualificationsforstudent');
+
+Route::get('/qualificationsfortrimester/{id}', 'ProfesorController@qualificationsfortrimester');
+
+Route::get('/questionsfortask/{task}', 'ProfesorController@questionsfortask');
+
+Route::get('/taskforcourse/{task}', 'ProfesorController@taskforcourse');
+
+Route::post('/addtaskforstudents', 'ProfesorController@addtaskforstudents');
+
+Route::post('/removetaskforstudents/{task}', 'ProfesorController@removetaskforstudents');
+
+Route::post('/store', 'ProfesorController@store');

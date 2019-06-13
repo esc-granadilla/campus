@@ -25,9 +25,12 @@ class HomeController extends Controller
    public function index(Request $request)
    {
       if ($request->user()->hasRole('Usuario')) {
-         return view('home');
+         $estudiante = $request->user()->student()->first();
+         $request->session()->push('student', $estudiante);
+         return view('home', compact('estudiante'));
       } elseif ($request->user()->hasAnyRole(['Profesor', 'Administrador'])) {
-         $profesor = $request->user()->profesor()->first();
+         $profesor = $request->user()->teacher()->first();
+         $request->session()->push('teacher', $profesor);
          return view('homeprofesores', compact('profesor'));
       }
    }

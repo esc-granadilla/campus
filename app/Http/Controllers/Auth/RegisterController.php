@@ -6,10 +6,9 @@ use Campus\User;
 use Campus\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Campus\Encargado;
-use Campus\Estudiante;
+use Campus\Guardian;
+use Campus\Student;
 use Campus\Role;
-use Campus\Profesor;
 
 class RegisterController extends Controller
 {
@@ -83,7 +82,7 @@ class RegisterController extends Controller
       $idencargado = null;
 
       if (array_key_exists('encargado_cedula', $data)) {
-         $encargado = new Encargado();
+         $encargado = new Guardian();
          $encargado->cedula = $data['encargado_cedula'];
          $encargado->nombre = $data['encargado_nombre'];
          $encargado->primer_apellido = $data['encargado_apellido1'];
@@ -95,18 +94,18 @@ class RegisterController extends Controller
          $idencargado = $encargado->id;
       }
 
-      $estudiante = new Estudiante();
+      $estudiante = new Student();
       $estudiante->cedula = $data['cedula'];
       $estudiante->nombre = $data['nombre'];
       $estudiante->primer_apellido = $data['primer_apellido'];
       $estudiante->segundo_apellido = $data['segundo_apellido'];
       $estudiante->fecha_nacimiento = $data['fecha_nacimiento'];
-      $estudiante->grado = $data['grado'];
+      $estudiante->section_id = null;
       $estudiante->adecuacion = $data['adecuacion'];
-      $estudiante->encargado_id = $idencargado;
+      $estudiante->guardian_id = $idencargado;
       $estudiante->estado = 1;
 
-      $user->estudiante()->save($estudiante);
+      $user->student()->save($estudiante);
       return $user;
    }
 }

@@ -8,7 +8,7 @@
 @endsection 
 
 @section('content')
-<form class="form-horizontal" method="POST" action="{{ route('profesors.store') }}">
+<form class="form-horizontal" method="POST" action="{{ route('teachers.store') }}">
    {{ csrf_field() }}
    <registerprofesor></registerprofesor>
 </form>

@@ -1,23 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.appstudents')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard de Estudiantes</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@if (!Auth::guest())
+   <estudiante estudiante_id={{ $estudiante->id }}></estudiante>
+@endif
 @endsection

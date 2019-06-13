@@ -4,17 +4,27 @@ namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Campus\Role;
-use Campus\Profesor;
 use Campus\User;
-use Campus\Curso;
-use Campus\Horario;
-use Campus\Dia;
-use Campus\Grado;
-use Campus\Asignacioncursoprofesor;
-use Campus\Estudiante;
+use Campus\Teacher;
+use Campus\Course;
+use Campus\Section;
+use Campus\Student;
+use Campus\Day;
+use Campus\Schedule;
+use Campus\Lesson;
 
 class AdministracionController extends Controller
 {
+   /*
+    |--------------------------------------------------------------------------
+    | Administrador Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
    public function __construct()
    {
       $this->middleware('auth');
@@ -42,7 +52,7 @@ class AdministracionController extends Controller
    {
       if ($request->ajax()) {
          $rolestouser = [];
-         $profesores = Profesor::where('estado', 1)->get();
+         $profesores = Teacher::where('estado', 1)->get();
          for ($i = 0; $i < sizeof($profesores); $i++) {
             $profesor = $profesores[$i]->user->hasRole('Profesor');
             $administrador = $profesores[$i]->user->hasRole('Administrador');
@@ -58,7 +68,7 @@ class AdministracionController extends Controller
       }
    }
 
-   public function credencial(User $user, Request $request)
+   public function updatecredencial(User $user, Request $request)
    {
       if ($request->ajax()) {
          $accion = (boolean)$request->input('attach');
@@ -74,107 +84,107 @@ class AdministracionController extends Controller
       return response()->json(['message' => 'error'], 400);
    }
 
-   public function asigcursohorario(Curso $curso, Request $request)
-   {
-      if ($request->ajax()) {
-         $curso->horarios()->detach();
-         $horarios = $request->input('horarios');
-         foreach ($horarios as $horario) {
-            $h = Horario::where('id', $horario["id"])->first();
-            $curso->horarios()->attach($h);
-         }
-         return response()->json(['message' => "Horarios ingresados correctamente"], 200);
-      }
-   }
+   // public function asigcursohorario(Course $curso, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $curso->schedule()->detach();
+   //       $horarios = $request->input('horarios');
+   //       foreach ($horarios as $horario) {
+   //          $h = Horario::where('id', $horario["id"])->first();
+   //          $curso->horarios()->attach($h);
+   //       }
+   //       return response()->json(['message' => "Horarios ingresados correctamente"], 200);
+   //    }
+   // }
 
-   public function cursohorario(Curso $curso, Request $request)
-   {
-      if ($request->ajax()) {
-         $horarios = $curso->horarios->toArray();
-         return response()->json($horarios, 200);
-      }
-   }
+   // public function cursohorario(Curso $curso, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $horarios = $curso->horarios->toArray();
+   //       return response()->json($horarios, 200);
+   //    }
+   // }
 
-   public function showcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
-   {
-      if ($request->ajax()) {
-         $asignaciones = Asignacioncursoprofesor::where('profesor_id', $profesor->id)->get();
-         $horarios = $curso->horarios()->get();
-         $horariospermitidos = [];
-         foreach ($horarios as $horario) {
-            $agregar = true;
-            if ($asignaciones != null && count($asignaciones) > 0) {
-               foreach ($asignaciones as $asignacion) {
-                  if ($asignacion->horario_id == $horario->id && $asignacion->dia_id == $dia->id) {
-                     if (
-                        $asignacion->grado_id == $grado->id &&
-                        $asignacion->curso_id == $curso->id
-                     ) {
-                        array_push(
-                           $horariospermitidos,
-                           [
-                              'id' => $horario->id,
-                              'desde' => $horario->desde,
-                              'hasta' => $horario->hasta,
-                              'selected' => true
-                           ]
-                        );
-                     }
-                     $agregar = false;
-                     break;
-                  }
-               }
-            }
-            if ($agregar) {
-               array_push(
-                  $horariospermitidos,
-                  ['id' => $horario->id, 'desde' => $horario->desde, 'hasta' => $horario->hasta, 'selected' => false]
-               );
-            }
-         }
-         return response()->json($horariospermitidos, 200);
-      }
-   }
+   // public function showcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $asignaciones = Asignacioncursoprofesor::where('profesor_id', $profesor->id)->get();
+   //       $horarios = $curso->horarios()->get();
+   //       $horariospermitidos = [];
+   //       foreach ($horarios as $horario) {
+   //          $agregar = true;
+   //          if ($asignaciones != null && count($asignaciones) > 0) {
+   //             foreach ($asignaciones as $asignacion) {
+   //                if ($asignacion->horario_id == $horario->id && $asignacion->dia_id == $dia->id) {
+   //                   if (
+   //                      $asignacion->grado_id == $grado->id &&
+   //                      $asignacion->curso_id == $curso->id
+   //                   ) {
+   //                      array_push(
+   //                         $horariospermitidos,
+   //                         [
+   //                            'id' => $horario->id,
+   //                            'desde' => $horario->desde,
+   //                            'hasta' => $horario->hasta,
+   //                            'selected' => true
+   //                         ]
+   //                      );
+   //                   }
+   //                   $agregar = false;
+   //                   break;
+   //                }
+   //             }
+   //          }
+   //          if ($agregar) {
+   //             array_push(
+   //                $horariospermitidos,
+   //                ['id' => $horario->id, 'desde' => $horario->desde, 'hasta' => $horario->hasta, 'selected' => false]
+   //             );
+   //          }
+   //       }
+   //       return response()->json($horariospermitidos, 200);
+   //    }
+   // }
 
-   public function asigcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
-   {
-      if ($request->ajax()) {
-         $horarios = $request->input('horarios');
-         Asignacioncursoprofesor::where(
-            [
-               'profesor_id' => $profesor->id,
-               'curso_id' => $curso->id,
-               'grado_id' => $grado->id,
-               'dia_id' => $dia->id
-            ]
-         )->delete();
-         foreach ($horarios as $horario) {
-            $asignacion = new Asignacioncursoprofesor();
-            $asignacion->profesor_id = $profesor->id;
-            $asignacion->curso_id = $curso->id;
-            $asignacion->grado_id = $grado->id;
-            $asignacion->dia_id = $dia->id;
-            $asignacion->horario_id = $horario['id'];
-            $asignacion->save();
-         }
-         return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
-      }
-   }
+   // public function asigcursohorarioprofesor(Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $horarios = $request->input('horarios');
+   //       Asignacioncursoprofesor::where(
+   //          [
+   //             'profesor_id' => $profesor->id,
+   //             'curso_id' => $curso->id,
+   //             'grado_id' => $grado->id,
+   //             'dia_id' => $dia->id
+   //          ]
+   //       )->delete();
+   //       foreach ($horarios as $horario) {
+   //          $asignacion = new Asignacioncursoprofesor();
+   //          $asignacion->profesor_id = $profesor->id;
+   //          $asignacion->curso_id = $curso->id;
+   //          $asignacion->grado_id = $grado->id;
+   //          $asignacion->dia_id = $dia->id;
+   //          $asignacion->horario_id = $horario['id'];
+   //          $asignacion->save();
+   //       }
+   //       return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+   //    }
+   // }
 
-   public function showcursosprofesors(Grado $grado, Request $request)
-   {
-      if ($request->ajax()) {
-         $cursosids = Asignacioncursoprofesor::where('grado_id', $grado->id)->get();
-         $cursosids = $cursosids->groupBy('curso_id');
-         $cursos = [];
-         foreach ($cursosids as $cursosid) {
-            $curso = Curso::find($cursosid[0]->curso_id);
-            if ($curso->estado == 1)
-               array_push($cursos, $curso);
-         }
-         return response()->json($cursos, 200);
-      }
-   }
+   // public function showcursosprofesors(Grado $grado, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $cursosids = Asignacioncursoprofesor::where('grado_id', $grado->id)->get();
+   //       $cursosids = $cursosids->groupBy('curso_id');
+   //       $cursos = [];
+   //       foreach ($cursosids as $cursosid) {
+   //          $curso = Curso::find($cursosid[0]->curso_id);
+   //          if ($curso->estado == 1)
+   //             array_push($cursos, $curso);
+   //       }
+   //       return response()->json($cursos, 200);
+   //    }
+   // }
    /*
    public function showprofesorscurso(Curso $curso, Grado $grado, Request $request)
    {
@@ -191,31 +201,31 @@ class AdministracionController extends Controller
       }
    }
 */
-   public function showprofesorscurso(Estudiante $estudiante, Curso $curso, Grado $grado, Request $request)
-   {
-      if ($request->ajax()) {
-         $myasignacion = $estudiante->Asignacioncursoprofesors()->where('curso_id', $curso->id)->first();
-         $profesores = [];
-         $cargar = true;
-         if ($myasignacion != null) {
-            $profesor = Profesor::find($myasignacion->profesor_id);
-            if ($profesor->estado == 1) {
-               array_push($profesores, $profesor);
-               $cargar = false;
-            }
-         }
-         if ($cargar) {
-            $cursosids = Asignacioncursoprofesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
-            $cursosids = $cursosids->groupBy('profesor_id');
-            foreach ($cursosids as $cursosid) {
-               $profesor = Profesor::find($cursosid[0]->profesor_id);
-               if ($profesor->estado == 1)
-                  array_push($profesores, $profesor);
-            }
-         }
-         return response()->json($profesores, 200);
-      }
-   }
+   // public function showprofesorscurso(Estudiante $estudiante, Curso $curso, Grado $grado, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $myasignacion = $estudiante->Asignacioncursoprofesors()->where('curso_id', $curso->id)->first();
+   //       $profesores = [];
+   //       $cargar = true;
+   //       if ($myasignacion != null) {
+   //          $profesor = Profesor::find($myasignacion->profesor_id);
+   //          if ($profesor->estado == 1) {
+   //             array_push($profesores, $profesor);
+   //             $cargar = false;
+   //          }
+   //       }
+   //       if ($cargar) {
+   //          $cursosids = Asignacioncursoprofesor::where(['grado_id' => $grado->id, 'curso_id' => $curso->id])->get();
+   //          $cursosids = $cursosids->groupBy('profesor_id');
+   //          foreach ($cursosids as $cursosid) {
+   //             $profesor = Profesor::find($cursosid[0]->profesor_id);
+   //             if ($profesor->estado == 1)
+   //                array_push($profesores, $profesor);
+   //          }
+   //       }
+   //       return response()->json($profesores, 200);
+   //    }
+   // }
    /*
    public function showhorarioscurso(Profesor $profesor, Curso $curso, Grado $grado, Request $request)
    {
@@ -243,95 +253,283 @@ class AdministracionController extends Controller
       }
    }*/
 
-   public function showhorarioscurso(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Request $request)
+   // public function showhorarioscurso(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $myasignacion = $estudiante->Asignacioncursoprofesors()->get();
+   //       $listnohorarios = [];
+   //       foreach ($myasignacion as $my) {
+   //          array_push($listnohorarios, ['asignacion' => $my->id, 'horario_id' => $my->horario_id, 'dia_id' => $my->dia_id]);
+   //       }
+   //       $cursosids = Asignacioncursoprofesor::where(
+   //          ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
+   //       )->get();
+   //       $cursosids = $cursosids->groupBy('dia_id');
+   //       $diasHorarios = [];
+   //       foreach ($cursosids as $cursosid) {
+   //          $dia = Dia::find($cursosid[0]->dia_id);
+   //          $valido = false;
+   //          $horarios = [];
+   //          foreach ($cursosid as $cursosi) {
+   //             $horario = Horario::find($cursosi->horario_id);
+   //             $asigna = Asignacioncursoprofesor::where(
+   //                [
+   //                   'horario_id' => $horario->id,
+   //                   'dia_id' => $dia->id,
+   //                   'grado_id' => $grado->id,
+   //                   'curso_id' => $curso->id,
+   //                   'profesor_id' => $profesor->id
+   //                ]
+   //             )->first();
+   //             $nuevo = true;
+   //             foreach ($listnohorarios as $no) {
+   //                if ($no['horario_id'] === $horario->id && $no['dia_id'] === $dia->id) {
+   //                   if ($asigna->id === $no['asignacion']) {
+   //                      $valido = true;
+   //                      array_push($horarios, [
+   //                         'id' => $horario->id,
+   //                         'desde' => $horario->desde,
+   //                         'hasta' => $horario->hasta,
+   //                         'selected' => true
+   //                      ]);
+   //                   }
+   //                   $nuevo = false;
+   //                   break;
+   //                }
+   //             }
+   //             if ($horario->estado == 1 && $nuevo) {
+   //                $valido = true;
+   //                array_push($horarios, [
+   //                   'id' => $horario->id,
+   //                   'desde' => $horario->desde,
+   //                   'hasta' => $horario->hasta,
+   //                   'selected' => false
+   //                ]);
+   //             }
+   //          }
+   //          if ($valido)
+   //             array_push($diasHorarios, ['Dia' => $dia, 'Horarios' => $horarios]);
+   //       }
+   //       return response()->json($diasHorarios, 200);
+   //    }
+   // }
+
+   // public function asigcursohorarioestudiante(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $asignaciones = Asignacioncursoprofesor::where(
+   //          [
+   //             'dia_id' => $dia->id,
+   //             'grado_id' => $grado->id,
+   //             'curso_id' => $curso->id,
+   //             'profesor_id' => $profesor->id
+   //          ]
+   //       )->get();
+   //       foreach ($asignaciones as $asig) {
+   //          $estudiante->asignacioncursoprofesors()->detach($asig);
+   //       }
+   //       $horarios = $request->input('horarios');
+   //       foreach ($horarios as $horario) {
+   //          $asignacion = Asignacioncursoprofesor::where(
+   //             [
+   //                'horario_id' => $horario['id'],
+   //                'dia_id' => $dia->id,
+   //                'grado_id' => $grado->id,
+   //                'curso_id' => $curso->id,
+   //                'profesor_id' => $profesor->id
+   //             ]
+   //          )->first();
+   //          $estudiante->asignacioncursoprofesors()->attach($asignacion);
+   //       }
+   //       return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+   //    }
+   // }
+
+   public function studentsforsection(Request $request, Section $section)
    {
       if ($request->ajax()) {
-         $myasignacion = $estudiante->Asignacioncursoprofesors()->get();
-         $listnohorarios = [];
-         foreach ($myasignacion as $my) {
-            array_push($listnohorarios, ['asignacion' => $my->id, 'horario_id' => $my->horario_id, 'dia_id' => $my->dia_id]);
-         }
-         $cursosids = Asignacioncursoprofesor::where(
-            ['grado_id' => $grado->id, 'curso_id' => $curso->id, 'profesor_id' => $profesor->id]
-         )->get();
-         $cursosids = $cursosids->groupBy('dia_id');
-         $diasHorarios = [];
-         foreach ($cursosids as $cursosid) {
-            $dia = Dia::find($cursosid[0]->dia_id);
-            $valido = false;
-            $horarios = [];
-            foreach ($cursosid as $cursosi) {
-               $horario = Horario::find($cursosi->horario_id);
-               $asigna = Asignacioncursoprofesor::where(
-                  [
-                     'horario_id' => $horario->id,
-                     'dia_id' => $dia->id,
-                     'grado_id' => $grado->id,
-                     'curso_id' => $curso->id,
-                     'profesor_id' => $profesor->id
-                  ]
-               )->first();
-               $nuevo = true;
-               foreach ($listnohorarios as $no) {
-                  if ($no['horario_id'] === $horario->id && $no['dia_id'] === $dia->id) {
-                     if ($asigna->id === $no['asignacion']) {
-                        $valido = true;
-                        array_push($horarios, [
-                           'id' => $horario->id,
-                           'desde' => $horario->desde,
-                           'hasta' => $horario->hasta,
-                           'selected' => true
-                        ]);
-                     }
-                     $nuevo = false;
-                     break;
-                  }
-               }
-               if ($horario->estado == 1 && $nuevo) {
-                  $valido = true;
-                  array_push($horarios, [
-                     'id' => $horario->id,
-                     'desde' => $horario->desde,
-                     'hasta' => $horario->hasta,
-                     'selected' => false
-                  ]);
-               }
-            }
-            if ($valido)
-               array_push($diasHorarios, ['Dia' => $dia, 'Horarios' => $horarios]);
-         }
-         return response()->json($diasHorarios, 200);
+         $students = $section->students()->where('estado', 1)->get();
+         return response()->json($students, 200);
       }
    }
 
-   public function asigcursohorarioestudiante(Estudiante $estudiante, Profesor $profesor, Curso $curso, Grado $grado, Dia $dia, Request $request)
+   /**
+    * Get all values from specific key in a multidimensional array
+    *
+    * @param $key string
+    * @param $arr array
+    * @return null|string|array
+    */
+   public function array_value_recursive($key, array $arr)
+   {
+      $val = array();
+      array_walk_recursive($arr, function ($v, $k) use ($key, &$val) {
+         if ($k == $key) array_push($val, $v);
+      });
+      return $val;
+   }
+
+   public function addstudentsforsection(Request $request, Section $section)
    {
       if ($request->ajax()) {
-         $asignaciones = Asignacioncursoprofesor::where(
-            [
-               'dia_id' => $dia->id,
-               'grado_id' => $grado->id,
-               'curso_id' => $curso->id,
-               'profesor_id' => $profesor->id
-            ]
-         )->get();
-         foreach ($asignaciones as $asig) {
-            $estudiante->asignacioncursoprofesors()->detach($asig);
+         try {
+            $students = $section->students()->where('estado', 1)->get();
+            foreach ($students as $student) {
+               $student->section_id = null;
+               $student->save();
+            }
+            $students_ids = $this->array_value_recursive('id', $request->input('students'));
+            $students = Student::whereIn('id', $students_ids)->get();
+            foreach ($students as $student) {
+               $student->section_id = $section->id;
+               $student->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se asigno la sección a los estudiantes exitosamente'], 200);
+         } catch (\Exception $e) {
+            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
-         $horarios = $request->input('horarios');
-         foreach ($horarios as $horario) {
-            $asignacion = Asignacioncursoprofesor::where(
-               [
-                  'horario_id' => $horario['id'],
-                  'dia_id' => $dia->id,
-                  'grado_id' => $grado->id,
-                  'curso_id' => $curso->id,
-                  'profesor_id' => $profesor->id
-               ]
-            )->first();
-            $estudiante->asignacioncursoprofesors()->attach($asignacion);
+      }
+   }
+
+   public function setstudentsforsection(Request $request, Section $section)
+   {
+      if ($request->ajax()) {
+         try {
+            $students_ids = $this->array_value_recursive('id', $request->input('students'));
+            $students = Student::whereIn('id', $students_ids)->get();
+            foreach ($students as $student) {
+               $student->section_id = $section->id;
+               $student->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se cambio la sección a los estudiantes exitosamente'], 200);
+         } catch (\Exception $e) {
+            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
-         return response()->json(['message' => "Asignaciones creadas correctamente"], 200);
+      }
+   }
+
+   public function lessonsforcourses(Request $request, Course $course)
+   {
+      if ($request->ajax()) {
+         $lessons = $course->lessons()->get();
+         $array = [];
+         foreach ($lessons as $lesson) {
+            array_push($array, [
+               'id' => $lesson->id,
+               'day_id' => $lesson->day_id,
+               'schedule_id' => $lesson->schedule_id,
+               'course_id' => $lesson->course_id,
+               'dia' => $lesson->day()->first(),
+               'horario' => $lesson->schedule()->first(),
+               'curso' => $lesson->course()->first(),
+            ]);
+         }
+         return response()->json($array, 200);
+      }
+   }
+
+   public function lessonsstock(Request $request, Course $course)
+   {
+      try {
+         if ($request->ajax()) {
+            $teacher = $course->teacher()->first();
+            $section = $course->section()->first();
+            $lessons = $this->MatrizLessons();
+            $lessons = $this->filter_teacher($teacher, $lessons);
+            $lessons = $this->filter_section($section, $lessons);
+            return response()->json($lessons, 200);
+         }
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function MatrizLessons()
+   {
+      try {
+         $days = Day::all()->toArray();
+         $schedule = Schedule::where('estado', 1)->get()->toArray();
+         $matriz = [];
+         foreach ($days as $day) {
+            array_push($matriz, ['dia' => $day, 'horario' => $schedule]);
+         }
+         return $matriz;
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function filter_teacher(Teacher $teacher, array $matriz)
+   {
+      try {
+         $courses = $teacher->courses()->where('estado', 1)->get();
+         return $this->filter($courses, $matriz);
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function filter_section(Section $section, array $matriz)
+   {
+      try {
+         $courses = $section->courses()->where('estado', 1)->get();
+         return $this->filter($courses, $matriz);
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function filter($courses, array $matriz)
+   {
+      try {
+         $lessons = [];
+         foreach ($courses as $course) {
+            $lecciones = $course->lessons()->get();
+            array_push($lessons, ...$lecciones);
+         }
+         foreach ($lessons as $lesson) {
+            $day = $lesson->day()->first();
+            $schedule = $lesson->schedule()->first();
+            for ($i = count($matriz) - 1; $i >= 0; $i--) {
+               if ($matriz[$i]['dia']['id'] == $day->id) {
+                  $matriz[$i]['horario'] = array_filter($matriz[$i]['horario'], function ($var) use ($schedule) {
+                     return $var['id'] != $schedule->id;
+                  });
+               }
+            }
+         }
+         $array = [];
+         for ($i = count($matriz) - 1; $i >= 0; $i--) {
+            if (($matriz[$i]['horario'] != null) || (count($matriz[$i]['horario']) > 0)) {
+               array_push($array, $matriz[$i]);
+            }
+         }
+         return $array;
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
+   }
+
+   public function addlessonsforcourse(Request $request, Course $course)
+   {
+      if ($request->ajax()) {
+         try {
+            Lesson::where('course_id', $course->id)->delete();
+            $lessons = $request->input('lessons');
+            foreach ($lessons as $leccion) {
+               $leccion['course_id'] = $course->id;
+               $lesson = new Lesson($leccion);
+               $lesson->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se asigno las lecciones al curso exitosamente'], 200);
+         } catch (\Exception $e) {
+            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+         }
       }
    }
 }
