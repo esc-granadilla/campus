@@ -48,7 +48,7 @@ export default {
          {
             title: "Noticias",
             icon: "notifications",
-            ruta: "pnoticias"
+            ruta: "egnoticias"
          },
          {
             title: "Notas",

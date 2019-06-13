@@ -151,3 +151,5 @@ Route::post('/addtaskforstudents', 'ProfesorController@addtaskforstudents');
 Route::post('/removetaskforstudents/{task}', 'ProfesorController@removetaskforstudents');
 
 Route::post('/store', 'ProfesorController@store');
+
+Route::get('/statusnotifications', 'EstudianteController@statusnotifications');
