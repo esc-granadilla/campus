@@ -30,3 +30,5 @@ storage/*.key
 *.sln
 *.sw*
 
+# Linux directorios
+.directory
