@@ -106,6 +106,12 @@ Route::get('/screenstudent', 'EstudianteController@index');
 
 Route::get('/enoticias', 'HomeController@index');
 
+Route::get('/egnoticias', 'EstudianteController@index');
+
+Route::get('/enotas', 'EstudianteController@index');
+
+Route::get('/epromedios', 'EstudianteController@index');
+
 Route::get(
    '/getcoursesteacher/{teacher}',
    'ProfesorController@getcoursesteacher'
@@ -153,3 +159,12 @@ Route::post('/removetaskforstudents/{task}', 'ProfesorController@removetaskforst
 Route::post('/store', 'ProfesorController@store');
 
 Route::get('/statusnotifications', 'EstudianteController@statusnotifications');
+
+Route::get('/myqualifications', 'EstudianteController@myqualifications');
+
+Route::get('/myqualificationsfortrimester/{id}', 'EstudianteController@myqualificationsfortrimester');
+
+Route::get(
+   'mystudentsexport/{id}/',
+   'ProfesorController@mystudentsexport'
+)->name('mystudentsexport');

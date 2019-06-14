@@ -214,10 +214,6 @@ export default {
          }
       },
       reset() {
-         this.nota.students.forEach(student => {
-            student.porcentaje_obtenido = "";
-            student.condicion = "";
-         });
          this.nota = {
             id: null,
             titulo: "",
@@ -228,12 +224,20 @@ export default {
             descripcion: "",
             trimestre: "",
             fecha: new Date().toISOString().substr(0, 10),
-            students: this.nota.students,
+            students: [],
             student_id: "",
             course_id: null,
             estado: 1
          };
          this.$refs.form.resetValidation();
+         let self = this;
+         axios.get("/studentsforcourse").then(function(res) {
+            self.nota.students = res.data;
+            self.nota.students.forEach(student => {
+               student.porcentaje_obtenido = "";
+               student.condicion = "";
+            });
+         });
       }
    },
    watch: {

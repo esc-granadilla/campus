@@ -20,6 +20,9 @@ import Administradornoticiascomponent from './components/Administradores/Noticia
 import Profesornoticiascomponent from './components/Profesores/Noticias/NewsComponent.vue';
 import Estudiantenoticiasglobalcomponent from './components/Estudiantes/Noticias/NewsGlobalComponent.vue';
 import Estudiantenoticiasgrupalcomponent from './components/Estudiantes/Noticias/NewsGrupalComponent.vue';
+import Estudiantenotacomponent from './components/Estudiantes/QualificationsComponent.vue';
+import Estudiantepromediocomponent from './components/Estudiantes/PromedioComponent.vue';
+
 
 Vue.use(Router);
 
@@ -98,6 +101,11 @@ export default new Router({
             component: Profesornotacomponent
         },
         {
+            path: '/enotas',
+            name: 'enotas',
+            component: Estudiantenotacomponent
+        },
+        {
             path: '/pnotasagregar',
             name: 'pnotasagregar',
             component: Profesornotasagregarcomponent
@@ -126,6 +134,11 @@ export default new Router({
             path: '/ppromedios',
             name: 'ppromedios',
             component: Profesorpromediocomponent
+        },
+        {
+            path: '/epromedios',
+            name: 'epromedios',
+            component: Estudiantepromediocomponent
         },
         {
             path: '/ptareas',
