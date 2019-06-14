@@ -53,12 +53,12 @@ export default {
          {
             title: "Notas",
             icon: "spellcheck",
-            ruta: "pnotas"
+            ruta: "enotas"
          },
          {
             title: "Promedios",
             icon: "trending_up",
-            ruta: "ppromedios"
+            ruta: "epromedios"
          },
          {
             title: "Tareas o Pruebas",

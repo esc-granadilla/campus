@@ -56,7 +56,7 @@ export default {
    methods: {
       route(ruta) {
          if (ruta === "/logout") {
-            document.getElementById("logout-form").submit();
+            document.getElementById("logout-form2").submit();
          } else location.href = ruta;
       }
    },

@@ -23,7 +23,7 @@
             <Appstudents login="false"  name=""></Appstudents>
         @else
             <Appstudents login="true"  name={{ Auth::user()->name }}></Appstudents>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">
                {{ csrf_field() }}
             </form>
         @endif

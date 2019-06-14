@@ -29,7 +29,7 @@ class ProfesorController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      $this->middleware('profesor', ['except' => ['store',]]);
+      $this->middleware('profesor', ['except' => ['store', 'mystudentsexport', 'studentsexport']]);
    }
 
    public function index()
@@ -423,5 +423,17 @@ class ProfesorController extends Controller
          return view('profileteacher', compact('teacher'));
       }
       return view('home');
+   }
+
+   public function mystudentsexport($id, Request $request)
+   {
+      try {
+         $cedula = $request->session()->get('student')[0]->cedula;
+         $student = Student::where('cedula', $cedula)->first();
+         $this->studentsexport($id, $student, $request);
+      } catch (\Exception $e) {
+         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+         $output->writeln($e->getMessage());
+      }
    }
 }
