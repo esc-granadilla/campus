@@ -3,7 +3,7 @@
       <div class="textos">
          <h1 class="titulo">Escuela Granadilla Norte</h1>
          <h3 class="subtitulo">Campus Virtual</h3>
-         <v-btn class="boton" @click="route('/login')">Ingresa</v-btn>
+         <v-btn class="boton" @click="route('/login')">Ingresar</v-btn>
       </div>
       <div class="sesgoabajo"></div>
    </div>
