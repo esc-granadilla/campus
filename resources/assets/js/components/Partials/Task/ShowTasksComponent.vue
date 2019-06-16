@@ -3,10 +3,11 @@
       <v-layout row wrap v-show="!selected">
          <v-flex xs12 v-for="(item, index) in data.tasks" :key="index">
             <v-card>
-               <v-card-title
-                  primary-title
-                  class="text-capitalize title font-weight-regular"
-               >{{item.titulo}}</v-card-title>
+               <v-card-title primary-title class="text-capitalize title font-weight-regular">
+                  {{item.titulo}}
+                  <v-spacer v-show="!data.edit"></v-spacer>
+                  <span v-show="!data.edit" style="color: cornflowerblue;">P.Obt: {{item.puntaje}}%</span>
+               </v-card-title>
                <v-divider light></v-divider>
                <v-card-text>
                   <v-layout row>
@@ -44,10 +45,7 @@
          </v-flex>
       </v-layout>
       <v-layout row wrap v-if="selected">
-         <taskcomponent :tarea="task" :type="'none'"></taskcomponent>
-         <v-flex xs12 class="pa-3 text-xs-right">
-            <v-btn color="red darken-1" outline flat @click="selected = false; task = null;">Cerrar</v-btn>
-         </v-flex>
+         <taskcomponent :tarea="task" :type="'none'" v-on:speak="cerrar($event)"></taskcomponent>
       </v-layout>
    </v-container>
 </template>
@@ -78,6 +76,11 @@ export default {
             this.task.preguntas.push(quest);
          });
          this.selected = true;
+      },
+      cerrar(msj) {
+         this.selected = msj.Open;
+         this.task = null;
+         this.$emit("speak");
       }
    }
 };

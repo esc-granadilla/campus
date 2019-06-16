@@ -4,7 +4,7 @@
       <v-tab-item v-for="n in 3" :key="n">
          <v-card flat>
             <v-card-text>
-               <showtaskscomponent :data="tareas[n-1]"></showtaskscomponent>
+               <showtaskscomponent :data="tareas[n-1]" v-on:speak="update($event)"></showtaskscomponent>
             </v-card-text>
          </v-card>
       </v-tab-item>
@@ -22,6 +22,16 @@ export default {
             { edit: false, tasks: [] }
          ]
       };
+   },
+   methods: {
+      update(msj) {
+         let self = this;
+         axios.get("studenttasks").then(function(res) {
+            self.tareas[1].tasks = res.data.realizadas;
+            self.tareas[2].tasks = res.data.norealizadas;
+            self.tareas[0].tasks = res.data.pendientes;
+         });
+      }
    },
    mounted() {
       let self = this;
