@@ -25,6 +25,7 @@ Vue.component('selectnewscomponent', require('./components/Partials/News/SelectN
 Vue.component('profilestudents', require('./components/Estudiantes/ProfileComponent.vue').default);
 Vue.component('profileteachers', require('./components/Profesores/ProfileComponent.vue').default);
 Vue.component('shownewscomponent', require('./components/Partials/News/ShowNewsComponent.vue').default);
+Vue.component('showtaskscomponent', require('./components/Partials/Task/ShowTasksComponent.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
 Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */

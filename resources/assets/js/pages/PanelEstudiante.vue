@@ -63,7 +63,7 @@ export default {
          {
             title: "Tareas o Pruebas",
             icon: "local_parking",
-            ruta: "ptareas"
+            ruta: "etareas"
          }
       ],
       mini: true,

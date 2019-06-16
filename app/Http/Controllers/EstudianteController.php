@@ -110,4 +110,51 @@ class EstudianteController extends Controller
          return response()->json($qualifications, 200);
       }
    }
+
+   public function studenttasks(Request $request)
+   {
+      if ($request->ajax()) {
+         $course = (int)$request->session()->get('course');
+         $cedula = $request->session()->get('student')[0]->cedula;
+         $student = Student::where('cedula', $cedula)->first();
+         $taskhistories = $student->taskhistories()->where('course_id', $course)->with(['task' => function ($query) {
+            $query->with('questions');
+         }])->get();
+         $realizadas = [];
+         $norealizadas = [];
+         $pendientes = [];
+         $fecha = Carbon::now('America/Costa_Rica')->format('Y-m-d');
+         foreach ($taskhistories as $taskhistory) {
+            $task = $taskhistory->task;
+            $task->respuestas = "";
+            $task->inicio = $taskhistory->inicio;
+            $task->final = $taskhistory->final;
+            $task->trimestre = $taskhistory->trimestre;
+            if ($taskhistory->estado == 0)
+               array_push($realizadas, $task);
+            elseif ($taskhistory->inicio <= $fecha && $taskhistory->final >= $fecha)
+               array_push($pendientes, $task);
+            elseif ($taskhistory->inicio < $fecha)
+               array_push($norealizadas, $task);
+         }
+         // if ($taskhistories->count() > 0) {
+         //    $items = $taskhistories->where('estado', 0);
+         //    $realizadas = [];
+         //    foreach ($items as $item) {
+         //       array_push($realizadas, $item->task);
+         //    }
+         //    $fecha = Carbon::now('America/Costa_Rica')->format('Y-m-d');
+         //    $items = $taskhistories->where('estado', 1);
+         //    $norealizadas = [];
+         //    $pendientes = [];
+         //    foreach ($items as $item) {
+         //       if ($item->inicio <= $fecha && $item->final >= $fecha)
+         //          array_push($pendientes, $item->task);
+         //       elseif ($item->inicio < $fecha)
+         //          array_push($norealizadas, $item->task);
+         //    }
+         // }
+         return response()->json(['realizadas' => $realizadas, 'norealizadas' => $norealizadas, 'pendientes' => $pendientes], 200);
+      }
+   }
 }
