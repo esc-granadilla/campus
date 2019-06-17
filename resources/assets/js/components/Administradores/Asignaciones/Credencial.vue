@@ -93,13 +93,13 @@ export default {
          if (this.admcheck) {
             let elt = document.getElementById("a" + index.id);
             if (elt.checked) {
-               axios.post("credencial/" + index.user_id, {
+               axios.post("updatecredencial/" + index.user_id, {
                   rol: "Administrador",
                   attach: false
                });
                index.administrador = false;
             } else {
-               axios.post("credencial/" + index.user_id, {
+               axios.post("updatecredencial/" + index.user_id, {
                   rol: "Administrador",
                   attach: true
                });
@@ -112,13 +112,13 @@ export default {
          if (this.procheck) {
             let elt = document.getElementById("p" + index.id);
             if (elt.checked) {
-               axios.post("credencial/" + index.user_id, {
+               axios.post("updatecredencial/" + index.user_id, {
                   rol: "Profesor",
                   attach: false
                });
                index.profesor = false;
             } else {
-               axios.post("credencial/" + index.user_id, {
+               axios.post("updatecredencial/" + index.user_id, {
                   rol: "Profesor",
                   attach: true
                });
