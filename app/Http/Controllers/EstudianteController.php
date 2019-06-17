@@ -7,6 +7,8 @@ use Campus\Student;
 use Campus\News;
 use Carbon\Carbon;
 use Campus\Course;
+use Campus\Task;
+use Campus\Taskhistory;
 
 class EstudianteController extends Controller
 {
@@ -108,6 +110,73 @@ class EstudianteController extends Controller
          $student = Student::where('cedula', $cedula)->first();
          $qualifications = $this->matrizqualifications($id, $student, $request);
          return response()->json($qualifications, 200);
+      }
+   }
+
+   public function studenttasks(Request $request)
+   {
+      if ($request->ajax()) {
+         $course = (int)$request->session()->get('course');
+         $cedula = $request->session()->get('student')[0]->cedula;
+         $student = Student::where('cedula', $cedula)->first();
+         $taskhistories = $student->taskhistories()->where('course_id', $course)->with(['task' => function ($query) {
+            $query->with('questions');
+         }])->get();
+         $realizadas = [];
+         $norealizadas = [];
+         $pendientes = [];
+         $fecha = Carbon::now('America/Costa_Rica')->format('Y-m-d');
+         foreach ($taskhistories as $taskhistory) {
+            $task = $taskhistory->task;
+            $task->respuestas = "";
+            $task->inicio = $taskhistory->inicio;
+            $task->final = $taskhistory->final;
+            $task->trimestre = $taskhistory->trimestre;
+            $task->puntaje = $taskhistory->puntaje;
+            if ($taskhistory->estado == 0)
+               array_push($realizadas, $task);
+            elseif ($taskhistory->inicio <= $fecha && $taskhistory->final >= $fecha)
+               array_push($pendientes, $task);
+            elseif ($taskhistory->inicio < $fecha)
+               array_push($norealizadas, $task);
+         }
+         return response()->json(['realizadas' => $realizadas, 'norealizadas' => $norealizadas, 'pendientes' => $pendientes], 200);
+      }
+   }
+
+   public function taskqualification(Request $request, Task $task)
+   {
+      if ($request->ajax()) {
+         $info = $request->all();
+         $respuestas = $task->respuestas;
+         $arrayres = explode(',', substr($respuestas, 0, -1));
+         $arraystudentres = explode(',', substr($info['respuestas'], 0, -1));
+         $correptas = 0;
+         $totales = count($arrayres);
+         for ($i = 0; $i < $totales; $i++)
+            if ($arrayres[$i] === $arraystudentres[$i]) $correptas++;
+         $puntaje = ($task->valor / $totales) * $correptas;
+         $course = (int)$request->session()->get('course');
+         $cedula = $request->session()->get('student')[0]->cedula;
+         $student = Student::where('cedula', $cedula)->first();
+         $fecha = Carbon::now('America/Costa_Rica')->format('Y-m-d');
+         $taskhistory = $student->taskhistories()->where(['course_id' => $course, 'task_id' => $task->id])->first();
+         $qualification = $student->qualifications()->where([
+            'descripcion' => $task->titulo,
+            'trimestre' => $taskhistory->trimestre,
+            'fecha' => $taskhistory->inicio,
+            'course_id' => $course,
+            'tipo' => 'Tarea',
+            'condicion' => 'No realisada'
+         ])->first();
+         $taskhistory->puntaje = $puntaje;
+         $taskhistory->estado = 0;
+         $qualification->porcentaje_obtenido = $puntaje;
+         $qualification->condicion = 'Realisada';
+         $qualification->fecha = $fecha;
+         $taskhistory->save();
+         $qualification->save();
+         return response()->json(['type' => 'success', 'message' => 'Se ha calificado la tarea.', 'respuestas' => $arrayres], 200);
       }
    }
 }

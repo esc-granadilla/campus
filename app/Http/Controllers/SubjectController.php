@@ -21,7 +21,8 @@ class SubjectController extends Controller
    {
       $this->middleware('auth');
       //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
-      $this->middleware('administrador');
+      $this->middleware('profesor', ['only' => ['index']]);
+      $this->middleware('administrador', ['except' => ['index']]);
    }
    /**
     * Display a listing of the resource.

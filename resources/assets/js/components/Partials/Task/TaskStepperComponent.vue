@@ -93,7 +93,7 @@
       <v-stepper-step step="3">Confirme el custionario creado.</v-stepper-step>
       <v-stepper-content step="3">
          <v-card color="white" class="mb-2" height="200px" v-bar light px-2>
-            <taskcomponent :type="'success'" :tarea="tarea"></taskcomponent>
+            <taskcomponent :type="'success'" :tarea="tareatemp"></taskcomponent>
          </v-card>
          <v-btn color="primary" @click="crear">Crear</v-btn>
          <v-btn flat @click="e6 = 2">Volver</v-btn>
@@ -130,6 +130,14 @@ export default {
          },
          respuesta: null,
          tarea: {
+            titulo: "",
+            valor: "",
+            descripcion: "",
+            respuestas: "",
+            subject_id: null,
+            preguntas: []
+         },
+         tareatemp: {
             titulo: "",
             valor: "",
             descripcion: "",
@@ -210,7 +218,10 @@ export default {
             this.tarea.preguntas.push(this.pregunta);
             this.puntero = this.numero++;
          }
-         if (this.tarea.preguntas.length > 0) this.formatear();
+         if (this.tarea.preguntas.length > 0) {
+            this.formatear();
+            this.tareatemp = this.tarea;
+         }
          return this.tarea.preguntas.length > 0 ? 3 : 2;
       }
    },

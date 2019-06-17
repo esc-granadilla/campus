@@ -22,7 +22,7 @@ import Estudiantenoticiasglobalcomponent from './components/Estudiantes/Noticias
 import Estudiantenoticiasgrupalcomponent from './components/Estudiantes/Noticias/NewsGrupalComponent.vue';
 import Estudiantenotacomponent from './components/Estudiantes/QualificationsComponent.vue';
 import Estudiantepromediocomponent from './components/Estudiantes/PromedioComponent.vue';
-
+import Estudiantetareacomponent from './components/Estudiantes/TareasComponent.vue';
 
 Vue.use(Router);
 
@@ -144,6 +144,11 @@ export default new Router({
             path: '/ptareas',
             name: 'ptareas',
             component: Profesortareacomponent
+        },
+        {
+            path: '/etareas',
+            name: 'etareas',
+            component: Estudiantetareacomponent
         },
     ],
 });

@@ -5,19 +5,27 @@
          <section class="acerca-de">
             <div class="contenedor">
                <h2 class="sobre-nosotros">Sobre nosotros</h2>
-               <h3 class="slogan">Tirando código en la web</h3>
-               <p class="parrafo">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem dicta rem hic totam necessitatibus
-                  tempora animi error perferendis. Vero corrupti porro quia! Ad saepe alias, officiis voluptatem sed, odio
-                  dolores neque dolorem placeat nam quia numquam soluta ipsam nostrum consequuntur, a magnam non. Tenetur
-                  repudiandae distinctio inventore voluptate fugit laborum?
-               </p>
-               <p class="parrafo">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem dicta rem hic totam necessitatibus
-                  tempora animi error perferendis. Vero corrupti porro quia! Ad saepe alias, officiis voluptatem sed, odio
-                  dolores neque dolorem placeat nam quia numquam soluta ipsam nostrum consequuntur, a magnam non. Tenetur
-                  repudiandae distinctio inventore voluptate fugit laborum?
-               </p>
+               <h3 class="slogan">Centro Educativo Granadilla</h3>
+               <p
+                  class="parrafo px-5"
+               >El Centro Educativo Granadilla Norte está ubicada en San José, Curridabat Granadilla. Este centro se fundó en 1968 por lo que lleva aproximadamente 50 años de brindar servicios educativos a la población estudiantil de los alrededores de Granadilla.</p>
+               <p
+                  class="parrafo px-5"
+               >Su nombre se debe al nombre de la comunidad de Granadilla, este centro se administró en sus primeros años por medio de los vecinos quienes pagaban a tres profesores para impartir lecciones, se originó por la preocupación de los vecinos quienes querían recibir educación para sus hijos.</p>
+               <v-layout row wrap>
+                  <v-flex xs6 pa-5>
+                     <h3 class="slogan">Misión</h3>
+                     <p
+                        class="parrafo"
+                     >Proyectar la institución con una educación de calidad, que permita una visión inclusiva donde se promueva la participación de toda la comunidad educativa, superando las barreras para el acceso al estudiantado y atendiendo la diversidad por medio de actividades innovadoras.</p>
+                  </v-flex>
+                  <v-flex xs6 pa-5>
+                     <h3 class="slogan">Visión</h3>
+                     <p
+                        class="parrafo"
+                     >Brindar una educación integral que promueva el desarrollo de estudiantes creativos, críticos e independientes, capaces de formar su proyecto de vida comprometidos con el respeto y la vivencia de los derechos humanos en su comunidad.</p>
+                  </v-flex>
+               </v-layout>
             </div>
          </section>
          <section class="galeria">
@@ -49,19 +57,19 @@
                <h3 class="slogan">Conoce algunas utilidades del campus</h3>
                <div class="cards">
                   <div class="card">
-                     <img src="../../img/11.jpg" alt>
+                     <img src="../../img/homevideos.jpg" alt>
                      <h4>Videos</h4>
-                     <p>Lorem ipsum dolor sit.</p>
+                     <p>Incorporación de videos infomativos.</p>
                   </div>
                   <div class="card">
-                     <img src="../../img/11.jpg" alt>
+                     <img src="../../img/hometareas.jpg" alt>
                      <h4>Tareas</h4>
-                     <p>Lorem ipsum dolor sit.</p>
+                     <p>Creación de tareas de selección.</p>
                   </div>
                   <div class="card">
-                     <img src="../../img/11.jpg" alt>
+                     <img src="../../img/homenoticias.png" alt>
                      <h4>Noticias</h4>
-                     <p>Lorem ipsum dolor sit.</p>
+                     <p>Inserción de noticias estudiantiles.</p>
                   </div>
                </div>
             </div>
@@ -69,20 +77,20 @@
          <section class="fondo">
             <div class="sesgoarriba"></div>
             <div class="contenedor">
-               <h2 class="titulo-patrocinadores">No se que poner</h2>
-               <h3 class="subtitulo-patrocinadores">Lorem ipsum dolor sit</h3>
+               <h2 class="titulo-patrocinadores">Innovación educativa</h2>
+               <h3 class="subtitulo-patrocinadores">Nuevo centro educativo</h3>
                <div class="clientes">
                   <div class="cliente">
-                     <img src="../../img/6.jpeg" alt>
+                     <img src="../../img/granadilla3.jpeg" alt>
                   </div>
                   <div class="cliente">
-                     <img src="../../img/6.jpeg" alt>
+                     <img src="../../img/granadilla2.jpeg" alt>
                   </div>
                   <div class="cliente">
-                     <img src="../../img/6.jpeg" alt>
+                     <img src="../../img/granadilla1.jpeg" alt>
                   </div>
                </div>
-               <h3 class="subtitulo-patrocinadores especial">y Lorem ipsum dolor sit...</h3>
+               <h3 class="subtitulo-patrocinadores especial">Centro educativo verde y sustentable.</h3>
             </div>
             <div class="sesgoabajo-unico"></div>
          </section>

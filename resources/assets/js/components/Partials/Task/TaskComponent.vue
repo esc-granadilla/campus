@@ -1,8 +1,17 @@
 <template>
    <v-layout row wrap>
       <v-flex xs12 v-for="(item, index) in tarea.preguntas" :key="item.id">
-         <v-flex xs12 v-if="type != 'edit'">
+         <v-flex xs12 v-if="type != 'edit'" :style="titulocolor(item,index)">
             <p class="headline">{{index+1}}) {{item.pregunta}}</p>
+            <v-flex
+               xs12
+               v-if="comprobacion"
+               class="text-xs-right"
+               pa-3
+               :style="titulocolor(item,index)"
+            >
+               <span class="title">R/. Correcta: {{verificacion[index]}}</span>
+            </v-flex>
          </v-flex>
          <v-flex xs12 v-if="type == 'edit'">
             <v-textarea
@@ -46,7 +55,21 @@
       </v-flex>
       <v-flex xs12 class="text-xs-right">
          <v-btn outline color="primary" @click="Editar" v-if="type == 'edit'">Editar</v-btn>
-         <v-btn outline color="success" @click="Calificar" v-if="type == 'none'">Enviar a Calificar</v-btn>
+         <v-btn
+            outline
+            color="success"
+            @click="Calificar"
+            v-if="type == 'none' && !comprobacion"
+         >Enviar a Calificar</v-btn>
+         <v-btn
+            color="red darken-1"
+            outline
+            flat
+            @click="$emit('speak', {
+                     Open: false
+                  })"
+            v-if="type == 'none'"
+         >Cerrar</v-btn>
       </v-flex>
    </v-layout>
 </template>
@@ -56,10 +79,18 @@ export default {
    props: ["tarea", "type"],
    data() {
       return {
-         mensaje: ""
+         mensaje: "",
+         verificacion: null,
+         comprobacion: false
       };
    },
    methods: {
+      titulocolor(item, index) {
+         if (!this.comprobacion) return "background-color: white;";
+         else if (item.answer == this.verificacion[index])
+            return "background-color: #4caf50; color:white;";
+         else return "background-color: #ff5252; color:white;";
+      },
       Editar() {
          let editar = true;
          let respuestas = "";
@@ -91,11 +122,35 @@ export default {
                message: "Complete todo el formulario."
             };
       },
-      Calificar() {}
+      Calificar() {
+         let validar = true;
+         let respuestas = "";
+         let self = this;
+         this.tarea.preguntas.forEach(pre => {
+            if (pre.answer == null) validar = false;
+            else respuestas += pre.answer + ",";
+         });
+         if (validar) {
+            this.tarea.respuestas = respuestas;
+            axios
+               .post("/taskqualification/" + this.tarea.id, this.tarea)
+               .then(function(res) {
+                  if (res.data.type == "success") {
+                     self.verificacion = res.data.respuestas;
+                     self.comprobacion = true;
+                  }
+                  self.mensaje = res.data;
+               });
+         } else
+            this.mensaje = {
+               type: "error",
+               message: "Complete todo el formulario."
+            };
+      }
    },
    watch: {
       tarea(val) {
-         if (this.type === "edit") {
+         if (this.type != "none") {
             let respuestas = val.respuestas.split(",");
             for (let index = 0; index < val.preguntas.length; index++) {
                val.preguntas[index].answer = respuestas[index];
@@ -134,6 +189,9 @@ export default {
 }
 .v-input--selection-controls .v-input__control {
    width: 100%;
+}
+p {
+   margin-bottom: 0px;
 }
 </style>
 

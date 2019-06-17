@@ -102,6 +102,8 @@ Route::get('/ppromedios', 'ProfesorController@index');
 
 Route::get('/screenteacher', 'ProfesorController@index');
 
+Route::get('/etareas', 'EstudianteController@index');
+
 Route::get('/screenstudent', 'EstudianteController@index');
 
 Route::get('/enoticias', 'HomeController@index');
@@ -168,3 +170,7 @@ Route::get(
    'mystudentsexport/{id}/',
    'ProfesorController@mystudentsexport'
 )->name('mystudentsexport');
+
+Route::get('/studenttasks', 'EstudianteController@studenttasks');
+
+Route::post('/taskqualification/{task}', 'EstudianteController@taskqualification');

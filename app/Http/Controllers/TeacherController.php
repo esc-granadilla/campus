@@ -23,7 +23,8 @@ class TeacherController extends Controller
    {
       $this->middleware('auth');
       //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
-      $this->middleware('administrador');
+      $this->middleware('profesor', ['only' => ['index', 'update']]);
+      $this->middleware('administrador', ['except' => ['index', 'show', 'edit', 'update']]);
    }
 
 

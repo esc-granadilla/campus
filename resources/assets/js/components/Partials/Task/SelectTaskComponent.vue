@@ -3,7 +3,7 @@
       <v-flex xs12>
          <div v-bar class="tm">
             <v-list subheader two-line>
-               <v-subheader>Cursos</v-subheader>
+               <v-subheader>Tareas</v-subheader>
                <v-list-tile @click.prevent="selectedTask(t)" v-for="t in tasks" :key="t.id">
                   <v-list-tile-action>
                      <v-checkbox v-model="t.selected" @click.prevent="selectedTask(t)"></v-checkbox>
