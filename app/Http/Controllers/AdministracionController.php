@@ -12,6 +12,7 @@ use Campus\Student;
 use Campus\Day;
 use Campus\Schedule;
 use Campus\Lesson;
+use Campus\News;
 
 class AdministracionController extends Controller
 {
@@ -270,6 +271,24 @@ class AdministracionController extends Controller
          } catch (\Exception $e) {
             return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
+      }
+   }
+
+   public function statistics(Request $request)
+   {
+      if ($request->ajax()) {
+         $profesores = Teacher::where('estado', 1)->get()->count();
+         $estudiantes = Student::where('estado', 1)->get()->count();
+         $secciones = Section::where('estado', 1)->get()->count();
+         $cursos = Course::where('estado', 1)->get()->count();
+         $lista = Student::where('estado', 1)->with('section')->get();
+         $listaestudiantes = [];
+         foreach ($lista as $list) {
+            if ($list->section != null)
+               array_push($listaestudiantes, $list);
+         }
+         $listanoticias = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
+         return response()->json(['ListaNoticias' => $listanoticias, 'ListaEstudiantes' => $listaestudiantes, 'Profesores' => $profesores, 'Alumnos' => $estudiantes, 'Secciones' => $secciones, 'Cursos' => $cursos], 200);
       }
    }
 }

@@ -174,3 +174,5 @@ Route::get(
 Route::get('/studenttasks', 'EstudianteController@studenttasks');
 
 Route::post('/taskqualification/{task}', 'EstudianteController@taskqualification');
+
+Route::get('/statistics', 'AdministracionController@statistics');
