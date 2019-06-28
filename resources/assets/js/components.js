@@ -1,4 +1,5 @@
 window.Vue = require('vue');
+Vue.component('notauthorized', require('./pages/Notauthorized.vue').default);
 Vue.component('login', require('./pages/Login.vue').default);
 Vue.component('App', require('./pages/App.vue').default);
 Vue.component('Appstudents', require('./pages/AppStudents.vue').default);
