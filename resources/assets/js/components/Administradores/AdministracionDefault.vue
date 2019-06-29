@@ -1,5 +1,11 @@
 <template>
    <v-layout row justify-center wrap pt-5 style="position: absolute;">
+      <dialogdelete
+         :text="text"
+         :title="title"
+         :dialogDeletes="dialogDelete"
+         v-on:speak="borrarMethod($event)"
+      ></dialogdelete>
       <v-flex class="text-xs-center" xs2>
          <v-progress-circular
             :rotate="360"
@@ -42,12 +48,23 @@
       </v-flex>
       <v-flex class="text-xs-center" xs4 px-5>
          <v-layout>
-            <v-btn block outline color="green darken-2" style="height: 60px; margin: 0;">Cambiar</v-btn>
+            <v-btn
+               block
+               outline
+               color="green darken-2"
+               style="height: 60px; margin: 0;"
+               @click="changetrimestre"
+            >Cambiar</v-btn>
             <v-flex xs6>
-               <v-select :items="[1,2,3]" label="Trimestres" outline></v-select>
+               <v-select :items="[1,2,3]" label="Trimestres" v-model="trimestre" outline></v-select>
             </v-flex>
          </v-layout>
-         <v-btn block outline color="red darken-2">Restaurar Año Lectivo</v-btn>
+         <v-btn
+            block
+            outline
+            color="red darken-2"
+            @click="dialogDelete = true;"
+         >Restaurar Año Lectivo</v-btn>
       </v-flex>
       <v-flex xs6 pt-5 px-4>
          <v-card>
@@ -135,7 +152,12 @@
 </template>
 
 <script>
+import dialogdelete from "../Modals/DialogDelete.vue";
+
 export default {
+   components: {
+      dialogdelete
+   },
    data() {
       return {
          estadisticas: {
@@ -146,7 +168,13 @@ export default {
             ListaEstudiantes: [],
             ListaNoticias: []
          },
+         trimestre: 1,
+         dialogDelete: false,
+         title: "Eliminar Registros?",
+         text: "Seguro que restaurar el sistema.",
+         mensaje: {},
          search: "",
+         data: { tipo: 14638163 },
          headers: [
             {
                text: "Sección",
@@ -170,9 +198,37 @@ export default {
          ]
       };
    },
-   methods: {},
+   methods: {
+      borrarMethod: function(msg) {
+         this.dialogDelete = msg.dialogdelete;
+         if (msg.Delete)
+            axios
+               .post("reset/", this.data)
+               .then(res => (this.mensaje = res.data));
+      },
+      changetrimestre() {
+         axios
+            .post("changetrimester/", { trimestre: this.trimestre })
+            .then(res => (this.mensaje = res.data));
+      }
+   },
+   watch: {
+      mensaje(val) {
+         if (val.type === "success")
+            this.$toast.success(val.message, {
+               y: "top",
+               timeout: 6000
+            });
+         else
+            this.$toast.error(val.message, {
+               y: "top",
+               timeout: 6000
+            });
+      }
+   },
    mounted() {
       axios.get("/statistics").then(res => (this.estadisticas = res.data));
+      axios.get("/gettrimester").then(res => (this.trimestre = res.data));
    }
 };
 </script>
