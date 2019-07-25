@@ -243,9 +243,13 @@ class AdministracionController extends Controller
             $schedule = $lesson->schedule()->first();
             for ($i = count($matriz) - 1; $i >= 0; $i--) {
                if ($matriz[$i]['dia']['id'] == $day->id) {
-                  $matriz[$i]['horario'] = array_filter($matriz[$i]['horario'], function ($var) use ($schedule) {
-                     return $var['id'] != $schedule->id;
-                  });
+                  $array = [];
+                  for ($j = 0; $j < count($matriz[$i]['horario']); $j++) {
+                     if ($matriz[$i]['horario'][$j]['id'] != $schedule->id) {
+                        array_push($array, $matriz[$i]['horario'][$j]);
+                     }
+                  }
+                  $matriz[$i]['horario'] = $array;
                }
             }
          }
