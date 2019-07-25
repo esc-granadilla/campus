@@ -32,7 +32,7 @@ export default {
    position: relative;
    overflow: hidden;
    text-align: center;
-   background-image: url("../../../img/Skewed.png");
+   background-image: url("../../../img/Skewed.jpg");
    background-position-y: 56px;
 }
 

@@ -1,6 +1,6 @@
 <template>
    <div id="apphome">
-      <headercomponent/>
+      <headercomponent />
       <div class="main">
          <section class="acerca-de">
             <div class="contenedor">
@@ -31,23 +31,23 @@
          <section class="galeria">
             <div class="sesgoarriba"></div>
             <div class="imagenes none">
-               <img src="../../img/1.jpg" alt>
+               <img src="../../img/1.jpg" alt />
             </div>
             <div class="imagenes">
-               <img src="../../img/3.jpg" alt>
+               <img src="../../img/3.jpg" alt />
             </div>
             <div class="imagenes">
-               <img src="../../img/2.jpg" alt>
+               <img src="../../img/2.jpg" alt />
                <div class="encima">
                   <h2>Herramientas Escolares</h2>
                   <div></div>
                </div>
             </div>
             <div class="imagenes">
-               <img src="../../img/4.jpeg" alt>
+               <img src="../../img/4.jpeg" alt />
             </div>
             <div class="imagenes none">
-               <img src="../../img/5.jpeg" alt>
+               <img src="../../img/5.jpeg" alt />
             </div>
             <div class="sesgoabajo"></div>
          </section>
@@ -57,17 +57,17 @@
                <h3 class="slogan">Conoce algunas utilidades del campus</h3>
                <div class="cards">
                   <div class="card">
-                     <img src="../../img/homevideos.jpg" alt>
+                     <img src="../../img/homevideos.jpg" alt />
                      <h4>Videos</h4>
                      <p>Incorporación de videos infomativos.</p>
                   </div>
                   <div class="card">
-                     <img src="../../img/hometareas.jpg" alt>
+                     <img src="../../img/hometareas.jpg" alt />
                      <h4>Tareas</h4>
                      <p>Creación de tareas de selección.</p>
                   </div>
                   <div class="card">
-                     <img src="../../img/homenoticias.png" alt>
+                     <img src="../../img/homenoticias.png" alt />
                      <h4>Noticias</h4>
                      <p>Inserción de noticias estudiantiles.</p>
                   </div>
@@ -81,13 +81,13 @@
                <h3 class="subtitulo-patrocinadores">Nuevo centro educativo</h3>
                <div class="clientes">
                   <div class="cliente">
-                     <img src="../../img/granadilla3.jpeg" alt>
+                     <img src="../../img/granadilla3.jpeg" alt />
                   </div>
                   <div class="cliente">
-                     <img src="../../img/granadilla2.jpeg" alt>
+                     <img src="../../img/granadilla2.jpeg" alt />
                   </div>
                   <div class="cliente">
-                     <img src="../../img/granadilla1.jpeg" alt>
+                     <img src="../../img/granadilla1.jpeg" alt />
                   </div>
                </div>
                <h3 class="subtitulo-patrocinadores especial">Centro educativo verde y sustentable.</h3>
@@ -95,7 +95,7 @@
             <div class="sesgoabajo-unico"></div>
          </section>
       </div>
-      <footercomponent/>
+      <footercomponent />
    </div>
 </template>
 
@@ -291,7 +291,7 @@ body {
    background-position: center;
    background-size: cover;
    padding-top: 130px;
-   background-image: url("../../img/fondo.png");
+   background-image: url("../../img/fondo.jpg");
 }
 
 .sesgoabajo-unico {
