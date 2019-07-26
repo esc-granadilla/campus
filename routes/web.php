@@ -183,3 +183,5 @@ Route::post('/changetrimester', 'AdministracionController@changetrimester');
 Route::post('/reset', 'AdministracionController@reset');
 
 Route::get('/gettrimester', 'AdministracionController@gettrimester');
+
+Route::get('/email', 'HomeController@email');

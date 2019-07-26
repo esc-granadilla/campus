@@ -4,6 +4,7 @@ namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Campus\Http\Middleware\Profesor;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,7 @@ class HomeController extends Controller
     */
    public function __construct()
    {
-      $this->middleware('auth');
+      $this->middleware('auth', ['except' => ['email']]);
    }
 
    /**
@@ -32,6 +33,33 @@ class HomeController extends Controller
          $profesor = $request->user()->teacher()->first();
          $request->session()->push('teacher', $profesor);
          return view('homeprofesores', compact('profesor'));
+      }
+   }
+
+   public function email(Request $request)
+   {
+      $data = array(
+         'mensaje' => $request->input('mensaje'),
+         'email' => $request->input('email'),
+         'name' => $request->input('name')
+      );
+      try {
+         Mail::send(
+            'emails.home',
+            $data,
+            function ($message) {
+               $message->from('escgranadilla@gmail.com', 'Campus Granadilla Norte');
+
+               $message->to('escgranadilla@gmail.com', 'Campus Granadilla Norte');
+
+               $message->subject('Info Campus Virtual');
+
+               $message->priority(3);
+            }
+         );
+         return view('welcome');
+      } catch (\Exception $e) {
+         return view('welcome');
       }
    }
 }
