@@ -87,6 +87,7 @@ class EstudianteController extends Controller
          $student = Student::where('cedula', $cedula)->first();
          $qualifications = $student->qualifications()->where([
             'estado' => 1,
+            'trimestre' => $this->gettrimester(),
             'course_id' => (int) $request->session()->get('course')
          ])->get();
          return response()->json($qualifications, 200);
@@ -120,7 +121,7 @@ class EstudianteController extends Controller
          $course = (int) $request->session()->get('course');
          $cedula = $request->session()->get('student')[0]->cedula;
          $student = Student::where('cedula', $cedula)->first();
-         $taskhistories = $student->taskhistories()->where('course_id', $course)->with(['task' => function ($query) {
+         $taskhistories = $student->taskhistories()->where(['course_id' => $course, 'trimestre' => $this->gettrimester()])->with(['task' => function ($query) {
             $query->with('questions');
          }])->get();
          $realizadas = [];
