@@ -16,7 +16,14 @@
                      <v-text-field label="Descripción" v-model="tarea.descripcion"></v-text-field>
                   </v-flex>
                   <v-flex xs2>
-                     <v-text-field label="Valor" v-model="tarea.valor" :mask="mask"></v-text-field>
+                     <v-text-field
+                        label="Valor"
+                        v-model="tarea.valor"
+                        suffix="%"
+                        :mask="mask"
+                        :return-masked-value="true"
+                        required
+                     ></v-text-field>
                   </v-flex>
                </v-layout>
                <v-flex xs12>
