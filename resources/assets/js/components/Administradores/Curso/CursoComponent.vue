@@ -1,180 +1,111 @@
 <template>
-   <v-flex md8 xs12 offset-md2>
-      <v-layout wrap row>
-         <v-flex xs12 pt-2 px-3>
-            <v-toolbar dark color="green" class="py-1">
-               <v-spacer></v-spacer>
-               <v-toolbar-title>Listado de Cursos</v-toolbar-title>
-               <v-spacer></v-spacer>
-            </v-toolbar>
-            <v-card>
-               <dialogcreate v-on:speak="crearMethod($event)"></dialogcreate>
-               <dialogdelete
-                  :text="text"
-                  :title="title"
-                  :dialogDeletes="dialogDelete"
-                  v-on:speak="borrarMethod($event)"
-               ></dialogdelete>
-               <v-card-title>
-                  <v-spacer></v-spacer>Cursos
-                  <v-spacer></v-spacer>
-                  <v-text-field
-                     v-model="search"
-                     append-icon="search"
-                     label="Buscar por Nombre"
-                     single-line
-                     hide-details
-                  ></v-text-field>
-               </v-card-title>
-               <v-data-table
-                  :headers="headers"
-                  :items="cursos"
-                  :search="search"
-                  rowsPerPageText="Elementos por página:"
-                  rowsPerPageAll="Todos"
-                  pageText="{0}-{1} de {2}"
-                  noResultsText="Ningún resultado a mostrar"
-                  nextPage="Página siguiente"
-                  prevPage="Página anterior"
-                  noDataText="Ningún dato disponible"
-               >
-                  <template v-slot:items="props">
-                     <td
-                        class="text-xs-left"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.nombre }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >{{ props.item.profesor.nombre }} {{ props.item.profesor.primer_apellido }} {{ props.item.profesor.segundo_apellido }}</td>
-                     <td
-                        class="text-xs-center"
-                        :style="{backgroundColor: (props.index % 2 == 0) ?'#c8e6c9' : 'white'}"
-                     >
-                        <v-btn
-                           flat
-                           small
-                           color="error"
-                           dark
-                           @click.stop="buscar(props.item.id),dialogDelete = true"
-                        >Eliminar</v-btn>
-                     </td>
-                  </template>
-                  <v-alert
-                     v-slot:no-results
-                     :value="true"
-                     color="error"
-                     icon="warning"
-                  >Tu busqueda por "{{ search }}" no encontro resultados.</v-alert>
-               </v-data-table>
-            </v-card>
-         </v-flex>
-      </v-layout>
-   </v-flex>
+   <v-form ref="form">
+      <v-select
+         :items="profesores"
+         item-text="name"
+         item-value="id"
+         return-object
+         v-model="curso.profesor"
+         label="*Profesor"
+         d-block
+      ></v-select>
+      <v-select
+         :items="asignaturas"
+         item-text="nombre"
+         item-value="id"
+         return-object
+         v-model="curso.asignatura"
+         label="*Asignatura"
+         d-block
+      ></v-select>
+      <v-select
+         :items="secciones"
+         item-text="seccion"
+         item-value="id"
+         return-object
+         v-model="curso.seccion"
+         label="*Sección"
+         d-block
+      ></v-select>
+   </v-form>
 </template>
 
 <script>
-import dialogcreate from "./DialogCreate";
-import dialogdelete from "../../Modals/DialogDelete.vue";
-
 export default {
-   name: "cursocomponent",
-   components: {
-      dialogcreate,
-      dialogdelete
-   },
+   name: "curso_component",
+   props: ["validar", "restaurar", "datos"],
    data() {
       return {
-         search: "",
-         dialogDelete: false,
-         title: "Eliminar Curso?",
-         text: "Seguro que quieres eliminar este Curso.",
          curso: {
             id: null,
             nombre: "",
+            profesor: null,
+            seccion: null,
+            asignatura: null,
             section_id: null,
             teacher_id: null,
             subject_id: null,
-            profesor: {
-               nombre: "",
-               primer_apellido: "",
-               segundo_apellido: ""
-            }
+            estado: 1
          },
-         cursos: [],
-         mensaje: { type: "success", message: "" },
-         headers: [
-            {
-               text: "Nombre",
-               align: "left",
-               sortable: false,
-               value: "nombre"
-            },
-            { text: "Profesor", align: "center", value: "codigo" },
-            { text: "Eliminar", align: "center", value: "" }
-         ]
+         asignaturas: [],
+         profesores: [],
+         rules: {
+            required: value => !!value || "Requerido."
+         },
+         secciones: []
       };
    },
-   methods: {
-      buscar(id) {
-         this.curso = this.cursos.find(function(c) {
-            return c.id == id;
-         });
-      },
-      crearMethod: function(msg) {
-         var self = this;
-         if (
-            msg.asignatura != null &&
-            msg.seccion != null &&
-            msg.profesor != null
-         ) {
-            msg.nombre = `${msg.asignatura.nombre} ${msg.seccion.seccion}`;
-            msg.subject_id = msg.asignatura.id;
-            msg.teacher_id = msg.profesor.id;
-            msg.section_id = msg.seccion.id;
-            this.curso = msg;
-            axios.post("courses/", this.curso).then(function(res) {
-               self.mensaje = res.data;
-               axios.get("/courses").then(res => (self.cursos = res.data));
-            });
-         }
-      },
-      eliminar() {
-         var self = this;
-         if (this.curso.id != null) {
-            axios.delete("courses/" + this.curso.id).then(function(res) {
-               self.mensaje = res.data;
-               axios.get("/courses").then(res => (self.cursos = res.data));
-            });
-         }
-      },
-      borrarMethod: function(msg) {
-         this.dialogDelete = msg.dialogdelete;
-         if (msg.Delete) this.eliminar();
-      }
-   },
    watch: {
-      mensaje(val) {
-         if (val.type === "success")
-            this.$toast.success(val.message, {
-               y: "top",
-               timeout: 6000
-            });
-         else
-            this.$toast.error(val.message, {
-               y: "top",
-               timeout: 6000
-            });
+      validar(val) {
+         if (val) {
+            if (this.$refs.form.validate()) {
+               this.$emit("speak", this.curso);
+               return;
+            }
+         }
+         this.$emit("speak", null);
+      },
+      datos(val) {
+         if (val != null) {
+            this.curso.id = val.id;
+            this.curso.nombre = val.nombre;
+            this.curso.profesor = val.profesor;
+            this.curso.seccion = val.seccion;
+            this.curso.asignatura = val.asignatura;
+            this.curso.section_id = val.section_id;
+            this.curso.teacher_id = val.teacher_id;
+            this.curso.subject_id = val.subject_id;
+            this.curso.estado = val.estado;
+         }
+      },
+      restaurar(val) {
+         if (val)
+            this.curso = {
+               id: null,
+               nombre: "",
+               profesor: null,
+               seccion: null,
+               asignatura: null,
+               section_id: null,
+               teacher_id: null,
+               subject_id: null,
+               estado: 1
+            };
       }
    },
    mounted() {
-      axios.get("/courses").then(res => (this.cursos = res.data));
+      let self = this;
+      axios.get("/subjects").then(res => (this.asignaturas = res.data));
+      axios.get("/sections").then(res => (this.secciones = res.data));
+      axios.get("/teachers").then(function(res) {
+         res.data.forEach(profesor => {
+            profesor.name = `${profesor.nombre} ${profesor.primer_apellido} ${profesor.segundo_apellido}`;
+         });
+         self.profesores = res.data;
+      });
    }
 };
 </script>
 
 <style scoped>
-.v-table thead tr:first-child {
-   background-color: black;
-}
 </style>

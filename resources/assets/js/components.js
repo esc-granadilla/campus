@@ -27,6 +27,13 @@ Vue.component('profilestudents', require('./components/Estudiantes/ProfileCompon
 Vue.component('profileteachers', require('./components/Profesores/ProfileComponent.vue').default);
 Vue.component('shownewscomponent', require('./components/Partials/News/ShowNewsComponent.vue').default);
 Vue.component('showtaskscomponent', require('./components/Partials/Task/ShowTasksComponent.vue').default);
+Vue.component('dialogcreate', require('./components/Modals/DialogCreate.vue').default);
+Vue.component('dialogedit', require('./components/Modals/DialogEdit.vue').default);
+Vue.component('dialogdelete', require('./components/Modals/DialogDelete.vue').default);
+Vue.component('asignatura_component', require('./components/Administradores/Asignatura/AsignaturaComponent.vue').default);
+Vue.component('horario_component', require('./components/Administradores/Horario/HorarioComponent.vue').default);
+Vue.component('seccion_component', require('./components/Administradores/Seccion/SeccionComponent.vue').default);
+Vue.component('curso_component', require('./components/Administradores/Curso/CursoComponent.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
 Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */

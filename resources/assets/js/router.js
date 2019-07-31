@@ -8,11 +8,11 @@ import Profesorpromediocomponent from './components/Profesores/Promedios/Promedi
 import Profesortareacomponent from './components/Profesores/Tareas/TareaComponent.vue';
 import Estudiantecomponent from './components/Administradores/Estudiantes/EstudianteComponent.vue';
 import Estudiantecursoscomponent from './components/Estudiantes/CursosComponent.vue';
-import Horariocomponent from './components/Administradores/Horario/HorarioComponent.vue';
-import Seccioncomponent from './components/Administradores/Seccion/SeccionComponent.vue';
-import Asignaturacomponent from './components/Administradores/Asignatura/AsignaturaComponent.vue';
+import Horariocomponent from './components/Administradores/Horario/index.vue';
+import Seccioncomponent from './components/Administradores/Seccion/index.vue';
+import Asignaturacomponent from './components/Administradores/Asignatura/index.vue';
 import Credencialcomponent from './components/Administradores/Asignaciones/Credencial.vue';
-import Cursocomponent from './components/Administradores/Curso/CursoComponent.vue';
+import Cursocomponent from './components/Administradores/Curso/index.vue';
 import Admincomponent from './components/Administradores/AdministracionDefault.vue';
 import AsigSeccionAlumnoscomponent from './components/Administradores/Asignaciones/SeccionAlumnos.vue';
 import AsigCursoLeccionescomponent from './components/Administradores/Asignaciones/CursoLecciones.vue';
