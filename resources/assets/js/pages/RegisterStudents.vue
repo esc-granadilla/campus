@@ -47,21 +47,23 @@
                         <div :class="ocultarParentesco">
                            <v-layout wrap>
                               <h3 mt-3>Datos encargado del estudiante</h3>
-                              <hr>
+                              <hr />
                               <v-flex xs12 pt-2>
                                  <v-text-field
                                     xs12
                                     v-model="encargado.cedula"
-                                    :rules="[rules.required, rules.min]"
+                                    :rules="[rules.required, rules.cedula]"
                                     label="Cedula"
                                     name="encargado_cedula"
+                                    :mask="mask"
+                                    :return-masked-value="false"
                                     v-if="ocultarParentesco !== 'si'"
                                  ></v-text-field>
                               </v-flex>
                               <v-flex xs12 pt-2>
                                  <v-text-field
                                     v-model="encargado.nombre"
-                                    :rules="[rules.required, rules.mini]"
+                                    :rules="[rules.required, rules.between]"
                                     counter
                                     label="Nombre"
                                     name="encargado_nombre"
@@ -72,7 +74,7 @@
                                  <v-text-field
                                     xs12
                                     v-model="encargado.primer_apellido"
-                                    :rules="[rules.required, rules.mini]"
+                                    :rules="[rules.required, rules.between]"
                                     counter
                                     label="Primer Apellido"
                                     name="encargado_apellido1"
@@ -82,7 +84,7 @@
                               <v-flex xs12 pt-2>
                                  <v-text-field
                                     v-model="encargado.segundo_apellido"
-                                    :rules="[rules.required, rules.mini]"
+                                    :rules="[rules.required, rules.between]"
                                     counter
                                     label="Segundo Apellido"
                                     name="encargado_apellido2"
@@ -92,7 +94,7 @@
                               <v-flex xs12 pt-2>
                                  <v-text-field
                                     v-model="encargado.parentesco"
-                                    :rules="[rules.required, rules.mini]"
+                                    :rules="[rules.required, rules.between]"
                                     label="Parentesco"
                                     name="encargado_parentesco"
                                     v-if="ocultarParentesco !== 'si'"
@@ -101,7 +103,7 @@
                               <v-flex xs12 pt-2>
                                  <v-text-field
                                     v-model="encargado.telefono"
-                                    :rules="[rules.required, rules.min8]"
+                                    :rules="[rules.required, rules.telefono]"
                                     :counter="8"
                                     label="Telefono"
                                     name="encargado_telefono"
@@ -191,16 +193,17 @@ export default {
          },
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 9 || "Min 9 Caracteres",
-            min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
-            mini: v => v.length >= 3 || "Min 3 Caracteres"
+            telefono: v => v.length == 8 || "EL telefonico no es valido",
+            cedula: v => v.length == 9 || "La cedula no es valida",
+            between: v =>
+               (v.length >= 3 && v.length < 41) || "Entre 3 y 40 Caracteres"
          },
          emailRules: [
             v => !!v || "E-mail es requerido",
-            v => /.+@.+/.test(v) || "E-mail debe ser valido"
+            v => /.+@.+\..+/.test(v) || "E-mail debe ser valido"
          ],
-         error: false
+         error: false,
+         mask: "#-####-####"
       };
    },
    methods: {

@@ -64,7 +64,7 @@
                                  ref="picker"
                                  v-model="date"
                                  :max="new Date().toISOString().substr(0, 10)"
-                                 min="1950-01-01"
+                                 min="1940-01-01"
                                  @change="save"
                               ></v-date-picker>
                            </v-menu>
@@ -72,7 +72,7 @@
                         <v-flex xs12 d-flex>
                            <v-text-field
                               v-model="telefono1"
-                              :rules="[rules.required, rules.min8]"
+                              :rules="[rules.required, rules.telefono]"
                               :counter="8"
                               label="1º Telefono"
                               name="telefono1"
@@ -81,7 +81,7 @@
                         <v-flex xs12 d-flex>
                            <v-text-field
                               v-model="telefono2"
-                              :rules="[rules.min8]"
+                              :rules="[rules.telefono]"
                               :counter="8"
                               label="2º Telefono"
                               name="telefono2"
@@ -145,10 +145,8 @@ export default {
          image: require("../../img/profebanner.jpg"),
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 9 || "Min 9 Caracteres",
-            min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length <= 50 || "Maximo 50 Caracteres",
-            mini: v => v.length >= 3 || "Min 3 Caracteres"
+            telefono: v => v.length == 8 || "EL telefonico no es valido",
+            max: v => v.length <= 50 || "Maximo 50 Caracteres"
          },
          error: false
       };

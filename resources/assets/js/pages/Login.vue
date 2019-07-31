@@ -31,11 +31,11 @@
                   <v-text-field
                      v-model="password"
                      :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                     :rules="[rules.required, rules.min]"
+                     :rules="[rules.required, rules.between]"
                      :type="show1 ? 'text' : 'password'"
                      name="password"
                      label="Contraseña"
-                     hint="At least 8 characters"
+                     hint="Entre 8 y 32 caracteres"
                      prepend-icon="lock"
                      counter
                      @click:append="show1 = !show1"
@@ -65,11 +65,12 @@ export default {
          switch1: true,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 8 || "Min 8 caracteres"
+            between: v =>
+               (v.length >= 8 && v.length < 33) || "Entre 8 y 32 caracteres"
          },
          emailRules: [
             v => !!v || "E-mail es requerido",
-            v => /.+@.+/.test(v) || "E-mail debe ser valido"
+            v => /.+@.+\..+/.test(v) || "E-mail debe ser valido"
          ]
       };
    },
