@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 import Vue from 'vue';
 import Router from 'vue-router';
-import Profesorcomponent from './components/Profesores/ProfesorComponent.vue';
+import Profesorcomponent from './components/Administradores/Profesor/index.vue';
 import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.vue';
 import Profesornotasagregarcomponent from './components/Profesores/Notas/NotasAgregarComponent.vue';
 import Profesorpromediocomponent from './components/Profesores/Promedios/PromedioComponent.vue';
@@ -16,7 +16,7 @@ import Cursocomponent from './components/Administradores/Curso/index.vue';
 import Admincomponent from './components/Administradores/AdministracionDefault.vue';
 import AsigSeccionAlumnoscomponent from './components/Administradores/Asignaciones/SeccionAlumnos.vue';
 import AsigCursoLeccionescomponent from './components/Administradores/Asignaciones/CursoLecciones.vue';
-import Administradornoticiascomponent from './components/Administradores/Noticias/NewsComponent.vue';
+import Administradornoticiascomponent from './components/Administradores/Noticias/index.vue';
 import Profesornoticiascomponent from './components/Profesores/Noticias/NewsComponent.vue';
 import Estudiantenoticiasglobalcomponent from './components/Estudiantes/Noticias/NewsGlobalComponent.vue';
 import Estudiantenoticiasgrupalcomponent from './components/Estudiantes/Noticias/NewsGrupalComponent.vue';

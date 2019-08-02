@@ -31,7 +31,7 @@
                               v-if="bottomNav == 2"
                               class="text-xs-center text-sm-center text-md-center text-lg-center"
                            >
-                              <img :src="imageUrl" height="100" v-if="imageUrl">
+                              <img :src="imageUrl" height="100" v-if="imageUrl" />
                               <v-text-field
                                  label="*Seleccionar la imagen a compartir"
                                  @click="pickFile"
@@ -45,7 +45,7 @@
                                  ref="image"
                                  accept="image/*"
                                  @change="onFilePicked"
-                              >
+                              />
                            </v-flex>
                            <v-text-field
                               xs12
@@ -155,7 +155,7 @@ export default {
                };
                axios.post("/store", data, config).then(function(res) {
                   if (res.data.name != "error") {
-                     newfile.link = "/storage" + res.data.name.substr(6);
+                     newfile.link = "/storage/app/" + res.data.name;
                      self.dialogCreate = false;
                      self.$emit("speak", newfile);
                      self.restaurar();

@@ -11,9 +11,9 @@
                      <v-layout xs12>
                         <v-flex xs5 class="text-xs-center">
                            <img
-                              :src="profesor.foto!='none'?profesor.foto:'/storage/imagen/default-user.png'"
+                              :src="profesor.foto!='none'?profesor.foto:'/storage/app/public/imagen/default-user.png'"
                               height="125"
-                           >
+                           />
                            <v-flex
                               v-if="edit"
                               class="text-xs-center text-sm-center text-md-center text-lg-center"
@@ -31,7 +31,7 @@
                                  ref="image"
                                  accept="image/*"
                                  @change="onFilePicked"
-                              >
+                              />
                            </v-flex>
                         </v-flex>
                         <v-flex xs7>
@@ -240,7 +240,7 @@ export default {
                };
                axios.post("/store", data, config).then(function(res) {
                   if (res.data.name != "error") {
-                     self.profesor.foto = "/storage" + res.data.name.substr(6);
+                     self.profesor.foto = "/storage/app/" + res.data.name;
                   } else {
                      self.$toast.error("No se pudo cargar esta imagen", {
                         y: "top",
