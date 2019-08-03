@@ -1,6 +1,6 @@
 <template>
    <v-layout row justify-center>
-      <v-dialog v-model="dialogdelete" max-width="290">
+      <v-dialog v-model="dialogdelete" persistent max-width="290">
          <v-card>
             <v-card-title class="headline">{{this.title}}</v-card-title>
 

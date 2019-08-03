@@ -18,7 +18,6 @@
          label="Grado"
          d-block
       ></v-select>
-      <v-text-field v-model="gradotxt" name="grado" v-show="false" required></v-text-field>
    </v-form>
 </template>
 
@@ -29,9 +28,10 @@ export default {
    data() {
       return {
          rules: {
-            required: value => !!value || "Requerido.",
+            required: v => !!v || "Requerido.",
             between: v =>
-               (v.length >= 3 && v.length < 11) || "Entre 3 y 10 Caracteres"
+               (!!v && (v.length >= 3 && v.length < 11)) ||
+               "Entre 3 y 10 Caracteres"
          },
          section: {
             id: null,
@@ -54,7 +54,7 @@ export default {
       validar(val) {
          if (val) {
             if (this.$refs.form.validate()) {
-               this.$emit("speak", this.section);
+               this.$emit("speak", Object.assign({}, this.section));
                return;
             }
          }
@@ -71,22 +71,14 @@ export default {
             });
          }
       },
+      grado(val) {
+         if (!!val) this.section.grade_id = this.grado.value;
+      },
       restaurar(val) {
          if (val) {
-            this.section = {
-               id: null,
-               seccion: "",
-               grade_id: null,
-               estado: 1
-            };
+            this.$refs.form.reset();
             this.grado = { value: 1, text: "Primero" };
          }
-      }
-   },
-   computed: {
-      gradotxt: function() {
-         this.section.grade_id = this.grado.value;
-         return this.grado.value;
       }
    }
 };

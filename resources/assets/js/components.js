@@ -35,6 +35,7 @@ Vue.component('horario_component', require('./components/Administradores/Horario
 Vue.component('seccion_component', require('./components/Administradores/Seccion/SeccionComponent.vue').default);
 Vue.component('curso_component', require('./components/Administradores/Curso/CursoComponent.vue').default);
 Vue.component('profesor_component', require('./components/Administradores/Profesor/ProfesorComponent.vue').default);
+Vue.component('estudiante_component', require('./components/Administradores/Estudiante/EstudianteComponent.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
 Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */

@@ -1,7 +1,7 @@
 
 <template>
    <v-layout row justify-center>
-      <v-dialog v-model="dialogedit" :max-width="width">
+      <v-dialog v-model="dialogedit" persistent :max-width="width">
          <v-card>
             <v-card-title>
                <span class="headline">{{ title }}</span>

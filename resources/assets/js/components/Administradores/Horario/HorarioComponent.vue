@@ -77,7 +77,7 @@ export default {
       validar(val) {
          if (val) {
             if (this.$refs.form.validate()) {
-               this.$emit("speak", this.horario);
+               this.$emit("speak", Object.assign({}, this.horario));
                return;
             }
          }
@@ -92,13 +92,7 @@ export default {
          }
       },
       restaurar(val) {
-         if (val)
-            this.horario = {
-               id: null,
-               desde: null,
-               hasta: null,
-               estado: ""
-            };
+         if (val) this.$refs.form.reset();
       }
    }
 };

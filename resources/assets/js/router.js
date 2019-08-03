@@ -6,7 +6,7 @@ import Profesornotacomponent from './components/Profesores/Notas/NotaComponent.v
 import Profesornotasagregarcomponent from './components/Profesores/Notas/NotasAgregarComponent.vue';
 import Profesorpromediocomponent from './components/Profesores/Promedios/PromedioComponent.vue';
 import Profesortareacomponent from './components/Profesores/Tareas/TareaComponent.vue';
-import Estudiantecomponent from './components/Administradores/Estudiantes/EstudianteComponent.vue';
+import Estudiantecomponent from './components/Administradores/Estudiante/index.vue';
 import Estudiantecursoscomponent from './components/Estudiantes/CursosComponent.vue';
 import Horariocomponent from './components/Administradores/Horario/index.vue';
 import Seccioncomponent from './components/Administradores/Seccion/index.vue';

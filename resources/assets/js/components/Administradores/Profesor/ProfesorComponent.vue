@@ -122,7 +122,7 @@
          <v-flex xs6 d-flex px-3>
             <v-text-field
                v-model="profesor.telefono2"
-               :rules="[rules.telefono]"
+               :rules="[rules.telefono2]"
                :counter="8"
                xs12
                label="2º Telefono"
@@ -141,9 +141,12 @@ export default {
       return {
          rules: {
             required: value => !!value || "Requerido.",
-            telefono: v => v.length == 8 || "EL telefonico no es valido",
+            telefono: v =>
+               (!!v && v.length == 8) || "EL telefonico no es valido",
+            telefono2: v => !v || v.length == 8 || "EL telefonico no es valido",
             between: v =>
-               (v.length >= 3 && v.length < 41) || "Entre 3 y 40 Caracteres"
+               (!!v && (v.length >= 3 && v.length < 41)) ||
+               "Entre 3 y 40 Caracteres"
          },
          profesor: {
             id: null,
@@ -179,7 +182,7 @@ export default {
       validar(val) {
          if (val) {
             if (this.$refs.form.validate()) {
-               this.$emit("speak", this.profesor);
+               this.$emit("speak", Object.assign({}, this.profesor));
                return;
             }
          }
@@ -201,20 +204,7 @@ export default {
          }
       },
       restaurar(val) {
-         if (val)
-            this.profesor = {
-               id: null,
-               cedula: "",
-               nombre: "",
-               primer_apellido: "",
-               segundo_apellido: "",
-               fecha_nacimiento: "",
-               puesto: "",
-               fecha_ingreso: "",
-               telefono1: "",
-               telefono2: "",
-               estado: 1
-            };
+         if (val) this.$refs.form.reset();
       },
       menu(val) {
          val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));

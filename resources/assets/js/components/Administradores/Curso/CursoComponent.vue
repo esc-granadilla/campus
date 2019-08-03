@@ -8,6 +8,7 @@
          v-model="curso.profesor"
          label="*Profesor"
          d-block
+         :rules="[rules.required]"
       ></v-select>
       <v-select
          :items="asignaturas"
@@ -17,6 +18,7 @@
          v-model="curso.asignatura"
          label="*Asignatura"
          d-block
+         :rules="[rules.required]"
       ></v-select>
       <v-select
          :items="secciones"
@@ -26,6 +28,7 @@
          v-model="curso.seccion"
          label="*Sección"
          d-block
+         :rules="[rules.required]"
       ></v-select>
    </v-form>
 </template>
@@ -59,7 +62,7 @@ export default {
       validar(val) {
          if (val) {
             if (this.$refs.form.validate()) {
-               this.$emit("speak", this.curso);
+               this.$emit("speak", Object.assign({}, this.curso));
                return;
             }
          }
@@ -79,18 +82,7 @@ export default {
          }
       },
       restaurar(val) {
-         if (val)
-            this.curso = {
-               id: null,
-               nombre: "",
-               profesor: null,
-               seccion: null,
-               asignatura: null,
-               section_id: null,
-               teacher_id: null,
-               subject_id: null,
-               estado: 1
-            };
+         if (val) this.$refs.form.reset();
       }
    },
    mounted() {

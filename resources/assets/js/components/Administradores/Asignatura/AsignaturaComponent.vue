@@ -32,9 +32,11 @@ export default {
          rules: {
             required: value => !!value || "Requerido.",
             between: v =>
-               (v.length >= 3 && v.length < 41) || "Entre 3 y 40 Caracteres",
+               (!!v && (v.length >= 3 && v.length < 41)) ||
+               "Entre 3 y 40 Caracteres",
             mini: v =>
-               (v.length >= 3 && v.length < 9) || "Entre 3 y 8 Caracteres"
+               (!!v && (v.length >= 3 && v.length < 9)) ||
+               "Entre 3 y 8 Caracteres"
          },
          data: {
             id: null,
@@ -49,7 +51,7 @@ export default {
       validar(val) {
          if (val) {
             if (this.$refs.form.validate()) {
-               this.$emit("speak", this.data);
+               this.$emit("speak", Object.assign({}, this.data));
                return;
             }
          }
@@ -65,14 +67,7 @@ export default {
          }
       },
       restaurar(val) {
-         if (val)
-            this.data = {
-               id: null,
-               codigo: "",
-               nombre: "",
-               descripcion: "",
-               estado: ""
-            };
+         if (val) this.$refs.form.reset();
       }
    }
 };
