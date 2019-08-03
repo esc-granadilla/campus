@@ -14,7 +14,7 @@
                            <v-text-field
                               xs12
                               v-model="nota.titulo"
-                              :rules="[rules.required, rules.max]"
+                              :rules="[rules.required, rules.between]"
                               counter
                               label="*Titulo"
                               name="titulo"
@@ -163,7 +163,9 @@ export default {
          mensaje: "",
          rules: {
             required: value => !!value || "Requerido.",
-            max: v => v == null || v.length <= 50 || "Maximo 50 Caracteres"
+            between: v =>
+               (!!v && (v.length >= 3 && v.length < 51)) ||
+               "Entre 3 y 50 Caracteres"
          },
          mask: "##.##",
          trimestres: [

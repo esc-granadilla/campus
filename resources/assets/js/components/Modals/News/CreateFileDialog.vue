@@ -18,7 +18,7 @@
                      <v-text-field
                         xs12
                         v-model="file.titulo"
-                        :rules="[rules.required, rules.max , rules.min]"
+                        :rules="[rules.required, rules.between]"
                         counter
                         label="*Titulo"
                         name="titulo"
@@ -104,8 +104,9 @@ export default {
          bottomNav: 0,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 3 || "Min 3 Caracteres",
-            max: v => v.length <= 250 || "Maximo 250 Caracteres"
+            between: v =>
+               (!!v && (v.length >= 3 && v.length < 61)) ||
+               "Entre 3 y 60 Caracteres"
          },
          imageName: "",
          texto: {
