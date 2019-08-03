@@ -50,7 +50,7 @@
                               v-model="profesor.nombre"
                               label="Ingrese el Nombre"
                               prefix="Nombre: "
-                              :rules="[rules.required, rules.max , rules.min]"
+                              :rules="[rules.required, rules.between]"
                               solo
                               :readonly="!edit"
                            ></v-text-field>
@@ -89,8 +89,8 @@
                               <v-date-picker
                                  ref="picker"
                                  v-model="profesor.fecha_nacimiento"
-                                 :max="new Date().toISOString().substr(0, 10)"
-                                 min="1950-01-01"
+                                 :max="fechamax()"
+                                 min="1940-01-01"
                                  @change="save"
                               ></v-date-picker>
                            </v-menu>
@@ -102,7 +102,7 @@
                               v-model="profesor.primer_apellido"
                               label="Ingrese el Apellido"
                               prefix="(1)Apellido: "
-                              :rules="[rules.required, rules.max , rules.min]"
+                              :rules="[rules.required, rules.between]"
                               solo
                               :readonly="!edit"
                            ></v-text-field>
@@ -113,7 +113,7 @@
                               label="Ingrese el Apellido"
                               prefix="(2)Apellido: "
                               solo
-                              :rules="[rules.required, rules.max , rules.min]"
+                              :rules="[rules.required, rules.between]"
                               :readonly="!edit"
                            ></v-text-field>
                         </v-flex>
@@ -126,7 +126,7 @@
                               prefix="(1)Telefono: "
                               solo
                               mask="########"
-                              :rules="[rules.required, rules.min8]"
+                              :rules="[rules.required, rules.telefono]"
                               :readonly="!edit"
                            ></v-text-field>
                         </v-flex>
@@ -136,7 +136,7 @@
                               label="Ingrese el telefono"
                               prefix="(2)Telefono: "
                               mask="########"
-                              :rules="[rules.min8]"
+                              :rules="[rules.telefono2]"
                               solo
                               :readonly="!edit"
                            ></v-text-field>
@@ -183,10 +183,13 @@ export default {
             foto: ""
          },
          rules: {
-            required: value => !!value || "Requerido.",
-            min: v => v.length >= 3 || "Min 3 Caracteres",
-            max: v => v.length <= 100 || "Maximo 100 Caracteres",
-            min8: v => v.length == 0 || v.length == 8 || "Debe ser de 8 Numeros"
+            required: v => !!v || "Requerido.",
+            telefono: v =>
+               (!!v && v.length == 8) || "EL telefonico no es valido",
+            telefono2: v => !v || v.length == 8 || "EL telefonico no es valido",
+            between: v =>
+               (!!v && (v.length >= 3 && v.length < 41)) ||
+               "Entre 3 y 40 Caracteres"
          },
          imageName: "",
          mensaje: "",
@@ -195,6 +198,11 @@ export default {
       };
    },
    methods: {
+      fechamax() {
+         let date = new Date();
+         date.setFullYear(date.getFullYear() - 18);
+         return date.toISOString().substr(0, 10);
+      },
       save(date) {
          this.$refs.menu.save(date);
       },

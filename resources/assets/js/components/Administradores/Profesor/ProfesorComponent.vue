@@ -114,6 +114,7 @@
                v-model="profesor.telefono1"
                :rules="[rules.required, rules.telefono]"
                :counter="8"
+               mask="########"
                xs12
                label="1º Telefono"
                name="telefono1"
@@ -124,6 +125,7 @@
                v-model="profesor.telefono2"
                :rules="[rules.telefono2]"
                :counter="8"
+               mask="########"
                xs12
                label="2º Telefono"
                name="telefono2"
