@@ -8453,8 +8453,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Modals/DialogDelete.vue */ "./resources/assets/js/components/Modals/DialogDelete.vue");
-/* harmony import */ var _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Modals/Task/EditDialog.vue */ "./resources/assets/js/components/Modals/Task/EditDialog.vue");
+/* harmony import */ var _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Modals/Task/EditDialog.vue */ "./resources/assets/js/components/Modals/Task/EditDialog.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -8540,11 +8539,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    dialogedit: _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    dialogdelete: _Modals_DialogDelete_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    dialogedit: _Modals_Task_EditDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ["tareas"],
   data: function data() {
@@ -12246,38 +12243,22 @@ __webpack_require__.r(__webpack_exports__);
     getErrors: function getErrors() {
       this.error = false;
       var self = this;
-
-      if (this.nextindex == 1) {
-        var i = 0;
-        $("input").each(function (index, value) {
-          if (i < 5 && i > 0) {
-            if ($(this).val() == "" && !self.error) {
-              self.$toast.error("Ingrese todos los datos", {
-                y: "top",
-                timeout: 6000
-              });
-              self.error = true;
-            }
+      var i = 0;
+      var menor = this.nextindex == 1 ? 5 : 10;
+      var mayor = this.nextindex == 1 ? 0 : 4;
+      if (this.nextindex == 1 || this.nextindex == 2) $("input").each(function (index, value) {
+        if (i < menor && i > mayor) {
+          if ($(this).val() == "" && !self.error) {
+            self.$toast.error("Ingrese todos los datos", {
+              y: "top",
+              timeout: 6000
+            });
+            self.error = true;
           }
+        }
 
-          i++;
-        });
-      } else if (this.nextindex == 2) {
-        var i = 0;
-        $("input").each(function (index, value) {
-          if (i < 10 && i > 4) {
-            if ($(this).val() == "" && !self.error) {
-              self.$toast.error("Ingrese todos los datos", {
-                y: "top",
-                timeout: 6000
-              });
-              self.error = true;
-            }
-          }
-
-          i++;
-        });
-      }
+        i++;
+      });
     }
   },
   watch: {
@@ -12565,38 +12546,22 @@ __webpack_require__.r(__webpack_exports__);
     getErrors: function getErrors() {
       this.error = false;
       var self = this;
-
-      if (this.nextindex == 1) {
-        var i = 0;
-        $("input").each(function (index, value) {
-          if (i < 5 && i > 0) {
-            if ($(this).val() == "" && !self.error) {
-              self.$toast.error("Ingrese todos los datos", {
-                y: "top",
-                timeout: 6000
-              });
-              self.error = true;
-            }
+      var i = 0;
+      var menor = this.nextindex == 1 ? 5 : 10;
+      var mayor = this.nextindex == 1 ? 0 : 4;
+      if (this.nextindex == 1 || this.nextindex == 2) $("input").each(function (index, value) {
+        if (i < menor && i > mayor) {
+          if ($(this).val() == "" && !self.error) {
+            self.$toast.error("Ingrese todos los datos", {
+              y: "top",
+              timeout: 6000
+            });
+            self.error = true;
           }
+        }
 
-          i++;
-        });
-      } else if (this.nextindex == 2) {
-        var i = 0;
-        $("input").each(function (index, value) {
-          if (i < 10 && i > 4) {
-            if ($(this).val() == "" && !self.error) {
-              self.$toast.error("Ingrese todos los datos", {
-                y: "top",
-                timeout: 6000
-              });
-              self.error = true;
-            }
-          }
-
-          i++;
-        });
-      }
+        i++;
+      });
     }
   },
   computed: {

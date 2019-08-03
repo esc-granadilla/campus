@@ -172,11 +172,13 @@ export default {
       },
       getErrors() {
          this.error = false;
-         var self = this;
-         if (this.nextindex == 1) {
-            var i = 0;
+         let self = this;
+         let i = 0;
+         let menor = this.nextindex == 1 ? 5 : 10;
+         let mayor = this.nextindex == 1 ? 0 : 4;
+         if (this.nextindex == 1 || this.nextindex == 2)
             $("input").each(function(index, value) {
-               if (i < 5 && i > 0) {
+               if (i < menor && i > mayor) {
                   if ($(this).val() == "" && !self.error) {
                      self.$toast.error("Ingrese todos los datos", {
                         y: "top",
@@ -187,21 +189,6 @@ export default {
                }
                i++;
             });
-         } else if (this.nextindex == 2) {
-            var i = 0;
-            $("input").each(function(index, value) {
-               if (i < 10 && i > 4) {
-                  if ($(this).val() == "" && !self.error) {
-                     self.$toast.error("Ingrese todos los datos", {
-                        y: "top",
-                        timeout: 6000
-                     });
-                     self.error = true;
-                  }
-               }
-               i++;
-            });
-         }
       }
    },
    watch: {
