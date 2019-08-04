@@ -26,8 +26,8 @@ class CreateStudentsTable extends Migration
          $table->integer('section_id')->unsigned()->nullable(true);
          $table->boolean('estado')->default(1)->nullable(false);
          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-         $table->foreign('guardian_id')->references('id')->on('guardians')->onDelete('cascade');
-         $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+         $table->foreign('guardian_id')->references('id')->on('guardians')->onDelete('set null');
+         $table->foreign('section_id')->references('id')->on('sections')->onDelete('set null');
          $table->timestamps();
       });
    }
