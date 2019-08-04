@@ -13,6 +13,7 @@ use Campus\Taskhistory;
 use Campus\Qualification;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Session;
+use Campus\Lesson;
 
 class ProfesorController extends Controller
 {
@@ -50,12 +51,13 @@ class ProfesorController extends Controller
          $asignaciones = $teacher->courses()->get();
          $cursos = [];
          foreach ($asignaciones as $asig) {
-            array_push($cursos, [
-               'id' => $asig->id,
-               'nombre' => $asig->nombre,
-               'curso' => $asig->subject()->first(),
-               'seccion' => $asig->section()->first()
-            ]);
+            if (Lesson::where('course_id', $asig->id)->count() > 0)
+               array_push($cursos, [
+                  'id' => $asig->id,
+                  'nombre' => $asig->nombre,
+                  'curso' => $asig->subject()->first(),
+                  'seccion' => $asig->section()->first()
+               ]);
          }
          return response()->json($cursos, 200);
       }
@@ -65,7 +67,7 @@ class ProfesorController extends Controller
    {
       if ($request->ajax()) {
          $course_id = $request->session()->get('course');
-         $course = Course::where('id', (int)$course_id)->first();
+         $course = Course::where('id', (int) $course_id)->first();
          $students = $course->section()->first()->students()->where('estado', 1)->get();
          return response()->json($students, 200);
       }
@@ -76,7 +78,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $qualifications = $student->qualifications()->where([
             'estado' => 1,
-            'course_id' => (int)$request->session()->get('course')
+            'course_id' => (int) $request->session()->get('course')
          ])->get();
          return response()->json($qualifications, 200);
       }
@@ -84,7 +86,7 @@ class ProfesorController extends Controller
 
    private function matrizqualifications(int $id, Request $request)
    {
-      $course = Course::where('id', (int)$request->session()->get('course'))->first();
+      $course = Course::where('id', (int) $request->session()->get('course'))->first();
       $section = $course->section()->first();
       $students = $section->students()->where('estado', 1)->get();
       $calificaciones = [];
@@ -336,7 +338,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $tarea = $request->all();
          $history = $request->all()['history'];
-         $course = Course::all()->find((int)$request->session()->get('course'));
+         $course = Course::all()->find((int) $request->session()->get('course'));
          $history['course_id'] = $course->id;
          $students = $course->section()->first()->students()->get();
          if ($students == null || $students->count() == 0) {
@@ -355,8 +357,8 @@ class ProfesorController extends Controller
                   $taskhistory = new Taskhistory($history);
                   $taskhistory->save();
                   $info = [
-                     'titulo' => $history['nombre'], 'valor_porcentual' => (float)$tarea['valor'],
-                     'porcentaje_obtenido' => (float)0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
+                     'titulo' => $history['nombre'], 'valor_porcentual' => (float) $tarea['valor'],
+                     'porcentaje_obtenido' => (float) 0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
                      'descripcion' => $tarea['titulo'], 'trimestre' => $taskhistory->trimestre,
                      'fecha' => $taskhistory->inicio, 'student_id' => $student->id, 'course_id' => $course->id,
                   ];
@@ -374,7 +376,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $taskhistories = $task->taskhistories()->where(
             'course_id',
-            (int)$request->session()->get('course')
+            (int) $request->session()->get('course')
          )->get();
          foreach ($taskhistories as $taskhistory) {
             $student = $taskhistory->student()->first();
@@ -395,7 +397,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $taskhistories = $task->taskhistories()->where(
             'course_id',
-            (int)$request->session()->get('course')
+            (int) $request->session()->get('course')
          )->get();
          $taskhistory = null;
          if ($taskhistories != null && $taskhistories->count() > 0) {

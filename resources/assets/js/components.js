@@ -30,6 +30,7 @@ Vue.component('showtaskscomponent', require('./components/Partials/Task/ShowTask
 Vue.component('dialogcreate', require('./components/Modals/DialogCreate.vue').default);
 Vue.component('dialogedit', require('./components/Modals/DialogEdit.vue').default);
 Vue.component('dialogdelete', require('./components/Modals/DialogDelete.vue').default);
+Vue.component('showlessons', require('./components/Modals/ShowLessons.vue').default);
 Vue.component('asignatura_component', require('./components/Administradores/Asignatura/AsignaturaComponent.vue').default);
 Vue.component('horario_component', require('./components/Administradores/Horario/HorarioComponent.vue').default);
 Vue.component('seccion_component', require('./components/Administradores/Seccion/SeccionComponent.vue').default);

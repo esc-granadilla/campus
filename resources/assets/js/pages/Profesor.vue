@@ -3,6 +3,7 @@
       <v-layout justify-end>
          <createtaskcomponent></createtaskcomponent>
          <edittaskdialog></edittaskdialog>
+         <showlessons :dialogOpen="Opendialog" :course="curso" v-on:speak="Opendialog = $event"></showlessons>
       </v-layout>
       <v-form id="nativeForm" method="post" action="/screenteacher">
          <v-text-field id="ids" required hidden name="id"></v-text-field>
@@ -41,6 +42,15 @@
                      <v-list-tile>
                         <v-list-tile-content class="align-center">
                            <v-btn
+                              flat
+                              dark
+                              color="success"
+                              block
+                              @click="curso = props.item.id, Opendialog = true"
+                           >Ver Lecciones</v-btn>
+                        </v-list-tile-content>
+                        <v-list-tile-content class="align-center">
+                           <v-btn
                               round
                               dark
                               color="primary"
@@ -74,7 +84,9 @@ export default {
          id: 0,
          course_id: 0,
          section_id: 0
-      }
+      },
+      curso: 0,
+      Opendialog: false
    }),
    methods: {
       seleccionarCurso(id) {

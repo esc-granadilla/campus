@@ -9,7 +9,7 @@ use Campus\News;
 use Carbon\Carbon;
 use Campus\Course;
 use Campus\Task;
-use Campus\Taskhistory;
+use Campus\Lesson;
 
 class EstudianteController extends Controller
 {
@@ -45,12 +45,13 @@ class EstudianteController extends Controller
          $asignaciones = ($student->section()->first() == null) ? [] : $student->section()->first()->courses()->get();
          $cursos = [];
          foreach ($asignaciones as $asig) {
-            array_push($cursos, [
-               'id' => $asig->id,
-               'nombre' => $asig->nombre,
-               'curso' => $asig->subject()->first(),
-               'seccion' => $asig->section()->first()
-            ]);
+            if (Lesson::where('course_id', $asig->id)->count() > 0)
+               array_push($cursos, [
+                  'id' => $asig->id,
+                  'nombre' => $asig->nombre,
+                  'curso' => $asig->subject()->first(),
+                  'seccion' => $asig->section()->first()
+               ]);
          }
          return response()->json($cursos, 200);
       }
@@ -186,5 +187,29 @@ class EstudianteController extends Controller
    {
       $trimester = (int) Storage::get('public/trimestre/trimester.txt');
       return $trimester;
+   }
+
+   public function lessonsforcourse(Course $course, Request $request)
+   {
+      if ($request->ajax()) {
+         $lessons = Lesson::where('course_id', $course->id)->get();
+         $horarios = [];
+         $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
+         for ($i = 1; $i < 6; $i++) {
+            $schedules = [];
+            $dia = 'no';
+            foreach ($lessons as $lesson) {
+               if ($lesson->day_id == $i) {
+                  $schedule = $lesson->schedule()->first();
+                  array_push($schedules, $schedule);
+                  $dia = $dias[($i - 1)];
+               }
+            }
+            if ($dia != 'no') {
+               array_push($horarios, ['dia' => $dia, 'horario' => $schedules]);
+            }
+         }
+         return response()->json($horarios, 200);
+      }
    }
 }

@@ -185,3 +185,5 @@ Route::post('/reset', 'AdministracionController@reset');
 Route::get('/gettrimester', 'AdministracionController@gettrimester');
 
 Route::get('/email', 'HomeController@email');
+
+Route::get('/lessonsforcourse/{course}', 'EstudianteController@lessonsforcourse');

@@ -1,5 +1,6 @@
 <template>
    <v-container grid-list-md class="cont">
+      <showlessons :dialogOpen="Opendialog" :course="curso" v-on:speak="Opendialog = $event"></showlessons>
       <v-form id="nativeForm" method="post" action="/screenstudent" v-show="false">
          <v-text-field id="ids" required hidden name="id"></v-text-field>
       </v-form>
@@ -35,6 +36,15 @@
                         <v-list-tile-content class="align-end">{{ props.item.seccion.seccion }}</v-list-tile-content>
                      </v-list-tile>
                      <v-list-tile>
+                        <v-list-tile-content class="align-center">
+                           <v-btn
+                              flat
+                              dark
+                              color="success"
+                              block
+                              @click="curso = props.item.id, Opendialog = true"
+                           >Ver Lecciones</v-btn>
+                        </v-list-tile-content>
                         <v-list-tile-content class="align-center">
                            <v-btn
                               round
@@ -76,7 +86,9 @@ export default {
          id: 0,
          course_id: 0,
          section_id: 0
-      }
+      },
+      curso: 0,
+      Opendialog: false
    }),
    methods: {
       seleccionarCurso(id) {
