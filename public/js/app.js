@@ -3553,6 +3553,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "horario_component",
   props: ["validar", "restaurar", "datos"],
@@ -7387,7 +7399,11 @@ __webpack_require__.r(__webpack_exports__);
       indeterminate: true,
       dialogOpen: false,
       studentstock: [],
-      qualifications: []
+      qualifications: [],
+      examenes: [],
+      tareas: [],
+      trabajos: [],
+      otros: []
     };
   },
   props: ["data"],
@@ -7405,55 +7421,115 @@ __webpack_require__.r(__webpack_exports__);
         this.exportOne(msg.Student.id);
       }
     },
+    gettitles: function gettitles(array) {
+      Array.prototype.unique = function (a) {
+        return function () {
+          return this.filter(a);
+        };
+      }(function (a, b, c) {
+        return c.indexOf(a, b + 1) < 0;
+      });
+
+      return array.unique().sort();
+    },
     getthead: function getthead() {
       var table = "<table><thead><tr>";
-      var quali = this.qualifications[0];
-      var examenes = quali.examenes;
-      var tareas = quali.tareas;
-      var trabajos = quali.trabajos;
-      var otros = quali.otros;
+      var self = this;
+      this.qualifications.forEach(function (quali) {
+        quali.examenes.forEach(function (exa) {
+          self.examenes.push(exa.titulo);
+        });
+        quali.tareas.forEach(function (ta) {
+          self.tareas.push(ta.titulo);
+        });
+        quali.trabajos.forEach(function (tra) {
+          self.trabajos.push(tra.titulo);
+        });
+        quali.otros.forEach(function (otro) {
+          self.otros.push(otro.titulo);
+        });
+      });
+      this.examenes = this.gettitles(this.examenes);
+      this.tareas = this.gettitles(this.tareas);
+      this.trabajos = this.gettitles(this.trabajos);
+      this.otros = this.gettitles(this.otros);
       table += "<th>Cedula</th><th>Nombre</th>";
-      examenes.forEach(function (exa) {
-        table += "<th>".concat(exa.titulo, "</th>");
+      this.examenes.forEach(function (exa) {
+        table += "<th>".concat(exa, "</th>");
       });
-      tareas.forEach(function (ta) {
-        table += "<th>".concat(ta.titulo, "</th>");
+      this.tareas.forEach(function (ta) {
+        table += "<th>".concat(ta, "</th>");
       });
-      trabajos.forEach(function (tra) {
-        table += "<th>".concat(tra.titulo, "</th>");
+      this.trabajos.forEach(function (tra) {
+        table += "<th>".concat(tra, "</th>");
       });
-      otros.forEach(function (otro) {
-        table += "<th>".concat(otro.titulo, "</th>");
+      this.otros.forEach(function (otro) {
+        table += "<th>".concat(otro, "</th>");
       });
       table += "<th>Nota</th></tr></thead>";
       return table;
     },
     gettbody: function gettbody() {
+      var _this = this;
+
       var table = "<tbody>";
       this.qualifications.forEach(function (quali) {
-        var examenes = quali.examenes;
-        var tareas = quali.tareas;
-        var trabajos = quali.trabajos;
-        var otros = quali.otros;
         var estudiante = quali.estudiante;
         var total = 0.0;
         table += "<tr><td>".concat(estudiante.cedula, "</td><td>").concat(estudiante.nombre, " ").concat(estudiante.primer_apellido, " ").concat(estudiante.segundo_apellido, "</td>");
-        examenes.forEach(function (exa) {
-          table += "<td>".concat(exa.porcentaje_obtenido, "%</td>");
-          total += parseFloat(exa.porcentaje_obtenido);
+
+        _this.examenes.forEach(function (ex) {
+          var exa = quali.examenes.find(function (element) {
+            return element.titulo === ex;
+          });
+
+          if (typeof exa !== "undefined") {
+            table += "<td>".concat(exa.porcentaje_obtenido, "%</td>");
+            total += parseFloat(exa.porcentaje_obtenido);
+          } else {
+            table += "<td>0.00%</td>";
+          }
         });
-        tareas.forEach(function (ta) {
-          table += "<td>".concat(ta.porcentaje_obtenido, "%</td>");
-          total += parseFloat(ta.porcentaje_obtenido);
+
+        _this.tareas.forEach(function (ta) {
+          var tar = quali.tareas.find(function (element) {
+            return element.titulo === ta;
+          });
+
+          if (typeof tar !== "undefined") {
+            table += "<td>".concat(tar.porcentaje_obtenido, "%</td>");
+            total += parseFloat(tar.porcentaje_obtenido);
+          } else {
+            table += "<td>0.00%</td>";
+          }
         });
-        trabajos.forEach(function (tra) {
-          table += "<td>".concat(tra.porcentaje_obtenido, "%</td>");
-          total += parseFloat(tra.porcentaje_obtenido);
+
+        _this.trabajos.forEach(function (tr) {
+          var tra = quali.trabajos.find(function (element) {
+            return element.titulo === tr;
+          });
+
+          if (typeof tra !== "undefined") {
+            table += "<td>".concat(tra.porcentaje_obtenido, "%</td>");
+            total += parseFloat(tra.porcentaje_obtenido);
+          } else {
+            table += "<td>0.00%</td>";
+          }
         });
-        otros.forEach(function (otro) {
-          table += "<td>".concat(otro.porcentaje_obtenido, "%</td>");
-          total += parseFloat(otro.porcentaje_obtenido);
+
+        _this.otros.forEach(function (otr) {
+          var otro = quali.otros.find(function (element) {
+            return element.titulo === otr;
+          });
+
+          if (typeof otro !== "undefined") {
+            table += "<td>".concat(otro.porcentaje_obtenido, "%</td>");
+            total += parseFloat(otro.porcentaje_obtenido);
+          } else {
+            table += "<td>0.00%</td>";
+          }
         });
+
         table += "<td>".concat(total, "%</td></tr>");
       });
       table += "</tbody><table/>";
@@ -7468,7 +7544,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     self = this;
     axios.get("/qualificationsfortrimester/" + this.data).then(function (res) {
@@ -7477,7 +7553,7 @@ __webpack_require__.r(__webpack_exports__);
       self.drawtable();
     });
     axios.get("/studentsforcourse").then(function (res) {
-      return _this.studentstock = res.data;
+      return _this2.studentstock = res.data;
     });
   }
 });
@@ -9171,8 +9247,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["data"],
+  props: ["data", "deshabilitar"],
   data: function data() {
     return {
       taskhistory: {
@@ -9223,6 +9325,7 @@ __webpack_require__.r(__webpack_exports__);
     data: function data(val) {
       if (val != null) {
         this.taskhistory = val;
+        this.taskhistory.nombre = "";
       } else {
         this.taskhistory = {
           nombre: "",
@@ -10902,6 +11005,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10912,6 +11019,7 @@ __webpack_require__.r(__webpack_exports__);
       mensaje: "",
       tarea: null,
       tareahistorial: null,
+      deshabilitar: false,
       accions: [{
         id: 1,
         text: "Tareas"
@@ -10928,6 +11036,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     SalvarMethod: function SalvarMethod(msg) {
       var self = this;
+      this.deshabilitar = true;
 
       if (msg.Accion === "save") {
         var History = msg.Data;
@@ -10935,11 +11044,13 @@ __webpack_require__.r(__webpack_exports__);
         this.tarea.history = History;
         axios.post("addtaskforstudents", this.tarea).then(function (res) {
           self.mensaje = res.data;
+          self.deshabilitar = false;
           if (res.data.type === "success") self.tabs = 0;
         });
       } else {
         axios.post("removetaskforstudents/" + this.tarea.id).then(function (res) {
           self.mensaje = res.data;
+          self.deshabilitar = false;
 
           if (res.data.type === "success") {
             self.tabs = 0;
@@ -45278,7 +45389,11 @@ var render = function() {
             ? _c(
                 "v-time-picker",
                 {
-                  attrs: { "full-width": "" },
+                  attrs: {
+                    "full-width": "",
+                    type: "month",
+                    max: _vm.horario.hasta
+                  },
                   model: {
                     value: _vm.horario.desde,
                     callback: function($$v) {
@@ -45387,7 +45502,11 @@ var render = function() {
             ? _c(
                 "v-time-picker",
                 {
-                  attrs: { "full-width": "" },
+                  attrs: {
+                    "full-width": "",
+                    type: "month",
+                    min: _vm.horario.desde
+                  },
                   model: {
                     value: _vm.horario.hasta,
                     callback: function($$v) {
@@ -50890,8 +51009,6 @@ var render = function() {
           attrs: { wrap: "", row: "" }
         },
         [
-          _c("v-flex", { attrs: { id: "table", xs12: "" } }),
-          _vm._v(" "),
           _c(
             "v-layout",
             { attrs: { xs12: "" } },
@@ -50923,7 +51040,9 @@ var render = function() {
               _c("v-spacer")
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("v-flex", { attrs: { id: "table", xs12: "" } })
         ],
         1
       )
@@ -53076,6 +53195,14 @@ var render = function() {
         { attrs: { xs12: "", "px-4": "" } },
         [
           _c("v-text-field", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.data == null,
+                expression: "data==null"
+              }
+            ],
             attrs: {
               "single-line": "",
               "hide-details": "",
@@ -53132,7 +53259,8 @@ var render = function() {
                             attrs: {
                               label: "Fecha de Inicio",
                               "prepend-icon": "event",
-                              readonly: ""
+                              readonly: "",
+                              disabled: _vm.data != null
                             },
                             model: {
                               value: _vm.taskhistory.inicio,
@@ -53162,7 +53290,11 @@ var render = function() {
               _c(
                 "v-date-picker",
                 {
-                  attrs: { "no-title": "", scrollable: "" },
+                  attrs: {
+                    "no-title": "",
+                    scrollable: "",
+                    max: _vm.taskhistory.final
+                  },
                   model: {
                     value: _vm.taskhistory.inicio,
                     callback: function($$v) {
@@ -53248,7 +53380,8 @@ var render = function() {
                             attrs: {
                               label: "Fecha de Fin",
                               "prepend-icon": "event",
-                              readonly: ""
+                              readonly: "",
+                              disabled: _vm.data != null
                             },
                             model: {
                               value: _vm.taskhistory.final,
@@ -53278,7 +53411,11 @@ var render = function() {
               _c(
                 "v-date-picker",
                 {
-                  attrs: { "no-title": "", scrollable: "" },
+                  attrs: {
+                    "no-title": "",
+                    scrollable: "",
+                    min: _vm.taskhistory.inicio
+                  },
                   model: {
                     value: _vm.taskhistory.final,
                     callback: function($$v) {
@@ -53336,6 +53473,7 @@ var render = function() {
               "item-value": "value",
               "menu-props": { returnValue: "value" },
               label: "*Trimestre",
+              disabled: _vm.data != null,
               "d-block": ""
             },
             model: {
@@ -53358,7 +53496,11 @@ var render = function() {
             ? _c(
                 "v-btn",
                 {
-                  attrs: { color: "red darken-1", flat: "" },
+                  attrs: {
+                    color: "red darken-1",
+                    flat: "",
+                    disabled: _vm.deshabilitar
+                  },
                   on: { click: _vm.eliminar }
                 },
                 [_vm._v("Eliminar")]
@@ -53369,7 +53511,11 @@ var render = function() {
             ? _c(
                 "v-btn",
                 {
-                  attrs: { color: "blue darken-1", flat: "" },
+                  attrs: {
+                    color: "blue darken-1",
+                    flat: "",
+                    disabled: _vm.deshabilitar
+                  },
                   on: { click: _vm.validar }
                 },
                 [_vm._v("Salvar")]
@@ -55960,7 +56106,10 @@ var render = function() {
                         { key: 2 },
                         [
                           _c("taskschedulecomponent", {
-                            attrs: { data: _vm.data },
+                            attrs: {
+                              data: _vm.data,
+                              deshabilitar: _vm.deshabilitar
+                            },
                             on: {
                               speak: function($event) {
                                 return _vm.SalvarMethod($event)

@@ -39,7 +39,11 @@
                      <selecttaskcomponent :search="search" v-on:speak="SelectTareaMethod($event)"></selecttaskcomponent>
                   </v-tab-item>
                   <v-tab-item :key="2">
-                     <taskschedulecomponent :data="data" v-on:speak="SalvarMethod($event)"></taskschedulecomponent>
+                     <taskschedulecomponent
+                        :data="data"
+                        v-on:speak="SalvarMethod($event)"
+                        :deshabilitar="deshabilitar"
+                     ></taskschedulecomponent>
                   </v-tab-item>
                </v-tabs-items>
             </v-flex>
@@ -59,6 +63,7 @@ export default {
          mensaje: "",
          tarea: null,
          tareahistorial: null,
+         deshabilitar: false,
          accions: [
             {
                id: 1,
@@ -79,12 +84,14 @@ export default {
       },
       SalvarMethod: function(msg) {
          let self = this;
+         this.deshabilitar = true;
          if (msg.Accion === "save") {
             let History = msg.Data;
             History.task_id = this.tarea.id;
             this.tarea.history = History;
             axios.post("addtaskforstudents", this.tarea).then(function(res) {
                self.mensaje = res.data;
+               self.deshabilitar = false;
                if (res.data.type === "success") self.tabs = 0;
             });
          } else {
@@ -92,6 +99,7 @@ export default {
                .post("removetaskforstudents/" + this.tarea.id)
                .then(function(res) {
                   self.mensaje = res.data;
+                  self.deshabilitar = false;
                   if (res.data.type === "success") {
                      self.tabs = 0;
                      self.data = null;

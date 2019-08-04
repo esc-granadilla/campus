@@ -3,6 +3,7 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Campus\Course;
 use Campus\Teacher;
 use Campus\Student;
@@ -109,27 +110,58 @@ class ProfesorController extends Controller
       }
    }
 
+   private function gettitles($array)
+   {
+      if (count($array) > 0) {
+         $collection = collect($array);
+         $titulos = $collection->unique()->sort();
+         return $titulos->toArray();
+      } else
+         return $array;
+   }
+
    private function Cabeceras($calificaciones)
    {
       $cabeceras = ['Cedula', 'Nombre'];
+      $examenes = [];
+      $tareas = [];
+      $trabajos = [];
+      $otros = [];
       $final = 0;
       if (count($calificaciones) > 0) {
+         foreach ($calificaciones as $calificacion) {
+            foreach ($calificacion['examenes'] as $array) {
+               array_push($examenes, $array->titulo);
+            }
+            foreach ($calificacion['tareas'] as $array) {
+               array_push($tareas, $array->titulo);
+            }
+            foreach ($calificacion['trabajos'] as $array) {
+               array_push($trabajos, $array->titulo);
+            }
+            foreach ($calificacion['otros'] as $array) {
+               array_push($otros, $array->titulo);
+            }
+         }
+         $examenes = $this->gettitles($examenes);
+         $tareas = $this->gettitles($tareas);
+         $trabajos = $this->gettitles($trabajos);
+         $otros = $this->gettitles($otros);
          $calificacion = $calificaciones[0];
-         $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
+         $arrays = [$examenes, $tareas, $trabajos, $otros];
          $final = 2;
          foreach ($arrays as $array) {
-            $final += $array->count();
+            $final += count($array);
             foreach ($array as $cali) {
-               array_push($cabeceras, $cali->titulo);
+               array_push($cabeceras, $cali);
             }
          }
          array_push($cabeceras, 'Nota');
       }
-      return [$final, $cabeceras];
+      return [$final, $cabeceras, [$examenes, $tareas, $trabajos, $otros]];
    }
 
-
-   private function Cuerpo($calificaciones)
+   private function Cuerpo($calificaciones, $titulos)
    {
       $rows = [];
       foreach ($calificaciones as $calificacion) {
@@ -141,10 +173,15 @@ class ProfesorController extends Controller
          ];
          $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
          $nota = 0;
-         foreach ($arrays as $array) {
-            foreach ($array as $cali) {
-               array_push($row, $cali->porcentaje_obtenido);
-               $nota += $cali->porcentaje_obtenido;
+         for ($i = 0; $i < count($titulos); $i++) {
+            foreach ($titulos[$i] as $titulo) {
+               $cali = $arrays[$i]->where('titulo', $titulo)->first();
+               if ($cali != null) {
+                  array_push($row, $cali->porcentaje_obtenido);
+                  $nota += $cali->porcentaje_obtenido;
+               } else {
+                  array_push($row, 0);
+               }
             }
          }
          array_push($row, $nota);
@@ -200,9 +237,10 @@ class ProfesorController extends Controller
          $course = $course->subject()->first();
          $calificaciones = $this->matrizqualifications($id, $request);
          $Heads = $this->Cabeceras($calificaciones);
+         $titulos = $Heads[2];
          $cabeceras = $Heads[1];
          $final = $Heads[0];
-         $rows = $this->Cuerpo($calificaciones);
+         $rows = $this->Cuerpo($calificaciones, $titulos);
          Excel::create('Notas trimestrales', function ($excel) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
             $excel->sheet('Notas Estudiantes', function ($sheet) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
                if ($final > 0) {
@@ -381,7 +419,7 @@ class ProfesorController extends Controller
          foreach ($taskhistories as $taskhistory) {
             $student = $taskhistory->student()->first();
             $qualification = $student->qualifications()->where([
-               'tipo' => 'Tarea', 'fecha' => $taskhistory->inicio,
+               'tipo' => 'Tarea',
                'course_id' => $taskhistory->course_id, 'trimestre' => $taskhistory->trimestre,
                'descripcion' => $task->titulo, 'valor_porcentual' => $task->valor
             ])->first();

@@ -19,7 +19,13 @@
                v-on="on"
             ></v-text-field>
          </template>
-         <v-time-picker v-if="modal1" v-model="horario.desde" full-width>
+         <v-time-picker
+            v-if="modal1"
+            v-model="horario.desde"
+            full-width
+            type="month"
+            :max="horario.hasta"
+         >
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="modal1 = false">Cancel</v-btn>
             <v-btn flat color="primary" @click="$refs.dialog.save(horario.desde)">OK</v-btn>
@@ -44,7 +50,13 @@
                v-on="on"
             ></v-text-field>
          </template>
-         <v-time-picker v-if="modal2" v-model="horario.hasta" full-width>
+         <v-time-picker
+            v-if="modal2"
+            v-model="horario.hasta"
+            full-width
+            type="month"
+            :min="horario.desde"
+         >
             <v-spacer></v-spacer>
             <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
             <v-btn flat color="primary" @click="$refs.dialog1.save(horario.hasta)">OK</v-btn>
