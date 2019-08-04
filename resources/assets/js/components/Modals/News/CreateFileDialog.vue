@@ -18,7 +18,7 @@
                      <v-text-field
                         xs12
                         v-model="file.titulo"
-                        :rules="[rules.required, rules.max , rules.min]"
+                        :rules="[rules.required, rules.between]"
                         counter
                         label="*Titulo"
                         name="titulo"
@@ -31,7 +31,7 @@
                               v-if="bottomNav == 2"
                               class="text-xs-center text-sm-center text-md-center text-lg-center"
                            >
-                              <img :src="imageUrl" height="100" v-if="imageUrl">
+                              <img :src="imageUrl" height="100" v-if="imageUrl" />
                               <v-text-field
                                  label="*Seleccionar la imagen a compartir"
                                  @click="pickFile"
@@ -45,7 +45,7 @@
                                  ref="image"
                                  accept="image/*"
                                  @change="onFilePicked"
-                              >
+                              />
                            </v-flex>
                            <v-text-field
                               xs12
@@ -104,8 +104,9 @@ export default {
          bottomNav: 0,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 3 || "Min 3 Caracteres",
-            max: v => v.length <= 250 || "Maximo 250 Caracteres"
+            between: v =>
+               (!!v && (v.length >= 3 && v.length < 61)) ||
+               "Entre 3 y 60 Caracteres"
          },
          imageName: "",
          texto: {
@@ -155,7 +156,7 @@ export default {
                };
                axios.post("/store", data, config).then(function(res) {
                   if (res.data.name != "error") {
-                     newfile.link = "/storage" + res.data.name.substr(6);
+                     newfile.link = "/storage/app/" + res.data.name;
                      self.dialogCreate = false;
                      self.$emit("speak", newfile);
                      self.restaurar();

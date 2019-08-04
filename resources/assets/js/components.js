@@ -1,4 +1,5 @@
 window.Vue = require('vue');
+Vue.component('notauthorized', require('./pages/Notauthorized.vue').default);
 Vue.component('login', require('./pages/Login.vue').default);
 Vue.component('App', require('./pages/App.vue').default);
 Vue.component('Appstudents', require('./pages/AppStudents.vue').default);
@@ -26,6 +27,17 @@ Vue.component('profilestudents', require('./components/Estudiantes/ProfileCompon
 Vue.component('profileteachers', require('./components/Profesores/ProfileComponent.vue').default);
 Vue.component('shownewscomponent', require('./components/Partials/News/ShowNewsComponent.vue').default);
 Vue.component('showtaskscomponent', require('./components/Partials/Task/ShowTasksComponent.vue').default);
+Vue.component('dialogcreate', require('./components/Modals/DialogCreate.vue').default);
+Vue.component('dialogedit', require('./components/Modals/DialogEdit.vue').default);
+Vue.component('dialogdelete', require('./components/Modals/DialogDelete.vue').default);
+Vue.component('showlessons', require('./components/Modals/ShowLessons.vue').default);
+Vue.component('asignatura_component', require('./components/Administradores/Asignatura/AsignaturaComponent.vue').default);
+Vue.component('horario_component', require('./components/Administradores/Horario/HorarioComponent.vue').default);
+Vue.component('seccion_component', require('./components/Administradores/Seccion/SeccionComponent.vue').default);
+Vue.component('curso_component', require('./components/Administradores/Curso/CursoComponent.vue').default);
+Vue.component('profesor_component', require('./components/Administradores/Profesor/ProfesorComponent.vue').default);
+Vue.component('estudiante_component', require('./components/Administradores/Estudiante/EstudianteComponent.vue').default);
+Vue.component('nota_component', require('./components/Profesores/Notas/NotaComponent.vue').default);
 /* Vue.component('ncrearcomponent', require('./components/Noticias/DialogCreate.vue').default);
 Vue.component('neditarcomponent', require('./components/Noticias/DialogEdit.vue').default);
 Vue.component('neliminarcomponent', require('./components/Noticias/DialogDelete.vue').default); */

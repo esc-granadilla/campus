@@ -16,6 +16,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
     <link href="{{ asset('css/vuetify.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
     <div id="app">

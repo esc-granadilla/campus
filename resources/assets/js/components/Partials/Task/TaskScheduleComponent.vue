@@ -6,6 +6,7 @@
             hide-details
             label="Nombre del rubro"
             v-model="taskhistory.nombre"
+            v-show="data==null"
          ></v-text-field>
       </v-flex>
 
@@ -28,10 +29,16 @@
                   label="Fecha de Inicio"
                   prepend-icon="event"
                   readonly
+                  :disabled="data!=null"
                   v-on="on"
                ></v-text-field>
             </template>
-            <v-date-picker v-model="taskhistory.inicio" no-title scrollable>
+            <v-date-picker
+               v-model="taskhistory.inicio"
+               no-title
+               scrollable
+               :max="taskhistory.final"
+            >
                <v-spacer></v-spacer>
                <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
                <v-btn flat color="primary" @click="$refs.menu.save(taskhistory.inicio)">OK</v-btn>
@@ -57,10 +64,16 @@
                   label="Fecha de Fin"
                   prepend-icon="event"
                   readonly
+                  :disabled="data!=null"
                   v-on="on"
                ></v-text-field>
             </template>
-            <v-date-picker v-model="taskhistory.final" no-title scrollable>
+            <v-date-picker
+               v-model="taskhistory.final"
+               no-title
+               scrollable
+               :min="taskhistory.inicio"
+            >
                <v-spacer></v-spacer>
                <v-btn flat color="primary" @click="menu2 = false">Cancel</v-btn>
                <v-btn flat color="primary" @click="$refs.menu2.save(taskhistory.final)">OK</v-btn>
@@ -76,19 +89,32 @@
             :menu-props="{returnValue:'value'}"
             v-model="taskhistory.trimestre"
             label="*Trimestre"
+            :disabled="data!=null"
             d-block
          ></v-select>
       </v-flex>
       <v-flex xs12 px-4 class="text-xs-right">
-         <v-btn color="red darken-1" flat @click="eliminar" v-if="data != null">Eliminar</v-btn>
-         <v-btn color="blue darken-1" flat @click="validar" v-if="data == null">Salvar</v-btn>
+         <v-btn
+            color="red darken-1"
+            flat
+            @click="eliminar"
+            v-if="data != null"
+            :disabled="deshabilitar"
+         >Eliminar</v-btn>
+         <v-btn
+            color="blue darken-1"
+            flat
+            @click="validar"
+            v-if="data == null"
+            :disabled="deshabilitar"
+         >Salvar</v-btn>
       </v-flex>
    </v-layout>
 </template>
 
 <script>
 export default {
-   props: ["data"],
+   props: ["data", "deshabilitar"],
    data() {
       return {
          taskhistory: {
@@ -133,6 +159,7 @@ export default {
       data(val) {
          if (val != null) {
             this.taskhistory = val;
+            this.taskhistory.nombre = "";
          } else {
             this.taskhistory = {
                nombre: "",

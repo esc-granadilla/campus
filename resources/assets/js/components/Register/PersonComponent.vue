@@ -4,16 +4,18 @@
          <v-text-field
             xs12
             v-model="person.cedula"
-            :rules="[rules.required, rules.min]"
+            :rules="[rules.required, rules.cedula]"
+            :mask="mask"
             label="Cedula"
             name="cedula"
+            :return-masked-value="false"
             required
          ></v-text-field>
       </v-flex>
       <v-flex xs12 pt-2>
          <v-text-field
             v-model="person.nombre"
-            :rules="[rules.required, rules.mini]"
+            :rules="[rules.required, rules.between]"
             counter
             label="Nombre"
             name="nombre"
@@ -24,7 +26,7 @@
          <v-text-field
             xs12
             v-model="person.primer_apellido"
-            :rules="[rules.required, rules.mini]"
+            :rules="[rules.required, rules.between]"
             counter
             label="Primer Apellido"
             name="primer_apellido"
@@ -34,7 +36,7 @@
       <v-flex xs12 pt-2>
          <v-text-field
             v-model="person.segundo_apellido"
-            :rules="[rules.required, rules.mini]"
+            :rules="[rules.required, rules.between]"
             counter
             label="Segundo Apellido"
             name="segundo_apellido"
@@ -44,6 +46,7 @@
       <v-flex xs12 pt-2>
          <v-menu
             ref="menu"
+            id="menufecha"
             v-model="menu"
             :close-on-content-click="false"
             :nudge-right="40"
@@ -66,8 +69,8 @@
             <v-date-picker
                ref="picker"
                v-model="person.date"
-               :max="new Date().toISOString().substr(0, 10)"
-               min="1950-01-01"
+               :max="fechamax()"
+               min="1940-01-01"
                @change="save"
             ></v-date-picker>
          </v-menu>
@@ -91,11 +94,11 @@ export default {
          menu: false,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 9 || "Min 9 Caracteres",
-            min8: v => v.length >= 8 || "Min 8 Caracteres",
-            max: v => v.length >= 50 || "Maximo 50 Caracteres",
-            mini: v => v.length >= 3 || "Min 3 Caracteres"
-         }
+            cedula: v => v.length == 9 || "La cedula no es valida",
+            between: v =>
+               (v.length >= 3 && v.length < 41) || "Entre 3 y 40 Caracteres"
+         },
+         mask: "#-####-####"
       };
    },
    watch: {
@@ -106,10 +109,18 @@ export default {
    methods: {
       save(date) {
          this.$refs.menu.save(date);
+      },
+      fechamax() {
+         let date = new Date();
+         date.setFullYear(date.getFullYear() - 5);
+         return date.toISOString().substr(0, 10);
       }
    }
 };
 </script>
 
-<style scoped>
+<style>
+.v-date-picker-table--date {
+   min-height: 350px;
+}
 </style>

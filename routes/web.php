@@ -1,4 +1,5 @@
 <?php
+
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Request;
 
@@ -174,3 +175,15 @@ Route::get(
 Route::get('/studenttasks', 'EstudianteController@studenttasks');
 
 Route::post('/taskqualification/{task}', 'EstudianteController@taskqualification');
+
+Route::get('/statistics', 'AdministracionController@statistics');
+
+Route::post('/changetrimester', 'AdministracionController@changetrimester');
+
+Route::post('/reset', 'AdministracionController@reset');
+
+Route::get('/gettrimester', 'AdministracionController@gettrimester');
+
+Route::get('/email', 'HomeController@email');
+
+Route::get('/lessonsforcourse/{course}', 'EstudianteController@lessonsforcourse');

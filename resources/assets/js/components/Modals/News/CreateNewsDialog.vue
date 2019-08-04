@@ -12,14 +12,14 @@
          <v-dialog v-model="dialogCreate" persistent max-width="600px">
             <v-card>
                <v-card-title>
-                  <span class="headline">Sección Nueva</span>
+                  <span class="headline">Noticia Nueva</span>
                </v-card-title>
                <v-card-text>
                   <v-form ref="form">
                      <v-text-field
                         xs12
                         v-model="news.titulo"
-                        :rules="[rules.required, rules.max , rules.min]"
+                        :rules="[rules.required, rules.between]"
                         counter
                         label="*Titulo"
                         name="titulo"
@@ -28,6 +28,7 @@
                      <v-textarea
                         v-model="news.descripcion"
                         auto-grow
+                        :rules="[rules.max]"
                         box
                         color="deep-purple"
                         label="Descripción"
@@ -68,7 +69,7 @@
                            <v-img
                               :aspect-ratio="16/9"
                               v-if="fi.tipo !== 'imagen'"
-                              :src="'storage/imagen/'+fi.tipo+'.jpg'"
+                              :src="'storage/app/public/imagen/'+fi.tipo+'.jpg'"
                               height="150px"
                            >
                               <v-layout pa-2 column fill-height class="lightbox white--text">
@@ -111,7 +112,9 @@ export default {
          dialogCreate: false,
          rules: {
             required: value => !!value || "Requerido.",
-            min: v => v.length >= 3 || "Min 9 Caracteres",
+            between: v =>
+               (!!v && (v.length >= 3 && v.length < 61)) ||
+               "Entre 3 y 60 Caracteres",
             max: v => v.length <= 250 || "Maximo 250 Caracteres"
          },
          mensaje: "",

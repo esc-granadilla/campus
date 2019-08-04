@@ -1,24 +1,26 @@
 <template>
    <v-layout row wrap>
-      <v-flex :class="ttitulo" v-if="news!=null">
-         <span class="display-1 font-weight-regular text-capitalize">{{news.titulo}}</span>
-         <br>
-         <span class="headline text-capitalize" v-if="descripcion">{{news.descripcion}}</span>
-      </v-flex>
-      <v-flex :class="timagen" v-if="imagen">
-         <v-carousel hide-controls height="auto">
-            <v-carousel-item v-for="(ima,i) in images" :key="i" :src="ima.link">
-               <v-flex class="text-xs-center" xs12 pt-3>
-                  <span
-                     class="display-1 text--white text-xs-center"
-                     style="color:white;"
-                  >{{ima.titulo}}</span>
-               </v-flex>
-            </v-carousel-item>
-         </v-carousel>
-      </v-flex>
+      <v-layout row wrap>
+         <v-flex :class="ttitulo" v-if="news!=null">
+            <span class="display-1 font-weight-regular">{{news.titulo}}</span>
+            <br />
+            <span class="headline" v-if="descripcion">{{news.descripcion}}</span>
+         </v-flex>
+         <v-flex :class="timagen" v-if="imagen">
+            <v-carousel hide-controls height="auto">
+               <v-carousel-item v-for="(ima,i) in images" :key="i" :src="ima.link">
+                  <v-flex class="text-xs-center" xs12 pt-3>
+                     <span
+                        class="display-1 text--white text-xs-center"
+                        style="color:white;"
+                     >{{ima.titulo}}</span>
+                  </v-flex>
+               </v-carousel-item>
+            </v-carousel>
+         </v-flex>
+      </v-layout>
       <v-flex v-if="contenido" xs12>
-         <p class="subheading text-capitalize">{{news.contenido}}</p>
+         <v-textarea v-model="news.contenido" auto-grow box class="subheading"></v-textarea>
       </v-flex>
       <v-flex v-if="video" xs12>
          <v-flex xs12 v-for="(vi,i) in videos" :key="i" class="text-xs-center">

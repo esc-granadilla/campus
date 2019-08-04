@@ -11,13 +11,13 @@
          <v-spacer></v-spacer>
       </v-layout>
       <v-layout v-show="!indeterminate" wrap row>
-         <v-flex id="table" xs12></v-flex>
          <v-layout xs12>
             <v-spacer></v-spacer>
             <v-btn dark color="primary" outline @click="dialogOpen=true">Exportar Estudiante</v-btn>
             <v-btn dark color="primary" outline @click="exportAll">Exportar Informe</v-btn>
             <v-spacer></v-spacer>
          </v-layout>
+         <v-flex id="table" xs12></v-flex>
       </v-layout>
    </v-flex>
 </template>
@@ -33,7 +33,11 @@ export default {
          indeterminate: true,
          dialogOpen: false,
          studentstock: [],
-         qualifications: []
+         qualifications: [],
+         examenes: [],
+         tareas: [],
+         trabajos: [],
+         otros: []
       };
    },
    props: ["data"],
@@ -50,25 +54,49 @@ export default {
             this.exportOne(msg.Student.id);
          }
       },
+      gettitles(array) {
+         Array.prototype.unique = (function(a) {
+            return function() {
+               return this.filter(a);
+            };
+         })(function(a, b, c) {
+            return c.indexOf(a, b + 1) < 0;
+         });
+         return array.unique().sort();
+      },
       getthead() {
          let table = `<table><thead><tr>`;
-         let quali = this.qualifications[0];
-         let examenes = quali.examenes;
-         let tareas = quali.tareas;
-         let trabajos = quali.trabajos;
-         let otros = quali.otros;
+         let self = this;
+         this.qualifications.forEach(quali => {
+            quali.examenes.forEach(exa => {
+               self.examenes.push(exa.titulo);
+            });
+            quali.tareas.forEach(ta => {
+               self.tareas.push(ta.titulo);
+            });
+            quali.trabajos.forEach(tra => {
+               self.trabajos.push(tra.titulo);
+            });
+            quali.otros.forEach(otro => {
+               self.otros.push(otro.titulo);
+            });
+         });
+         this.examenes = this.gettitles(this.examenes);
+         this.tareas = this.gettitles(this.tareas);
+         this.trabajos = this.gettitles(this.trabajos);
+         this.otros = this.gettitles(this.otros);
          table += `<th>Cedula</th><th>Nombre</th>`;
-         examenes.forEach(exa => {
-            table += `<th>${exa.titulo}</th>`;
+         this.examenes.forEach(exa => {
+            table += `<th>${exa}</th>`;
          });
-         tareas.forEach(ta => {
-            table += `<th>${ta.titulo}</th>`;
+         this.tareas.forEach(ta => {
+            table += `<th>${ta}</th>`;
          });
-         trabajos.forEach(tra => {
-            table += `<th>${tra.titulo}</th>`;
+         this.trabajos.forEach(tra => {
+            table += `<th>${tra}</th>`;
          });
-         otros.forEach(otro => {
-            table += `<th>${otro.titulo}</th>`;
+         this.otros.forEach(otro => {
+            table += `<th>${otro}</th>`;
          });
          table += `<th>Nota</th></tr></thead>`;
          return table;
@@ -76,32 +104,52 @@ export default {
       gettbody() {
          let table = `<tbody>`;
          this.qualifications.forEach(quali => {
-            let examenes = quali.examenes;
-            let tareas = quali.tareas;
-            let trabajos = quali.trabajos;
-            let otros = quali.otros;
             let estudiante = quali.estudiante;
             let total = 0.0;
-            table += `<tr><td>${estudiante.cedula}</td><td>${
-               estudiante.nombre
-            } ${estudiante.primer_apellido} ${
-               estudiante.segundo_apellido
-            }</td>`;
-            examenes.forEach(exa => {
-               table += `<td>${exa.porcentaje_obtenido}%</td>`;
-               total += parseFloat(exa.porcentaje_obtenido);
+            table += `<tr><td>${estudiante.cedula}</td><td>${estudiante.nombre} ${estudiante.primer_apellido} ${estudiante.segundo_apellido}</td>`;
+            this.examenes.forEach(ex => {
+               let exa = quali.examenes.find(function(element) {
+                  return element.titulo === ex;
+               });
+               if (typeof exa !== "undefined") {
+                  table += `<td>${exa.porcentaje_obtenido}%</td>`;
+                  total += parseFloat(exa.porcentaje_obtenido);
+               } else {
+                  table += `<td>0.00%</td>`;
+               }
             });
-            tareas.forEach(ta => {
-               table += `<td>${ta.porcentaje_obtenido}%</td>`;
-               total += parseFloat(ta.porcentaje_obtenido);
+            this.tareas.forEach(ta => {
+               let tar = quali.tareas.find(function(element) {
+                  return element.titulo === ta;
+               });
+               if (typeof tar !== "undefined") {
+                  table += `<td>${tar.porcentaje_obtenido}%</td>`;
+                  total += parseFloat(tar.porcentaje_obtenido);
+               } else {
+                  table += `<td>0.00%</td>`;
+               }
             });
-            trabajos.forEach(tra => {
-               table += `<td>${tra.porcentaje_obtenido}%</td>`;
-               total += parseFloat(tra.porcentaje_obtenido);
+            this.trabajos.forEach(tr => {
+               let tra = quali.trabajos.find(function(element) {
+                  return element.titulo === tr;
+               });
+               if (typeof tra !== "undefined") {
+                  table += `<td>${tra.porcentaje_obtenido}%</td>`;
+                  total += parseFloat(tra.porcentaje_obtenido);
+               } else {
+                  table += `<td>0.00%</td>`;
+               }
             });
-            otros.forEach(otro => {
-               table += `<td>${otro.porcentaje_obtenido}%</td>`;
-               total += parseFloat(otro.porcentaje_obtenido);
+            this.otros.forEach(otr => {
+               let otro = quali.otros.find(function(element) {
+                  return element.titulo === otr;
+               });
+               if (typeof otro !== "undefined") {
+                  table += `<td>${otro.porcentaje_obtenido}%</td>`;
+                  total += parseFloat(otro.porcentaje_obtenido);
+               } else {
+                  table += `<td>0.00%</td>`;
+               }
             });
             table += `<td>${total}%</td></tr>`;
          });

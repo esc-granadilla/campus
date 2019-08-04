@@ -12,7 +12,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
+   realpath(__DIR__ . '/../')
 );
 
 /*
@@ -27,18 +27,18 @@ $app = new Illuminate\Foundation\Application(
 */
 
 $app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    Campus\Http\Kernel::class
+   Illuminate\Contracts\Http\Kernel::class,
+   Campus\Http\Kernel::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    Campus\Console\Kernel::class
+   Illuminate\Contracts\Console\Kernel::class,
+   Campus\Console\Kernel::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Campus\Exceptions\Handler::class
+   Illuminate\Contracts\Debug\ExceptionHandler::class,
+   Campus\Exceptions\Handler::class
 );
 
 /*
@@ -51,5 +51,5 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-
+$app->useStoragePath($app->basePath() . '/public/storage');
 return $app;

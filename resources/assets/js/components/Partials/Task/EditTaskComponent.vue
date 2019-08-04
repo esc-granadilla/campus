@@ -81,13 +81,11 @@
 </template>
 
 <script>
-import dialogdelete from "../../Modals/DialogDelete.vue";
 import dialogedit from "../../Modals/Task/EditDialog.vue";
 
 export default {
    components: {
-      dialogedit,
-      dialogdelete
+      dialogedit
    },
    props: ["tareas"],
    data: () => ({

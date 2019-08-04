@@ -15,7 +15,7 @@
 export default {
    data() {
       return {
-         titulos: ["Pendientes", "Realisadas", "Sin realizar"],
+         titulos: ["Pendientes", "Realizadas", "Sin realizar"],
          tareas: [
             { edit: true, tasks: [] },
             { edit: false, tasks: [] },

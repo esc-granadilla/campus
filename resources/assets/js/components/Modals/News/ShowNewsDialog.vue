@@ -1,6 +1,6 @@
 <template>
    <v-layout row justify-center>
-      <v-dialog v-model="open" persistent max-width="800px">
+      <v-dialog v-model="open" persistent max-width="1200px">
          <v-card>
             <v-card-text>
                <shownewscomponent :news="news"></shownewscomponent>

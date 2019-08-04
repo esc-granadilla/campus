@@ -3,12 +3,13 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Campus\Student;
 use Campus\News;
 use Carbon\Carbon;
 use Campus\Course;
 use Campus\Task;
-use Campus\Taskhistory;
+use Campus\Lesson;
 
 class EstudianteController extends Controller
 {
@@ -44,12 +45,13 @@ class EstudianteController extends Controller
          $asignaciones = ($student->section()->first() == null) ? [] : $student->section()->first()->courses()->get();
          $cursos = [];
          foreach ($asignaciones as $asig) {
-            array_push($cursos, [
-               'id' => $asig->id,
-               'nombre' => $asig->nombre,
-               'curso' => $asig->subject()->first(),
-               'seccion' => $asig->section()->first()
-            ]);
+            if (Lesson::where('course_id', $asig->id)->count() > 0)
+               array_push($cursos, [
+                  'id' => $asig->id,
+                  'nombre' => $asig->nombre,
+                  'curso' => $asig->subject()->first(),
+                  'seccion' => $asig->section()->first()
+               ]);
          }
          return response()->json($cursos, 200);
       }
@@ -86,7 +88,8 @@ class EstudianteController extends Controller
          $student = Student::where('cedula', $cedula)->first();
          $qualifications = $student->qualifications()->where([
             'estado' => 1,
-            'course_id' => (int)$request->session()->get('course')
+            'trimestre' => $this->gettrimester(),
+            'course_id' => (int) $request->session()->get('course')
          ])->get();
          return response()->json($qualifications, 200);
       }
@@ -94,7 +97,7 @@ class EstudianteController extends Controller
 
    private function matrizqualifications(int $id, Student $student,  Request $request)
    {
-      $course = Course::where('id', (int)$request->session()->get('course'))->first();
+      $course = Course::where('id', (int) $request->session()->get('course'))->first();
       $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen', 'course_id' => $course->id])->get();
       $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea', 'course_id' => $course->id])->get();
       $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación', 'course_id' => $course->id])->get();
@@ -116,10 +119,10 @@ class EstudianteController extends Controller
    public function studenttasks(Request $request)
    {
       if ($request->ajax()) {
-         $course = (int)$request->session()->get('course');
+         $course = (int) $request->session()->get('course');
          $cedula = $request->session()->get('student')[0]->cedula;
          $student = Student::where('cedula', $cedula)->first();
-         $taskhistories = $student->taskhistories()->where('course_id', $course)->with(['task' => function ($query) {
+         $taskhistories = $student->taskhistories()->where(['course_id' => $course, 'trimestre' => $this->gettrimester()])->with(['task' => function ($query) {
             $query->with('questions');
          }])->get();
          $realizadas = [];
@@ -156,7 +159,7 @@ class EstudianteController extends Controller
          for ($i = 0; $i < $totales; $i++)
             if ($arrayres[$i] === $arraystudentres[$i]) $correptas++;
          $puntaje = ($task->valor / $totales) * $correptas;
-         $course = (int)$request->session()->get('course');
+         $course = (int) $request->session()->get('course');
          $cedula = $request->session()->get('student')[0]->cedula;
          $student = Student::where('cedula', $cedula)->first();
          $fecha = Carbon::now('America/Costa_Rica')->format('Y-m-d');
@@ -177,6 +180,36 @@ class EstudianteController extends Controller
          $taskhistory->save();
          $qualification->save();
          return response()->json(['type' => 'success', 'message' => 'Se ha calificado la tarea.', 'respuestas' => $arrayres], 200);
+      }
+   }
+
+   private function gettrimester()
+   {
+      $trimester = (int) Storage::get('public/trimestre/trimester.txt');
+      return $trimester;
+   }
+
+   public function lessonsforcourse(Course $course, Request $request)
+   {
+      if ($request->ajax()) {
+         $lessons = Lesson::where('course_id', $course->id)->get();
+         $horarios = [];
+         $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
+         for ($i = 1; $i < 6; $i++) {
+            $schedules = [];
+            $dia = 'no';
+            foreach ($lessons as $lesson) {
+               if ($lesson->day_id == $i) {
+                  $schedule = $lesson->schedule()->first();
+                  array_push($schedules, $schedule);
+                  $dia = $dias[($i - 1)];
+               }
+            }
+            if ($dia != 'no') {
+               array_push($horarios, ['dia' => $dia, 'horario' => $schedules]);
+            }
+         }
+         return response()->json($horarios, 200);
       }
    }
 }

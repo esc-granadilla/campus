@@ -3,6 +3,7 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Campus\Course;
 use Campus\Teacher;
 use Campus\Student;
@@ -13,6 +14,7 @@ use Campus\Taskhistory;
 use Campus\Qualification;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Session;
+use Campus\Lesson;
 
 class ProfesorController extends Controller
 {
@@ -50,12 +52,13 @@ class ProfesorController extends Controller
          $asignaciones = $teacher->courses()->get();
          $cursos = [];
          foreach ($asignaciones as $asig) {
-            array_push($cursos, [
-               'id' => $asig->id,
-               'nombre' => $asig->nombre,
-               'curso' => $asig->subject()->first(),
-               'seccion' => $asig->section()->first()
-            ]);
+            if (Lesson::where('course_id', $asig->id)->count() > 0)
+               array_push($cursos, [
+                  'id' => $asig->id,
+                  'nombre' => $asig->nombre,
+                  'curso' => $asig->subject()->first(),
+                  'seccion' => $asig->section()->first()
+               ]);
          }
          return response()->json($cursos, 200);
       }
@@ -65,7 +68,7 @@ class ProfesorController extends Controller
    {
       if ($request->ajax()) {
          $course_id = $request->session()->get('course');
-         $course = Course::where('id', (int)$course_id)->first();
+         $course = Course::where('id', (int) $course_id)->first();
          $students = $course->section()->first()->students()->where('estado', 1)->get();
          return response()->json($students, 200);
       }
@@ -76,7 +79,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $qualifications = $student->qualifications()->where([
             'estado' => 1,
-            'course_id' => (int)$request->session()->get('course')
+            'course_id' => (int) $request->session()->get('course')
          ])->get();
          return response()->json($qualifications, 200);
       }
@@ -84,7 +87,7 @@ class ProfesorController extends Controller
 
    private function matrizqualifications(int $id, Request $request)
    {
-      $course = Course::where('id', (int)$request->session()->get('course'))->first();
+      $course = Course::where('id', (int) $request->session()->get('course'))->first();
       $section = $course->section()->first();
       $students = $section->students()->where('estado', 1)->get();
       $calificaciones = [];
@@ -107,27 +110,58 @@ class ProfesorController extends Controller
       }
    }
 
+   private function gettitles($array)
+   {
+      if (count($array) > 0) {
+         $collection = collect($array);
+         $titulos = $collection->unique()->sort();
+         return $titulos->toArray();
+      } else
+         return $array;
+   }
+
    private function Cabeceras($calificaciones)
    {
       $cabeceras = ['Cedula', 'Nombre'];
+      $examenes = [];
+      $tareas = [];
+      $trabajos = [];
+      $otros = [];
       $final = 0;
       if (count($calificaciones) > 0) {
+         foreach ($calificaciones as $calificacion) {
+            foreach ($calificacion['examenes'] as $array) {
+               array_push($examenes, $array->titulo);
+            }
+            foreach ($calificacion['tareas'] as $array) {
+               array_push($tareas, $array->titulo);
+            }
+            foreach ($calificacion['trabajos'] as $array) {
+               array_push($trabajos, $array->titulo);
+            }
+            foreach ($calificacion['otros'] as $array) {
+               array_push($otros, $array->titulo);
+            }
+         }
+         $examenes = $this->gettitles($examenes);
+         $tareas = $this->gettitles($tareas);
+         $trabajos = $this->gettitles($trabajos);
+         $otros = $this->gettitles($otros);
          $calificacion = $calificaciones[0];
-         $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
+         $arrays = [$examenes, $tareas, $trabajos, $otros];
          $final = 2;
          foreach ($arrays as $array) {
-            $final += $array->count();
+            $final += count($array);
             foreach ($array as $cali) {
-               array_push($cabeceras, $cali->titulo);
+               array_push($cabeceras, $cali);
             }
          }
          array_push($cabeceras, 'Nota');
       }
-      return [$final, $cabeceras];
+      return [$final, $cabeceras, [$examenes, $tareas, $trabajos, $otros]];
    }
 
-
-   private function Cuerpo($calificaciones)
+   private function Cuerpo($calificaciones, $titulos)
    {
       $rows = [];
       foreach ($calificaciones as $calificacion) {
@@ -139,10 +173,15 @@ class ProfesorController extends Controller
          ];
          $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
          $nota = 0;
-         foreach ($arrays as $array) {
-            foreach ($array as $cali) {
-               array_push($row, $cali->porcentaje_obtenido);
-               $nota += $cali->porcentaje_obtenido;
+         for ($i = 0; $i < count($titulos); $i++) {
+            foreach ($titulos[$i] as $titulo) {
+               $cali = $arrays[$i]->where('titulo', $titulo)->first();
+               if ($cali != null) {
+                  array_push($row, $cali->porcentaje_obtenido);
+                  $nota += $cali->porcentaje_obtenido;
+               } else {
+                  array_push($row, 0);
+               }
             }
          }
          array_push($row, $nota);
@@ -198,9 +237,10 @@ class ProfesorController extends Controller
          $course = $course->subject()->first();
          $calificaciones = $this->matrizqualifications($id, $request);
          $Heads = $this->Cabeceras($calificaciones);
+         $titulos = $Heads[2];
          $cabeceras = $Heads[1];
          $final = $Heads[0];
-         $rows = $this->Cuerpo($calificaciones);
+         $rows = $this->Cuerpo($calificaciones, $titulos);
          Excel::create('Notas trimestrales', function ($excel) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
             $excel->sheet('Notas Estudiantes', function ($sheet) use ($profesor, $course, $id, $section, $cabeceras, $final, $rows) {
                if ($final > 0) {
@@ -336,7 +376,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $tarea = $request->all();
          $history = $request->all()['history'];
-         $course = Course::all()->find((int)$request->session()->get('course'));
+         $course = Course::all()->find((int) $request->session()->get('course'));
          $history['course_id'] = $course->id;
          $students = $course->section()->first()->students()->get();
          if ($students == null || $students->count() == 0) {
@@ -355,8 +395,8 @@ class ProfesorController extends Controller
                   $taskhistory = new Taskhistory($history);
                   $taskhistory->save();
                   $info = [
-                     'titulo' => $history['nombre'], 'valor_porcentual' => (float)$tarea['valor'],
-                     'porcentaje_obtenido' => (float)0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
+                     'titulo' => $history['nombre'], 'valor_porcentual' => (float) $tarea['valor'],
+                     'porcentaje_obtenido' => (float) 0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
                      'descripcion' => $tarea['titulo'], 'trimestre' => $taskhistory->trimestre,
                      'fecha' => $taskhistory->inicio, 'student_id' => $student->id, 'course_id' => $course->id,
                   ];
@@ -374,12 +414,12 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $taskhistories = $task->taskhistories()->where(
             'course_id',
-            (int)$request->session()->get('course')
+            (int) $request->session()->get('course')
          )->get();
          foreach ($taskhistories as $taskhistory) {
             $student = $taskhistory->student()->first();
             $qualification = $student->qualifications()->where([
-               'tipo' => 'Tarea', 'fecha' => $taskhistory->inicio,
+               'tipo' => 'Tarea',
                'course_id' => $taskhistory->course_id, 'trimestre' => $taskhistory->trimestre,
                'descripcion' => $task->titulo, 'valor_porcentual' => $task->valor
             ])->first();
@@ -395,7 +435,7 @@ class ProfesorController extends Controller
       if ($request->ajax()) {
          $taskhistories = $task->taskhistories()->where(
             'course_id',
-            (int)$request->session()->get('course')
+            (int) $request->session()->get('course')
          )->get();
          $taskhistory = null;
          if ($taskhistories != null && $taskhistories->count() > 0) {

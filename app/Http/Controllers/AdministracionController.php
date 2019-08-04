@@ -3,6 +3,7 @@
 namespace Campus\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Campus\Role;
 use Campus\User;
 use Campus\Teacher;
@@ -12,6 +13,12 @@ use Campus\Student;
 use Campus\Day;
 use Campus\Schedule;
 use Campus\Lesson;
+use Campus\News;
+use Campus\Question;
+use Campus\Taskhistory;
+use Campus\Task;
+use Campus\Qualification;
+use Campus\File;
 
 class AdministracionController extends Controller
 {
@@ -71,7 +78,7 @@ class AdministracionController extends Controller
    public function updatecredencial(User $user, Request $request)
    {
       if ($request->ajax()) {
-         $accion = (boolean)$request->input('attach');
+         $accion = (bool) $request->input('attach');
          $role = Role::where('nombre', $request->input('rol'))->first();
          if ($accion) {
             $user->roles()->attach($role);
@@ -236,9 +243,13 @@ class AdministracionController extends Controller
             $schedule = $lesson->schedule()->first();
             for ($i = count($matriz) - 1; $i >= 0; $i--) {
                if ($matriz[$i]['dia']['id'] == $day->id) {
-                  $matriz[$i]['horario'] = array_filter($matriz[$i]['horario'], function ($var) use ($schedule) {
-                     return $var['id'] != $schedule->id;
-                  });
+                  $array = [];
+                  for ($j = 0; $j < count($matriz[$i]['horario']); $j++) {
+                     if ($matriz[$i]['horario'][$j]['id'] != $schedule->id) {
+                        array_push($array, $matriz[$i]['horario'][$j]);
+                     }
+                  }
+                  $matriz[$i]['horario'] = $array;
                }
             }
          }
@@ -271,5 +282,58 @@ class AdministracionController extends Controller
             return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
          }
       }
+   }
+
+   public function statistics(Request $request)
+   {
+      if ($request->ajax()) {
+         $profesores = Teacher::where('estado', 1)->get()->count();
+         $estudiantes = Student::where('estado', 1)->get()->count();
+         $secciones = Section::where('estado', 1)->get()->count();
+         $cursos = Course::where('estado', 1)->get()->count();
+         $lista = Student::where('estado', 1)->with('section')->get();
+         $listaestudiantes = [];
+         foreach ($lista as $list) {
+            if ($list->section != null)
+               array_push($listaestudiantes, $list);
+         }
+         $listanoticias = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
+         return response()->json(['ListaNoticias' => $listanoticias, 'ListaEstudiantes' => $listaestudiantes, 'Profesores' => $profesores, 'Alumnos' => $estudiantes, 'Secciones' => $secciones, 'Cursos' => $cursos], 200);
+      }
+   }
+
+   public function reset(Request $request)
+   {
+      if ($request->ajax() && $request->input('tipo') == '14638163') {
+         try {
+            Question::whereNotNull('id')->delete();
+            Taskhistory::whereNotNull('id')->delete();
+            Task::whereNotNull('id')->delete();
+            Qualification::whereNotNull('id')->delete();
+            Lesson::whereNotNull('id')->delete();
+            Section::whereNotNull('id')->delete();
+            File::whereNotNull('id')->delete();
+            News::whereNotNull('id')->delete();
+            Course::whereNotNull('id')->delete();
+            return response()->json(['type' => 'success', 'message' => 'Se a restaurado el sistema exitosamente'], 200);
+         } catch (\Exception $ex) {
+            return response()->json(['type' => 'error', 'message' => $ex->getMessage()], 200);
+         }
+      }
+      return response()->json(['type' => 'error', 'message' => 'No estas autorizado para esta acción'], 200);
+   }
+
+   public function changetrimester(Request $request)
+   {
+      if ($request->ajax()) {
+         Storage::put('public/trimestre/trimester.txt', (int) $request->input('trimestre'));
+         return response()->json(['type' => 'success', 'message' => 'Se cambio el trimestre exitosamente'], 200);
+      }
+   }
+
+   public function gettrimester()
+   {
+      $trimester = (int) Storage::get('public/trimestre/trimester.txt');
+      return response()->json($trimester, 200);
    }
 }
