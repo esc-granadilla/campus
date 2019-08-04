@@ -7915,6 +7915,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["news"],
   data: function data() {
@@ -50392,7 +50394,7 @@ var render = function() {
                                               attrs: {
                                                 "aspect-ratio": 16 / 9,
                                                 src:
-                                                  "storage/imagen/" +
+                                                  "storage/app/public/imagen/" +
                                                   fi.tipo +
                                                   ".jpg",
                                                 height: "150px"
@@ -50558,7 +50560,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { persistent: "", "max-width": "800px" },
+          attrs: { persistent: "", "max-width": "1200px" },
           model: {
             value: _vm.open,
             callback: function($$v) {
@@ -51393,72 +51395,90 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "" } },
     [
-      _vm.news != null
-        ? _c("v-flex", { class: _vm.ttitulo }, [
-            _c(
-              "span",
-              { staticClass: "display-1 font-weight-regular text-capitalize" },
-              [_vm._v(_vm._s(_vm.news.titulo))]
-            ),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm.descripcion
-              ? _c("span", { staticClass: "headline text-capitalize" }, [
-                  _vm._v(_vm._s(_vm.news.descripcion))
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.imagen
-        ? _c(
-            "v-flex",
-            { class: _vm.timagen },
-            [
-              _c(
-                "v-carousel",
-                { attrs: { "hide-controls": "", height: "auto" } },
-                _vm._l(_vm.images, function(ima, i) {
-                  return _c(
-                    "v-carousel-item",
-                    { key: i, attrs: { src: ima.link } },
-                    [
-                      _c(
-                        "v-flex",
-                        {
-                          staticClass: "text-xs-center",
-                          attrs: { xs12: "", "pt-3": "" }
-                        },
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _vm.news != null
+            ? _c("v-flex", { class: _vm.ttitulo }, [
+                _c("span", { staticClass: "display-1 font-weight-regular" }, [
+                  _vm._v(_vm._s(_vm.news.titulo))
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm.descripcion
+                  ? _c("span", { staticClass: "headline" }, [
+                      _vm._v(_vm._s(_vm.news.descripcion))
+                    ])
+                  : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.imagen
+            ? _c(
+                "v-flex",
+                { class: _vm.timagen },
+                [
+                  _c(
+                    "v-carousel",
+                    { attrs: { "hide-controls": "", height: "auto" } },
+                    _vm._l(_vm.images, function(ima, i) {
+                      return _c(
+                        "v-carousel-item",
+                        { key: i, attrs: { src: ima.link } },
                         [
                           _c(
-                            "span",
+                            "v-flex",
                             {
-                              staticClass:
-                                "display-1 text--white text-xs-center",
-                              staticStyle: { color: "white" }
+                              staticClass: "text-xs-center",
+                              attrs: { xs12: "", "pt-3": "" }
                             },
-                            [_vm._v(_vm._s(ima.titulo))]
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "display-1 text--white text-xs-center",
+                                  staticStyle: { color: "white" }
+                                },
+                                [_vm._v(_vm._s(ima.titulo))]
+                              )
+                            ]
                           )
-                        ]
+                        ],
+                        1
                       )
-                    ],
+                    }),
                     1
                   )
-                }),
+                ],
                 1
               )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.contenido
+        ? _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("v-textarea", {
+                staticClass: "subheading",
+                attrs: { "auto-grow": "", box: "" },
+                model: {
+                  value: _vm.news.contenido,
+                  callback: function($$v) {
+                    _vm.$set(_vm.news, "contenido", $$v)
+                  },
+                  expression: "news.contenido"
+                }
+              })
             ],
             1
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.contenido
-        ? _c("v-flex", { attrs: { xs12: "" } }, [
-            _c("p", { staticClass: "subheading text-capitalize" }, [
-              _vm._v(_vm._s(_vm.news.contenido))
-            ])
-          ])
         : _vm._e(),
       _vm._v(" "),
       _vm.video

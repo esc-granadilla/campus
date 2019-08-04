@@ -69,7 +69,7 @@
                            <v-img
                               :aspect-ratio="16/9"
                               v-if="fi.tipo !== 'imagen'"
-                              :src="'storage/imagen/'+fi.tipo+'.jpg'"
+                              :src="'storage/app/public/imagen/'+fi.tipo+'.jpg'"
                               height="150px"
                            >
                               <v-layout pa-2 column fill-height class="lightbox white--text">
