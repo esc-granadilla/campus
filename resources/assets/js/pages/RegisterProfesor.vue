@@ -76,6 +76,7 @@
                               :counter="8"
                               label="1º Telefono"
                               name="telefono1"
+                              mask="########"
                            ></v-text-field>
                         </v-flex>
                         <v-flex xs12 d-flex>
@@ -85,6 +86,7 @@
                               :counter="8"
                               label="2º Telefono"
                               name="telefono2"
+                              mask="########"
                            ></v-text-field>
                         </v-flex>
                      </v-layout>

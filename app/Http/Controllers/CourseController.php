@@ -70,23 +70,23 @@ class CourseController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $cur = Course::where('nombre', $request->input('nombre'))->first();
-         if ($cur != null) {
-            if ($cur->estado == 0) {
-               $cur->estado = 1;
-               $cur->save();
+         try {
+            $cur = Course::where('nombre', $request->input('nombre'))->first();
+            if ($cur != null) {
+               if ($cur->estado == 0) {
+                  $cur->estado = 1;
+                  $cur->save();
+               } else {
+                  return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+               }
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Este curso ya esta registrado.'], 200);
+               $curso = new Course($request->all());
+               $curso->save();
             }
-         } else {
-            $curso = new Course();
-            $curso->nombre = $request->input('nombre');
-            $curso->teacher_id = $request->input('teacher_id');
-            $curso->subject_id = $request->input('subject_id');
-            $curso->section_id = $request->input('section_id');
-            $curso->save();
+            return response()->json(['type' => 'success', 'message' => 'Se registro el Curso correctamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro el Curso correctamente'], 200);
       }
    }
 

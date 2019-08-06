@@ -20,7 +20,6 @@ class SubjectController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
       $this->middleware('profesor', ['only' => ['index']]);
       $this->middleware('administrador', ['except' => ['index']]);
    }
@@ -57,22 +56,27 @@ class SubjectController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
-         if ($asig != null) {
-            if ($asig->estado == 0) {
-               $asig->estado = 1;
-               $asig->save();
+         try {
+            $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
+            if ($asig != null) {
+               if ($asig->estado == 0) {
+                  $asig->estado = 1;
+                  $asig->save();
+               } else {
+                  return response()->json(['type' => 'error', 'message' => 'Esta asignatura ya esta registrada.'], 200);
+               }
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Esta asignatura ya esta registrada.'], 200);
+               $asignatura = new Subject($request->all());
+               $asignatura->codigo = strtoupper($request->input('codigo'));
+               $asignatura->save();
             }
-         } else {
-            $asignatura = new Subject();
-            $asignatura->codigo = strtoupper($request->input('codigo'));
-            $asignatura->nombre = $request->input('nombre');
-            $asignatura->descripcion = $request->input('descripcion');
-            $asignatura->save();
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Se registro la asignatura correctamente.'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro la asignatura correctamente.'], 200);
       }
    }
 
@@ -116,16 +120,26 @@ class SubjectController extends Controller
    public function update(Request $request, Subject $subject)
    {
       if ($request->ajax()) {
-         $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
-         if ($asig != null && ($asig->id != $subject->id)) {
-            return response()->json(['type' => 'error', 'message' => 'Ya existe una asignatura con este codigo.'], 200);
-         } else {
-            $subject->codigo = strtoupper($request->input('codigo'));
-            $subject->nombre = $request->input('nombre');
-            $subject->descripcion = $request->input('descripcion');
-            $subject->save();
+         try {
+            $asig = Subject::where('codigo', strtoupper($request->input('codigo')))->first();
+            if ($asig != null && ($asig->id != $subject->id)) {
+               return response()->json([
+                  'type' => 'error',
+                  'message' => 'Ya existe una asignatura con este codigo.'
+               ], 200);
+            } else {
+               $subject->codigo = strtoupper($request->input('codigo'));
+               $subject->nombre = $request->input('nombre');
+               $subject->descripcion = $request->input('descripcion');
+               $subject->save();
+            }
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Datos de la asignatura fueron actualizados correctamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Datos de la asignatura fueron actualizados correctamente'], 200);
       }
    }
 

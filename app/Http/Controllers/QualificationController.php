@@ -55,27 +55,31 @@ class QualificationController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $course = (int)$request->session()->get('course');
-         $qualifi = Qualification::where([
-            'titulo' => $request->input('titulo'),
-            'trimestre' => $request->input('trimestre'),
-            'student_id' => $request->input('student_id'),
-            'course_id' => $course
-         ])->first();
-         if ($qualifi != null) {
-            if ($qualifi->estado == 0) {
-               $qualifi->estado = 1;
-               $qualifi->save();
+         try {
+            $course = (int) $request->session()->get('course');
+            $qualifi = Qualification::where([
+               'titulo' => $request->input('titulo'),
+               'trimestre' => $request->input('trimestre'),
+               'student_id' => $request->input('student_id'),
+               'course_id' => $course
+            ])->first();
+            if ($qualifi != null) {
+               if ($qualifi->estado == 0) {
+                  $qualifi->estado = 1;
+                  $qualifi->save();
+               } else {
+                  return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
+               }
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
+               $qualificationarray = $request->all();
+               $qualificationarray['course_id'] = $course;
+               $qualification = new Qualification($qualificationarray);
+               $qualification->save();
             }
-         } else {
-            $qualificationarray = $request->all();
-            $qualificationarray['course_id'] = $course;
-            $qualification = new Qualification($qualificationarray);
-            $qualification->save();
+            return response()->json(['type' => 'success', 'message' => 'Se registro la nota correctamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro la nota correctamente'], 200);
       }
    }
 
@@ -88,32 +92,36 @@ class QualificationController extends Controller
    public function qualificationstudents(Request $request)
    {
       if ($request->ajax()) {
-         $students = $request->input('students');
-         $qualificationarray = $request->all();
-         $course = (int)$request->session()->get('course');
-         $estado = false;
-         foreach ($students as $student) {
-            $qualifi = Qualification::where([
-               'titulo' => $qualificationarray['titulo'],
-               'trimestre' => $qualificationarray['trimestre'],
-               'student_id' => $student['id'],
-               'course_id' => $course
-            ])->first();
-            if ($qualifi != null) $estado = true;
-         }
-         if ($estado) {
-            return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
-         } else {
+         try {
+            $students = $request->input('students');
+            $qualificationarray = $request->all();
+            $course = (int) $request->session()->get('course');
+            $estado = false;
             foreach ($students as $student) {
-               $qualificationarray['porcentaje_obtenido'] = $student['porcentaje_obtenido'];
-               $qualificationarray['condicion'] = $student['condicion'];
-               $qualificationarray['student_id'] = $student['id'];
-               $qualificationarray['course_id'] = $course;
-               $qualification = new Qualification($qualificationarray);
-               $qualification->save();
+               $qualifi = Qualification::where([
+                  'titulo' => $qualificationarray['titulo'],
+                  'trimestre' => $qualificationarray['trimestre'],
+                  'student_id' => $student['id'],
+                  'course_id' => $course
+               ])->first();
+               if ($qualifi != null) $estado = true;
             }
+            if ($estado) {
+               return response()->json(['type' => 'error', 'message' => 'Este nota ya esta registrada.'], 200);
+            } else {
+               foreach ($students as $student) {
+                  $qualificationarray['porcentaje_obtenido'] = $student['porcentaje_obtenido'];
+                  $qualificationarray['condicion'] = $student['condicion'];
+                  $qualificationarray['student_id'] = $student['id'];
+                  $qualificationarray['course_id'] = $course;
+                  $qualification = new Qualification($qualificationarray);
+                  $qualification->save();
+               }
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se registraron las notas correctamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registraron las notas correctamente'], 200);
       }
    }
 
@@ -157,25 +165,32 @@ class QualificationController extends Controller
    public function update(Request $request, Qualification $qualification)
    {
       if ($request->ajax()) {
-         $quali = Qualification::where([
-            'titulo' => $request->input('titulo'),
-            'trimestre' => $request->input('trimestre'),
-            'student_id' => $request->input('student_id')
-         ])->first();
-         if ($quali != null && $quali->id != $qualification->id) {
-            return response()->json(['type' => 'error', 'message' => 'Esta nota ya esta registrada.'], 200);
-         } else {
-            $qualification->titulo = $request->input('titulo');
-            $qualification->valor_porcentual = (float)$request->input('valor_porcentual');
-            $qualification->porcentaje_obtenido = (float)$request->input('porcentaje_obtenido');
-            $qualification->tipo = $request->input('tipo');
-            $qualification->condicion = $request->input('condicion');
-            $qualification->descripcion = $request->input('descripcion');
-            $qualification->trimestre = (int)$request->input('trimestre');
-            $qualification->fecha = $request->input('fecha');
-            $qualification->save();
+         try {
+            $quali = Qualification::where([
+               'titulo' => $request->input('titulo'),
+               'trimestre' => $request->input('trimestre'),
+               'student_id' => $request->input('student_id')
+            ])->first();
+            if ($quali != null && $quali->id != $qualification->id) {
+               return response()->json(['type' => 'error', 'message' => 'Esta nota ya esta registrada.'], 200);
+            } else {
+               $qualification->titulo = $request->input('titulo');
+               $qualification->valor_porcentual = (float) $request->input('valor_porcentual');
+               $qualification->porcentaje_obtenido = (float) $request->input('porcentaje_obtenido');
+               $qualification->tipo = $request->input('tipo');
+               $qualification->condicion = $request->input('condicion');
+               $qualification->descripcion = $request->input('descripcion');
+               $qualification->trimestre = (int) $request->input('trimestre');
+               $qualification->fecha = $request->input('fecha');
+               $qualification->save();
+            }
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Datos de la nota fueron actualizados correctamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Datos de la nota fueron actualizados correctamente'], 200);
       }
    }
 

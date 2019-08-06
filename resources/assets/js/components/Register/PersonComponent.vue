@@ -98,7 +98,7 @@ export default {
             between: v =>
                (v.length >= 3 && v.length < 41) || "Entre 3 y 40 Caracteres"
          },
-         mask: "#-####-####"
+         mask: "#########"
       };
    },
    watch: {

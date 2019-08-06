@@ -25,25 +25,29 @@ class HomeController extends Controller
     */
    public function index(Request $request)
    {
-      if ($request->user()->hasRole('Usuario')) {
-         $estudiante = $request->user()->student()->first();
-         $request->session()->push('student', $estudiante);
-         return view('home', compact('estudiante'));
-      } elseif ($request->user()->hasAnyRole(['Profesor', 'Administrador'])) {
-         $profesor = $request->user()->teacher()->first();
-         $request->session()->push('teacher', $profesor);
-         return view('homeprofesores', compact('profesor'));
+      try {
+         if ($request->user()->hasRole('Usuario')) {
+            $estudiante = $request->user()->student()->first();
+            $request->session()->push('student', $estudiante);
+            return view('home', compact('estudiante'));
+         } elseif ($request->user()->hasAnyRole(['Profesor', 'Administrador'])) {
+            $profesor = $request->user()->teacher()->first();
+            $request->session()->push('teacher', $profesor);
+            return view('homeprofesores', compact('profesor'));
+         }
+      } catch (\Throwable $th) {
+         return view('welcome');
       }
    }
 
    public function email(Request $request)
    {
-      $data = array(
-         'mensaje' => $request->input('mensaje'),
-         'email' => $request->input('email'),
-         'name' => $request->input('name')
-      );
       try {
+         $data = array(
+            'mensaje' => $request->input('mensaje'),
+            'email' => $request->input('email'),
+            'name' => $request->input('name')
+         );
          Mail::send(
             'emails.home',
             $data,
@@ -57,9 +61,7 @@ class HomeController extends Controller
                $message->priority(3);
             }
          );
-         return view('welcome');
-      } catch (\Exception $e) {
-         return view('welcome');
-      }
+      } catch (\Throwable $th) { }
+      return view('welcome');
    }
 }

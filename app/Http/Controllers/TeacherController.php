@@ -22,7 +22,6 @@ class TeacherController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
       $this->middleware('profesor', ['only' => ['index', 'update']]);
       $this->middleware('administrador', ['except' => ['index', 'show', 'edit', 'update']]);
    }
@@ -60,42 +59,46 @@ class TeacherController extends Controller
     */
    public function store(Request $request)
    {
-      $this->validate($request, [
-         'name' => 'required|string|max:32',
-         'email' => 'required|string|email|max:255|unique:users',
-         'password' => 'required|string|min:6|confirmed',
-         'cedula' => 'required|string|min:9|max:9',
-         'nombre' => 'required|string|min:3|max:50',
-         'primer_apellido' => 'required|string|min:3|max:80',
-         'segundo_apellido' => 'required|string|min:3|max:80',
-         'fecha_nacimiento' => ' required',
-         'fecha_ingreso' => ' required',
-         'telefono1' => ' required|string|min:8|max:8',
-         'puesto' => 'required|string|min:3|max:50',
-      ]);
+      try {
+         $this->validate($request, [
+            'name' => 'required|string|max:32',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'cedula' => 'required|string|min:9|max:9',
+            'nombre' => 'required|string|min:3|max:50',
+            'primer_apellido' => 'required|string|min:3|max:80',
+            'segundo_apellido' => 'required|string|min:3|max:80',
+            'fecha_nacimiento' => ' required',
+            'fecha_ingreso' => ' required',
+            'telefono1' => ' required|string|min:8|max:8',
+            'puesto' => 'required|string|min:3|max:50',
+         ]);
 
-      $role = Role::where('nombre', 'Profesor')->first();
-      $user = User::create([
-         'name' => $request->input('name'),
-         'email' => $request->input('email'),
-         'password' => bcrypt($request->input('password')),
-      ]);
+         $role = Role::where('nombre', 'Profesor')->first();
+         $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+         ]);
 
-      $user->roles()->attach($role);
+         $user->roles()->attach($role);
 
-      $profesor = new Teacher();
-      $profesor->cedula = $request->input('cedula');
-      $profesor->nombre = $request->input('nombre');
-      $profesor->primer_apellido = $request->input('primer_apellido');
-      $profesor->segundo_apellido = $request->input('segundo_apellido');
-      $profesor->fecha_nacimiento = $request->input('fecha_nacimiento');
-      $profesor->puesto = $request->input('puesto');
-      $profesor->fecha_ingreso = $request->input('fecha_ingreso');
-      $profesor->telefono1 = $request->input('telefono1');
-      $profesor->telefono2 = $request->input('telefono2');
-      $profesor->estado = 1;
+         $profesor = new Teacher();
+         $profesor->cedula = $request->input('cedula');
+         $profesor->nombre = $request->input('nombre');
+         $profesor->primer_apellido = $request->input('primer_apellido');
+         $profesor->segundo_apellido = $request->input('segundo_apellido');
+         $profesor->fecha_nacimiento = $request->input('fecha_nacimiento');
+         $profesor->puesto = $request->input('puesto');
+         $profesor->fecha_ingreso = $request->input('fecha_ingreso');
+         $profesor->telefono1 = $request->input('telefono1');
+         $profesor->telefono2 = $request->input('telefono2');
+         $profesor->estado = 1;
 
-      $user->teacher()->save($profesor);
+         $user->teacher()->save($profesor);
+      } catch (\Throwable $th) {
+         return $th->getMessage();
+      }
       return redirect('/admin');
    }
 
@@ -139,29 +142,36 @@ class TeacherController extends Controller
     */
    public function update(Request $request, Teacher $teacher)
    {
-      $this->validate($request, [
-         'nombre' => 'required|string|min:3|max:50',
-         'primer_apellido' => 'required|string|min:3|max:80',
-         'segundo_apellido' => 'required|string|min:3|max:80',
-         'fecha_nacimiento' => ' required',
-         'fecha_ingreso' => ' required',
-         'telefono1' => ' required|string|min:8|max:8',
-         'puesto' => 'required|string|min:3|max:50',
-      ]);
-      if ($request->ajax()) {
-         $teacher->nombre = $request->input('nombre');
-         $teacher->primer_apellido = $request->input('primer_apellido');
-         $teacher->segundo_apellido = $request->input('segundo_apellido');
-         $teacher->fecha_nacimiento = $request->input('fecha_nacimiento');
-         $teacher->puesto = $request->input('puesto');
-         $teacher->fecha_ingreso = $request->input('fecha_ingreso');
-         $teacher->telefono1 = $request->input('telefono1');
-         $teacher->telefono2 = $request->input('telefono2');
-         if ($request->has('foto')) {
-            $teacher->foto = $request->input('foto');
+      try {
+         $this->validate($request, [
+            'nombre' => 'required|string|min:3|max:50',
+            'primer_apellido' => 'required|string|min:3|max:80',
+            'segundo_apellido' => 'required|string|min:3|max:80',
+            'fecha_nacimiento' => ' required',
+            'fecha_ingreso' => ' required',
+            'telefono1' => ' required|string|min:8|max:8',
+            'puesto' => 'required|string|min:3|max:50',
+         ]);
+         if ($request->ajax()) {
+            $teacher->nombre = $request->input('nombre');
+            $teacher->primer_apellido = $request->input('primer_apellido');
+            $teacher->segundo_apellido = $request->input('segundo_apellido');
+            $teacher->fecha_nacimiento = $request->input('fecha_nacimiento');
+            $teacher->puesto = $request->input('puesto');
+            $teacher->fecha_ingreso = $request->input('fecha_ingreso');
+            $teacher->telefono1 = $request->input('telefono1');
+            $teacher->telefono2 = $request->input('telefono2');
+            if ($request->has('foto')) {
+               $teacher->foto = $request->input('foto');
+            }
+            $teacher->save();
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Datos del Profesor fueron actualizados correctamente'
+            ], 200);
          }
-         $teacher->save();
-         return response()->json(['type' => 'success', 'message' => 'Datos del Profesor fueron actualizados correctamente'], 200);
+      } catch (\Throwable $th) {
+         return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
       }
    }
 

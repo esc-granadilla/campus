@@ -98,13 +98,13 @@ class StudentController extends Controller
     */
    public function update(Request $request, Student $student)
    {
-      $this->validate($request, [
-         'nombre' => 'required|string|min:3|max:50',
-         'primer_apellido' => 'required|string|min:3|max:80',
-         'segundo_apellido' => 'required|string|min:3|max:80',
-         'fecha_nacimiento' => ' required',
-      ]);
       try {
+         $this->validate($request, [
+            'nombre' => 'required|string|min:3|max:50',
+            'primer_apellido' => 'required|string|min:3|max:80',
+            'segundo_apellido' => 'required|string|min:3|max:80',
+            'fecha_nacimiento' => ' required',
+         ]);
          if ($request->ajax()) {
             $student->nombre = $request->input('nombre');
             $student->primer_apellido = $request->input('primer_apellido');
@@ -112,13 +112,16 @@ class StudentController extends Controller
             $student->fecha_nacimiento = $request->input('fecha_nacimiento');
             $student->adecuacion = $request->input('adecuacion');
             if ($request->input('section_id') != null) {
-               $student->section_id = (int)$request->input('section_id');
+               $student->section_id = (int) $request->input('section_id');
             }
             if ($request->has('foto')) {
                $student->foto = $request->input('foto');
             }
             $student->save();
-            return response()->json(['type' => 'success', 'message' => 'Datos del Estudiante fueron actualizados correctamente'], 200);
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Datos del Estudiante fueron actualizados correctamente'
+            ], 200);
          }
       } catch (\Exception $e) {
          return response()->json(['type' => 'error', 'message' => $e->getMessage()], 500);

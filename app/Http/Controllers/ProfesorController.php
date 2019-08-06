@@ -49,182 +49,222 @@ class ProfesorController extends Controller
    public function getcoursesteacher(Teacher $teacher, Request $request)
    {
       if ($request->ajax()) {
-         $asignaciones = $teacher->courses()->get();
-         $cursos = [];
-         foreach ($asignaciones as $asig) {
-            if (Lesson::where('course_id', $asig->id)->count() > 0)
-               array_push($cursos, [
-                  'id' => $asig->id,
-                  'nombre' => $asig->nombre,
-                  'curso' => $asig->subject()->first(),
-                  'seccion' => $asig->section()->first()
-               ]);
+         try {
+            $asignaciones = $teacher->courses()->get();
+            $cursos = [];
+            foreach ($asignaciones as $asig) {
+               if (Lesson::where('course_id', $asig->id)->count() > 0)
+                  array_push($cursos, [
+                     'id' => $asig->id,
+                     'nombre' => $asig->nombre,
+                     'curso' => $asig->subject()->first(),
+                     'seccion' => $asig->section()->first()
+                  ]);
+            }
+            return response()->json($cursos, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
          }
-         return response()->json($cursos, 200);
       }
    }
 
    public function studentsforcourse(Request $request)
    {
       if ($request->ajax()) {
-         $course_id = $request->session()->get('course');
-         $course = Course::where('id', (int) $course_id)->first();
-         $students = $course->section()->first()->students()->where('estado', 1)->get();
-         return response()->json($students, 200);
+         try {
+            $course_id = $request->session()->get('course');
+            $course = Course::where('id', (int) $course_id)->first();
+            $students = $course->section()->first()->students()->where('estado', 1)->get();
+            return response()->json($students, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
+         }
       }
    }
 
    public function qualificationsforstudent(Student $student, Request $request)
    {
       if ($request->ajax()) {
-         $qualifications = $student->qualifications()->where([
-            'estado' => 1,
-            'course_id' => (int) $request->session()->get('course')
-         ])->get();
-         return response()->json($qualifications, 200);
+         try {
+            $qualifications = $student->qualifications()->where([
+               'estado' => 1,
+               'course_id' => (int) $request->session()->get('course')
+            ])->get();
+            return response()->json($qualifications, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
+         }
       }
    }
 
    private function matrizqualifications(int $id, Request $request)
    {
-      $course = Course::where('id', (int) $request->session()->get('course'))->first();
-      $section = $course->section()->first();
-      $students = $section->students()->where('estado', 1)->get();
-      $calificaciones = [];
-      foreach ($students as $student) {
-         $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen', 'course_id' => $course->id])->get();
-         $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea', 'course_id' => $course->id])->get();
-         $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación', 'course_id' => $course->id])->get();
-         $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra', 'course_id' => $course->id])->get();
-         $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
-         array_push($calificaciones, $calificacion);
+      try {
+         $course = Course::where('id', (int) $request->session()->get('course'))->first();
+         $section = $course->section()->first();
+         $students = $section->students()->where('estado', 1)->get();
+         $calificaciones = [];
+         foreach ($students as $student) {
+            $examenes = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Examen', 'course_id' => $course->id])->get();
+            $tareas = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Tarea', 'course_id' => $course->id])->get();
+            $trabajos = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Trabajo o investigación', 'course_id' => $course->id])->get();
+            $otros = $student->qualifications()->where(['trimestre' => $id, 'tipo' => 'Otra', 'course_id' => $course->id])->get();
+            $calificacion = ['estudiante' => $student, 'examenes' => $examenes, 'tareas' => $tareas, 'trabajos' => $trabajos, 'otros' => $otros];
+            array_push($calificaciones, $calificacion);
+         }
+         return $calificaciones;
+      } catch (\Throwable $th) {
+         throw $th;
       }
-      return $calificaciones;
    }
 
    public function qualificationsfortrimester($id, Request $request)
    {
       if ($request->ajax()) {
-         $qualifications = $this->matrizqualifications($id, $request);
-         return response()->json($qualifications, 200);
+         try {
+            $qualifications = $this->matrizqualifications($id, $request);
+            return response()->json($qualifications, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
+         }
       }
    }
 
    private function gettitles($array)
    {
-      if (count($array) > 0) {
-         $collection = collect($array);
-         $titulos = $collection->unique()->sort();
-         return $titulos->toArray();
-      } else
-         return $array;
+      try {
+         if (count($array) > 0) {
+            $collection = collect($array);
+            $titulos = $collection->unique()->sort();
+            return $titulos->toArray();
+         } else
+            return $array;
+      } catch (\Throwable $th) {
+         throw $th;
+      }
    }
 
    private function Cabeceras($calificaciones)
    {
-      $cabeceras = ['Cedula', 'Nombre'];
-      $examenes = [];
-      $tareas = [];
-      $trabajos = [];
-      $otros = [];
-      $final = 0;
-      if (count($calificaciones) > 0) {
-         foreach ($calificaciones as $calificacion) {
-            foreach ($calificacion['examenes'] as $array) {
-               array_push($examenes, $array->titulo);
+      try {
+         $cabeceras = ['Cedula', 'Nombre'];
+         $examenes = [];
+         $tareas = [];
+         $trabajos = [];
+         $otros = [];
+         $final = 0;
+         if (count($calificaciones) > 0) {
+            foreach ($calificaciones as $calificacion) {
+               foreach ($calificacion['examenes'] as $array) {
+                  array_push($examenes, $array->titulo);
+               }
+               foreach ($calificacion['tareas'] as $array) {
+                  array_push($tareas, $array->titulo);
+               }
+               foreach ($calificacion['trabajos'] as $array) {
+                  array_push($trabajos, $array->titulo);
+               }
+               foreach ($calificacion['otros'] as $array) {
+                  array_push($otros, $array->titulo);
+               }
             }
-            foreach ($calificacion['tareas'] as $array) {
-               array_push($tareas, $array->titulo);
+            $examenes = $this->gettitles($examenes);
+            $tareas = $this->gettitles($tareas);
+            $trabajos = $this->gettitles($trabajos);
+            $otros = $this->gettitles($otros);
+            $calificacion = $calificaciones[0];
+            $arrays = [$examenes, $tareas, $trabajos, $otros];
+            $final = 2;
+            foreach ($arrays as $array) {
+               $final += count($array);
+               foreach ($array as $cali) {
+                  array_push($cabeceras, $cali);
+               }
             }
-            foreach ($calificacion['trabajos'] as $array) {
-               array_push($trabajos, $array->titulo);
-            }
-            foreach ($calificacion['otros'] as $array) {
-               array_push($otros, $array->titulo);
-            }
+            array_push($cabeceras, 'Nota');
          }
-         $examenes = $this->gettitles($examenes);
-         $tareas = $this->gettitles($tareas);
-         $trabajos = $this->gettitles($trabajos);
-         $otros = $this->gettitles($otros);
-         $calificacion = $calificaciones[0];
-         $arrays = [$examenes, $tareas, $trabajos, $otros];
-         $final = 2;
-         foreach ($arrays as $array) {
-            $final += count($array);
-            foreach ($array as $cali) {
-               array_push($cabeceras, $cali);
-            }
-         }
-         array_push($cabeceras, 'Nota');
+         return [$final, $cabeceras, [$examenes, $tareas, $trabajos, $otros]];
+      } catch (\Throwable $th) {
+         throw $th;
       }
-      return [$final, $cabeceras, [$examenes, $tareas, $trabajos, $otros]];
    }
 
    private function Cuerpo($calificaciones, $titulos)
    {
-      $rows = [];
-      foreach ($calificaciones as $calificacion) {
-         $row = [
-            $calificacion['estudiante']->cedula,
-            $calificacion['estudiante']->nombre . ' ' .
-               $calificacion['estudiante']->primer_apellido . ' ' .
-               $calificacion['estudiante']->segundo_apellido
-         ];
-         $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
-         $nota = 0;
-         for ($i = 0; $i < count($titulos); $i++) {
-            foreach ($titulos[$i] as $titulo) {
-               $cali = $arrays[$i]->where('titulo', $titulo)->first();
-               if ($cali != null) {
-                  array_push($row, $cali->porcentaje_obtenido);
-                  $nota += $cali->porcentaje_obtenido;
-               } else {
-                  array_push($row, 0);
+      try {
+         $rows = [];
+         foreach ($calificaciones as $calificacion) {
+            $row = [
+               $calificacion['estudiante']->cedula,
+               $calificacion['estudiante']->nombre . ' ' .
+                  $calificacion['estudiante']->primer_apellido . ' ' .
+                  $calificacion['estudiante']->segundo_apellido
+            ];
+            $arrays = [$calificacion['examenes'], $calificacion['tareas'], $calificacion['trabajos'], $calificacion['otros']];
+            $nota = 0;
+            for ($i = 0; $i < count($titulos); $i++) {
+               foreach ($titulos[$i] as $titulo) {
+                  $cali = $arrays[$i]->where('titulo', $titulo)->first();
+                  if ($cali != null) {
+                     array_push($row, $cali->porcentaje_obtenido);
+                     $nota += $cali->porcentaje_obtenido;
+                  } else {
+                     array_push($row, 0);
+                  }
                }
             }
+            array_push($row, $nota);
+            array_push($rows, $row);
          }
-         array_push($row, $nota);
-         array_push($rows, $row);
+         return $rows;
+      } catch (\Throwable $th) {
+         throw $th;
       }
-      return $rows;
    }
 
    private function CuerpoLlenado($calificaciones, $text, &$array, &$nota)
    {
-      if ($calificaciones->count() > 0) {
-         $total = 0;
-         foreach ($calificaciones as $cali) {
-            $total += $cali->porcentaje_obtenido;
-         }
-         $nota += $total;
-         $row = [$text, "", "", $total];
-         array_push($array, $row);
-         $row = [];
-         foreach ($calificaciones as $cali) {
-            $row = [$cali->titulo, $cali->valor_porcentual, $cali->porcentaje_obtenido, ""];
+      try {
+         if ($calificaciones->count() > 0) {
+            $total = 0;
+            foreach ($calificaciones as $cali) {
+               $total += $cali->porcentaje_obtenido;
+            }
+            $nota += $total;
+            $row = [$text, "", "", $total];
             array_push($array, $row);
+            $row = [];
+            foreach ($calificaciones as $cali) {
+               $row = [$cali->titulo, $cali->valor_porcentual, $cali->porcentaje_obtenido, ""];
+               array_push($array, $row);
+            }
          }
+      } catch (\Throwable $th) {
+         throw $th;
       }
    }
 
    private function CuerpoEstudiante($calificaciones)
    {
-      $rows = [];
-      if (
-         $calificaciones['examenes']->count() > 0 ||
-         $calificaciones['tareas']->count() > 0 ||
-         $calificaciones['trabajos']->count() > 0 ||
-         $calificaciones['otros']
-      ) {
-         $nota = 0;
-         $this->CuerpoLlenado($calificaciones['examenes'], "Exámenes", $rows, $nota);
-         $this->CuerpoLlenado($calificaciones['tareas'], "Tareas", $rows, $nota);
-         $this->CuerpoLlenado($calificaciones['trabajos'], "Trabajos", $rows, $nota);
-         $this->CuerpoLlenado($calificaciones['otros'], "Otros", $rows, $nota);
-         array_push($rows, ["", "", "Nota", $nota]);
+      try {
+         $rows = [];
+         if (
+            $calificaciones['examenes']->count() > 0 ||
+            $calificaciones['tareas']->count() > 0 ||
+            $calificaciones['trabajos']->count() > 0 ||
+            $calificaciones['otros']
+         ) {
+            $nota = 0;
+            $this->CuerpoLlenado($calificaciones['examenes'], "Exámenes", $rows, $nota);
+            $this->CuerpoLlenado($calificaciones['tareas'], "Tareas", $rows, $nota);
+            $this->CuerpoLlenado($calificaciones['trabajos'], "Trabajos", $rows, $nota);
+            $this->CuerpoLlenado($calificaciones['otros'], "Otros", $rows, $nota);
+            array_push($rows, ["", "", "Nota", $nota]);
+         }
+         return $rows;
+      } catch (\Throwable $th) {
+         throw $th;
       }
-      return $rows;
    }
 
    public function qualificationsexport($id, Request $request)
@@ -287,9 +327,10 @@ class ProfesorController extends Controller
                }
             });
          })->export('xlsx');
-      } catch (\Exception $e) {
+      } catch (\Throwable $e) {
          $output = new \Symfony\Component\Console\Output\ConsoleOutput();
          $output->writeln($e->getMessage());
+         return;
       }
    }
 
@@ -357,9 +398,10 @@ class ProfesorController extends Controller
                }
             });
          })->export('xlsx');
-      } catch (\Exception $e) {
+      } catch (\Throwable $e) {
          $output = new \Symfony\Component\Console\Output\ConsoleOutput();
          $output->writeln($e->getMessage());
+         return;
       }
    }
 
@@ -374,37 +416,41 @@ class ProfesorController extends Controller
    public function addtaskforstudents(Request $request)
    {
       if ($request->ajax()) {
-         $tarea = $request->all();
-         $history = $request->all()['history'];
-         $course = Course::all()->find((int) $request->session()->get('course'));
-         $history['course_id'] = $course->id;
-         $students = $course->section()->first()->students()->get();
-         if ($students == null || $students->count() == 0) {
-            return response()->json(['type' => 'error', 'message' => 'No alumnos en este curso imposible asignar tareas.'], 200);
-         } else {
-            $taskhistory = Taskhistory::where([
-               'course_id' => $course->id,
-               'task_id' => $history['task_id'],
-               'student_id' => $students->first()->id,
-            ])->first();
-            if ($taskhistory != null) {
-               return response()->json(['type' => 'error', 'message' => 'Ya se ha asignado esta tarea al curso.'], 200);
+         try {
+            $tarea = $request->all();
+            $history = $request->all()['history'];
+            $course = Course::all()->find((int) $request->session()->get('course'));
+            $history['course_id'] = $course->id;
+            $students = $course->section()->first()->students()->get();
+            if ($students == null || $students->count() == 0) {
+               return response()->json(['type' => 'error', 'message' => 'No alumnos en este curso imposible asignar tareas.'], 200);
             } else {
-               foreach ($students as $student) {
-                  $history['student_id'] = $student->id;
-                  $taskhistory = new Taskhistory($history);
-                  $taskhistory->save();
-                  $info = [
-                     'titulo' => $history['nombre'], 'valor_porcentual' => (float) $tarea['valor'],
-                     'porcentaje_obtenido' => (float) 0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
-                     'descripcion' => $tarea['titulo'], 'trimestre' => $taskhistory->trimestre,
-                     'fecha' => $taskhistory->inicio, 'student_id' => $student->id, 'course_id' => $course->id,
-                  ];
-                  $qualification = new Qualification($info);
-                  $qualification->save();
+               $taskhistory = Taskhistory::where([
+                  'course_id' => $course->id,
+                  'task_id' => $history['task_id'],
+                  'student_id' => $students->first()->id,
+               ])->first();
+               if ($taskhistory != null) {
+                  return response()->json(['type' => 'error', 'message' => 'Ya se ha asignado esta tarea al curso.'], 200);
+               } else {
+                  foreach ($students as $student) {
+                     $history['student_id'] = $student->id;
+                     $taskhistory = new Taskhistory($history);
+                     $taskhistory->save();
+                     $info = [
+                        'titulo' => $history['nombre'], 'valor_porcentual' => (float) $tarea['valor'],
+                        'porcentaje_obtenido' => (float) 0.0, 'tipo' => 'Tarea', 'condicion' => 'No realisada',
+                        'descripcion' => $tarea['titulo'], 'trimestre' => $taskhistory->trimestre,
+                        'fecha' => $taskhistory->inicio, 'student_id' => $student->id, 'course_id' => $course->id,
+                     ];
+                     $qualification = new Qualification($info);
+                     $qualification->save();
+                  }
+                  return response()->json(['type' => 'success', 'message' => 'Se asigno la tarea correctamente.'], 200);
                }
-               return response()->json(['type' => 'success', 'message' => 'Se asigno la tarea correctamente.'], 200);
             }
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
    }
@@ -412,46 +458,56 @@ class ProfesorController extends Controller
    public function removetaskforstudents(Request $request, Task $task)
    {
       if ($request->ajax()) {
-         $taskhistories = $task->taskhistories()->where(
-            'course_id',
-            (int) $request->session()->get('course')
-         )->get();
-         foreach ($taskhistories as $taskhistory) {
-            $student = $taskhistory->student()->first();
-            $qualification = $student->qualifications()->where([
-               'tipo' => 'Tarea',
-               'course_id' => $taskhistory->course_id, 'trimestre' => $taskhistory->trimestre,
-               'descripcion' => $task->titulo, 'valor_porcentual' => $task->valor
-            ])->first();
-            $taskhistory->delete();
-            $qualification->delete();
+         try {
+            $taskhistories = $task->taskhistories()->where(
+               'course_id',
+               (int) $request->session()->get('course')
+            )->get();
+            foreach ($taskhistories as $taskhistory) {
+               $student = $taskhistory->student()->first();
+               $qualification = $student->qualifications()->where([
+                  'tipo' => 'Tarea',
+                  'course_id' => $taskhistory->course_id, 'trimestre' => $taskhistory->trimestre,
+                  'descripcion' => $task->titulo, 'valor_porcentual' => $task->valor
+               ])->first();
+               $taskhistory->delete();
+               $qualification->delete();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se elimino la asignacion la tarea correctamente.'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se elimino la asignacion la tarea correctamente.'], 200);
       }
    }
 
    public function taskforcourse(Request $request, Task $task)
    {
       if ($request->ajax()) {
-         $taskhistories = $task->taskhistories()->where(
-            'course_id',
-            (int) $request->session()->get('course')
-         )->get();
-         $taskhistory = null;
-         if ($taskhistories != null && $taskhistories->count() > 0) {
-            $taskhistory = $taskhistories->first();
+         try {
+            $taskhistories = $task->taskhistories()->where(
+               'course_id',
+               (int) $request->session()->get('course')
+            )->get();
+            $taskhistory = null;
+            if ($taskhistories != null && $taskhistories->count() > 0) {
+               $taskhistory = $taskhistories->first();
+            }
+            return response()->json($taskhistory, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
          }
-         return response()->json($taskhistory, 200);
       }
    }
 
    public function store(Request $request)
    {
-      if ($request->ajax() && $request->hasFile('imagen')) {
-         $file = $request->file('imagen');
-         $name = $file->store('public/imagen');
-         return response()->json(['name' => $name], 200);
-      }
+      try {
+         if ($request->ajax() && $request->hasFile('imagen')) {
+            $file = $request->file('imagen');
+            $name = $file->store('public/imagen');
+            return response()->json(['name' => $name], 200);
+         }
+      } catch (\Throwable $th) { }
       return response()->json(['name' => 'error'], 200);
    }
 
@@ -471,9 +527,10 @@ class ProfesorController extends Controller
          $cedula = $request->session()->get('student')[0]->cedula;
          $student = Student::where('cedula', $cedula)->first();
          $this->studentsexport($id, $student, $request);
-      } catch (\Exception $e) {
+      } catch (\Throwable $e) {
          $output = new \Symfony\Component\Console\Output\ConsoleOutput();
          $output->writeln($e->getMessage());
+         return;
       }
    }
 }

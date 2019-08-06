@@ -20,7 +20,6 @@ class ScheduleController extends Controller
    public function __construct()
    {
       $this->middleware('auth');
-      //$this->middleware('administrador', ['only' => ['create', 'store', 'index']]);
       $this->middleware('administrador');
    }
    /**
@@ -56,21 +55,23 @@ class ScheduleController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
-         if ($hor != null) {
-            if ($hor->estado == 0) {
-               $hor->estado = 1;
-               $hor->save();
+         try {
+            $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+            if ($hor != null) {
+               if ($hor->estado == 0) {
+                  $hor->estado = 1;
+                  $hor->save();
+               } else {
+                  return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
+               }
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
+               $horario = new Schedule($request->all());
+               $horario->save();
             }
-         } else {
-            $horario = new Schedule();
-            $horario->hasta = $request->input('hasta');
-            $horario->desde = $request->input('desde');
-            $horario->save();
+            return response()->json(['type' => 'success', 'message' => 'Se registro el Horario correctamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro el Horario correctamente'], 200);
       }
    }
 
@@ -115,15 +116,22 @@ class ScheduleController extends Controller
    public function update(Request $request, Schedule $schedule)
    {
       if ($request->ajax()) {
-         $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
-         if ($hor != null) {
-            return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
-         } else {
-            $schedule->hasta = $request->input('hasta');
-            $schedule->desde = $request->input('desde');
-            $schedule->save();
+         try {
+            $hor = Schedule::where(['desde' => $request->input('desde'), 'hasta' => $request->input('hasta')])->first();
+            if ($hor != null) {
+               return response()->json(['type' => 'error', 'message' => 'Este horario ya esta registrado.'], 200);
+            } else {
+               $schedule->hasta = $request->input('hasta');
+               $schedule->desde = $request->input('desde');
+               $schedule->save();
+            }
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Datos del Horario fueron actualizados correctamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Datos del Horario fueron actualizados correctamente'], 200);
       }
    }
 

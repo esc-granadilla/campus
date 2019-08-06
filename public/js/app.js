@@ -11209,7 +11209,7 @@ __webpack_require__.r(__webpack_exports__);
           return v.length >= 3 && v.length < 41 || "Entre 3 y 40 Caracteres";
         }
       },
-      mask: "#-####-####"
+      mask: "#########"
     };
   },
   watch: {
@@ -12266,6 +12266,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Register_UserComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Register/UserComponent.vue */ "./resources/assets/js/components/Register/UserComponent.vue");
 /* harmony import */ var _components_Register_PersonComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Register/PersonComponent.vue */ "./resources/assets/js/components/Register/PersonComponent.vue");
+//
+//
 //
 //
 //
@@ -58291,7 +58293,8 @@ var render = function() {
                                       ],
                                       counter: 8,
                                       label: "1º Telefono",
-                                      name: "telefono1"
+                                      name: "telefono1",
+                                      mask: "########"
                                     },
                                     model: {
                                       value: _vm.telefono1,
@@ -58314,7 +58317,8 @@ var render = function() {
                                       rules: [_vm.rules.telefono],
                                       counter: 8,
                                       label: "2º Telefono",
-                                      name: "telefono2"
+                                      name: "telefono2",
+                                      mask: "########"
                                     },
                                     model: {
                                       value: _vm.telefono2,

@@ -106,7 +106,7 @@ class AdministracionController extends Controller
     * @param $arr array
     * @return null|string|array
     */
-   public function array_value_recursive($key, array $arr)
+   private function array_value_recursive($key, array $arr)
    {
       $val = array();
       array_walk_recursive($arr, function ($v, $k) use ($key, &$val) {
@@ -130,9 +130,12 @@ class AdministracionController extends Controller
                $student->section_id = $section->id;
                $student->save();
             }
-            return response()->json(['type' => 'success', 'message' => 'Se asigno la sección a los estudiantes exitosamente'], 200);
-         } catch (\Exception $e) {
-            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Se asigno la sección a los estudiantes exitosamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
    }
@@ -147,9 +150,12 @@ class AdministracionController extends Controller
                $student->section_id = $section->id;
                $student->save();
             }
-            return response()->json(['type' => 'success', 'message' => 'Se cambio la sección a los estudiantes exitosamente'], 200);
-         } catch (\Exception $e) {
-            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Se cambio la sección a los estudiantes exitosamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
    }
@@ -185,13 +191,14 @@ class AdministracionController extends Controller
             $lessons = $this->filter_section($section, $lessons);
             return response()->json($lessons, 200);
          }
-      } catch (\Exception $e) {
+      } catch (\Throwable $th) {
          $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $output->writeln($e->getMessage());
+         $output->writeln($th->getMessage());
+         return response()->json([], 200);
       }
    }
 
-   public function MatrizLessons()
+   private function MatrizLessons()
    {
       try {
          $days = Day::all()->toArray();
@@ -201,35 +208,32 @@ class AdministracionController extends Controller
             array_push($matriz, ['dia' => $day, 'horario' => $schedule]);
          }
          return $matriz;
-      } catch (\Exception $e) {
-         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $output->writeln($e->getMessage());
+      } catch (\Throwable $th) {
+         throw $th;
       }
    }
 
-   public function filter_teacher(Teacher $teacher, array $matriz)
+   private function filter_teacher(Teacher $teacher, array $matriz)
    {
       try {
          $courses = $teacher->courses()->where('estado', 1)->get();
          return $this->filter($courses, $matriz);
-      } catch (\Exception $e) {
-         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $output->writeln($e->getMessage());
+      } catch (\Throwable $th) {
+         throw $th;
       }
    }
 
-   public function filter_section(Section $section, array $matriz)
+   private function filter_section(Section $section, array $matriz)
    {
       try {
          $courses = $section->courses()->where('estado', 1)->get();
          return $this->filter($courses, $matriz);
-      } catch (\Exception $e) {
-         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $output->writeln($e->getMessage());
+      } catch (\Throwable $th) {
+         throw $th;
       }
    }
 
-   public function filter($courses, array $matriz)
+   private function filter($courses, array $matriz)
    {
       try {
          $lessons = [];
@@ -260,9 +264,8 @@ class AdministracionController extends Controller
             }
          }
          return $array;
-      } catch (\Exception $e) {
-         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-         $output->writeln($e->getMessage());
+      } catch (\Throwable $th) {
+         throw $th;
       }
    }
 
@@ -277,9 +280,12 @@ class AdministracionController extends Controller
                $lesson = new Lesson($leccion);
                $lesson->save();
             }
-            return response()->json(['type' => 'success', 'message' => 'Se asigno las lecciones al curso exitosamente'], 200);
-         } catch (\Exception $e) {
-            return response()->json(['type' => 'error', 'message' => $e->getMessage()], 200);
+            return response()->json([
+               'type' => 'success',
+               'message' => 'Se asigno las lecciones al curso exitosamente'
+            ], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
    }
@@ -298,7 +304,14 @@ class AdministracionController extends Controller
                array_push($listaestudiantes, $list);
          }
          $listanoticias = News::where(['estado' => 1, 'tipo' => 'Global'])->get();
-         return response()->json(['ListaNoticias' => $listanoticias, 'ListaEstudiantes' => $listaestudiantes, 'Profesores' => $profesores, 'Alumnos' => $estudiantes, 'Secciones' => $secciones, 'Cursos' => $cursos], 200);
+         return response()->json([
+            'ListaNoticias' => $listanoticias,
+            'ListaEstudiantes' => $listaestudiantes,
+            'Profesores' => $profesores,
+            'Alumnos' => $estudiantes,
+            'Secciones' => $secciones,
+            'Cursos' => $cursos
+         ], 200);
       }
    }
 
@@ -316,8 +329,8 @@ class AdministracionController extends Controller
             News::whereNotNull('id')->delete();
             Course::whereNotNull('id')->delete();
             return response()->json(['type' => 'success', 'message' => 'Se a restaurado el sistema exitosamente'], 200);
-         } catch (\Exception $ex) {
-            return response()->json(['type' => 'error', 'message' => $ex->getMessage()], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
       return response()->json(['type' => 'error', 'message' => 'No estas autorizado para esta acción'], 200);
@@ -326,14 +339,22 @@ class AdministracionController extends Controller
    public function changetrimester(Request $request)
    {
       if ($request->ajax()) {
-         Storage::put('public/trimestre/trimester.txt', (int) $request->input('trimestre'));
-         return response()->json(['type' => 'success', 'message' => 'Se cambio el trimestre exitosamente'], 200);
+         try {
+            Storage::put('public/trimestre/trimester.txt', (int) $request->input('trimestre'));
+            return response()->json(['type' => 'success', 'message' => 'Se cambio el trimestre exitosamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
+         }
       }
    }
 
    public function gettrimester()
    {
-      $trimester = (int) Storage::get('public/trimestre/trimester.txt');
-      return response()->json($trimester, 200);
+      try {
+         $trimester = (int) Storage::get('public/trimestre/trimester.txt');
+         return response()->json($trimester, 200);
+      } catch (\Throwable $th) {
+         return response()->json(1, 200);
+      }
    }
 }

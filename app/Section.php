@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
+   protected $fillable = [
+      'seccion', 'grade_id'
+   ];
+
    public function grade()
    {
       return $this->belongsTo(Grade::class);

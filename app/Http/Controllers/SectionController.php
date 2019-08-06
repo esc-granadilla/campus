@@ -58,21 +58,23 @@ class SectionController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $sec = Section::where('seccion', $request->input('seccion'))->first();
-         if ($sec != null) {
-            if ($sec->estado == 0) {
-               $sec->estado = 1;
-               $sec->save();
+         try {
+            $sec = Section::where('seccion', $request->input('seccion'))->first();
+            if ($sec != null) {
+               if ($sec->estado == 0) {
+                  $sec->estado = 1;
+                  $sec->save();
+               } else {
+                  return response()->json(['type' => 'error', 'message' => 'Esta Sección ya esta registrada.'], 200);
+               }
             } else {
-               return response()->json(['type' => 'error', 'message' => 'Esta Sección ya esta registrada.'], 200);
+               $section = new Section($request->all());
+               $section->save();
             }
-         } else {
-            $section = new Section();
-            $section->seccion = $request->input('seccion');
-            $section->grade_id = (int)$request->input('grade_id');
-            $section->save();
+            return response()->json(['type' => 'success', 'message' => 'Se registro la Sección correctamente'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro la Sección correctamente'], 200);
       }
    }
 
@@ -121,10 +123,13 @@ class SectionController extends Controller
             return response()->json(['type' => 'error', 'message' => 'Ya existe una sección con este nombre.'], 200);
          } else {
             $section->seccion = $request->input('seccion');
-            $section->grade_id = (int)$request->input('grade_id');
+            $section->grade_id = (int) $request->input('grade_id');
             $section->save();
          }
-         return response()->json(['type' => 'success', 'message' => 'Datos de la sección fueron actualizados correctamente'], 200);
+         return response()->json([
+            'type' => 'success',
+            'message' => 'Datos de la sección fueron actualizados correctamente'
+         ], 200);
       }
    }
 

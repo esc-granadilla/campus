@@ -57,16 +57,20 @@ class TaskController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $tarea = new Task($request->all());
-         $tarea->save();
-         $id = $tarea->id;
-         $preguntas = $request->all()['preguntas'];
-         foreach ($preguntas as $pregunta) {
-            $pregunta['task_id'] = $id;
-            $question = new Question($pregunta);
-            $question->save();
+         try {
+            $tarea = new Task($request->all());
+            $tarea->save();
+            $id = $tarea->id;
+            $preguntas = $request->all()['preguntas'];
+            foreach ($preguntas as $pregunta) {
+               $pregunta['task_id'] = $id;
+               $question = new Question($pregunta);
+               $question->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se registro la tarea correctamente.'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         return response()->json(['type' => 'success', 'message' => 'Se registro la tarea correctamente.'], 200);
       }
    }
 
@@ -80,15 +84,19 @@ class TaskController extends Controller
    public function show(int $id, Request $request)
    {
       if ($request->ajax()) {
-         if ($id == 0) {
-            $course = Course::all()->find((int)$request->session()->get('course'));
-            $id = $course->subject()->first()->id;
-            $tasks = Task::where(['estado' => 1, 'subject_id' => $id])->orderBy('created_at', 'des')->get();
-            return response()->json($tasks, 200);
-         } else {
-            $task = Task::where('id', $id)->first();
-            $task = ($task != null && $task->estado == 0) ? null : $task;
-            return response()->json($task, 200);
+         try {
+            if ($id == 0) {
+               $course = Course::all()->find((int) $request->session()->get('course'));
+               $id = $course->subject()->first()->id;
+               $tasks = Task::where(['estado' => 1, 'subject_id' => $id])->orderBy('created_at', 'des')->get();
+               return response()->json($tasks, 200);
+            } else {
+               $task = Task::where('id', $id)->first();
+               $task = ($task != null && $task->estado == 0) ? null : $task;
+               return response()->json($task, 200);
+            }
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
       }
    }
@@ -118,20 +126,24 @@ class TaskController extends Controller
    public function update(Request $request, Task $task)
    {
       if ($request->ajax()) {
-         $questions = $task->questions()->get();
-         foreach ($questions as $question) {
-            $question->delete();
+         try {
+            $questions = $task->questions()->get();
+            foreach ($questions as $question) {
+               $question->delete();
+            }
+            $task->respuestas = $request->input('respuestas');
+            $task->save();
+            $id = $task->id;
+            $preguntas = $request->all()['preguntas'];
+            foreach ($preguntas as $pregunta) {
+               $pregunta['task_id'] = $id;
+               $question = new Question($pregunta);
+               $question->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se actualizo la tarea correctamente.'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         $task->respuestas = $request->input('respuestas');
-         $task->save();
-         $id = $task->id;
-         $preguntas = $request->all()['preguntas'];
-         foreach ($preguntas as $pregunta) {
-            $pregunta['task_id'] = $id;
-            $question = new Question($pregunta);
-            $question->save();
-         }
-         return response()->json(['type' => 'success', 'message' => 'Se actualizo la tarea correctamente.'], 200);
       }
    }
 

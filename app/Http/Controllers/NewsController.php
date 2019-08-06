@@ -32,11 +32,15 @@ class NewsController extends Controller
    public function index(Request $request)
    {
       if ($request->ajax()) {
-         $news = News::where(['estado' => 1, 'tipo' => 'Global'])->orderBy('created_at', 'des')->get();
-         foreach ($news as $item) {
-            $item->files = File::where('news_id', $item->id)->orderBy('created_at', 'des')->get();
+         try {
+            $news = News::where(['estado' => 1, 'tipo' => 'Global'])->orderBy('created_at', 'des')->get();
+            foreach ($news as $item) {
+               $item->files = File::where('news_id', $item->id)->orderBy('created_at', 'des')->get();
+            }
+            return response()->json($news, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
          }
-         return response()->json($news, 200);
       } else {
          return;
       }
@@ -61,24 +65,28 @@ class NewsController extends Controller
    public function store(Request $request)
    {
       if ($request->ajax()) {
-         $newsarray = $request->all();
-         $files = $request->input('files');
-         $course_id = null;
-         if ($request->input('tipo') == 'Grupal') {
-            $course_id = (int)$request->session()->get('course');
+         try {
+            $newsarray = $request->all();
+            $files = $request->input('files');
+            $course_id = null;
+            if ($request->input('tipo') == 'Grupal') {
+               $course_id = (int) $request->session()->get('course');
+            }
+            $newsarray['course_id'] = $course_id;
+            $newsarray['fecha'] = Carbon::now('America/Costa_Rica')->formatLocalized('%A %d %B %Y %H:%M:%S');
+            $news = new News($newsarray);
+            $news->save();
+            foreach ($files as $fil) {
+               $fil['news_id'] = $news->id;
+               if ($fil['tipo'] == 'video')
+                  $fil['link'] = 'https://www.youtube.com/embed/' . explode('&', explode('=', $fil['link'])[1])[0];
+               $file = new File($fil);
+               $file->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se registro la noticia correctamente.'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         $newsarray['course_id'] = $course_id;
-         $newsarray['fecha'] = Carbon::now('America/Costa_Rica')->formatLocalized('%A %d %B %Y %H:%M:%S');
-         $news = new News($newsarray);
-         $news->save();
-         foreach ($files as $fil) {
-            $fil['news_id'] = $news->id;
-            if ($fil['tipo'] == 'video')
-               $fil['link'] = 'https://www.youtube.com/embed/' . explode('&', explode('=', $fil['link'])[1])[0];
-            $file = new File($fil);
-            $file->save();
-         }
-         return response()->json(['type' => 'success', 'message' => 'Se registro la noticia correctamente.'], 200);
       } else {
          return;
       }
@@ -94,12 +102,16 @@ class NewsController extends Controller
    public function show(int $id, Request $request)
    {
       if ($request->ajax()) {
-         $course_id = (int)$request->session()->get('course');
-         $news = News::where(['estado' => 1, 'tipo' => 'Grupal', 'course_id' => $course_id])->get();
-         foreach ($news as $item) {
-            $item->files = File::where('news_id', $item->id)->get();
+         try {
+            $course_id = (int) $request->session()->get('course');
+            $news = News::where(['estado' => 1, 'tipo' => 'Grupal', 'course_id' => $course_id])->get();
+            foreach ($news as $item) {
+               $item->files = File::where('news_id', $item->id)->get();
+            }
+            return response()->json($news, 200);
+         } catch (\Throwable $th) {
+            return response()->json([], 200);
          }
-         return response()->json($news, 200);
       } else {
          return;
       }
@@ -130,22 +142,26 @@ class NewsController extends Controller
    public function update(Request $request, News $news)
    {
       if ($request->ajax()) {
-         $files = $news->files()->get();
-         foreach ($files as $file) {
-            $file->delete();
+         try {
+            $files = $news->files()->get();
+            foreach ($files as $file) {
+               $file->delete();
+            }
+            $newsarray = $request->all();
+            $files = $request->input('files');
+            $news->titulo = $newsarray['titulo'];
+            $news->descripcion = $newsarray['descripcion'];
+            $news->contenido = $newsarray['contenido'];
+            $news->save();
+            foreach ($files as $fil) {
+               $fil['news_id'] = $news->id;
+               $file = new File($fil);
+               $file->save();
+            }
+            return response()->json(['type' => 'success', 'message' => 'Se actualizo la noticia correctamente.'], 200);
+         } catch (\Throwable $th) {
+            return response()->json(['type' => 'error', 'message' => $th->getMessage()], 200);
          }
-         $newsarray = $request->all();
-         $files = $request->input('files');
-         $news->titulo = $newsarray['titulo'];
-         $news->descripcion = $newsarray['descripcion'];
-         $news->contenido = $newsarray['contenido'];
-         $news->save();
-         foreach ($files as $fil) {
-            $fil['news_id'] = $news->id;
-            $file = new File($fil);
-            $file->save();
-         }
-         return response()->json(['type' => 'success', 'message' => 'Se actualizo la noticia correctamente.'], 200);
       } else {
          return;
       }
