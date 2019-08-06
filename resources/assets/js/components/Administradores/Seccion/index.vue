@@ -139,7 +139,7 @@ export default {
          var self = this;
          this.section = msg;
          if (this.section.seccion != null) {
-            axios.post("sections/", self.section).then(function(res) {
+            axios.post("sections", self.section).then(function(res) {
                self.mensaje = res.data;
                axios.get("/sections").then(function(res) {
                   self.sections = res.data;

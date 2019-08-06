@@ -2638,7 +2638,7 @@ __webpack_require__.r(__webpack_exports__);
       this.asignatura = msg;
 
       if (this.asignatura.nombre != "") {
-        axios.post("subjects/", this.asignatura).then(function (res) {
+        axios.post("subjects", this.asignatura).then(function (res) {
           self.mensaje = res.data;
           axios.get("/subjects").then(function (res) {
             return self.asignaturas = res.data;
@@ -2977,7 +2977,7 @@ __webpack_require__.r(__webpack_exports__);
         msg.teacher_id = msg.profesor.id;
         msg.section_id = msg.seccion.id;
         this.curso = msg;
-        axios.post("courses/", this.curso).then(function (res) {
+        axios.post("courses", this.curso).then(function (res) {
           self.mensaje = res.data;
           axios.get("/courses").then(function (res) {
             return self.cursos = res.data;
@@ -3776,7 +3776,7 @@ __webpack_require__.r(__webpack_exports__);
       this.horario = msg;
 
       if (this.horario.desde != null) {
-        axios.post("schedules/", self.horario).then(function (res) {
+        axios.post("schedules", self.horario).then(function (res) {
           self.mensaje = res.data;
           axios.get("/schedules").then(function (res) {
             return self.horarios = res.data;
@@ -4687,7 +4687,7 @@ __webpack_require__.r(__webpack_exports__);
       this.section = msg;
 
       if (this.section.seccion != null) {
-        axios.post("sections/", self.section).then(function (res) {
+        axios.post("sections", self.section).then(function (res) {
           self.mensaje = res.data;
           axios.get("/sections").then(function (res) {
             self.sections = res.data;

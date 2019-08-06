@@ -151,7 +151,7 @@ export default {
          var self = this;
          this.asignatura = msg;
          if (this.asignatura.nombre != "") {
-            axios.post("subjects/", this.asignatura).then(function(res) {
+            axios.post("subjects", this.asignatura).then(function(res) {
                self.mensaje = res.data;
                axios
                   .get("/subjects")

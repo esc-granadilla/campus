@@ -131,7 +131,7 @@ export default {
             msg.teacher_id = msg.profesor.id;
             msg.section_id = msg.seccion.id;
             this.curso = msg;
-            axios.post("courses/", this.curso).then(function(res) {
+            axios.post("courses", this.curso).then(function(res) {
                self.mensaje = res.data;
                axios.get("/courses").then(res => (self.cursos = res.data));
             });

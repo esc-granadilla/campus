@@ -138,7 +138,7 @@ export default {
          var self = this;
          this.horario = msg;
          if (this.horario.desde != null) {
-            axios.post("schedules/", self.horario).then(function(res) {
+            axios.post("schedules", self.horario).then(function(res) {
                self.mensaje = res.data;
                axios.get("/schedules").then(res => (self.horarios = res.data));
             });
