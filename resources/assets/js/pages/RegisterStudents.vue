@@ -106,6 +106,7 @@
                                     :rules="[rules.required, rules.telefono]"
                                     :counter="8"
                                     label="Telefono"
+                                    mask="########"
                                     name="encargado_telefono"
                                     v-if="ocultarParentesco !== 'si'"
                                  ></v-text-field>
@@ -203,7 +204,7 @@ export default {
             v => /.+@.+\..+/.test(v) || "E-mail debe ser valido"
          ],
          error: false,
-         mask: "#-####-####"
+         mask: "#########"
       };
    },
    methods: {
